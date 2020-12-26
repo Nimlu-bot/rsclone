@@ -1,0 +1,91 @@
+@import "./nullstyle.scss";
+
+$color-header-font : rgb(116, 1, 199);
+$color-header-back : lemonchiffon;
+$color-footer-font : lemonchiffon;
+$color-footer-back : rgb(116, 1, 199);
+
+html{
+	height: 100%;
+
+}
+body{
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+
+	.header{
+		flex: 0 0 auto;
+		display: flex;
+		justify-content: space-evenly;
+		align-items:center;
+		padding: 10px;
+		background-color: $color-header-back;
+		font-family: 'Bad Script', cursive;
+			font-size: 48px;
+			font-weight: 800;
+  color:$color-header-font;
+	}
+	.main{
+		flex: 1 0 auto;
+	}
+	.footer{
+		flex: 0 0 auto;
+		padding: 10px;
+		background-color:$color-footer-back ;
+		font-family: 'Bad Script', cursive;
+		font-size: 20px;
+		color: $color-footer-font;
+		
+	
+		.footer-dev-ops{
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+	
+			.footer-dev-ops-list {
+				order: 1;
+				margin: 2px 0;
+				display: flex;
+				align-items: center;
+		
+				.footer-dev-ops-list-person {
+						color: inherit;
+						margin-right: 10px;
+		
+						.footer-dev-ops-ref {
+								display: flex;
+								align-items: center;
+								text-decoration: none;
+								color: inherit;
+		
+								.footer-github-logo {
+										width: 25px;
+										margin-right: 5px;
+								}
+						}
+		
+						&:hover {
+								text-decoration: underline;
+						}
+				}
+		}
+		}
+		.footer-create-year {
+			color: inherits;
+			order: 0;
+			margin-right: 5px;
+	}
+
+	.footer-rs-ref {
+			order: 2;
+
+			.footer-rs-logo {
+					order: 2;
+					width: 70px;
+			}
+	}
+	}
+
+
