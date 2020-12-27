@@ -3,11 +3,8 @@ export class BaseMarkup {
         document.body.insertAdjacentHTML(
             "afterbegin",
             `
-        <header class="header">
-						<h1 class = "header-title">RSClone</h1>
-						<h2 clas = "header-subtitle">DUCK HUNT</h2>
-        </header>
-        <main class="main"></main>
+				<div class="wrapper ">
+         <main class="main"></main>
         <footer class="footer">
             <div class = "footer-dev-ops">
                 <ul class = "footer-dev-ops-list">
@@ -20,6 +17,7 @@ export class BaseMarkup {
                 <a href = "https://rs.school/js/" class = "footer-rs-ref"><img class = "footer-rs-logo" src = "assets/img/rs-school-js.svg"></a>
             </div>
 				</footer>
+				</div>
         `
         );
     }
