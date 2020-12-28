@@ -5,7 +5,7 @@ import {Game} from "./components/game-field/game/game.component";
 
 const markup = new BaseMarkup();
 const game = new Game();// добавила!!
-const gameField = new GameField(game);
+const gameField = new GameField();
 const header = new Header();
 const lvlPage = new LvlPage();// добавила!!
 
