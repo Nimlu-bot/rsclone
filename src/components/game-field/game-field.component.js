@@ -1,14 +1,14 @@
 import { gameFieldTemplate } from "./game-field.template";
-import { Game } from "./game/index";
+import { Game } from "./game/index"; // перенесла в index.js!!
 import { headerTemplate } from "../header/header.template";
 
 export class GameField {
     constructor() {
         this.pageName = 'Game';// добавила
-        this.game = new Game();
+        // this.game = new Game;
     }
 
-    init() {
+    init(game) {
         // добавила
         const header = document.querySelector(".header");
         if(header) header.remove();
@@ -18,7 +18,7 @@ export class GameField {
         const list = document.querySelector(".main");
         list.innerHTML='';
         list.insertAdjacentHTML("beforeend", gameFieldTemplate);
-        console.log(this.game);
-        this.game.init();
+        console.log(game);
+        game.init();
     }
 }
