@@ -1,17 +1,17 @@
 $font-game-field: 'Bad Script', cursive;
 
-.lvlBox{
+.lvl-page-lvl-box{
     width: 100%;
     min-height: 80vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    .lvlList{
+    .lvl-page-lvl-list{
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        .lvl{
+        .lvl-page-lvl{
             display: flex;
             flex-direction: row;
             padding: 10px;
@@ -19,15 +19,17 @@ $font-game-field: 'Bad Script', cursive;
             font-size: 30px;
             font-weight: bold;
             color: rgb(65, 0, 187);
-            .footprints{
+            .lvl-page-footprints{
                 transition: all .2s;
                 opacity: 0;
+                margin-left: 10px;
+                margin-right: 10px;
             }
         }
-        .lvl:hover{
+        .lvl-page-lvl:hover{
             cursor: pointer;
-           .footprints{
-            opacity: 1;
+           .lvl-page-footprints{
+            opacity: .7;
             } 
         } 
     }
