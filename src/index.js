@@ -23,7 +23,7 @@ function handler(event) {
     ];
     const argumentsArr = [
         game,
-        'ваш-аргумент'
+        'ваш-аргумент'// если нет аргументов можно добавлять null
     ]
 
  for(let i=0; i<targetNamesArr.length; i+=1) { // ищем в массиве имен таргетов и запускаем соответствующий метод
