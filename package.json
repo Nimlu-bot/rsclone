@@ -15,7 +15,6 @@
     },
     "author": "Netizen",
     "license": "ISC",
-    "proxi": "http://localhost:4000",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/Net-zen/webpack-boilerplate.git"
