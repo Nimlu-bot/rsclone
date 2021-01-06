@@ -1,4 +1,6 @@
-
+$colour-login-message: red;
+$colour-login-password-length: grey;
+$colour-login-border: blue;
 .login-wrapper{
 	margin: 10px	;
 	width: 300px;
@@ -6,16 +8,22 @@
 	display: flex;
 	font-size: 24px;
 	flex-direction: column;
-	border: 1px solid blue;
+	border: 1px solid $colour-login-border; //debug
 	.login-email{
 		margin: 10px;
 		font-size: inherit;
-		border: 1px solid blue;
+		border: 1px solid $colour-login-border; //debug
 	}
 	.login-password{
 		font-size: inherit;
 		margin: 10px;
-		border: 1px solid blue;
+		border: 1px solid $colour-login-border; //debug
+	}
+	.login-password-length{
+		font-size: 12px;
+		margin: 10px;
+		margin-top: 0;
+		color: $colour-login-password-length;
 	}
 	.login-buttons-wrapper{
 		font-size: inherit;
@@ -25,8 +33,12 @@
 		.login-button {
 			font-size: inherit;
 			width: 100px;
-			border: 1px solid blue;
+			border: 1px solid $colour-login-border;  //debug
 			background-color: transparent;
 		}
+	}
+	.login-message{
+		text-align: center;
+		color: $colour-login-message;
 	}
 }

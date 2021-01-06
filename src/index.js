@@ -1,5 +1,5 @@
-import "./assets/css/style.scss";
-import { BaseMarkup, GameField, Header, Login } from "./components/index";
+import './assets/css/style.scss';
+import { BaseMarkup, GameField, Header, Login } from './components/index';
 
 const markup = new BaseMarkup();
 const gameField = new GameField();
