@@ -4,7 +4,10 @@ import { settingsPagesTemplate } from "./psges-list/settings/settings-pages.temp
 import { navPagesTemplate } from "./psges-list/nav/nav-pages.template";
 import { levelPagesTemplate } from "./psges-list/level/level-pages.template";
 import { firstPagesTemplate } from "./first-pages.template";
+// Tonya
 import {GameField} from "../game-field/game-field.component"
+// Sergey
+import { Login } from '../login/login.component';
 
 export class FirstPages {
     constructor() {
@@ -18,8 +21,14 @@ export class FirstPages {
         // document.querySelector(".main").style.backgroundImage='url(../../assets/img/10.png)';
         // eslint-disable-next-line consistent-return
         document.querySelector(".nav").addEventListener('click', (e) => {
+
+            if(!(document.querySelector(".login-wrapper")) === false ) {
+                document.querySelector(".login-wrapper").remove()
+            }
+                
             // eslint-disable-next-line prefer-const
             switch (e.target.id) {
+                
                 case 'start': 
                     document.querySelector(".nav").remove()
                     return this.start()
@@ -37,17 +46,19 @@ export class FirstPages {
                     return this.statistic()
             
                 default:
-
+                
                 break
             }
         })
     }
 
-    pause() {
+    continue() {
         this.nav()
+        document.querySelector(".game-menu").style.backgroundColor = "rgba(50, 150, 141, 0.9)";
         document.querySelector(".nav").insertAdjacentHTML('afterbegin', continueBtn)
         document.querySelector(".continue-btn").addEventListener("click",() => {
             document.querySelector(".nav").remove();
+            document.querySelector(".game-menu").style.backgroundColor = "transparent";
             this.pauseBtn()
         })
     }
@@ -56,11 +67,13 @@ export class FirstPages {
         document.querySelector(".pause-btn").insertAdjacentHTML("afterbegin", backBtnHeader);
         document.querySelector(".pause-btn-header").addEventListener("click",()=>{
             document.querySelector(".pause-btn-header").remove();
-            this.pause();
+            this.continue();
         })
     }
 
     start() {
+        document.querySelector(".game-place").innerHTML = "";
+        document.querySelector(".game-menu").style.backgroundColor = "transparent";
         this.title = "play"
         document.querySelector(".pages").innerHTML = this.title;
         this.pauseBtn()
@@ -77,6 +90,10 @@ export class FirstPages {
             if(e.target.id === 'level-back'){
                 document.querySelector(".level").remove();
                 return this.nav()
+            // eslint-disable-next-line no-else-return
+            } else {
+                document.querySelector(".level").remove()
+                this.start()
             }
         })
     }
@@ -110,6 +127,8 @@ export class FirstPages {
 
     init() {
         document.body.insertAdjacentHTML("afterbegin", firstPagesTemplate);
+        const login = new Login();
+        login.init();
         this.nav();
     }
 }
