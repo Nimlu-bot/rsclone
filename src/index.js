@@ -1,10 +1,6 @@
-import "./assets/css/style.scss";
-import { BaseMarkup, GameField, Header } from "./components/index";
-
-const markup = new BaseMarkup();
-const gameField = new GameField();
-const header = new Header();
-
-markup.init();
-gameField.init();
-header.init();
+// fedya
+    import { FirstPages} from "./components/index";
+    
+    const firstPages = new FirstPages();
+    firstPages.init()
+// ---

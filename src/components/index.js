@@ -1,3 +1,3 @@
-export * from "./base-markup";
+export * from "./first-pages/index";
 export * from "./game-field/index";
-export * from "./header/index";
+
