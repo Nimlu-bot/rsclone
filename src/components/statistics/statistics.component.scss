@@ -1,0 +1,55 @@
+@mixin column {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	border: 1px solid black;
+	font-size: 20px;
+}
+.stat-wrapper{
+	display: flex;
+	flex-direction: column;
+	width: 800px;
+	height: 600px;
+	background-color: red;
+	margin: 10px auto;
+	justify-content: space-around;
+}
+.row-wrapper{
+	display: flex;
+	flex-direction: row;
+	height: 9.09%;
+	// width: 800px;
+	// height: 600px;
+	// justify-content: space-around;
+}
+.stat-number{
+	@include column();
+	width: 5%;
+	
+}
+.stat-name{
+	@include column();
+	width: 35%;
+
+}
+.stat-ducks{
+	@include column();
+	width: 15%;
+	
+}
+.stat-shots{
+	@include column();
+	width: 15%;
+	
+}
+.stat-persent{
+	@include column();
+	width: 15%;
+	
+}
+.stat-score{
+	@include column();
+	width: 20%;
+	
+}
