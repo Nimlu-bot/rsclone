@@ -18,7 +18,6 @@ export class GameField {
         const list = document.querySelector(".main");
         list.innerHTML='';
         list.insertAdjacentHTML("beforeend", gameFieldTemplate);
-        console.log(game);
         game.init();
     }
 }
