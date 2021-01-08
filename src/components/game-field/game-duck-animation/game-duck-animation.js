@@ -149,12 +149,12 @@ export function duckFly (ctx){
     }
 
 
-    const main = document.querySelector('.main');
-    main.addEventListener('click', (event) => {
-        console.log(event.target);
-        shot(event);
-    }
-        );
+    // const main = document.querySelector('.main');
+    // main.addEventListener('click', (event) => {
+    //     console.log(event.target);
+    //     shot(event);
+    // }
+    //     );
 
 
     canvas.addEventListener('click', (event) => {
