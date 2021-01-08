@@ -1,3 +1,4 @@
+  
 import { gameFieldTemplate } from "./game-field.template";
 import { Game } from "./game/index";
 
