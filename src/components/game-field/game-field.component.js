@@ -7,7 +7,7 @@ export class GameField {
     }
 
     init() {
-        const list = document.querySelector(".game-place");
+        const list = document.querySelector(".main");
         list.insertAdjacentHTML("beforeend", gameFieldTemplate);
         this.game.init();
     }

@@ -1,11 +1,3 @@
-// fedya
-    import { FirstPages} from "./components/index";
-    
-    const firstPages = new FirstPages();
-    firstPages.init()
-// ---
-
-
 import "./assets/css/style.scss";
 import { BaseMarkup, GameField, Header, AudioProcessor } from "./components/index";
 
@@ -18,6 +10,5 @@ markup.init();
 gameField.init();
 header.init();
 audioProcessor.init();
-
 
 
