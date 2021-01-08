@@ -5,4 +5,3 @@ export const gameTemplate = (width, heigth) => {
     <canvas class="game-canvas" width="${width}" height="${heigth}"></canvas>
 `;
 };
-// <canvas class="game-canvas" width="${width}" height="${heigth}"></canvas>

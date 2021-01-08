@@ -138,6 +138,7 @@ export function duckFly (ctx){
     const canvas = document.querySelector('.game-canvas');
 
     function shot(event){
+        console.log('HI!!!!!!!!!!!!!!!');
         const clickX = event.clientX - canvas.getBoundingClientRect().left;
         const clickY = event.clientY - canvas.getBoundingClientRect().top;
         if((clickX > (duck1X +20) && clickX < (duck1X + 101-20)) 
@@ -147,7 +148,20 @@ export function duckFly (ctx){
         }
     }
 
-    canvas.addEventListener('click', (event) => shot(event));
+
+    const main = document.querySelector('.main');
+    main.addEventListener('click', (event) => {
+        console.log(event.target);
+        shot(event);
+    }
+        );
+
+
+    canvas.addEventListener('click', (event) => {
+        console.log('HI!!!!!!!!!!!!!!!');
+        shot(event);
+    }
+        );
 
 
 
