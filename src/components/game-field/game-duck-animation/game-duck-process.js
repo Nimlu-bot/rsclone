@@ -10,6 +10,7 @@ treeGrass.src='../../../assets/img/background_little.png';
 let ctx;
 let canvas;
 let moveIntervalId;
+let pauseFlag=false;
 
 const ducks = {
     duck1:{
@@ -74,24 +75,29 @@ function ducksMove(/* level */){
 
 
 function shot(event){
-    const clickX = event.clientX - canvas.getBoundingClientRect().left;
+    if(!pauseFlag){
+            const clickX = event.clientX - canvas.getBoundingClientRect().left;
     const clickY = event.clientY - canvas.getBoundingClientRect().top;
 
     if((clickX > (ducks.duck1.moveX +5) && clickX < (ducks.duck1.moveX + 101-5)) 
     && ((clickY > (ducks.duck1.moveY +5) && clickY < (ducks.duck1.moveY + 90 -5)))){
         ducks.duck1.isLive=false;
-    }
+        }
     if((clickX > (ducks.duck2.moveX +5) && clickX < (ducks.duck2.moveX + 101-5)) 
     && ((clickY > (ducks.duck2.moveY +5) && clickY < (ducks.duck2.moveY + 90 -5)))){
         ducks.duck2.isLive=false;
+     }
+}   
     }
-}
+
 
 function continueGame(){
+    pauseFlag=false;
     moveIntervalId= setInterval(()=>ducksMove(/* level */),80);
 }
 
 function pauseGame(){
+    pauseFlag=true;
     clearInterval(moveIntervalId);
     const continueBtn=document.querySelector('.continue-btn');
     continueBtn.addEventListener('click', continueGame);
