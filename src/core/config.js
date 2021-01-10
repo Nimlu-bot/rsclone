@@ -17,7 +17,12 @@ const EN = {
     EnterPassword: 'Enter password',
     InvalidLoginData: 'Invalid login data',
     UserIsNotFound: 'User is not found',
-    InvalidPasswordTryAgain: 'Invalid password, try again'
+    InvalidPasswordTryAgain: 'Invalid password, try again',
+    name: 'Name',
+    ducks: 'Ducks',
+    hits: 'Shots',
+    persent: 'Persent',
+    score: 'Score'
 };
 const RU = {
     Login: 'Вход',
@@ -38,7 +43,12 @@ const RU = {
     EnterPassword: 'Введите пароль',
     InvalidLoginData: 'Некорректный данные при входе в систему',
     UserIsNotFound: 'Пользователь не найден',
-    InvalidPasswordTryAgain: 'Неверный пароль, попробуйте снова'
+    InvalidPasswordTryAgain: 'Неверный пароль, попробуйте снова',
+    name: 'Имя',
+    ducks: 'Уток',
+    hits: 'Попаданий',
+    persent: 'Процент',
+    score: 'Очки'
 };
 
 const BY = {
@@ -60,7 +70,12 @@ const BY = {
     EnterPassword: 'Увядзіце пароль',
     InvalidLoginData: 'Некарэктны дадзеныя пры ўваходзе ў сістэму',
     UserIsNotFound: 'Карыстач не знойдзены',
-    InvalidPasswordTryAgain: 'Няправільны пароль, паспрабуйце зноў'
+    InvalidPasswordTryAgain: 'Няправільны пароль, паспрабуйце зноў',
+    name: 'Імя',
+    ducks: 'Качак',
+    hits: 'Трапленняў',
+    persent: 'Адсоткаў',
+    score: 'Ачкі'
 };
 
 export const lang = {
@@ -69,7 +84,7 @@ export const lang = {
     BY
 };
 
-let currentLang = 'EN';
+let currentLang = 'BY';
 export function getLang() {
     return currentLang;
 }
