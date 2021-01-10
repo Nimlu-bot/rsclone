@@ -1,190 +1,149 @@
 // import * as PIXI from 'pixi.js'
-import { CANVAS_HEIGTH, CANVAS_WIDTH } from "../../../core/index";
+// import { CANVAS_HEIGTH, CANVAS_WIDTH } from "../../../core/index";
 
-// добавила
+const duckImgR=document.createElement('img');
+duckImgR.src='../../../assets/img/duckR.png'; 
+const duckImgL=document.createElement('img');
+duckImgL.src='../../../assets/img/duckL.png';
+const duckShotImg=document.createElement('img');
+duckShotImg.src='../../../assets/img/duckD.png';// застреленная в 1м кадре, падающая во втором
+let ctx;
+let canvas;
 
+const ducks = {
+    duck1:{
+        moveX:400,
+        moveY:510,
+        num:0
+    },
+    duck2:{
+        moveX:350,
+        moveY:510,
+        num:3
+    }
+};
 
-// let ctx=document.querySelector(".game-canvas").getContext("2d");
-// let img=document.createElement('img');
-// img.src='../../../assets/img/duckR.png';
-// img.onload=function(){
-//     ctx.drawImage(img,0,0, 16, 27, 0, 0, 16, 27);
-// }
-
-export function duckFly (ctx){
-    const pathX=[];
-    const pathY=[];
-    let duck1TimeoutId;
-    let duck1X;
-    let duck1Y;
-    let duck1XF;
-    let duck1YF;
-    let num=0;
-    let x=0;
-    const duckImgR=document.createElement('img');
-    duckImgR.src='../../../assets/img/duckR.png'; 
-    const duckImgL=document.createElement('img');
-    duckImgL.src='../../../assets/img/duckL.png';
-    const duckShotImg=document.createElement('img');
-    duckShotImg.src='../../../assets/img/duckD.png'; 
+function randomWithoutZero(){
+    const stepPathChangeArr = [-20, -10, 10, 20];
+    return stepPathChangeArr[Math.round(Math.random()*3)];
     
-    // let type = "WebGL";
-    // if(!PIXI.utils.isWebGLSupported()){
-    //   type = "canvas"
-    // }
-    // PIXI.utils.sayHello(type);
+}
 
-    // // Create a Pixi Application
-    // const app = new PIXI.Application({
-    //     width: 800,
-    //     height: 600,
-    //     backgroundColor: 0xFFFFFF
-    // });
-    // app.renderer.autoResize = true;
+function duckMove(duck){// здесь только логика смены направления движения и отрисовка картинки с учетом направления
+   
+    // отрисовка кадров
+     ctx.clearRect(duck.moveX, duck.moveY, 101, 90);
+    duck.moveY += duck.randomPathChangeY;
+    const duckImg = duck.moveX < duck.moveX+duck.randomPathChangeX ? duckImgR : duckImgL;
+    duck.moveX += duck.randomPathChangeX;
+    ctx.drawImage(duckImg, 101*duck.num, 0, 101, 90, duck.moveX,  duck.moveY, 101, 90);
+    duck.num+=1;
+    duck.frameCounter+=1;
+    if(duck.num>3)duck.num=0;
 
-    // const gameBox=document.querySelector('.canvas-box');
-    // gameBox.appendChild(app.view);
-
-    // app.loader.add([
-    //     '../../../assets/img/duckR.png',
-    //     '../../../assets/img/duckD.png'
-    // ]);
-
-    //      function setup() {
-    //         const rectangle = new PIXI.Rectangle(303, 0, 101, 90);
-    //         const newTex = new PIXI.Texture(app.loader.resources['../../../assets/img/duckR.png'].texture, rectangle);
-
-    //         const duckR = new PIXI.Sprite(
-    //             newTex
-    //         );
-    //         const duckD = new PIXI.Sprite(
-    //             app.loader.resources[ '../../../assets/img/duckD.png'].texture
-    //         );
-    //         duckR.x =100;
-    //         duckR.y =100;
-    //         app.stage.addChild(duckR);
-    //         app.renderer.render(app.stage);
-    // }   
-    // app.loader.load(setup);
-        
-
-    // let k = 0;
-    // let b = 0;
-    // setInterval(() => {
-    //      k = -1*k; 
-    //     //  + Math.floor(Math.random() * 3);
-    //      b = -1*b + Math.floor(Math.random() * 10);
-    //     //  console.log(k);
-    //     //  console.log(b);
-    // }, 1000);
-    const blaBla = [ '2*x+3', '-2*x+200', '200', ''];
-
-
-    function duckMove(){
-        ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGTH);
-        // const duckImg = duck1X < 200 ? duckImgR : duckImgL;
-        // duck1X = 200;
-        
-        // duck1Y =510 - x;
-
-        // if(duck1Y<=0)x=0;
-
-        duck1Y = 510-x;
-        const duckImg = duck1X < (400 + 300 * Math.sin(x)) ? duckImgR : duckImgL;
-        duck1X =400 + 300 * Math.sin(x);
-
-
-        ctx.drawImage(duckImg, 101*num, 0, 101, 90, duck1X, duck1Y, 101, 90);
-        num+=1;
-        x+=5;
-        if(num>3)num=0;
-        if(x>=CANVAS_WIDTH-100)x=0;
-        // requestAnimationFrame(drawDuck);  
-        
+    // проверяем столкновение со стеной
+    if(duck.moveX<10) duck.randomPathChangeX=Math.abs(randomWithoutZero());
+    if( duck.moveY<10) duck.randomPathChangeY=Math.abs(randomWithoutZero());
+    if(duck.moveX>690) duck.randomPathChangeX= (-1) * Math.abs(randomWithoutZero());   
+    if( duck.moveY>450) duck.randomPathChangeY= (-1) * Math.abs(randomWithoutZero());
+    // проверяем столкновение летающих уток
+    if((Math.max(ducks.duck1.moveY, ducks.duck2.moveY) <= Math.min(ducks.duck1.moveY, ducks.duck2.moveY)+100) 
+     && (Math.max(ducks.duck1.moveX, ducks.duck2.moveX) <= Math.min(ducks.duck1.moveX, ducks.duck2.moveX)+110)){
+        ducks.duck1.moveY > ducks.duck2.moveY ? ducks.duck1.randomPathChangeY=Math.abs(randomWithoutZero()) : ducks.duck1.randomPathChangeY= (-1) * Math.abs(randomWithoutZero());
+        ducks.duck2.moveY > ducks.duck1.moveY ? ducks.duck2.randomPathChangeY=Math.abs(randomWithoutZero()) : ducks.duck2.randomPathChangeY= (-1) * Math.abs(randomWithoutZero());
+        ducks.duck1.moveX > ducks.duck2.moveX ? ducks.duck1.randomPathChangeX=Math.abs(randomWithoutZero()) : ducks.duck1.randomPathChangeX= (-1) * Math.abs(randomWithoutZero());
+        ducks.duck2.moveX > ducks.duck1.moveX ? ducks.duck2.randomPathChangeX=Math.abs(randomWithoutZero()) : ducks.duck2.randomPathChangeX= (-1) * Math.abs(randomWithoutZero());
+     }
+     // проверяем столкновение с падающей уткой
+     if(((Math.max(duck.moveY, ducks.duck2.fallY) <= Math.min(duck.moveY, ducks.duck2.fallY)+130) 
+     && (Math.max(duck.moveX, ducks.duck2.moveX) <= Math.min(duck.moveX, ducks.duck2.moveX)+130))
+     || ((Math.max(duck.moveY, ducks.duck1.fallY) <= Math.min(duck.moveY, ducks.duck1.fallY)+130) 
+     && (Math.max(duck.moveX, ducks.duck1.moveX) <= Math.min(duck.moveX, ducks.duck1.moveX)+130))){
+        duck.frameCounter=0;
+        duck.randomPathChangeX *= (-1);
+     }
+     // случайная смена направления через заданное количество кадров
+    if(duck.frameCounter>10){
+        duck.frameCounter=0;
+        duck.randomPathChangeY = randomWithoutZero();
+        duck.randomPathChangeX = randomWithoutZero();
     }
+}
+
+function ducksMove(/* level */){
+    ducks.duck1.moveX=400;
+    ducks.duck1.moveY=510;
+    ducks.duck2.moveX=350;
+    ducks.duck2.moveY=510;
+    console.log('begin');
+    ducks.duck1.intervalId = setInterval(()=>duckMove(ducks.duck1),80);
+    ducks.duck2.intervalId = setInterval(()=>duckMove(ducks.duck2),80);
+
+}
+
+function duckFall(duck){                
+    if(duck.moveY<600-90){
+        ctx.clearRect(duck.fallX, duck.fallY-10, 101, 90);
+        ctx.drawImage(duckShotImg, 105, 0, 105, 90, duck.fallX, duck.fallY, 101, 90);
+        duck.fallY+=10;
+        requestAnimationFrame(()=>duckFall(duck)); 
+    } else {
+        ctx.clearRect(duck.fallX, duck.fallY-10, 101, 90);
+    }  
+    
+}
+
+function duckShot(duck){
+    clearTimeout(duck.timeoutId);
+    duck.fallX=duck.moveX;
+    duck.fallY=duck.moveY;
+    duck.moveX=null;
+    duck.moveY=null;
+    duck.num=0;
+    ctx.clearRect(duck.fallX, duck.fallY, 101, 90);
+    ctx.drawImage(duckShotImg, 0, 0, 105, 90, duck.fallX, duck.fallY, 101, 90);
+    duck.timeoutId = setTimeout(()=>duckFall(duck), 400);
+    
+}
 
 
-    function duckFall(){                
-            if(duck1Y<600-90){
-                ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGTH);
-                ctx.drawImage(duckShotImg, 105, 0, 105, 90, duck1XF, duck1YF, 101, 90);
-                duck1YF+=10;
-                requestAnimationFrame(duckFall); 
-            } else {
-                ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGTH);
-            }  
-            
+function shot(event){
+    const clickX = event.clientX - canvas.getBoundingClientRect().left;
+    const clickY = event.clientY - canvas.getBoundingClientRect().top;
+
+    if((clickX > (ducks.duck1.moveX +5) && clickX < (ducks.duck1.moveX + 101-5)) 
+    && ((clickY > (ducks.duck1.moveY +5) && clickY < (ducks.duck1.moveY + 90 -5)))){
+        clearInterval(ducks.duck1.intervalId);
+        duckShot(ducks.duck1);
     }
-
-    function duckShot(){
-        clearTimeout(duck1TimeoutId);
-        duck1XF=duck1X;
-        duck1YF=duck1Y;
-        duck1X=0;
-        duck1Y=0;
-        num=0;
-        x=0;
-        ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGTH);
-        ctx.drawImage(duckShotImg, 0, 0, 105, 90, duck1XF, duck1YF, 101, 90);
-        duck1TimeoutId = setTimeout(duckFall, 400);
-        
+    if((clickX > (ducks.duck2.moveX +5) && clickX < (ducks.duck2.moveX + 101-5)) 
+    && ((clickY > (ducks.duck2.moveY +5) && clickY < (ducks.duck2.moveY + 90 -5)))){
+        clearInterval(ducks.duck2.intervalId);
+        duckShot(ducks.duck2);
     }
-
-    // duckImg.onload=()=>{
-    //   const duc1IntervalId = setInterval(duckMove,200);  
-    // }
-    const duc1IntervalId = setInterval(duckMove,200);
-
-    const canvas = document.querySelector('.game-canvas');
-
-    function shot(event){
-        console.log('HI!!!!!!!!!!!!!!!');
-        const clickX = event.clientX - canvas.getBoundingClientRect().left;
-        const clickY = event.clientY - canvas.getBoundingClientRect().top;
-        if((clickX > (duck1X +20) && clickX < (duck1X + 101-20)) 
-        && ((clickY > (duck1Y +20) && clickY < (duck1Y + 90 -20)))){
-            clearInterval(duc1IntervalId);
-            duckShot();
-        }
-    }
+}
 
 
-    // const main = document.querySelector('.main');
-    // main.addEventListener('click', (event) => {
-    //     console.log(event.target);
-    //     shot(event);
-    // }
-    //     );
+export function duckFly (context){ // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!export!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    ctx=context;
+    ducks.duck1.randomPathChangeY = randomWithoutZero();
+    ducks.duck1.randomPathChangeX = randomWithoutZero();
+    ducks.duck1.frameCounter = 0;
+    ducks.duck2.randomPathChangeY = randomWithoutZero();
+    ducks.duck2.randomPathChangeX = randomWithoutZero();
+    ducks.duck2.frameCounter = 0;
 
+    ducksMove(/* level */);
 
-    canvas.addEventListener('click', (event) => {
+    canvas = document.querySelector('.game-canvas');
+    canvas.addEventListener('click', (event) => { // не работает из-за меню
         console.log('HI!!!!!!!!!!!!!!!');
         shot(event);
-    }
-        );
+    });
 
-
-
-    // let time1Id;
-    // function createPath(event){
-    //     // clearTimeout(time1Id);
-    //     // time1Id = setTimeout(()=> {
-    //     //     pathX.push(event.offsetX - canvas.getBoundingClientRect().left);
-    //     //     pathY.push(event.offsetX - canvas.getBoundingClientRect().top);
-            
-    //     // }, 200);
-    //         // pathX.push(event.offsetX - canvas.getBoundingClientRect().left);
-    //         // pathY.push(event.offsetX - canvas.getBoundingClientRect().top);
-    //         pathX.push(event.offsetX);
-    //         pathY.push(event.offsetY);
-
-    // }
-    // function showPath(){
-    //     console.log(pathX);
-    //     console.log(pathY);
-    // }
-
-
-    // canvas.addEventListener('mousemove', (event) => createPath(event));
-    // canvas.addEventListener('click', showPath);
+    const main = document.querySelector('.main');// убрать, когда Федя меню починит ! ! !
+    main.addEventListener('click', (event) => {
+        console.log(event.target);
+        shot(event);
+    });
 }
