@@ -1,64 +1,18 @@
 import { CANVAS_HEIGTH, CANVAS_WIDTH } from "../../../core/index";
-import {duckMove, randomWithoutZero, duckGoAway} from './game-duck-duck-move';
+import {duckMove, randomWithoutZero, duckGoAway, duckShot, newDucksParameters} from './game-duck-duck-move';
+import {ducksForGame, progressForGame} from './game-constants'
 
-
-const duckShotImg=document.createElement('img');
-duckShotImg.src='../../../assets/img/duckD.png';// застреленная в 1м кадре, падающая во втором
 const treeGrass=document.createElement('img');
 treeGrass.src='../../../assets/img/background_little.png';
 let ctx;
 let canvas;
 let moveIntervalId;
 let pauseFlag=false;
+let gameFlag=false;
 
-const ducks = {
-    duck1:{
-        isLive:true,
-        moveX:400,
-        moveY:510,
-        fallY:0,
-        fallX:0,
-        goAwX:0,
-        goAwY:0,
-        num:0,
-        timeAfterDeath:0,
-        timeAfterStartFly:0
-    },
-    duck2:{
-        isLive:true,
-        moveX:350,
-        moveY:510,
-        fallY:0,
-        fallX:0,
-        goAwX:0,
-        goAwY:0,
-        num:3,
-        timeAfterDeath:0,
-        timeAfterStartFly:0
-    }
-};
+const ducks = ducksForGame;
+const progress = progressForGame;
 
-function duckFall(duck){             
-    if(duck.moveY<600-90){
-        ctx.drawImage(duckShotImg, 105, 0, 105, 90, duck.fallX, duck.fallY, 101, 90);
-        duck.fallY+=50;
-    }
-}
-
-function duckShot(duck){
-    duck.isLive=false
-    if(duck.moveX!==null)duck.fallX=duck.moveX;
-    if(duck.moveY!==null)duck.fallY=duck.moveY;
-    duck.moveX=null;
-    duck.moveY=null;
-    // duck.num=0;
-    if(duck.timeAfterDeath<4){
-        ctx.drawImage(duckShotImg, 0, 0, 105, 90, duck.fallX, duck.fallY, 101, 90);
-        duck.timeAfterDeath+=1;
-    }else{
-        duckFall(duck);
-    }
-}
 
 function ducksMove(/* level */){
     pauseFlag=false;
@@ -66,45 +20,77 @@ function ducksMove(/* level */){
     // отрисовываем фон
     ctx.drawImage(treeGrass, 0, 5);
     ctx.globalCompositeOperation = 'destination-over';
+    if(progress.currentTwoDucksCruck===2){
+        // console.log('NEW TWO DUCKS');
+        // console.log(progress.ducksInCurrentLvl);
+        // console.log(progress.cruckDuck);
+        // console.log(progress.shotDucks);
+        // console.log(progress.goAwayducks);
+        // console.log(progress.currentTwoDucksCruck);
+        progress.currentTwoDucksCruck=0;
+        progress.bullet=4;
+        console.log(`new bullet ${progress.bullet}`);
+        newDucksParameters(ducks);
+    }
+    if(progress.cruckDuck===10){
+        
+        if (progress.level<3){
+            console.log('NEW LEVEL');
+            progress.level+=1;
+            progress.cruckDuck=0;
+            progress.shotDucks=0;
+            progress.goAwayducks=0;
+            console.log(`level ${progress.level}`);
+        }else{
+            console.log('ALL LEVELS COMPLETE');
+            clearInterval(moveIntervalId);
+
+        }
+    }
     if(ducks.duck1.timeAfterStartFly<200) {
         if(ducks.duck1.isLive){
                 duckMove(ctx, ducks.duck1, ducks);
                 ducks.duck1.timeAfterStartFly+=1;
         } else {
-                duckShot(ducks.duck1);
+                duckShot(ducks.duck1, ctx, progress);
         }
     }else{
-        duckGoAway(ducks.duck1, ctx);
+        duckGoAway(ducks.duck1, ctx, progress);
     }
     if(ducks.duck2.timeAfterStartFly<200) {
         if(ducks.duck2.isLive){
             duckMove(ctx, ducks.duck2, ducks);
             ducks.duck2.timeAfterStartFly+=1;
         } else{
-            duckShot(ducks.duck2);
+            duckShot(ducks.duck2, ctx, progress);
         }
     }else{
-        duckGoAway(ducks.duck2, ctx);
+        duckGoAway(ducks.duck2, ctx, progress);
     }    
 
 }
 
 
 function shot(event){
-    if(!pauseFlag){
-            const clickX = event.clientX - canvas.getBoundingClientRect().left;
-    const clickY = event.clientY - canvas.getBoundingClientRect().top;
+    if(gameFlag && !pauseFlag && progress.bullet>0) progress.bullet-=1;
+    console.log(`bullet ${progress.bullet}`);
+    if(progress.bullet>0){
+            if(!pauseFlag){
+                const clickX = event.clientX - canvas.getBoundingClientRect().left;
+                const clickY = event.clientY - canvas.getBoundingClientRect().top;
 
-    if((clickX > (ducks.duck1.moveX +5) && clickX < (ducks.duck1.moveX + 101-5)) 
-    && ((clickY > (ducks.duck1.moveY +5) && clickY < (ducks.duck1.moveY + 90 -5)))){
-        ducks.duck1.isLive=false;
-        }
-    if((clickX > (ducks.duck2.moveX +5) && clickX < (ducks.duck2.moveX + 101-5)) 
-    && ((clickY > (ducks.duck2.moveY +5) && clickY < (ducks.duck2.moveY + 90 -5)))){
-        ducks.duck2.isLive=false;
-     }
-}   
+            if((clickX > (ducks.duck1.moveX +5) && clickX < (ducks.duck1.moveX + 101-5)) 
+            && ((clickY > (ducks.duck1.moveY +5) && clickY < (ducks.duck1.moveY + 90 -5)))){
+                ducks.duck1.isLive=false;
+                }
+            if((clickX > (ducks.duck2.moveX +5) && clickX < (ducks.duck2.moveX + 101-5)) 
+            && ((clickY > (ducks.duck2.moveY +5) && clickY < (ducks.duck2.moveY + 90 -5)))){
+                ducks.duck2.isLive=false;
+                }
+            }   
+    
     }
+}
 
 
 function continueGame(){
@@ -121,26 +107,12 @@ function pauseGame(){
 
 
 export function startGame (context){ // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!export
-    ducks.duck1.timeAfterStartFly=0;
-    ducks.duck2.timeAfterStartFly=0;
+    gameFlag=true;
     clearInterval(moveIntervalId);
     ctx=context;
-    ducks.duck1.timeAfterDeath=0;
-    ducks.duck2.timeAfterDeath=0;
-    ducks.duck1.isLive=true;
-    ducks.duck2.isLive=true;
-    ducks.duck1.moveX=400 + randomWithoutZero();
-    ducks.duck1.moveY=510;
-    ducks.duck2.moveX=350 + randomWithoutZero();
-    ducks.duck2.moveY=510;
-    // устанавливаем случайное направление для уток
-    ducks.duck1.randomPathChangeY = randomWithoutZero();
-    ducks.duck1.randomPathChangeX = randomWithoutZero();
-    // ducks.duck1.frameCounter = 0;
-    ducks.duck2.randomPathChangeY = randomWithoutZero();
-    ducks.duck2.randomPathChangeX = randomWithoutZero();
-    // ducks.duck2.frameCounter = 0;
+    newDucksParameters(ducks);
 
+    progress.ducksInCurrentLvl+=2;
     moveIntervalId= setInterval(()=>ducksMove(/* level */),80);
 
     canvas = document.querySelector('.game-canvas');
