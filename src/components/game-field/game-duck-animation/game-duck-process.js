@@ -1,5 +1,5 @@
 import { CANVAS_HEIGTH, CANVAS_WIDTH } from "../../../core/index";
-import {duckMove, randomWithoutZero} from './game-duck-duck-move';
+import {duckMove, randomWithoutZero, duckGoAway} from './game-duck-duck-move';
 
 
 const duckShotImg=document.createElement('img');
@@ -18,8 +18,11 @@ const ducks = {
         moveY:510,
         fallY:0,
         fallX:0,
+        goAwX:0,
+        goAwY:0,
         num:0,
-        timeAfterDeath:0
+        timeAfterDeath:0,
+        timeAfterStartFly:0
     },
     duck2:{
         isLive:true,
@@ -27,8 +30,11 @@ const ducks = {
         moveY:510,
         fallY:0,
         fallX:0,
+        goAwX:0,
+        goAwY:0,
         num:3,
-        timeAfterDeath:0
+        timeAfterDeath:0,
+        timeAfterStartFly:0
     }
 };
 
@@ -40,7 +46,6 @@ function duckFall(duck){
 }
 
 function duckShot(duck){
-    console.log(duck.timeAfterDeath);
     duck.isLive=false
     if(duck.moveX!==null)duck.fallX=duck.moveX;
     if(duck.moveY!==null)duck.fallY=duck.moveY;
@@ -61,16 +66,27 @@ function ducksMove(/* level */){
     // отрисовываем фон
     ctx.drawImage(treeGrass, 0, 5);
     ctx.globalCompositeOperation = 'destination-over';
-    if(ducks.duck1.isLive){
-        duckMove(ctx, ducks.duck1, ducks);
-    } else {
-        duckShot(ducks.duck1);
+    if(ducks.duck1.timeAfterStartFly<200) {
+        if(ducks.duck1.isLive){
+                duckMove(ctx, ducks.duck1, ducks);
+                ducks.duck1.timeAfterStartFly+=1;
+        } else {
+                duckShot(ducks.duck1);
+        }
+    }else{
+        duckGoAway(ducks.duck1, ctx);
     }
-    if(ducks.duck2.isLive){
-        duckMove(ctx, ducks.duck2, ducks);
-    } else{
-        duckShot(ducks.duck2);
-    }
+    if(ducks.duck2.timeAfterStartFly<200) {
+        if(ducks.duck2.isLive){
+            duckMove(ctx, ducks.duck2, ducks);
+            ducks.duck2.timeAfterStartFly+=1;
+        } else{
+            duckShot(ducks.duck2);
+        }
+    }else{
+        duckGoAway(ducks.duck2, ctx);
+    }    
+
 }
 
 
@@ -105,6 +121,8 @@ function pauseGame(){
 
 
 export function startGame (context){ // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!export
+    ducks.duck1.timeAfterStartFly=0;
+    ducks.duck2.timeAfterStartFly=0;
     clearInterval(moveIntervalId);
     ctx=context;
     ducks.duck1.timeAfterDeath=0;

@@ -2,6 +2,8 @@ const duckImgR=document.createElement('img');
 duckImgR.src='../../../assets/img/duckR.png';
 const duckImgL=document.createElement('img');
 duckImgL.src='../../../assets/img/duckL.png';
+const duckGoAw=document.createElement('img');
+duckGoAw.src='../../../assets/img/duckGo.png';
 
 // функция для рандомного изменения направления
 export function randomWithoutZero(){
@@ -40,5 +42,20 @@ export function duckMove(ctx,duck,ducks){
     //     duck.randomPathChangeY = randomWithoutZero();
     //     duck.randomPathChangeX = randomWithoutZero();
     // }
+}
+
+export function duckGoAway(duck,ctx){
+    duck.isLive=false;
+    if(duck.moveX!==null)duck.goAwX=duck.moveX;
+    if(duck.moveY!==null)duck.goAwY=duck.moveY;
+    duck.moveX=null;
+    duck.moveY=null;
+    if(duck.goAwY>-80){
+        ctx.drawImage(duckGoAw, 100*duck.num, 0, 100,  90, duck.goAwX, duck.goAwY, 100, 90);
+        duck.num+=1;
+        if(duck.num>3)duck.num=0;
+        duck.goAwY-=10;
+    }
+
 }
 
