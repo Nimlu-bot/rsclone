@@ -1,6 +1,6 @@
 import { gameTemplate } from "./game.template";
 import { CANVAS_HEIGTH, CANVAS_WIDTH } from "../../../core/index";
-import { duckFly } from "../game-duck-animation/game-duck-animation";
+import { startGame } from "../game-duck-animation/game-duck-process";
 // game-duck-animation
 
 export class Game {
@@ -15,8 +15,6 @@ export class Game {
 
         const canvas = document.querySelector(".game-canvas");
         const ctx = canvas.getContext("2d");
-        // ctx.fillStyle = "green";
-        // ctx.fillRect(10, 10, 100, 100);
-        duckFly(ctx);
+        startGame(ctx);
     }
 }
