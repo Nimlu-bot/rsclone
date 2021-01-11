@@ -1,44 +1,7 @@
-$color-game-field-header : white;
-$color-game-field-main : red;
-$color-game-field-footer : white;
-
-$font-game-field: 'Bad Script', cursive;
-
-.game-field-wrapper{
-	display: flex;
-	flex-direction: column;
-	.game-field-header{
-		flex: 0 0 auto;
-		height: 40px;
-
-		//stub
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		font-family: $font-game-field; 
-		font-size: 16px;
-		font-weight: bold;
-		background-color: $color-game-field-header ;
-	}
-	.game-field-main{
-		flex: 1 0 auto;
-		height: 620px;
-		
-		//stub
-		background-color: $color-game-field-main ;
-		
-	}
-	.game-field-footer{
-		flex: 0 0 auto;
-		height: 200px;
-
-		//stub
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		font-family: $font-game-field; 
-		font-size: 16px;
-		font-weight: bold;
-		background-color: $color-game-field-footer;
-	}
+.game-field-main{
+    position: relative;
+    display: flex;
+    background-color: white;
+    margin: 10px;
+    box-shadow: 0 0 5px white;
 }

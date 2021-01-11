@@ -4,6 +4,7 @@ import { settingsPagesTemplate } from "./psges-list/settings/settings-pages.temp
 import { navPagesTemplate } from "./psges-list/nav/nav-pages.template";
 import { levelPagesTemplate } from "./psges-list/level/level-pages.template";
 import { firstPagesTemplate } from "./first-pages.template";
+import { scoreTemplate } from "./psges-list/score/score.template";
 // Tonya
 import {GameField} from "../game-field/game-field.component"
 // Sergey
@@ -12,6 +13,15 @@ import { Login } from '../login/login.component';
 export class FirstPages {
     constructor() {
         this.title = "Game menu";
+    }
+
+    score(){
+        document.querySelector(".game-field-main").insertAdjacentHTML("afterbegin", scoreTemplate);
+        setTimeout(()=>{
+            document.querySelector(".bullet-box").style.left = "0%"
+            document.querySelector(".point-box").style.left = "0%"
+            document.querySelector(".total-box").style.left = "0%"
+        },0)
     }
 
     nav(){
@@ -79,6 +89,7 @@ export class FirstPages {
         this.pauseBtn()
         const gameField = new GameField();
         gameField.init()
+        this.score()
     }
 
     level() {
