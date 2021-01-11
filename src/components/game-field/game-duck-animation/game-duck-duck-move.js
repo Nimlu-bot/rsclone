@@ -18,7 +18,7 @@ export function duckMove(ctx,duck,ducks){
     duck.moveX += duck.randomPathChangeX;
     ctx.drawImage(duckImg, 101*duck.num, 0, 101, 90, duck.moveX,  duck.moveY, 101, 90);
     duck.num+=1;
-    duck.frameCounter+=1;
+    // duck.frameCounter+=1;
     if(duck.num>3)duck.num=0;
 
     // проверяем столкновение со стеной
@@ -35,10 +35,10 @@ export function duckMove(ctx,duck,ducks){
         ducks.duck2.moveX > ducks.duck1.moveX ? ducks.duck2.randomPathChangeX=Math.abs(randomWithoutZero()) : ducks.duck2.randomPathChangeX= (-1) * Math.abs(randomWithoutZero());
      }
      // случайная смена направления через заданное количество кадров
-    if(duck.frameCounter>10){
-        duck.frameCounter=0;
-        duck.randomPathChangeY = randomWithoutZero();
-        duck.randomPathChangeX = randomWithoutZero();
-    }
+    // if(duck.frameCounter>30){
+    //     duck.frameCounter=0;
+    //     duck.randomPathChangeY = randomWithoutZero();
+    //     duck.randomPathChangeX = randomWithoutZero();
+    // }
 }
 

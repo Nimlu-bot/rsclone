@@ -1,4 +1,3 @@
-// import * as PIXI from 'pixi.js'
 import { CANVAS_HEIGTH, CANVAS_WIDTH } from "../../../core/index";
 import {duckMove, randomWithoutZero} from './game-duck-duck-move';
 
@@ -57,6 +56,7 @@ function duckShot(duck){
 }
 
 function ducksMove(/* level */){
+    pauseFlag=false;
     ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGTH);
     // отрисовываем фон
     ctx.drawImage(treeGrass, 0, 5);
@@ -92,7 +92,7 @@ function shot(event){
 
 
 function continueGame(){
-    pauseFlag=false;
+    // pauseFlag=false;
     moveIntervalId= setInterval(()=>ducksMove(/* level */),80);
 }
 
@@ -115,13 +115,13 @@ export function startGame (context){ // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!export
     ducks.duck1.moveY=510;
     ducks.duck2.moveX=350 + randomWithoutZero();
     ducks.duck2.moveY=510;
-    // устанавливаем случайное направление для уток на следующие 10 кадров
+    // устанавливаем случайное направление для уток
     ducks.duck1.randomPathChangeY = randomWithoutZero();
     ducks.duck1.randomPathChangeX = randomWithoutZero();
-    ducks.duck1.frameCounter = 0;
+    // ducks.duck1.frameCounter = 0;
     ducks.duck2.randomPathChangeY = randomWithoutZero();
     ducks.duck2.randomPathChangeX = randomWithoutZero();
-    ducks.duck2.frameCounter = 0;
+    // ducks.duck2.frameCounter = 0;
 
     moveIntervalId= setInterval(()=>ducksMove(/* level */),80);
 
