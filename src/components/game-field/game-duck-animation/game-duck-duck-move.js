@@ -25,10 +25,10 @@ export function newDucksParameters(ducks){
     ducks.duck2.timeAfterDeath=0;
     ducks.duck1.isLive=true;
     ducks.duck2.isLive=true;
-    ducks.duck1.moveX=400 + randomWithoutZero();
-    ducks.duck1.moveY=510;
-    ducks.duck2.moveX=350 + randomWithoutZero();
-    ducks.duck2.moveY=510;
+    ducks.duck1.moveX=500 + randomWithoutZero();
+    ducks.duck1.moveY=480;
+    ducks.duck2.moveX=250 + randomWithoutZero();
+    ducks.duck2.moveY=480;
     // устанавливаем случайное направление для уток
     ducks.duck1.randomPathChangeY = randomWithoutZero();
     ducks.duck1.randomPathChangeX = randomWithoutZero();
@@ -83,12 +83,13 @@ export function duckGoAway(duck,ctx, progress){
 }
 
 export function duckFall(duck, ctx, progress){             
-    if(!duck.duckFall && duck.fallY<510){
+    if(!duck.duckFall && duck.fallY<450){
         ctx.drawImage(duckShotImg, 105, 0, 105, 90, duck.fallX, duck.fallY, 101, 90);
         duck.fallY+=50;
     } else if(!duck.duckFall){
         duck.duckFall=true;
         progress.currentTwoDucksCruck+=1;
+        progress.currentTwoShotDucks+=1;
         progress.shotDucks+=1;
         console.log(`shotDucks ${progress.shotDucks}`);
         progress.cruckDuck+=1;

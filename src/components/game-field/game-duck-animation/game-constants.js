@@ -2,8 +2,8 @@ export const ducksForGame = {
     duck1:{
         isLive:true,
         duckFall:false, 
-        moveX:400,
-        moveY:510,
+        moveX:500,
+        moveY:480,
         fallY:0,
         fallX:0,
         goAwX:0,
@@ -15,8 +15,8 @@ export const ducksForGame = {
     duck2:{
         isLive:true,
         duckFall:false, 
-        moveX:350,
-        moveY:510,
+        moveX:250,
+        moveY:480,
         fallY:0,
         fallX:0,
         goAwX:0,
@@ -34,5 +34,6 @@ export const progressForGame = {
     shotDucks:0, // застреленные утки
     goAwayducks:0, // улетевшие утки
     currentTwoDucksCruck:0, // ушла ли любым свособом текущая пара уток
+    currentTwoShotDucks:0,
     bullet:4 // оставшиеся пули
 } 
