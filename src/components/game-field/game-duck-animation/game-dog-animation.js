@@ -22,7 +22,7 @@ export const dog={
 
 export function dogMove(ctx,time,ducksMove){
     clearInterval(time.moveIntervalId);
-    time.frameTime=150;
+    time.frameTime=100;
     // time.frameTime=1000;
     time.moveIntervalId=setInterval(()=>ducksMove(/* level */),time.frameTime);
     if(dog.go){
@@ -56,12 +56,12 @@ export function dogMove(ctx,time,ducksMove){
             frameCounter+=1;
             if(frameCounter>2){// замерла с поднятыми ушами
                 if(frameNum<2)frameNum+=1;
-                dogGoX+=7;
-                dogGoY-=8;
+                dogGoX+=8;
+                dogGoY-=10;
             
             
             // if(frameNum===3){
-                if(frameCounter>8){
+                if(frameCounter>7){
                 console.log('i am jump');
                 dog.jump=false;
                 dog.scaredDucks=true;
@@ -78,7 +78,7 @@ export function dogMove(ctx,time,ducksMove){
     }
     if(dog.findOneDuck){
         clearInterval(time.moveIntervalId);
-        time.frameTime=100;
+        time.frameTime=20;
         time.moveIntervalId=setInterval(()=>ducksMove(/* level */),time.frameTime);
         frameString=0;
         frameNum=5
@@ -97,7 +97,7 @@ export function dogMove(ctx,time,ducksMove){
     }
     if(dog.findTwoDucks){
         clearInterval(time.moveIntervalId);
-        time.frameTime=100;
+        time.frameTime=20;
         time.moveIntervalId=setInterval(()=>ducksMove(/* level */),time.frameTime);
         frameString=1;
         frameNum=5;
