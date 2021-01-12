@@ -1,10 +1,5 @@
-// возможно не нужно ------федя
-// $color-game-canvas-back: white;
 
-// .game-canvas{
-	// display: block;	
-	// margin: 10px auto;
-	// border: $color-game-canvas-back 1px solid;
-	// box-shadow: 0 0 5px 5px $color-game-canvas-back;
-	// background-color: $color-game-canvas-back;
-// }
+.game-canvas{
+	box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.562);
+	border-radius: 5px;
+}

@@ -1,5 +1,5 @@
-$bgHeaderFooter: rgba(67, 199, 188, 0.808);
-$bgMain:  rgba(50, 150, 141, 0.808);
+$bgHeaderFooter: rgba(67, 199, 188, 0);
+$bgMain:  rgba(50, 150, 142, 0);
 $textColor1: rgb(0, 0, 0);
 
 // general style
@@ -21,7 +21,7 @@ $textColor1: rgb(0, 0, 0);
         display: flex;
         justify-content: center;
         align-items: center;
-        min-height: 10vh;
+        min-height: 5vh;
         background-color: $bgHeaderFooter;
         user-select: none;
     }
@@ -43,10 +43,20 @@ $textColor1: rgb(0, 0, 0);
             width: 30%;
             text-transform: uppercase;
         }
+      
         .pause-btn{
             display: flex;
-            justify-content: flex-end;
+            flex-direction: row-reverse;
+            align-items: center;
+            justify-content: space-between;
             width: 30%;
+
+            .user{
+                .user-img{
+                    width: 25px;
+                    cursor: pointer;
+                }
+            }
         }
 
     }
@@ -56,11 +66,13 @@ $textColor1: rgb(0, 0, 0);
         min-height: 80vh;
         align-items: center;
         background-color: $bgMain;
+
         .content{
             position: relative;
             justify-content: center;
             flex-wrap: nowrap;
             min-height: 80vh;
+
             
             .game-place,
             .game-menu {

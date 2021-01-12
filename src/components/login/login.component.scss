@@ -2,22 +2,25 @@ $colour-login-message: red;
 $colour-login-password-length: grey;
 $colour-login-border: blue;
 .login-wrapper{
-	margin: 10px	;
-	width: 300px;
-	height: 200px;
 	display: flex;
+	padding: 2px 5px;
 	font-size: 24px;
 	flex-direction: column;
-	border: 1px solid $colour-login-border; //debug
+	border: 2px solid #000;
+    border-radius: 5px;
 	.login-email{
 		margin: 10px;
+		padding: 2px 5px;
 		font-size: inherit;
-		border: 1px solid $colour-login-border; //debug
+		border: 2px solid #000;
+		border-radius: 5px;
 	}
 	.login-password{
 		font-size: inherit;
 		margin: 10px;
-		border: 1px solid $colour-login-border; //debug
+		padding: 2px 5px;
+		border: 2px solid #000;
+		border-radius: 5px;
 	}
 	.login-password-length{
 		font-size: 12px;
@@ -31,10 +34,7 @@ $colour-login-border: blue;
 		display: flex;
 		justify-content: space-between;
 		.login-button {
-			font-size: inherit;
-			width: 100px;
-			border: 1px solid $colour-login-border;  //debug
-			background-color: transparent;
+			margin: 0 2px;
 		}
 	}
 	.login-message{
