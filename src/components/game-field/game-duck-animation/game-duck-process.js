@@ -18,7 +18,7 @@ function ducksMove(/* level */){
     pauseFlag=false;
     ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGTH);
     // отрисовываем фон
-    ctx.drawImage(treeGrass, 0, 5);
+    ctx.drawImage(treeGrass, -5, 5);
     ctx.globalCompositeOperation = 'destination-over';
     if(progress.currentTwoDucksCruck===2){
         // console.log('NEW TWO DUCKS');
