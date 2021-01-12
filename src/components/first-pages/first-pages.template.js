@@ -37,7 +37,7 @@ export const firstPagesTemplate = `
         <li><a href = https://github.com/tone4ka ><img class="git-logo" src="../../assets/img/github.svg" alt="git-logo" />Antonina Zinkevich</a></li>
         <li><a href = "https://github.com/Mikulich-Fedor"><img class="git-logo" src="../../assets/img/github.svg" alt="git-logo" />Fedor Mikulich</a></li>
         <li><a href = "https://github.com/nimlu-bot"><img class="git-logo" src="../../assets/img/github.svg" alt="git-logo" />Sergey Nesterov</a></li>
-        <li><a href = "#"><img class="git-logo" src="../../assets/img/github.svg" alt="git-logo" />Andrey Komov</a></li>
+        <li><a href = "https://github.com/andreykomov"><img class="git-logo" src="../../assets/img/github.svg" alt="git-logo" />Andrey Komov</a></li>
     </ul>
 
     </div>
