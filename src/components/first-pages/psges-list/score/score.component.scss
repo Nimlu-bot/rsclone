@@ -1,0 +1,28 @@
+ .score{
+    display: flex;
+    position: relative;
+    transition: all 0.2s;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 50px;
+    background-color: rgba(76, 143, 121, 0.2);
+    overflow: hidden;
+    .bullet-box,
+    .point-box,
+    .total-box{
+        display: flex;
+        position: relative;
+        left: 200%;
+        transition: all 0.7s;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    img{
+        transition: all .5s;
+        width: 30px;
+        height: 10px;
+        margin: 1px 0;
+    }
+}   
