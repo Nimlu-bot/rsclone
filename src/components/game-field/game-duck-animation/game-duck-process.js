@@ -7,7 +7,6 @@ const treeGrass=document.createElement('img');
 treeGrass.src='../../../assets/img/background_full.png';
 let ctx;
 let canvas;
-let moveIntervalId;
 let pauseFlag=false;
 let gameFlag=false;
 const time={
@@ -26,7 +25,6 @@ function ducksMove(/* level */){
     ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGTH);
     // отрисовываем фон
     ctx.drawImage(treeGrass, 0, 0, 1008, 724, 0, 80, 800, 600);
-    
 
     dogMove(ctx,time,ducksMove);// !!!!!!!!!!!!!!!!!!!!!!!собачка
 
@@ -117,35 +115,48 @@ function shot(event){
 }
 
 
-function continueGame(){
-    // pauseFlag=false;
-    time.moveIntervalId= setInterval(()=>ducksMove(/* level */),80);
-}
-
-function pauseGame(){
-    pauseFlag=true;
-    clearInterval(time.moveIntervalId);
-    const continueBtn=document.querySelector('.continue-btn');
-    continueBtn.addEventListener('click', continueGame);
-}
-
-
 export function startGame (context){ // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!export
+    console.log('START');
+    
     canvas = document.querySelector('.game-canvas');
     gameFlag=true;
     clearInterval(time.moveIntervalId);
-    ctx=context;
-    newDucksParameters(ducks);
-
     
-    
+    if(!pauseFlag){
+        ctx=context;
+        newDucksParameters(ducks);
         progress.ducksInCurrentLvl+=2;
-        // moveIntervalId= setInterval(()=>ducksMove(/* level */),80);
-        time.moveIntervalId= setInterval(()=>ducksMove(/* level */),time.frameTime);
-    
-        
 
+    //     // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    //     const startBtn = document.querySelector('.start');
+    //     if(startBtn){
+    //         startBtn.addEventListener('click', ()=>{
+    //             console.log('START!!!!!!!!!!!!!!!!!!!!!!!!!');
+    //             ctx = document.querySelector('.game-canvas').getContext("2d");//! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    //             startGame(ctx);
+    //         });
+    //     }
+    //    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 
+    }
+
+    console.log(ctx);
+
+    function continueGame(){
+        // pauseFlag=false;
+        // time.moveIntervalId= setInterval(()=>ducksMove(/* level */),80);
+        startGame (null);
+    }
     
+    function pauseGame(){
+        pauseFlag=true;
+        clearInterval(time.moveIntervalId);
+        const continueBtn=document.querySelector('.continue-btn');
+        continueBtn.addEventListener('click', continueGame);
+    }
+
+
+    // moveIntervalId= setInterval(()=>ducksMove(/* level */),80);
+    time.moveIntervalId= setInterval(()=>ducksMove(/* level */),time.frameTime);
     // canvas.addEventListener('click', (event) => { // не работает из-за меню;
     //     shot(event);
     // });
