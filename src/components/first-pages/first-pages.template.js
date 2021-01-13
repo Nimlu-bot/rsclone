@@ -10,7 +10,10 @@ export const firstPagesTemplate = `
         
         <h1>Duck Hunt</h1>
         <div class="pages">Game menu</div>
-        <div class="pause-btn"></div>
+        
+        <div class="pause-btn">
+        <div class="user"><img class="user-img" src="../../assets/img/user.svg"></div>
+        </div>
     </div>
     </div>
 

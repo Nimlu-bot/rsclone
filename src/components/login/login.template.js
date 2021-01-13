@@ -1,5 +1,6 @@
 import './login.component.scss';
 import { lang } from '../../core/index';
+import "../../assets/css/general-style.scss";
 
 export const loginTemplate = (language) => {
     return `
@@ -9,8 +10,8 @@ export const loginTemplate = (language) => {
 		<span class ="login-password-length">${lang[language].passwordLength}</span>
 		
 		<div class = "login-buttons-wrapper">
-			<button class = "login-button login">${lang[language].Login}</button>
-			<button class = "login-button signup">${lang[language].signUp}</button>
+			<button class = "login-button login game-btn">${lang[language].Login}</button>
+			<button class = "login-button signup game-btn">${lang[language].signUp}</button>
 		</div>
 		<div class="login-message"></div>
 	</div>

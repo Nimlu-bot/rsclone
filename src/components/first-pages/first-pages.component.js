@@ -16,8 +16,10 @@ import AudioProcessor from "../audio-processor/audio-processor.component";
 export class FirstPages {
     constructor() {
         this.title = "Game menu";
+        this.gameField = new GameField();
+        this.login = new Login();
     }
-
+    
     score(){
         document.querySelector(".game-field-main").insertAdjacentHTML("afterbegin", scoreTemplate);
         setTimeout(()=>{
@@ -27,15 +29,37 @@ export class FirstPages {
         },0)
     }
 
+    loginForm(){
+        document.querySelector(".user").addEventListener("click", () => {
+            if(!document.querySelector(".game-field-main")){
+                if(!document.querySelector(".login-wrapper")){
+                    this.login.init();
+                } else {
+                    document.querySelector(".login-wrapper").remove();
+                }
+            } else {
+                return false
+            } 
+        })
+    }
+
+    continue() {
+        document.querySelector(".continue-btn").addEventListener("click",() => {
+            document.querySelector(".nav").remove();
+            document.querySelector(".game-menu").style.backgroundColor = "transparent";
+            this.pauseBtn()
+        })
+    }
+
     nav(){
         this.title = "Game menu"
         document.querySelector(".pages").innerHTML = this.title;
         document.querySelector(".game-menu").insertAdjacentHTML("afterbegin", navPagesTemplate);
-        // document.querySelector(".main").style.backgroundImage='url(../../assets/img/10.png)';
+
         // eslint-disable-next-line consistent-return
         document.querySelector(".nav").addEventListener('click', (e) => {
 
-            if (!(document.querySelector(".login-wrapper")) === false) {
+            if (document.querySelector(".login-wrapper")) {
                 document.querySelector(".login-wrapper").remove()
             }
 
@@ -63,24 +87,17 @@ export class FirstPages {
                     break
             }
         })
+        if(document.querySelector(".game-field-main")){
+            document.querySelector(".nav").insertAdjacentHTML('afterbegin', continueBtn)
+            this.continue()
+        }
     }
 
-    continue() {
-        this.nav()
-        document.querySelector(".game-menu").style.backgroundColor = "rgba(50, 150, 141, 0.9)";
-        document.querySelector(".nav").insertAdjacentHTML('afterbegin', continueBtn)
-        document.querySelector(".continue-btn").addEventListener("click", () => {
-            document.querySelector(".nav").remove();
-            document.querySelector(".game-menu").style.backgroundColor = "transparent";
-            this.pauseBtn()
-        })
-    }
-
-    pauseBtn() {
-        document.querySelector(".pause-btn").insertAdjacentHTML("afterbegin", backBtnHeader);
-        document.querySelector(".pause-btn-header").addEventListener("click", () => {
+    pauseBtn(){
+        document.querySelector(".user").insertAdjacentHTML("afterend", backBtnHeader);
+        document.querySelector(".pause-btn-header").addEventListener("click",()=>{
             document.querySelector(".pause-btn-header").remove();
-            this.continue();
+            this.nav();
         })
     }
 
@@ -90,8 +107,7 @@ export class FirstPages {
         this.title = "play"
         document.querySelector(".pages").innerHTML = this.title;
         this.pauseBtn()
-        const gameField = new GameField();
-        gameField.init()
+        this.gameField.init()
         this.score()
     }
 
@@ -162,9 +178,10 @@ export class FirstPages {
     }
 
     init() {
+        
         document.body.insertAdjacentHTML("afterbegin", firstPagesTemplate);
-        const login = new Login();
-        login.init();
+        document.querySelector('.wrapper').style.backgroundImage = "url(../../assets/img/paper-cell.jpg)"
         this.nav();
+        this.loginForm();
     }
 }
