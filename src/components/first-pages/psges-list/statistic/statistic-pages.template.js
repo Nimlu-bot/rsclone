@@ -17,9 +17,9 @@ export const statisticTableHeader = `
 <table border class="stat-table">
 	 <caption>Таблица статистики</caption>
 	 <tbody class= "stat-table-body">
-   <tr >
+   <tr class = "stat-table-header" >
     <th>№</th>
-    <th>${lang[getLang()].name}</th>
+    <th>${lang[getLang()].time}</th>
     <th>${lang[getLang()].ducks}</th>
 		<th>${lang[getLang()].hits}</th>
 		<th>${lang[getLang()].persent}</th>
@@ -27,15 +27,19 @@ export const statisticTableHeader = `
 	 </tr>
 	 </tbody>
 	 </table>
-	 <button class = "get-stat">Получить</button>
-	 <button class = "set-stat">Отправить</button>
-	 <button class = "to-local">В локал</button>
+	 <button class = "stat-get">Получить</button>
+	 <button class = "stat-set">Записать</button>
+	 <button class = "stat-reset">Удалить</button>
 `;
 export const statisticsTemplate = (userStat, number) => {
     const persent = Math.ceil((userStat.ducks / userStat.hits) * 100);
+    const date = new Date(userStat.time);
+
     return `
 		
-	 <tr><td>${number}</td><td>${userStat.name}</td><td>${userStat.ducks}</td><td>${userStat.hits}</td><td>${persent}</td><td>${userStat.score}</td></tr>
+	 <tr class = "stat-table-item" ><td>${number}</td><td>${date.toLocaleString()}</td><td>${userStat.ducks}</td><td>${
+        userStat.hits
+    }</td><td>${persent}</td><td>${userStat.score}</td></tr>
 	 
 		
 `;

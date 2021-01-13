@@ -1,85 +1,82 @@
-import { backBtnHeader, continueBtn } from "./psges-list/backBtnHeader/backBtnHeader.template";
-import { statisticPagesTemplate } from "./psges-list/statistic/statistic-pages.template";
-import { settingsPagesTemplate } from "./psges-list/settings/settings-pages.template";
-import { navPagesTemplate } from "./psges-list/nav/nav-pages.template";
-import { levelPagesTemplate } from "./psges-list/level/level-pages.template";
-import { firstPagesTemplate } from "./first-pages.template";
-import { scoreTemplate } from "./psges-list/score/score.template";
+import { backBtnHeader, continueBtn } from './psges-list/backBtnHeader/backBtnHeader.template';
+
+import { settingsPagesTemplate } from './psges-list/settings/settings-pages.template';
+import { navPagesTemplate } from './psges-list/nav/nav-pages.template';
+import { levelPagesTemplate } from './psges-list/level/level-pages.template';
+import { firstPagesTemplate } from './first-pages.template';
+import { scoreTemplate } from './psges-list/score/score.template';
 // Tonya
-import { GameField } from "../game-field/game-field.component"
+import { GameField } from '../game-field/game-field.component';
 // Sergey
 import { Login } from '../login/login.component';
+import { Statistics } from './psges-list/statistic/statistic-page.component';
 // Andrey
-import AudioProcessor from "../audio-processor/audio-processor.component";
-
+import AudioProcessor from '../audio-processor/audio-processor.component';
 
 export class FirstPages {
     constructor() {
         this.title = 'Game menu';
     }
 
-    score(){
-        document.querySelector(".game-field-main").insertAdjacentHTML("afterbegin", scoreTemplate);
-        setTimeout(()=>{
-            document.querySelector(".bullet-box").style.left = "0%"
-            document.querySelector(".point-box").style.left = "0%"
-            document.querySelector(".total-box").style.left = "0%"
-        },0)
+    score() {
+        document.querySelector('.game-field-main').insertAdjacentHTML('afterbegin', scoreTemplate);
+        setTimeout(() => {
+            document.querySelector('.bullet-box').style.left = '0%';
+            document.querySelector('.point-box').style.left = '0%';
+            document.querySelector('.total-box').style.left = '0%';
+        }, 0);
     }
 
-    nav(){
-        this.title = "Game menu"
-        document.querySelector(".pages").innerHTML = this.title;
-        document.querySelector(".game-menu").insertAdjacentHTML("afterbegin", navPagesTemplate);
+    nav() {
+        this.title = 'Game menu';
+        document.querySelector('.pages').innerHTML = this.title;
+        document.querySelector('.game-menu').insertAdjacentHTML('afterbegin', navPagesTemplate);
         // document.querySelector(".main").style.backgroundImage='url(../../assets/img/10.png)';
         // eslint-disable-next-line consistent-return
-        document.querySelector(".nav").addEventListener('click', (e) => {
-
-            if (!(document.querySelector(".login-wrapper")) === false) {
-                document.querySelector(".login-wrapper").remove()
+        document.querySelector('.nav').addEventListener('click', (e) => {
+            if (!document.querySelector('.login-wrapper') === false) {
+                document.querySelector('.login-wrapper').remove();
             }
 
             // eslint-disable-next-line prefer-const
             switch (e.target.id) {
-
                 case 'start':
-                    document.querySelector(".nav").remove()
-                    return this.start()
+                    document.querySelector('.nav').remove();
+                    return this.start();
 
                 case 'level':
-                    document.querySelector(".nav").remove()
-                    return this.level()
+                    document.querySelector('.nav').remove();
+                    return this.level();
 
                 case 'settings':
-                    document.querySelector(".nav").remove()
-                    return this.settings()
+                    document.querySelector('.nav').remove();
+                    return this.settings();
 
                 case 'statistic':
-                    document.querySelector(".nav").remove()
-                    return this.statistic()
+                    document.querySelector('.nav').remove();
+                    return this.statistic();
 
                 default:
-
-                    break
+                    break;
             }
         });
     }
 
     continue() {
-        this.nav()
-        document.querySelector(".game-menu").style.backgroundColor = "rgba(50, 150, 141, 0.9)";
-        document.querySelector(".nav").insertAdjacentHTML('afterbegin', continueBtn)
-        document.querySelector(".continue-btn").addEventListener("click", () => {
-            document.querySelector(".nav").remove();
-            document.querySelector(".game-menu").style.backgroundColor = "transparent";
-            this.pauseBtn()
-        })
+        this.nav();
+        document.querySelector('.game-menu').style.backgroundColor = 'rgba(50, 150, 141, 0.9)';
+        document.querySelector('.nav').insertAdjacentHTML('afterbegin', continueBtn);
+        document.querySelector('.continue-btn').addEventListener('click', () => {
+            document.querySelector('.nav').remove();
+            document.querySelector('.game-menu').style.backgroundColor = 'transparent';
+            this.pauseBtn();
+        });
     }
 
     pauseBtn() {
-        document.querySelector(".pause-btn").insertAdjacentHTML("afterbegin", backBtnHeader);
-        document.querySelector(".pause-btn-header").addEventListener("click", () => {
-            document.querySelector(".pause-btn-header").remove();
+        document.querySelector('.pause-btn').insertAdjacentHTML('afterbegin', backBtnHeader);
+        document.querySelector('.pause-btn-header').addEventListener('click', () => {
+            document.querySelector('.pause-btn-header').remove();
             this.continue();
         });
     }
@@ -91,8 +88,8 @@ export class FirstPages {
         document.querySelector('.pages').innerHTML = this.title;
         this.pauseBtn();
         const gameField = new GameField();
-        gameField.init()
-        this.score()
+        gameField.init();
+        this.score();
     }
 
     level() {
@@ -100,10 +97,10 @@ export class FirstPages {
         document.querySelector('.pages').innerHTML = this.title;
         document.querySelector('.game-menu').insertAdjacentHTML('afterbegin', levelPagesTemplate);
         // eslint-disable-next-line consistent-return
-        document.querySelector(".level").addEventListener('click', (e) => {
+        document.querySelector('.level').addEventListener('click', (e) => {
             if (e.target.id === 'level-back') {
-                document.querySelector(".level").remove();
-                return this.nav()
+                document.querySelector('.level').remove();
+                return this.nav();
                 // eslint-disable-next-line no-else-return
             } else {
                 document.querySelector('.level').remove();
@@ -113,52 +110,60 @@ export class FirstPages {
     }
 
     settings() {
-        this.title = "settings"
-        document.querySelector(".pages").innerHTML = this.title;
-        document.querySelector(".game-menu").insertAdjacentHTML("afterbegin", settingsPagesTemplate);
+        this.title = 'settings';
+        document.querySelector('.pages').innerHTML = this.title;
+        document.querySelector('.game-menu').insertAdjacentHTML('afterbegin', settingsPagesTemplate);
         // eslint-disable-next-line consistent-return
-        document.querySelector(".settings").addEventListener('click', (e) => {
+        document.querySelector('.settings').addEventListener('click', (e) => {
             if (e.target.id === 'settings-back') {
-                document.querySelector(".settings").remove();
-                return this.nav()
+                document.querySelector('.settings').remove();
+                return this.nav();
             }
         });
 
         this.volumeChanger();
         this.panChanger();
-
     }
 
     statistic() {
-        this.title = "statistic"
-        document.querySelector(".pages").innerHTML = this.title;
-        document.querySelector(".game-menu").insertAdjacentHTML("afterbegin", statisticPagesTemplate);
+        this.title = 'statistic';
+        document.querySelector('.pages').innerHTML = this.title;
+        // document.querySelector(".game-menu").insertAdjacentHTML("afterbegin", statisticPagesTemplate);
+        const stat = new Statistics();
+        stat.init();
         // eslint-disable-next-line consistent-return
-        document.querySelector(".statistic").addEventListener('click', (e) => {
+        document.querySelector('.statistic').addEventListener('click', (e) => {
             if (e.target.id === 'statistic-back') {
-                document.querySelector(".statistic").remove();
-                return this.nav()
+                document.querySelector('.statistic').remove();
+                return this.nav();
             }
-        })
-
+        });
     }
 
     volumeChanger() {
         // volume changer
         const volumeChanger = document.querySelector('#volume');
         volumeChanger.value = AudioProcessor.gain;
-        volumeChanger.addEventListener('input', (event) => {
-            AudioProcessor.setVolume(event.target.value);
-        }, false);
+        volumeChanger.addEventListener(
+            'input',
+            (event) => {
+                AudioProcessor.setVolume(event.target.value);
+            },
+            false
+        );
     }
 
     panChanger() {
         // panner (left/right speacker)
         const panChanger = document.querySelector('#panner');
         panChanger.value = AudioProcessor.pan;
-        panChanger.addEventListener('input', (event) => {
-            AudioProcessor.setPan(event.target.value);
-        }, false);
+        panChanger.addEventListener(
+            'input',
+            (event) => {
+                AudioProcessor.setPan(event.target.value);
+            },
+            false
+        );
     }
 
     init() {
