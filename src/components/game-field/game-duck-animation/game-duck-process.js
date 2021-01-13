@@ -154,7 +154,7 @@ export function startGame (context){ // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!export
         shot(event);
     });
 
-    const pauseBtn =document.querySelector('.pause-btn');
+    const pauseBtn =document.querySelector('.pause-btn-header');
     pauseBtn.addEventListener('click', pauseGame);
     
 }
