@@ -1,3 +1,5 @@
+import {showCurrentStatistic} from './game-show-current-statistic-function';
+
 const duckImgR=document.createElement('img');
 duckImgR.src='../../../assets/img/duckR.png';
 const duckImgL=document.createElement('img');
@@ -77,6 +79,7 @@ export function duckGoAway(duck,ctx, progress){
         progress.currentTwoDucksCruck+=1;
         progress.goAwayducks+=1;
         console.log(`goAwayducks ${progress.goAwayducks}`);
+        showCurrentStatistic(progress); // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         progress.cruckDuck+=1;
     }
 
@@ -91,7 +94,9 @@ export function duckFall(duck, ctx, progress){
         progress.currentTwoDucksCruck+=1;
         progress.currentTwoShotDucks+=1;
         progress.shotDucks+=1;
+        progress.score+=8+2*progress.level;
         console.log(`shotDucks ${progress.shotDucks}`);
+        showCurrentStatistic(progress); // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         progress.cruckDuck+=1;
        
     }

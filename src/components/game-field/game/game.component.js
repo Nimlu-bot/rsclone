@@ -12,6 +12,7 @@ export class Game {
         const field = document.querySelector(".game-field-main");
 
         field.insertAdjacentHTML("beforeend", gameTemplate(CANVAS_WIDTH, CANVAS_HEIGTH));
+        console.log('canvas created');
 
         const canvas = document.querySelector(".game-canvas");
         const ctx = canvas.getContext("2d");

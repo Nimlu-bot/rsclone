@@ -20,6 +20,24 @@ export const dog={
     scaredDucks:false
 }
 
+export function newDogParameters(){
+    frameNum=0;
+    frameString=0;
+    frameNumLaught=3;
+    dogGoX=0;
+    dogGoY=400;
+    dogIngrassX=290;
+    dogInGrassY=370;
+    frameCounter=0;
+    frameCounterLaught=0;
+    dog.go=true;
+    dog.jump=false;
+    dog.findOneDuck=false;
+    dog.findTwoDucks=false;
+    dog.laught=false;
+    dog.scaredDucks=false;
+}
+
 export function dogMove(ctx,time,ducksMove){
     clearInterval(time.moveIntervalId);
     time.frameTime=100;
