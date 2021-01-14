@@ -11,14 +11,10 @@ export class ModalWindow {
 
     if (this.windowName === 'game-over') {
       AudioProcessor.play('gameOver');
-      setTimeout(() => {
-        AudioProcessor.play('dogLaughs');
-      }, 4000);
     }
 
     if (this.windowName === 'perfect') {
       AudioProcessor.play('perfect');
-      
     }
 
     const coverDiv = document.createElement('div');
@@ -29,6 +25,12 @@ export class ModalWindow {
     document.querySelector('#to-main').addEventListener('click', () => {
       document.querySelector('#modal-window').remove();
       document.querySelector('#cover-div').remove();
+      AudioProcessor.pause('gameOver');
+      AudioProcessor.reset('gameOver');
+      AudioProcessor.pause('dogLaughs');
+      AudioProcessor.reset('dogLaughs');
+      AudioProcessor.pause('perfect');
+      AudioProcessor.reset('perfect');
     });
   }
 }

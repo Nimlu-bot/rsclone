@@ -1,6 +1,6 @@
 import "./modal-window.component.scss";
 import gameOverDog from "../../assets/img/game_over_dog.png"
-import perfectDog from "../../assets/img/perfect_dog.png"
+import perfectDog from "../../assets/img/dog_perfect.png"
 
 
 export const modalWindowTemplate = (name) => {
