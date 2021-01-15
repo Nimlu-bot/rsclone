@@ -116,7 +116,6 @@ export function dogMove(ctx,time,ducksMove){
             frameString=0;
             frameNum=0;
             dog.scaredDucks=true;
-            // if(progress.level<=10 && progress.cruckDuck===10)newDogParameters();//! !!!!!!!!!!!!!!!!!!!???????????????????????
         }
     }
     if(dog.findTwoDucks){
@@ -142,7 +141,6 @@ export function dogMove(ctx,time,ducksMove){
             frameString=0;
             frameNum=0;
             dog.scaredDucks=true;
-            // if(progress.level<=10 && progress.cruckDuck===10)newDogParameters();//! !!!!!!!!!!!!!!!!!!!???????????????????????
         }
     }
     if(dog.laught){
@@ -165,8 +163,7 @@ export function dogMove(ctx,time,ducksMove){
             dogInGrassY=370;
             frameString=0;
             frameCounterLaught=0;
-            dog.scaredDucks=true;// условие продолжения игры!!!!!!!!!!!!!!!!!!!!???????????????????????
-            // dog.go=true;// условие продолжения игры!!!!!!!!!!!!!!!!!!!!???????????????????????
+            dog.scaredDucks=true;
         }
 
     }
