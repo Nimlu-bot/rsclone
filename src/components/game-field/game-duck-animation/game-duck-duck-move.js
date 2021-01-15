@@ -27,6 +27,10 @@ export function newDucksParameters(ducks){
     ducks.duck2.timeAfterDeath=0;
     ducks.duck1.isLive=true;
     ducks.duck2.isLive=true;
+
+    ducks.duck1.goAvay=false;
+    ducks.duck2.goAvay=false;
+
     ducks.duck1.moveX=500 + randomWithoutZero();
     ducks.duck1.moveY=480;
     ducks.duck2.moveX=250 + randomWithoutZero();
@@ -65,7 +69,7 @@ export function duckMove(ctx,duck,ducks){
 }
 
 export function duckGoAway(duck,ctx, progress){
-    duck.isLive=false;
+    duck.goAway=true;
     if(duck.moveX!==null)duck.goAwX=duck.moveX;
     if(duck.moveY!==null)duck.goAwY=duck.moveY;
     duck.moveX=null;
@@ -76,10 +80,10 @@ export function duckGoAway(duck,ctx, progress){
         if(duck.num>3)duck.num=0;
         duck.goAwY-=10;
     }else{
-        progress.currentTwoDucksCruck+=1;
+        if(duck.goAway) progress.currentTwoDucksCruck+=1;
         progress.goAwayducks+=1;
         console.log(`goAwayducks ${progress.goAwayducks}`);
-        showCurrentStatistic(progress); // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        showCurrentStatistic(progress); 
         progress.cruckDuck+=1;
     }
 
@@ -90,13 +94,13 @@ export function duckFall(duck, ctx, progress){
         ctx.drawImage(duckShotImg, 105, 0, 105, 90, duck.fallX, duck.fallY, 101, 90);
         duck.fallY+=50;
     } else if(!duck.duckFall){
-        duck.duckFall=true;
+        duck.duckFall=true;;
         progress.currentTwoDucksCruck+=1;
         progress.currentTwoShotDucks+=1;
         progress.shotDucks+=1;
         progress.score+=8+2*progress.level;
         console.log(`shotDucks ${progress.shotDucks}`);
-        showCurrentStatistic(progress); // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        showCurrentStatistic(progress); 
         progress.cruckDuck+=1;
        
     }
@@ -105,8 +109,6 @@ export function duckFall(duck, ctx, progress){
 export function duckShot(duck, ctx, progress){
         duck.isLive=false;
         if(duck.moveX!==null){
-    
-            // progress.currentTwoDucksCruck+=1;
             duck.fallX=duck.moveX;
         }
         if(duck.moveY!==null)duck.fallY=duck.moveY;

@@ -15,14 +15,9 @@ const time={
     moveIntervalId:null
 }
 let shotListenerFlag=false;
-
-
 const ducks = ducksForGame;
 const progress = progressForGame;
-const dogObj = dog; // по нем отслеживать запуск уток
-
-
-
+const dogObj = dog;
 
 
 function ducksMove(/* level */){
@@ -36,9 +31,8 @@ function ducksMove(/* level */){
 
     if(dogObj.scaredDucks) {
         // ускоряем движение
-
         clearInterval(time.moveIntervalId);
-        time.frameTime=90-progress.level*10;
+        time.frameTime=85-progress.level*7;
         time.moveIntervalId=setInterval(()=>ducksMove(/* level */),time.frameTime);
 
         ctx.globalCompositeOperation = 'destination-over';
@@ -56,9 +50,9 @@ function ducksMove(/* level */){
         }
         if(progress.cruckDuck===10){
             
-            if (progress.level<=10){
+            if (progress.level<10){
                 console.log('NEW LEVEL');
-                newDogParameters()
+                newDogParameters(); // для выхода собаки между уровнями
                 progress.level+=1;
                 progress.cruckDuck=0;
                 progress.shotDucks=0;
@@ -78,7 +72,7 @@ function ducksMove(/* level */){
             } else {
                     duckShot(ducks.duck1, ctx, progress);
             }
-        }else{
+        }else if(ducks.duck1.isLive){
             duckGoAway(ducks.duck1, ctx, progress);
         }
         if((ducks.duck2.timeAfterStartFly<Math.ceil(200*(80/time.frameTime))) && (progress.bullet!==0) ) {
@@ -88,7 +82,7 @@ function ducksMove(/* level */){
             } else{
                 duckShot(ducks.duck2, ctx, progress);
             }
-        }else{
+        }else if(ducks.duck2.isLive){
             duckGoAway(ducks.duck2, ctx, progress);
         }    
     }
@@ -96,6 +90,27 @@ function ducksMove(/* level */){
 
 
 function shot(event){
+    // увеличиваем радиус попадания при увеличении скорости
+    let hittingError=0;
+    switch (progress.level) {
+        case 6:
+            hittingError=5;
+            break;
+        case 7:
+            hittingError=10;
+            break;
+        case 8:
+            hittingError=15;
+            break;
+        case 9:
+            hittingError=18;
+            break;
+        case 10:
+            hittingError=20;
+            break;
+        default:
+            break;
+    }
     if(gameFlag && !pauseFlag && progress.bullet>0) progress.bullet-=1;
     console.log(`bullet ${progress.bullet}`);
     if(progress.bullet>0){
@@ -103,12 +118,12 @@ function shot(event){
                 const clickX = event.clientX - canvas.getBoundingClientRect().left;
                 const clickY = event.clientY - canvas.getBoundingClientRect().top;
 
-            if((clickX > (ducks.duck1.moveX +5) && clickX < (ducks.duck1.moveX + 101-5)) 
-            && ((clickY > (ducks.duck1.moveY +5) && clickY < (ducks.duck1.moveY + 90 -5)))){
+            if((clickX > (ducks.duck1.moveX +5) && clickX < (ducks.duck1.moveX + 101-5+hittingError)) 
+            && ((clickY > (ducks.duck1.moveY +5) && clickY < (ducks.duck1.moveY + 90 -5+hittingError)))){
                 ducks.duck1.isLive=false;
                 }
-            if((clickX > (ducks.duck2.moveX +5) && clickX < (ducks.duck2.moveX + 101-5)) 
-            && ((clickY > (ducks.duck2.moveY +5) && clickY < (ducks.duck2.moveY + 90 -5)))){
+            if((clickX > (ducks.duck2.moveX +5) && clickX < (ducks.duck2.moveX + 101-5+hittingError)) 
+            && ((clickY > (ducks.duck2.moveY +5) && clickY < (ducks.duck2.moveY + 90 -5+hittingError)))){
                 ducks.duck2.isLive=false;
                 }
             }   
@@ -120,10 +135,8 @@ function shot(event){
 
 export function startGame (context){ // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!export
     canvas = document.querySelector('.game-canvas');
-    
     clearInterval(time.moveIntervalId);
     showCurrentStatistic(progress);
-
 
     if(context){// запуск начала игры(при продолжении взамен контекста ставлю null)
         newProgressParameters();
@@ -159,9 +172,7 @@ export function startGame (context){ // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!export
     time.moveIntervalId= setInterval(()=>ducksMove(/* level */),time.frameTime);
 
     const main = document.querySelector('.main');
-    if(!shotListenerFlag)main.addEventListener('click', (event) => {
-        shot(event);
-    });
+    if(!shotListenerFlag)main.addEventListener('click', (event) =>shot(event));
     shotListenerFlag=true;
     
 }

@@ -1,6 +1,8 @@
 export const ducksForGame = {
     duck1:{
+        name:'duck1',
         isLive:true,
+        goAway:false,
         duckFall:false, 
         moveX:500,
         moveY:480,
@@ -13,7 +15,9 @@ export const ducksForGame = {
         timeAfterStartFly:0
     },
     duck2:{
+        name:'duck2',
         isLive:true,
+        goAway:false,
         duckFall:false, 
         moveX:250,
         moveY:480,

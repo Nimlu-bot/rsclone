@@ -60,7 +60,6 @@ export function dogMove(ctx,time,ducksMove){
             dog.jump=true;
             frameCounter=0;
             frameNum=0;
-            console.log('jump');
             dogGoY=350;
         }
     }
@@ -79,8 +78,7 @@ export function dogMove(ctx,time,ducksMove){
                 if(frameNum<2)frameNum+=1;
                 dogGoX+=10;
                 dogGoY-=10;
-                if(frameCounter>40){// прыгнула
-                console.log('i am jump');
+                if(frameCounter>30){// прыгнула
                 dog.jump=false;
                 dog.scaredDucks=true;
                 console.log('ducks scared');
@@ -117,8 +115,8 @@ export function dogMove(ctx,time,ducksMove){
             frameCounter=0;
             frameString=0;
             frameNum=0;
-            dog.scaredDucks=true;// условие продолжения игры!!!!!!!!!!!!!!!!!!!!???????????????????????
-            // dog.go=true;// условие продолжения игры!!!!!!!!!!!!!!!!!!!!???????????????????????
+            dog.scaredDucks=true;
+            // if(progress.level<=10 && progress.cruckDuck===10)newDogParameters();//! !!!!!!!!!!!!!!!!!!!???????????????????????
         }
     }
     if(dog.findTwoDucks){
@@ -143,8 +141,8 @@ export function dogMove(ctx,time,ducksMove){
             frameCounter=0;
             frameString=0;
             frameNum=0;
-            dog.scaredDucks=true;// условие продолжения игры!!!!!!!!!!!!!!!!!!!!???????????????????????
-            // dog.go=true;// условие продолжения игры!!!!!!!!!!!!!!!!!!!!???????????????????????
+            dog.scaredDucks=true;
+            // if(progress.level<=10 && progress.cruckDuck===10)newDogParameters();//! !!!!!!!!!!!!!!!!!!!???????????????????????
         }
     }
     if(dog.laught){
