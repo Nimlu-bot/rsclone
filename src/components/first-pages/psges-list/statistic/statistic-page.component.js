@@ -1,6 +1,6 @@
 // потом удалить
 import { statisticPagesTemplate, statisticsTemplate, statisticTableHeader } from './statistic-pages.template';
-import { lang, getLang } from '../../../../core/index';
+import { lang, getLang, statEventHandler, getStatEventHandler } from '../../../../core/index';
 
 export class Statistics {
     constructor() {
@@ -44,6 +44,14 @@ export class Statistics {
         document.querySelector('.stat-reset').addEventListener('click', () => {
             document.querySelectorAll('.stat-table-item').forEach((e) => e.remove());
             localStorage.removeItem('userStat');
+        });
+
+        document.querySelector('.stat-server-set').addEventListener('click', () => {
+            statEventHandler();
+        });
+
+        document.querySelector('.stat-server-get').addEventListener('click', () => {
+            getStatEventHandler();
         });
     }
 }

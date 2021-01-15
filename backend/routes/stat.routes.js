@@ -1,6 +1,6 @@
 const { Router } = require('express');
-const { Stat } = require('../models/Stat');
-const { auth } = require('../middleware/auth.middleware');
+const Stat = require('../models/Stat');
+const auth = require('../middleware/auth.middleware');
 
 const router = Router();
 
@@ -24,6 +24,7 @@ router.post('/save', auth, async (req, res) => {
 router.get('/', auth, async (req, res) => {
     try {
         const stat = await Stat.find({ owner: req.user.userId });
+        console.log(stat);
         res.json(stat);
     } catch (e) {
         res.status(500).json({ message: 'SomethingWentWrongTryAgain' }); // Что-то пошло не так, попробуйте снова

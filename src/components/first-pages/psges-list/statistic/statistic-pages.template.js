@@ -30,6 +30,8 @@ export const statisticTableHeader = `
 	 <button class = "stat-get">Получить</button>
 	 <button class = "stat-set">Записать</button>
 	 <button class = "stat-reset">Удалить</button>
+	 <button class = "stat-server-set">Записать на сервер</button>
+	 <button class = "stat-server-get">Получить с сервера</button>
 `;
 export const statisticsTemplate = (userStat, number) => {
     const persent = Math.ceil((userStat.ducks / userStat.hits) * 100);
