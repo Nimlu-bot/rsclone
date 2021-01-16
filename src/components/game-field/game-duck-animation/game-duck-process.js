@@ -1,77 +1,116 @@
 import { CANVAS_HEIGTH, CANVAS_WIDTH } from "../../../core/index";
-import {duckMove, randomWithoutZero, duckGoAway, duckShot, newDucksParameters} from './game-duck-duck-move';
-import {ducksForGame, progressForGame} from './game-constants'
+import {duckMove, duckGoAway, duckShot, newDucksParameters} from './game-duck-duck-move';
+import {ducksForGame, progressForGame,newProgressParameters} from './game-constants';
+import {dog, dogMove, newDogParameters} from './game-dog-animation';
+import {showCurrentStatistic} from './game-show-current-statistic-function';
 
 const treeGrass=document.createElement('img');
-treeGrass.src='../../../assets/img/background_little.png';
+treeGrass.src='../../../assets/img/background_full.png';
 let ctx;
 let canvas;
-let moveIntervalId;
 let pauseFlag=false;
 let gameFlag=false;
-
+const time={
+    frameTime:80,
+    moveIntervalId:null
+}
+let shotListenerFlag=false;
 const ducks = ducksForGame;
 const progress = progressForGame;
+const dogObj = dog;
 
 
 function ducksMove(/* level */){
+    gameFlag=true;
     pauseFlag=false;
     ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGTH);
     // отрисовываем фон
-    ctx.drawImage(treeGrass, 0, 5);
-    ctx.globalCompositeOperation = 'destination-over';
-    if(progress.currentTwoDucksCruck===2){
-        // console.log('NEW TWO DUCKS');
-        // console.log(progress.ducksInCurrentLvl);
-        // console.log(progress.cruckDuck);
-        // console.log(progress.shotDucks);
-        // console.log(progress.goAwayducks);
-        // console.log(progress.currentTwoDucksCruck);
-        progress.currentTwoDucksCruck=0;
-        progress.bullet=4;
-        console.log(`new bullet ${progress.bullet}`);
-        newDucksParameters(ducks);
-    }
-    if(progress.cruckDuck===10){
-        
-        if (progress.level<3){
-            console.log('NEW LEVEL');
-            progress.level+=1;
-            progress.cruckDuck=0;
-            progress.shotDucks=0;
-            progress.goAwayducks=0;
-            console.log(`level ${progress.level}`);
-        }else{
-            console.log('ALL LEVELS COMPLETE');
-            clearInterval(moveIntervalId);
+    ctx.drawImage(treeGrass, 0, 0, 1008, 724, 0, 80, 800, 600);
 
-        }
-    }
-    if(ducks.duck1.timeAfterStartFly<200) {
-        if(ducks.duck1.isLive){
-                duckMove(ctx, ducks.duck1, ducks);
-                ducks.duck1.timeAfterStartFly+=1;
-        } else {
-                duckShot(ducks.duck1, ctx, progress);
-        }
-    }else{
-        duckGoAway(ducks.duck1, ctx, progress);
-    }
-    if(ducks.duck2.timeAfterStartFly<200) {
-        if(ducks.duck2.isLive){
-            duckMove(ctx, ducks.duck2, ducks);
-            ducks.duck2.timeAfterStartFly+=1;
-        } else{
-            duckShot(ducks.duck2, ctx, progress);
-        }
-    }else{
-        duckGoAway(ducks.duck2, ctx, progress);
-    }    
+    dogMove(ctx,time,ducksMove);// !!!!!!!!!!!!!!!!!!!!!!!собачка
 
+    if(dogObj.scaredDucks) {
+        // ускоряем движение
+        clearInterval(time.moveIntervalId);
+        time.frameTime=85-progress.level*7;
+        time.moveIntervalId=setInterval(()=>ducksMove(/* level */),time.frameTime);
+
+        ctx.globalCompositeOperation = 'destination-over';
+        if(progress.currentTwoDucksCruck===2){
+            if(progress.currentTwoShotDucks===1)dogObj.findOneDuck=true;// если поймали одну утку
+            if(progress.currentTwoShotDucks===2)dogObj.findTwoDucks=true;// если поймали две утки
+            if(progress.currentTwoShotDucks===0)dogObj.laught=true;// если не поймали ни одной утки
+            progress.currentTwoDucksCruck=0;
+            progress.currentTwoShotDucks=0;
+            progress.bullet=4;
+            console.log(`new bullet ${progress.bullet}`);
+            newDucksParameters(ducks);
+            dogObj.scaredDucks=false;
+            showCurrentStatistic(progress);
+        }
+        if(progress.cruckDuck===10){
+            
+            if (progress.level<10){
+                console.log('NEW LEVEL');
+                newDogParameters(); // для выхода собаки между уровнями
+                progress.level+=1;
+                progress.cruckDuck=0;
+                progress.shotDucks=0;
+                progress.goAwayducks=0;
+                console.log(`level ${progress.level}`);
+                showCurrentStatistic(progress); 
+            }else{
+                console.log('ALL LEVELS COMPLETE');
+                clearInterval(time.moveIntervalId);
+    
+            }
+        }
+        if((ducks.duck1.timeAfterStartFly<Math.ceil(200*(80/time.frameTime))) && (progress.bullet!==0)) {
+            if(ducks.duck1.isLive){
+                    duckMove(ctx, ducks.duck1, ducks);
+                    ducks.duck1.timeAfterStartFly+=1;
+            } else {
+                    duckShot(ducks.duck1, ctx, progress);
+            }
+        }else if(ducks.duck1.isLive){
+            duckGoAway(ducks.duck1, ctx, progress);
+        }
+        if((ducks.duck2.timeAfterStartFly<Math.ceil(200*(80/time.frameTime))) && (progress.bullet!==0) ) {
+            if(ducks.duck2.isLive){
+                duckMove(ctx, ducks.duck2, ducks);
+                ducks.duck2.timeAfterStartFly+=1;
+            } else{
+                duckShot(ducks.duck2, ctx, progress);
+            }
+        }else if(ducks.duck2.isLive){
+            duckGoAway(ducks.duck2, ctx, progress);
+        }    
+    }
 }
 
 
 function shot(event){
+    // увеличиваем радиус попадания при увеличении скорости
+    let hittingError=0;
+    switch (progress.level) {
+        case 6:
+            hittingError=5;
+            break;
+        case 7:
+            hittingError=10;
+            break;
+        case 8:
+            hittingError=15;
+            break;
+        case 9:
+            hittingError=18;
+            break;
+        case 10:
+            hittingError=20;
+            break;
+        default:
+            break;
+    }
     if(gameFlag && !pauseFlag && progress.bullet>0) progress.bullet-=1;
     console.log(`bullet ${progress.bullet}`);
     if(progress.bullet>0){
@@ -79,53 +118,63 @@ function shot(event){
                 const clickX = event.clientX - canvas.getBoundingClientRect().left;
                 const clickY = event.clientY - canvas.getBoundingClientRect().top;
 
-            if((clickX > (ducks.duck1.moveX +5) && clickX < (ducks.duck1.moveX + 101-5)) 
-            && ((clickY > (ducks.duck1.moveY +5) && clickY < (ducks.duck1.moveY + 90 -5)))){
+            if((clickX > (ducks.duck1.moveX +5) && clickX < (ducks.duck1.moveX + 101-5+hittingError)) 
+            && ((clickY > (ducks.duck1.moveY +5) && clickY < (ducks.duck1.moveY + 90 -5+hittingError)))){
                 ducks.duck1.isLive=false;
                 }
-            if((clickX > (ducks.duck2.moveX +5) && clickX < (ducks.duck2.moveX + 101-5)) 
-            && ((clickY > (ducks.duck2.moveY +5) && clickY < (ducks.duck2.moveY + 90 -5)))){
+            if((clickX > (ducks.duck2.moveX +5) && clickX < (ducks.duck2.moveX + 101-5+hittingError)) 
+            && ((clickY > (ducks.duck2.moveY +5) && clickY < (ducks.duck2.moveY + 90 -5+hittingError)))){
                 ducks.duck2.isLive=false;
                 }
             }   
     
     }
-}
-
-
-function continueGame(){
-    // pauseFlag=false;
-    moveIntervalId= setInterval(()=>ducksMove(/* level */),80);
-}
-
-function pauseGame(){
-    pauseFlag=true;
-    clearInterval(moveIntervalId);
-    const continueBtn=document.querySelector('.continue-btn');
-    continueBtn.addEventListener('click', continueGame);
+    showCurrentStatistic(progress);
 }
 
 
 export function startGame (context){ // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!export
-    gameFlag=true;
-    clearInterval(moveIntervalId);
-    ctx=context;
-    newDucksParameters(ducks);
-
-    progress.ducksInCurrentLvl+=2;
-    moveIntervalId= setInterval(()=>ducksMove(/* level */),80);
-
     canvas = document.querySelector('.game-canvas');
-    canvas.addEventListener('click', (event) => { // не работает из-за меню;
-        shot(event);
-    });
+    clearInterval(time.moveIntervalId);
+    showCurrentStatistic(progress);
 
-    const main = document.querySelector('.main');// убрать, когда Федя меню починит ! ! !
-    main.addEventListener('click', (event) => {
-        shot(event);
-    });
+    if(context){// запуск начала игры(при продолжении взамен контекста ставлю null)
+        newProgressParameters();
+        newDogParameters();
+        newDucksParameters(ducks);
+        progress.ducksInCurrentLvl+=2;
+        ctx=context;
+    }
+    
+    if(!pauseFlag){
+        newDucksParameters(ducks);
+        progress.ducksInCurrentLvl+=2;
+    }
 
-    const pauseBtn =document.querySelector('.pause-btn');
-    pauseBtn.addEventListener('click', pauseGame);
+    function continueGame(event){
+        if(event.target.classList.contains("continue-btn")){
+            if (gameFlag) startGame (null);
+        }
+    }
+    
+    function pauseGame(){
+        if (gameFlag) {
+            pauseFlag=true;
+            clearInterval(time.moveIntervalId);
+            document.body.addEventListener('click', (event)=>continueGame(event));
+        }
+    
+    }
+    
+    const pauseBtn =document.querySelector('.pause-btn-header');
+    if(pauseBtn)pauseBtn.addEventListener('click', ()=>pauseGame());
+
+    time.moveIntervalId= setInterval(()=>ducksMove(/* level */),time.frameTime);
+
+    const main = document.querySelector('.main');
+    if(!shotListenerFlag)main.addEventListener('click', (event) =>shot(event));
+    shotListenerFlag=true;
     
 }
+
+

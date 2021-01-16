@@ -6,15 +6,16 @@
     justify-content: space-around;
     align-items: center;
     width: 50px;
-    background-color: rgba(76, 143, 121, 0.2);
     overflow: hidden;
+    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.562);
+    border-radius: 5px;
     .bullet-box,
     .point-box,
     .total-box{
         display: flex;
         position: relative;
-        left: 200%;
-        transition: all 0.7s;
+        left: -200%;
+        transition: all 1s;
         flex-direction: column;
         justify-content: center;
         align-items: center;

@@ -11,7 +11,7 @@ export class Login {
     init() {
         const main = document.querySelector('.game-menu');
 
-        main.innerHTML = '';
+        // main.innerHTML = '';
         main.insertAdjacentHTML('afterbegin', loginTemplate(getLang()));
         const loginButton = document.querySelector('.login');
         const signUpButton = document.querySelector('.signup');

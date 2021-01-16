@@ -1,9 +1,11 @@
 export const ducksForGame = {
     duck1:{
+        name:'duck1',
         isLive:true,
+        goAway:false,
         duckFall:false, 
-        moveX:400,
-        moveY:510,
+        moveX:500,
+        moveY:480,
         fallY:0,
         fallX:0,
         goAwX:0,
@@ -13,10 +15,12 @@ export const ducksForGame = {
         timeAfterStartFly:0
     },
     duck2:{
+        name:'duck2',
         isLive:true,
+        goAway:false,
         duckFall:false, 
-        moveX:350,
-        moveY:510,
+        moveX:250,
+        moveY:480,
         fallY:0,
         fallX:0,
         goAwX:0,
@@ -34,5 +38,17 @@ export const progressForGame = {
     shotDucks:0, // застреленные утки
     goAwayducks:0, // улетевшие утки
     currentTwoDucksCruck:0, // ушла ли любым свособом текущая пара уток
-    bullet:4 // оставшиеся пули
+    currentTwoShotDucks:0,
+    bullet:4, // оставшиеся пули
+    score:0 // очки
 } 
+
+export function newProgressParameters(){
+    progressForGame.ducksInCurrentLvl=0;
+    progressForGame.cruckDuck=0; // ушедшие любым способом утки
+    progressForGame.shotDucks=0; // застреленные утки
+    progressForGame.goAwayducks=0; // улетевшие утки
+    progressForGame.currentTwoDucksCruck=0; // ушла ли любым свособом текущая пара уток
+    progressForGame.currentTwoShotDucks=0;
+    progressForGame.bullet=4; // оставшиеся пули
+}
