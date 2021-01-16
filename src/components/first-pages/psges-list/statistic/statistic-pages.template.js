@@ -1,7 +1,7 @@
-import '../../../../assets/css/general-style.scss';
-import './statistic-pages.component.scss';
+import "../../../../assets/css/general-style.scss";
+import "./statistic-pages.component.scss";
 
-import { lang, getLang } from '../../../../core/index';
+import { lang, getLang } from "../../../../core/index";
 
 export const statisticPagesTemplate = `
 <div class="statistic">
@@ -15,7 +15,7 @@ export const statisticPagesTemplate = `
 
 export const statisticTableHeader = `
 <table border class="stat-table">
-	 <caption>Таблица статистики</caption>
+	 <caption>${lang[getLang()].statisticsTable} </caption>
 	 <tbody class= "stat-table-body">
    <tr class = "stat-table-header" >
     <th>№</th>
