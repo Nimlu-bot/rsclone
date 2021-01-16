@@ -36,35 +36,7 @@ function ducksMove(/* level */){
         time.moveIntervalId=setInterval(()=>ducksMove(/* level */),time.frameTime);
 
         ctx.globalCompositeOperation = 'destination-over';
-        if(progress.currentTwoDucksCruck===2){
-            if(progress.currentTwoShotDucks===1)dogObj.findOneDuck=true;// если поймали одну утку
-            if(progress.currentTwoShotDucks===2)dogObj.findTwoDucks=true;// если поймали две утки
-            if(progress.currentTwoShotDucks===0)dogObj.laught=true;// если не поймали ни одной утки
-            progress.currentTwoDucksCruck=0;
-            progress.currentTwoShotDucks=0;
-            progress.bullet=4;
-            console.log(`new bullet ${progress.bullet}`);
-            newDucksParameters(ducks);
-            dogObj.scaredDucks=false;
-            showCurrentStatistic(progress);
-        }
-        if(progress.cruckDuck===10){
-            
-            if (progress.level<10){
-                console.log('NEW LEVEL');
-                newDogParameters(); // для выхода собаки между уровнями
-                progress.level+=1;
-                progress.cruckDuck=0;
-                progress.shotDucks=0;
-                progress.goAwayducks=0;
-                console.log(`level ${progress.level}`);
-                showCurrentStatistic(progress); 
-            }else{
-                console.log('ALL LEVELS COMPLETE');
-                clearInterval(time.moveIntervalId);
-    
-            }
-        }
+
         if((ducks.duck1.timeAfterStartFly<Math.ceil(200*(80/time.frameTime))) && (progress.bullet!==0)) {
             if(ducks.duck1.isLive){
                     duckMove(ctx, ducks.duck1, ducks);
@@ -84,7 +56,36 @@ function ducksMove(/* level */){
             }
         }else if(ducks.duck2.isLive){
             duckGoAway(ducks.duck2, ctx, progress);
-        }    
+        }
+        if(progress.currentTwoDucksCruck>=2){// выбылы пара уток
+            if(progress.currentTwoDucksCruck>2)progress.goAwayducks-=1;// костыль для случая >2...
+            if(progress.currentTwoShotDucks===1)dogObj.findOneDuck=true;// если поймали одну утку
+            if(progress.currentTwoShotDucks===2)dogObj.findTwoDucks=true;// если поймали две утки
+            if(progress.currentTwoShotDucks===0)dogObj.laught=true;// если не поймали ни одной утки
+            progress.currentTwoDucksCruck=0;
+            progress.currentTwoShotDucks=0;
+            progress.bullet=4;
+            console.log(`new bullet ${progress.bullet}`);
+            newDucksParameters(ducks);
+            dogObj.scaredDucks=false;
+            showCurrentStatistic(progress);
+        }
+        if(progress.cruckDuck===10){
+            if (progress.level<10){
+                console.log('NEW LEVEL');
+                newDogParameters(); // для выхода собаки между уровнями
+                progress.level+=1;
+                progress.cruckDuck=0;
+                progress.shotDucks=0;
+                progress.goAwayducks=0;
+                console.log(`level ${progress.level}`);
+                showCurrentStatistic(progress); 
+            }else{// конец игры
+                console.log('ALL LEVELS COMPLETE');
+                clearInterval(time.moveIntervalId);
+    
+            }
+        }
     }
 }
 
