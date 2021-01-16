@@ -37,6 +37,7 @@ function ducksMove(/* level */){
 
         ctx.globalCompositeOperation = 'destination-over';
 
+
         if((ducks.duck1.timeAfterStartFly<Math.ceil(200*(80/time.frameTime))) && (progress.bullet!==0)) {
             if(ducks.duck1.isLive){
                     duckMove(ctx, ducks.duck1, ducks);
@@ -47,7 +48,7 @@ function ducksMove(/* level */){
         }else if(ducks.duck1.isLive){
             duckGoAway(ducks.duck1, ctx, progress);
         }
-        if((ducks.duck2.timeAfterStartFly<Math.ceil(200*(80/time.frameTime))) && (progress.bullet!==0) ) {
+        if((ducks.duck2.timeAfterStartFly<Math.ceil(200*(80/time.frameTime))) && (progress.bullet!==0) ) {// если еще не закончилось время и пули
             if(ducks.duck2.isLive){
                 duckMove(ctx, ducks.duck2, ducks);
                 ducks.duck2.timeAfterStartFly+=1;
@@ -57,8 +58,8 @@ function ducksMove(/* level */){
         }else if(ducks.duck2.isLive){
             duckGoAway(ducks.duck2, ctx, progress);
         }
-        if(progress.currentTwoDucksCruck>=2){// выбылы пара уток
-            if(progress.currentTwoDucksCruck>2)progress.goAwayducks-=1;// костыль для случая >2...
+        if(progress.currentTwoDucksCruck===2){// выбылы пара уток
+            // if(progress.currentTwoDucksCruck>2)progress.goAwayducks-=1;// костыль для случая >2...
             if(progress.currentTwoShotDucks===1)dogObj.findOneDuck=true;// если поймали одну утку
             if(progress.currentTwoShotDucks===2)dogObj.findTwoDucks=true;// если поймали две утки
             if(progress.currentTwoShotDucks===0)dogObj.laught=true;// если не поймали ни одной утки
