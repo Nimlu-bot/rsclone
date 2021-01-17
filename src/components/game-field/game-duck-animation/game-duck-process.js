@@ -36,7 +36,30 @@ function ducksMove(/* level */){
         time.moveIntervalId=setInterval(()=>ducksMove(/* level */),time.frameTime);
 
         ctx.globalCompositeOperation = 'destination-over';
-        if(progress.currentTwoDucksCruck===2){
+
+
+        if((ducks.duck1.timeAfterStartFly<Math.ceil(200*(80/time.frameTime))) && (progress.bullet!==0)) {
+            if(ducks.duck1.isLive){
+                    duckMove(ctx, ducks.duck1, ducks);
+                    ducks.duck1.timeAfterStartFly+=1;
+            } else {
+                    duckShot(ducks.duck1, ctx, progress);
+            }
+        }else if(ducks.duck1.isLive){
+            duckGoAway(ducks.duck1, ctx, progress);
+        }
+        if((ducks.duck2.timeAfterStartFly<Math.ceil(200*(80/time.frameTime))) && (progress.bullet!==0) ) {// если еще не закончилось время и пули
+            if(ducks.duck2.isLive){
+                duckMove(ctx, ducks.duck2, ducks);
+                ducks.duck2.timeAfterStartFly+=1;
+            } else{
+                duckShot(ducks.duck2, ctx, progress);
+            }
+        }else if(ducks.duck2.isLive){
+            duckGoAway(ducks.duck2, ctx, progress);
+        }
+        if(progress.currentTwoDucksCruck===2){// выбылы пара уток
+            // if(progress.currentTwoDucksCruck>2)progress.goAwayducks-=1;// костыль для случая >2...
             if(progress.currentTwoShotDucks===1)dogObj.findOneDuck=true;// если поймали одну утку
             if(progress.currentTwoShotDucks===2)dogObj.findTwoDucks=true;// если поймали две утки
             if(progress.currentTwoShotDucks===0)dogObj.laught=true;// если не поймали ни одной утки
@@ -49,7 +72,6 @@ function ducksMove(/* level */){
             showCurrentStatistic(progress);
         }
         if(progress.cruckDuck===10){
-            
             if (progress.level<10){
                 console.log('NEW LEVEL');
                 newDogParameters(); // для выхода собаки между уровнями
@@ -59,32 +81,12 @@ function ducksMove(/* level */){
                 progress.goAwayducks=0;
                 console.log(`level ${progress.level}`);
                 showCurrentStatistic(progress); 
-            }else{
+            }else{// конец игры
                 console.log('ALL LEVELS COMPLETE');
                 clearInterval(time.moveIntervalId);
     
             }
         }
-        if((ducks.duck1.timeAfterStartFly<Math.ceil(200*(80/time.frameTime))) && (progress.bullet!==0)) {
-            if(ducks.duck1.isLive){
-                    duckMove(ctx, ducks.duck1, ducks);
-                    ducks.duck1.timeAfterStartFly+=1;
-            } else {
-                    duckShot(ducks.duck1, ctx, progress);
-            }
-        }else if(ducks.duck1.isLive){
-            duckGoAway(ducks.duck1, ctx, progress);
-        }
-        if((ducks.duck2.timeAfterStartFly<Math.ceil(200*(80/time.frameTime))) && (progress.bullet!==0) ) {
-            if(ducks.duck2.isLive){
-                duckMove(ctx, ducks.duck2, ducks);
-                ducks.duck2.timeAfterStartFly+=1;
-            } else{
-                duckShot(ducks.duck2, ctx, progress);
-            }
-        }else if(ducks.duck2.isLive){
-            duckGoAway(ducks.duck2, ctx, progress);
-        }    
     }
 }
 
