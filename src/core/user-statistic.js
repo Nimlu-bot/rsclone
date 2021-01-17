@@ -7,6 +7,7 @@ const levelSettings = {
 };
 
 const gameStat = {
+    time: null,
     ducks: null,
     hits: null,
     kills: null,
@@ -26,6 +27,7 @@ const lvlStat = {
 
 // начало игры
 export function startGame() {
+    gameStat.time = 0;
     gameStat.ducks = 0;
     gameStat.hits = 0;
     gameStat.kills = 0;
@@ -96,6 +98,7 @@ export function isLevelEnd() {
 
 // при окончании уровня  т.е isLevelEnd вернул true
 export function isWin() {
+    gameStat.time = new Date();
     gameStat.ducks += levelSettings.ducksPerRound;
     gameStat.hits += lvlStat.hits;
     gameStat.kills += lvlStat.duckKillPerLevel;
@@ -113,4 +116,11 @@ export function getStat() {
 
 export function getLvlStat() {
     return lvlStat;
+}
+
+export function saveStat() {
+    const statArray = JSON.parse(localStorage.getItem('userStat')) || [];
+		statArray.push(gameStat);
+		
+    localStorage.setItem('userStat', JSON.stringify(statArray));
 }
