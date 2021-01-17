@@ -6,8 +6,11 @@ $colour-login-border: blue;
 	padding: 2px 5px;
 	font-size: 24px;
 	flex-direction: column;
-	border: 2px solid #000;
-    border-radius: 5px;
+	border-radius: 5px;
+	background-image: url(../../assets/img/paper-cell.jpg);
+	border-radius: 5px;
+	box-shadow: 0 0 10px black;
+	
 	.login-email{
 		margin: 10px;
 		padding: 2px 5px;
@@ -35,6 +38,7 @@ $colour-login-border: blue;
 		justify-content: space-between;
 		.login-button {
 			margin: 0 2px;
+			background-color: transparent;
 		}
 	}
 	.login-message{

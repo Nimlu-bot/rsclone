@@ -2,9 +2,8 @@ import "../../../../assets/css/general-style.scss";
 import "./settings-pages.component.scss";
 
 export const settingsPagesTemplate = `
-<div class="settings">
+<div class="settings-wrap">
     <ul>
-        <li class="settings-btn">settings</li>
         <li>
             <div class="audio-container">
         <div class="volume-container">

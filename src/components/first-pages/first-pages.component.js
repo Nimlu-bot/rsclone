@@ -12,7 +12,6 @@ import { Login } from '../login/login.component';
 // Andrey
 import AudioProcessor from "../audio-processor/audio-processor.component";
 
-
 export class FirstPages {
     constructor() {
         this.title = "Game menu";
@@ -31,12 +30,25 @@ export class FirstPages {
 
     loginForm(){
         document.querySelector(".user").addEventListener("click", () => {
+
             if(!document.querySelector(".game-field-main")){
-                if(!document.querySelector(".login-wrapper")){
+
+                if(!document.querySelector(".login-div")){
+                    let divElem = document.createElement("div");
+                    divElem.classList.add("login-div");
+                    setTimeout(()=>{
+                        divElem.style.right = "5px"
+                    },100)
+                    document.querySelector(".wrapper").append(divElem);
                     this.login.init();
-                } else {
-                    document.querySelector(".login-wrapper").remove();
+                   
+                }else{
+                    setTimeout(()=>{
+                        document.querySelector(".login-div").remove()
+                    },900);
+                    document.querySelector(".login-div").style.right = "-100%"
                 }
+                      
             } else {
                 return false
             } 
@@ -116,13 +128,13 @@ export class FirstPages {
         document.querySelector(".pages").innerHTML = this.title
         document.querySelector(".game-menu").insertAdjacentHTML("afterbegin", levelPagesTemplate);
         // eslint-disable-next-line consistent-return
-        document.querySelector(".level").addEventListener('click', (e) => {
+        document.querySelector(".level-wrap").addEventListener('click', (e) => {
             if (e.target.id === 'level-back') {
-                document.querySelector(".level").remove();
+                document.querySelector(".level-wrap").remove();
                 return this.nav()
                 // eslint-disable-next-line no-else-return
             } else {
-                document.querySelector(".level").remove()
+                document.querySelector(".level-wrap").remove()
                 this.start()
             }
         })
@@ -133,9 +145,9 @@ export class FirstPages {
         document.querySelector(".pages").innerHTML = this.title;
         document.querySelector(".game-menu").insertAdjacentHTML("afterbegin", settingsPagesTemplate);
         // eslint-disable-next-line consistent-return
-        document.querySelector(".settings").addEventListener('click', (e) => {
+        document.querySelector(".settings-wrap").addEventListener('click', (e) => {
             if (e.target.id === 'settings-back') {
-                document.querySelector(".settings").remove();
+                document.querySelector(".settings-wrap").remove();
                 return this.nav()
             }
         });
@@ -150,9 +162,9 @@ export class FirstPages {
         document.querySelector(".pages").innerHTML = this.title;
         document.querySelector(".game-menu").insertAdjacentHTML("afterbegin", statisticPagesTemplate);
         // eslint-disable-next-line consistent-return
-        document.querySelector(".statistic").addEventListener('click', (e) => {
+        document.querySelector(".statistic-wrap").addEventListener('click', (e) => {
             if (e.target.id === 'statistic-back') {
-                document.querySelector(".statistic").remove();
+                document.querySelector(".statistic-wrap").remove();
                 return this.nav()
             }
         })
@@ -183,5 +195,6 @@ export class FirstPages {
         document.querySelector('.wrapper').style.backgroundImage = "url(../../assets/img/paper-cell.jpg)"
         this.nav();
         this.loginForm();
+    
     }
 }
