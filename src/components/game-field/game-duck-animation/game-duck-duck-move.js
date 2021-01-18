@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import {showCurrentStatistic} from './game-show-current-statistic-function';
 
 const duckImgR=document.createElement('img');
