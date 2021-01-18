@@ -6,6 +6,17 @@
     padding: 80px 50px;
     border-radius: 5px;
     box-shadow: 0 0 10px black;
+
+    .volume-container{
+        .audio-img{
+            height: 20px;
+            width: 20px;
+            margin-right: 12px;
+        }
+    }
+    .panner-container{
+        display: flex;
+    }
     
     .settings-btn{
     padding: 8px 25px !important;

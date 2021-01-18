@@ -80,7 +80,9 @@ export class FirstPages {
 
                 case 'start':
                     document.querySelector(".nav").remove()
-                    return this.start()
+
+                    // default start level 1
+                    return this.start(1)
 
                 case 'level':
                     document.querySelector(".nav").remove()
@@ -113,13 +115,13 @@ export class FirstPages {
         })
     }
 
-    start() {
+    start(lvl) {
         document.querySelector(".game-place").innerHTML = "";
         document.querySelector(".game-menu").style.backgroundColor = "transparent";
         this.title = "play"
         document.querySelector(".pages").innerHTML = this.title;
         this.pauseBtn()
-        this.gameField.init()
+        this.gameField.init(lvl)
         this.score()
     }
 
@@ -135,7 +137,7 @@ export class FirstPages {
                 // eslint-disable-next-line no-else-return
             } else {
                 document.querySelector(".level-wrap").remove()
-                this.start()
+                this.start(e.target.value)
             }
         })
     }
