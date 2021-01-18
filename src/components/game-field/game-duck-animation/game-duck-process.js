@@ -4,10 +4,8 @@ import {duckMove, duckGoAway, duckShot, newDucksParameters} from './game-duck-du
 import {ducksForGame, progressForGame, newProgressParameters, startGameProgressParameters} from './game-constants';
 import {dog, dogMove, newDogParameters} from './game-dog-animation';
 import {showCurrentStatistic} from './game-show-current-statistic-function';
-
-
+import {aimMove} from './game-aim';
 import { ModalWindow } from "../../modal-window/modal-window.component";
-// new ModalWindow('perfect').showWindow();    param: 'game-over' or 'perfect'
 
 
 const treeGrass=document.createElement('img');
@@ -27,7 +25,7 @@ const dogObj = dog;
 
 function continueGame(event){
     if(event.target.classList.contains("continue-btn")||event.target.id==='to-main'){
-        if (gameFlag) startGame(null);
+        if (gameFlag) startGame(null, null);// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     }
 }
 
@@ -56,6 +54,10 @@ function showModalWindow(){
 }
 
 function ducksMove(/* level */){
+
+    const main = document.querySelector('.main');
+    main.addEventListener('mousemove', (event) =>aimMove(event, canvas, ctx));
+    
     gameFlag=true;
     pauseFlag=false;
     ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGTH);
@@ -163,13 +165,14 @@ function shot(event){
 }
 
 
-export function startGame (context){ // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!export
+export function startGame (context, lvl){ // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!export
     canvas = document.querySelector('.game-canvas');
     clearInterval(time.moveIntervalId);
     showCurrentStatistic(progress);
 
     if(context){// запуск начала игры(при продолжении взамен контекста ставлю null)
         startGameProgressParameters();// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        if(lvl) progress.level=lvl;// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         newDogParameters();
         newDucksParameters(ducks);
         progress.ducksInCurrentLvl+=2;

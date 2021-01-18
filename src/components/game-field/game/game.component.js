@@ -8,7 +8,7 @@ export class Game {
         this.game = "Game";
     }
 
-    init() {
+    init(lvl) {
         const field = document.querySelector(".game-field-main");
 
         field.insertAdjacentHTML("beforeend", gameTemplate(CANVAS_WIDTH, CANVAS_HEIGTH));
@@ -16,6 +16,6 @@ export class Game {
 
         const canvas = document.querySelector(".game-canvas");
         const ctx = canvas.getContext("2d");
-        startGame(ctx);
+        startGame(ctx, lvl);  // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     }
 }
