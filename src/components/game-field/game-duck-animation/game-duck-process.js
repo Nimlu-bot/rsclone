@@ -4,7 +4,7 @@ import {duckMove, duckGoAway, duckShot, newDucksParameters} from './game-duck-du
 import {ducksForGame, progressForGame, newProgressParameters, startGameProgressParameters} from './game-constants';
 import {dog, dogMove, newDogParameters} from './game-dog-animation';
 import {showCurrentStatistic} from './game-show-current-statistic-function';
-import {aimMove} from './game-aim';
+// import {aimMove} from './game-aim';
 import { ModalWindow } from "../../modal-window/modal-window.component";
 
 
@@ -62,8 +62,8 @@ function ducksMove(/* level */){
     ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGTH);
     // отрисовываем фон
     ctx.drawImage(treeGrass, 0, 0, 1008, 724, 0, 80, 800, 600);
-    const main = document.querySelector('.main');
-    main.addEventListener('mousemove', (event) =>aimMove(event, canvas, ctx, pauseFlag));
+    // const main = document.querySelector('.main');
+    // main.addEventListener('mousemove', (event) =>aimMove(event, canvas, ctx, pauseFlag));
 
     dogMove(ctx,time,ducksMove);// !!!!!!!!!!!!!!!!!!!!!!!собачка
 
