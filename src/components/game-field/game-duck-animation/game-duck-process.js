@@ -55,14 +55,15 @@ function showModalWindow(){
 
 function ducksMove(/* level */){
 
-    const main = document.querySelector('.main');
-    main.addEventListener('mousemove', (event) =>aimMove(event, canvas, ctx));
+
     
     gameFlag=true;
     pauseFlag=false;
     ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGTH);
     // отрисовываем фон
     ctx.drawImage(treeGrass, 0, 0, 1008, 724, 0, 80, 800, 600);
+    const main = document.querySelector('.main');
+    main.addEventListener('mousemove', (event) =>aimMove(event, canvas, ctx, pauseFlag));
 
     dogMove(ctx,time,ducksMove);// !!!!!!!!!!!!!!!!!!!!!!!собачка
 
