@@ -1,8 +1,14 @@
+/* eslint-disable no-use-before-define */
 import { CANVAS_HEIGTH, CANVAS_WIDTH } from "../../../core/index";
 import {duckMove, duckGoAway, duckShot, newDucksParameters} from './game-duck-duck-move';
-import {ducksForGame, progressForGame,newProgressParameters} from './game-constants';
+import {ducksForGame, progressForGame, newProgressParameters, startGameProgressParameters} from './game-constants';
 import {dog, dogMove, newDogParameters} from './game-dog-animation';
 import {showCurrentStatistic} from './game-show-current-statistic-function';
+
+
+import { ModalWindow } from "../../modal-window/modal-window.component";
+// new ModalWindow('perfect').showWindow();    param: 'game-over' or 'perfect'
+
 
 const treeGrass=document.createElement('img');
 treeGrass.src='../../../assets/img/background_full.png';
@@ -19,6 +25,35 @@ const ducks = ducksForGame;
 const progress = progressForGame;
 const dogObj = dog;
 
+function continueGame(event){
+    if(event.target.classList.contains("continue-btn")||event.target.id==='to-main'){
+        if (gameFlag) startGame(null);
+    }
+}
+
+function pauseGame(){
+    if (gameFlag) {
+        pauseFlag=true;
+        clearInterval(time.moveIntervalId);
+        document.body.addEventListener('click', (event)=>continueGame(event));
+    }
+}
+
+// для модальных окон
+const modalWindowPerfect=new ModalWindow('perfect');
+const modalWindowGameOver=new ModalWindow('game-over');
+
+function showModalWindow(){
+        if(progress.shotDucks>=5){
+            modalWindowPerfect.showWindow();
+            newProgressParameters();
+            progress.level+=1;
+        }else{
+            modalWindowGameOver.showWindow();
+            startGameProgressParameters();// ??????????????????????????????????????????????Обнуляем очки????
+        }
+        pauseGame();
+}
 
 function ducksMove(/* level */){
     gameFlag=true;
@@ -58,8 +93,7 @@ function ducksMove(/* level */){
         }else if(ducks.duck2.isLive){
             duckGoAway(ducks.duck2, ctx, progress);
         }
-        if(progress.currentTwoDucksCruck===2){// выбылы пара уток
-            // if(progress.currentTwoDucksCruck>2)progress.goAwayducks-=1;// костыль для случая >2...
+        if(progress.currentTwoDucksCruck===2){// выбыла пара уток
             if(progress.currentTwoShotDucks===1)dogObj.findOneDuck=true;// если поймали одну утку
             if(progress.currentTwoShotDucks===2)dogObj.findTwoDucks=true;// если поймали две утки
             if(progress.currentTwoShotDucks===0)dogObj.laught=true;// если не поймали ни одной утки
@@ -71,15 +105,10 @@ function ducksMove(/* level */){
             dogObj.scaredDucks=false;
             showCurrentStatistic(progress);
         }
-        if(progress.cruckDuck===10){
+        if(progress.cruckDuck===10){// конец уровня
             if (progress.level<10){
-                console.log('NEW LEVEL');
+                showModalWindow();
                 newDogParameters(); // для выхода собаки между уровнями
-                progress.level+=1;
-                progress.cruckDuck=0;
-                progress.shotDucks=0;
-                progress.goAwayducks=0;
-                console.log(`level ${progress.level}`);
                 showCurrentStatistic(progress); 
             }else{// конец игры
                 console.log('ALL LEVELS COMPLETE');
@@ -89,7 +118,6 @@ function ducksMove(/* level */){
         }
     }
 }
-
 
 function shot(event){
     // увеличиваем радиус попадания при увеличении скорости
@@ -141,7 +169,7 @@ export function startGame (context){ // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!export
     showCurrentStatistic(progress);
 
     if(context){// запуск начала игры(при продолжении взамен контекста ставлю null)
-        newProgressParameters();
+        startGameProgressParameters();// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         newDogParameters();
         newDucksParameters(ducks);
         progress.ducksInCurrentLvl+=2;
@@ -151,21 +179,6 @@ export function startGame (context){ // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!export
     if(!pauseFlag){
         newDucksParameters(ducks);
         progress.ducksInCurrentLvl+=2;
-    }
-
-    function continueGame(event){
-        if(event.target.classList.contains("continue-btn")){
-            if (gameFlag) startGame (null);
-        }
-    }
-    
-    function pauseGame(){
-        if (gameFlag) {
-            pauseFlag=true;
-            clearInterval(time.moveIntervalId);
-            document.body.addEventListener('click', (event)=>continueGame(event));
-        }
-    
     }
     
     const pauseBtn =document.querySelector('.pause-btn-header');
