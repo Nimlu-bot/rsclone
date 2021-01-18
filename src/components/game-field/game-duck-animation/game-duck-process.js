@@ -4,7 +4,6 @@ import {duckMove, duckGoAway, duckShot, newDucksParameters} from './game-duck-du
 import {ducksForGame, progressForGame, newProgressParameters, startGameProgressParameters} from './game-constants';
 import {dog, dogMove, newDogParameters} from './game-dog-animation';
 import {showCurrentStatistic} from './game-show-current-statistic-function';
-// import {aimMove} from './game-aim';
 import { ModalWindow } from "../../modal-window/modal-window.component";
 
 
@@ -25,7 +24,7 @@ const dogObj = dog;
 
 function continueGame(event){
     if(event.target.classList.contains("continue-btn")||event.target.id==='to-main'){
-        if (gameFlag) startGame(null, null);// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        if (gameFlag) startGame(null, null);// возвращаемся в игру, не меняя параметры
     }
 }
 
@@ -48,22 +47,17 @@ function showModalWindow(){
             progress.level+=1;
         }else{
             modalWindowGameOver.showWindow();
-            startGameProgressParameters();// ??????????????????????????????????????????????Обнуляем очки????
+            startGameProgressParameters();// Обнуляем очки
         }
         pauseGame();
 }
 
-function ducksMove(/* level */){
-
-
-    
+function ducksMove(){
     gameFlag=true;
     pauseFlag=false;
     ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGTH);
     // отрисовываем фон
-    ctx.drawImage(treeGrass, 0, 0, 1008, 724, 0, 80, 800, 600);
-    // const main = document.querySelector('.main');
-    // main.addEventListener('mousemove', (event) =>aimMove(event, canvas, ctx, pauseFlag));
+    ctx.drawImage(treeGrass, 0, 0, 1008, 724, 0, 80, CANVAS_WIDTH, CANVAS_HEIGTH);
 
     dogMove(ctx,time,ducksMove);// !!!!!!!!!!!!!!!!!!!!!!!собачка
 
@@ -172,8 +166,8 @@ export function startGame (context, lvl){ // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!ex
     showCurrentStatistic(progress);
 
     if(context){// запуск начала игры(при продолжении взамен контекста ставлю null)
-        startGameProgressParameters();// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        if(lvl) progress.level=lvl;// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        startGameProgressParameters();
+        if(lvl) progress.level=lvl;
         newDogParameters();
         newDucksParameters(ducks);
         progress.ducksInCurrentLvl+=2;

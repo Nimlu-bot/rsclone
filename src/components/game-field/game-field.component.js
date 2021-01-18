@@ -7,9 +7,10 @@ export class GameField {
         this.game = new Game();
     }
 
-    init() {
+    init(lvl) {
         const list = document.querySelector(".game-place");
+        console.log(`level ${  lvl}`) 
         list.insertAdjacentHTML("beforeend", gameFieldTemplate);
-        this.game.init();
+        this.game.init(lvl);
     }
 }

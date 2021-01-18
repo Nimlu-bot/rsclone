@@ -9,7 +9,7 @@ export class Login {
     }
 
     init() {
-        const main = document.querySelector('.game-menu');
+        const main = document.querySelector('.login-div');
 
         // main.innerHTML = '';
         main.insertAdjacentHTML('afterbegin', loginTemplate(getLang()));

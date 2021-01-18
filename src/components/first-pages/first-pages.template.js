@@ -12,7 +12,7 @@ export const firstPagesTemplate = `
         <div class="pages">Game menu</div>
         
         <div class="pause-btn">
-        <div class="user"><img class="user-img" src="../../assets/img/user.svg"></div>
+        <div class="user"><img class="user-img" src="../../assets/img/troll.png"></div>
         </div>
     </div>
     </div>
@@ -31,7 +31,7 @@ export const firstPagesTemplate = `
     <div class="footer">
     <div class="content">
 
-    <a href = "#"><img class="rs-logo" src="../../assets/img/rs-school-js.svg" alt="rs-logo" /></a>
+    <a class="logo-box" href = "#"><img class="rs-logo" src="../../assets/img/rs-school-js.svg" alt="rs-logo" /></a>
 
     <ul class="autor">
         <li><a href = https://github.com/tone4ka ><img class="git-logo" src="../../assets/img/github.svg" alt="git-logo" />Antonina Zinkevich</a></li>
@@ -39,6 +39,7 @@ export const firstPagesTemplate = `
         <li><a href = "https://github.com/nimlu-bot"><img class="git-logo" src="../../assets/img/github.svg" alt="git-logo" />Sergey Nesterov</a></li>
         <li><a href = "https://github.com/andreykomov"><img class="git-logo" src="../../assets/img/github.svg" alt="git-logo" />Andrey Komov</a></li>
     </ul>
+    <div class="year">2021</div>
 
     </div>
     </div>

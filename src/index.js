@@ -1,7 +1,8 @@
 // fedya
-    import { FirstPages} from "./components/index";
-    
-    const firstPages = new FirstPages();
-    firstPages.init()
+import { FirstPages} from "./components/index";
+
+const firstPages = new FirstPages();
+firstPages.init()
+
 // ---
 

@@ -10,7 +10,7 @@ export class Game {
 
     init(lvl) {
         const field = document.querySelector(".game-field-main");
-
+        console.log(lvl);
         field.insertAdjacentHTML("beforeend", gameTemplate(CANVAS_WIDTH, CANVAS_HEIGTH));
         console.log('canvas created');
 

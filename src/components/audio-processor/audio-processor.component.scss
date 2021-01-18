@@ -9,18 +9,13 @@ audio {
 .audio-container span {
   font-size: 19px;
   font-weight: 400;
-  padding-left: 5px;
-  padding-right: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .volume-container,
 .panner-container {
   display: flex;
-}
-
-.panner-container {
-  padding-top: 10px;
-  padding-left: 19px;
 }
 
 input[type=range]::-webkit-slider-runnable-track {
