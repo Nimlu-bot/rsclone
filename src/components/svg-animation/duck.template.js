@@ -6,7 +6,7 @@ export const duckTemplate = () => {
   <svg id="svg-duck" class="duck" version="1.0" xmlns="http://www.w3.org/2000/svg" width="100.000000pt"
   height="100.000000pt" viewBox="0 0 1002.000000 1002.000000" preserveAspectRatio="xMidYMid meet">
   <g transform="translate(0.000000,1002.000000) scale(0.100000,-0.100000)" fill="none"
-    stroke="rgba(127, 27, 204, 1)" stroke-width="100" stroke-dasharray="51127" stroke-dashoffset="0">
+    stroke="rgba(85, 53, 92, 1)" stroke-width="100" stroke-dasharray="51127" stroke-dashoffset="0">
     <path id="duck-hunt-logo10" d="M4063 7797 c-3 -4 -11 -6 -17 -4 -17 7 -23 1 -76 -56 -42 -46 -44
 -52 -46 -110 0 -34 3 -67 8 -74 5 -7 5 -14 -2 -18 -6 -3 -8 -11 -5 -16 4 -5 8
 -19 10 -30 2 -12 12 -33 22 -48 9 -14 16 -28 16 -31 0 -3 8 -22 18 -42 11 -21
@@ -336,7 +336,7 @@ export const duckTemplate = () => {
 16 -5 18 -7 3 -13 19 -14 37 -1 19 -12 42 -25 54 -15 14 -18 22 -10 25 11 4
 10 6 0 13 -12 7 -11 9 1 9 13 0 13 1 0 10 -8 5 -10 10 -3 10 6 0 9 9 5 22 -3
 14 -2 19 6 14 8 -4 16 3 22 18 9 25 13 26 90 26 57 0 80 -4 81 -12z">
-      <animate id="pl-duck" attributeName="stroke-dashoffset" begin="0s" values="51127; 0" dur="5s" repeatCount="1"
+      <animate id="pl-duck" attributeName="stroke-dashoffset" begin="0s" values="51127; 0" dur="2s" repeatCount="1"
         fill="freeze" calcMode="linear">
       </animate>
     </path>

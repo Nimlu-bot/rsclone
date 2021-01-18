@@ -7,7 +7,7 @@ export const aimTemplate = () => {
 viewBox="0 0 1002.000000 1002.000000" preserveAspectRatio="xMidYMid meet">
 
 <g transform="translate(0.000000,1002.000000) scale(0.100000,-0.100000)" fill="none"
-  stroke="green" stroke-width="90" stroke-dasharray="70685" stroke-dashoffset="0">
+  stroke="rgba(85, 53, 92, 1)" stroke-width="90" stroke-dasharray="70685" stroke-dashoffset="0">
   <path id="duck-hunt-logo" d="M4690 9739 c-1000 -60 -1960 -409 -2745 -997 -356 -268 -741 -652
 -991 -992 -654 -887 -971 -1939 -904 -3005 62 -989 423 -1892 1068 -2675 122
 -148 463 -488 617 -616 422 -351 865 -613 1381 -817 772 -306 1650 -420 2489
@@ -26,7 +26,7 @@ c-371 0 -674 -3 -673 -7 1 -5 -3 -17 -9 -28 -11 -20 -8 -20 673 -17 l684 2 0
 172 -10 202 l0 56 505 0 c278 0 505 3 506 8 0 4 2 15 4 25 3 16 -26 17 -506
 17 l-509 0 0 56 c0 30 5 121 10 202 68 979 422 1860 1059 2632 121 147 452
 478 601 602 329 271 599 447 990 642 659 328 1420 514 2153 525 l97 1 0 -741z">
-    <animate id="pl-aim" attributeName="stroke-dashoffset" begin="0s" values="70685; 0" dur="3s" repeatCount="1"
+    <animate id="pl-aim" attributeName="stroke-dashoffset" begin="0s" values="70685; 0" dur="4.5s" repeatCount="1"
       fill="freeze" calcMode="linear">
     </animate>
   </path>

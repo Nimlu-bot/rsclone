@@ -10,12 +10,11 @@ export class SvgAnimation {
     this.loadingBtn(document.body);
     setTimeout(() => this.bullet(document.querySelector('.animation-bullet')), 1000);
     setTimeout(() => this.duck(document.querySelector('.duck-aim')), 2000);
-    setTimeout(() => this.aim(document.querySelector('.duck-aim')), 5000);
-    setTimeout(() => this.text(document.querySelector('.animation-text')), 8000);
+    setTimeout(() => this.aim(document.querySelector('.duck-aim')), 2000);
     setTimeout(() => {
       this.getButton().classList.add('end-loading');
-      this.getButton().innerText='Click here!'
-    }, 11000);
+      this.getButton().innerText='Ducks are detected! Click here...'
+    }, 5500);
 
   }
 
@@ -59,7 +58,7 @@ export class SvgAnimation {
       text.remove();
     }
 
-    const bullet = document.querySelector('#svg-bullet');
+    const bullet = document.querySelector('#bullet-container');
     if (bullet) {
       bullet.remove();
     }
