@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 const dogImg=document.createElement('img');
 dogImg.src='../../../assets/img/pes.png';
 let frameNum=0;

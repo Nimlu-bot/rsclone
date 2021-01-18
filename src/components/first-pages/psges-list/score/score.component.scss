@@ -21,16 +21,22 @@
         justify-content: center;
         align-items: center;
     }
+    .bullet-box{
+        margin-top: -60px!important;
+    }
+    .total-box{
+        margin-bottom: -80px !important;
+    }
     img{
         transition: all .5s;
-        width: 30px;
-        height: 12px;
+        width: 40px;
+        height: 16px;
         margin: 1px 0;
     }
     .img-duck-popadanie{
-        height: 30px !important;
+        height: 39.4px !important;
     }
     .img-duck-conture{
-        height: 27px !important;
+        height: 36px !important;
     }
 }   
