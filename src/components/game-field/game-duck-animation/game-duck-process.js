@@ -108,9 +108,11 @@ function gameProcess(){
                 newDogParameters(); // для выхода собаки между уровнями
                 showCurrentStatistic(progress); 
             }else{// конец игры
+                showModalWindow();
+                showCurrentStatistic(progress); 
+                newDogParameters(); // для выхода собаки между уровнями
                 console.log('ALL LEVELS COMPLETE');
                 clearInterval(time.moveIntervalId);
-    
             }
         }
     }
