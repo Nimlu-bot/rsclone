@@ -52,20 +52,20 @@ function showModalWindow(){
         pauseGame();
 }
 
-function ducksMove(){
+function gameProcess(){
     gameFlag=true;
     pauseFlag=false;
     ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGTH);
     // отрисовываем фон
     ctx.drawImage(treeGrass, 0, 0, 1008, 724, 0, 80, CANVAS_WIDTH, CANVAS_HEIGTH);
 
-    dogMove(ctx,time,ducksMove);// !!!!!!!!!!!!!!!!!!!!!!!собачка
+    dogMove(ctx,time,gameProcess);// !!!!!!!!!!!!!!!!!!!!!!!собачка
 
     if(dogObj.scaredDucks) {
         // ускоряем движение
         clearInterval(time.moveIntervalId);
         time.frameTime=85-progress.level*7;
-        time.moveIntervalId=setInterval(()=>ducksMove(/* level */),time.frameTime);
+        time.moveIntervalId=setInterval(()=>gameProcess(/* level */),time.frameTime);
 
         ctx.globalCompositeOperation = 'destination-over';
 
@@ -142,8 +142,8 @@ function shot(event){
     console.log(`bullet ${progress.bullet}`);
     if(progress.bullet>0){
             if(!pauseFlag){
-                const clickX = event.clientX - canvas.getBoundingClientRect().left;
-                const clickY = event.clientY - canvas.getBoundingClientRect().top;
+                const clickX = event.clientX - canvas.getBoundingClientRect().left+25;
+                const clickY = event.clientY - canvas.getBoundingClientRect().top+25;
 
             if((clickX > (ducks.duck1.moveX +5) && clickX < (ducks.duck1.moveX + 101-5+hittingError)) 
             && ((clickY > (ducks.duck1.moveY +5) && clickY < (ducks.duck1.moveY + 90 -5+hittingError)))){
@@ -182,7 +182,7 @@ export function startGame (context, lvl){ // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!ex
     const pauseBtn =document.querySelector('.pause-btn-header');
     if(pauseBtn)pauseBtn.addEventListener('click', ()=>pauseGame());
 
-    time.moveIntervalId= setInterval(()=>ducksMove(/* level */),time.frameTime);
+    time.moveIntervalId= setInterval(()=>gameProcess(/* level */),time.frameTime);
 
     const main = document.querySelector('.main');
     if(!shotListenerFlag)main.addEventListener('click', (event) =>shot(event));

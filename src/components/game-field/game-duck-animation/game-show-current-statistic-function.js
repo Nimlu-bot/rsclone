@@ -11,7 +11,7 @@
         if(ducsBox){
             ducsBox.innerHTML='';
             for (let i=0; i<currentProgress.shotDucks; i+=1) {
-                ducsBox.insertAdjacentHTML("beforeend", '<img class="img-duck-popadanie" src="../../../assets/img/utka_popadanie.png"></img>');
+                ducsBox.insertAdjacentHTML("beforeend", '<img class="img-duck-popadanie" src="../../../assets/img/utka_popad_big.png"></img>');
             }
             for (let i=0; i<currentProgress.goAwayducks; i+=1) {
                 ducsBox.insertAdjacentHTML("beforeend", '<img class="img-duck-conture" src="../../../assets/img/utka_kontur_little_little.png"></img>');
