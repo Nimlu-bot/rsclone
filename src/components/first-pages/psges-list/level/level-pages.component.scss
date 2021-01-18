@@ -1,4 +1,17 @@
-.game-btn{
-    padding: 5px 25px;
-    background-color: rgb(43, 233, 160);
+
+.level-wrap{
+    background-image: url(../../../../assets/img/paper-cell.jpg);
+    background-position: center;
+    background-size: cover;
+    padding: 5px 50px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px black;
+    
+    .level-btn{
+    padding: 8px 25px !important;
+    }
 }
+
+
+    
+

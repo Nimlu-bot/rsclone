@@ -1,15 +1,20 @@
 
 // general btn
 .game-btn{
-    width:100%;
+    display: flex;
+    justify-content: center;
+    background-image: url(../img/button_slim.png);
+    background-position: center;
+    background-size: 90%;
+    background-repeat: no-repeat;
+   
     text-transform: uppercase;
     text-align: center;
     margin: 10px auto;
-    padding: 12px 40px;
+    padding: 20px 80px;
     cursor: pointer;
     font-size: 21px;
     line-height: 24px;
-    border: 2px solid #000;
     border-radius: 5px;
     user-select: none;
     box-sizing: border-box;

@@ -12,7 +12,7 @@ export class Statistics {
 
         main.insertAdjacentHTML("afterbegin", statisticPagesTemplate);
 
-        const statWrapper = document.querySelector(".statistic");
+        const statWrapper = document.querySelector(".statistic-wrap");
 
         statWrapper.insertAdjacentHTML("afterbegin", statisticTableHeader);
 
