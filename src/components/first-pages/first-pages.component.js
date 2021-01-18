@@ -46,7 +46,7 @@ export class FirstPages {
                 }else{
                     setTimeout(()=>{
                         document.querySelector(".login-div").remove()
-                    },900);
+                    },100);
                     document.querySelector(".login-div").style.right = "-100%"
                 }
                       
