@@ -18,8 +18,8 @@
             }
         }
         if(score){
-            let lvl=currentProgress.level;
-            if(lvl>10)lvl=10;
+            const lvl=currentProgress.level;
+            // if(lvl>10)lvl=10;
             score.innerHTML='';
             score.innerHTML=currentProgress.score;
             score.insertAdjacentHTML("beforeend", `<p>lvl ${lvl}</p>`);

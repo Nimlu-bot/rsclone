@@ -41,8 +41,7 @@ export function newDogParameters(){
     dog.scaredDucks=false;
 }
 
-export function dogMove(ctx,time,gameProcess){
-    
+export function dogMove(ctx,time,gameProcess, progress, showCurrentStatistic){
     clearInterval(time.moveIntervalId);
     time.frameTime=100;
     time.moveIntervalId=setInterval(()=>gameProcess(/* level */),time.frameTime);
@@ -100,6 +99,8 @@ export function dogMove(ctx,time,gameProcess){
     }
     if(dog.findOneDuck){
         clearInterval(time.moveIntervalId);
+        progress.bullet=0;
+        showCurrentStatistic(progress);
         time.frameTime=40;
         time.moveIntervalId=setInterval(()=>gameProcess(/* level */),time.frameTime);
         frameString=0;
@@ -121,11 +122,15 @@ export function dogMove(ctx,time,gameProcess){
             frameCounter=0;
             frameString=0;
             frameNum=0;
+            progress.bullet=4;
+            showCurrentStatistic(progress);
             dog.scaredDucks=true;
         }
     }
     if(dog.findTwoDucks){
         clearInterval(time.moveIntervalId);
+        progress.bullet=0;
+        showCurrentStatistic(progress);
         time.frameTime=30;
         time.moveIntervalId=setInterval(()=>gameProcess(/* level */),time.frameTime);
         frameString=1;
@@ -146,11 +151,15 @@ export function dogMove(ctx,time,gameProcess){
             frameCounter=0;
             frameString=0;
             frameNum=0;
+            progress.bullet=4;
+            showCurrentStatistic(progress);
             dog.scaredDucks=true;
         }
     }
     if(dog.laught){
         clearInterval(time.moveIntervalId);
+        progress.bullet=0;
+        showCurrentStatistic(progress);
         time.frameTime=100;
         time.moveIntervalId=setInterval(()=>gameProcess(/* level */),time.frameTime);
         frameString=1;
@@ -169,6 +178,8 @@ export function dogMove(ctx,time,gameProcess){
             dogInGrassY=370;
             frameString=0;
             frameCounterLaught=0;
+            progress.bullet=4;
+            showCurrentStatistic(progress);
             dog.scaredDucks=true;
         }
 

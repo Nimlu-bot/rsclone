@@ -63,7 +63,7 @@ function gameProcess(){
     ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGTH);
     // отрисовываем фон
     ctx.drawImage(treeGrass, 0, 0, 1008, 724, 0, 80, CANVAS_WIDTH, CANVAS_HEIGTH);
-    dogMove(ctx,time,gameProcess);// !!!!!!!!!!!!!!!!!!!!!!!собачка
+    dogMove(ctx,time,gameProcess, progress, showCurrentStatistic);// !!!!!!!!!!!!!!!!!!!!!!!собачка
 
     if(dogObj.scaredDucks) {
         // ускоряем движение
@@ -98,7 +98,7 @@ function gameProcess(){
             if(progress.currentTwoShotDucks===0)dogObj.laught=true;// если не поймали ни одной утки
             progress.currentTwoDucksCruck=0;
             progress.currentTwoShotDucks=0;
-            progress.bullet=4;
+            // progress.bullet=4;
             newDucksParameters(ducks);
             dogObj.scaredDucks=false;
             showCurrentStatistic(progress);
@@ -109,6 +109,7 @@ function gameProcess(){
             if (progress.level<10){
                 showCurrentStatistic(progress); 
                 showModalWindow();
+                // progress.level+=1;
                 newDogParameters(); // для выхода собаки между уровнями
             }else{// конец игры
                 showCurrentStatistic(progress);
