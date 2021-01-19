@@ -6,6 +6,7 @@ import {dog, dogMove, newDogParameters} from './game-dog-animation';
 import {showCurrentStatistic} from './game-show-current-statistic-function';
 import { ModalWindow } from "../../modal-window/modal-window.component";
 import {startGameStat, statStart, newRound, isBuletsEnd, isLevelEnd, isWin} from "../../../core/user-statistic"
+import {cloudsAdd} from "./game-clouds";
 
 
 const treeGrass=document.createElement('img');
@@ -62,7 +63,6 @@ function gameProcess(){
     ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGTH);
     // отрисовываем фон
     ctx.drawImage(treeGrass, 0, 0, 1008, 724, 0, 80, CANVAS_WIDTH, CANVAS_HEIGTH);
-
     dogMove(ctx,time,gameProcess);// !!!!!!!!!!!!!!!!!!!!!!!собачка
 
     if(dogObj.scaredDucks) {
@@ -111,7 +111,7 @@ function gameProcess(){
                 showModalWindow();
                 newDogParameters(); // для выхода собаки между уровнями
             }else{// конец игры
-                 showCurrentStatistic(progress);
+                showCurrentStatistic(progress);
                 showModalWindow();
                 newDogParameters(); // для выхода собаки между уровнями
                 dogObj.go=false;
@@ -120,6 +120,7 @@ function gameProcess(){
             }
         }
     }
+    cloudsAdd(ctx,progress.level);
 }
 
 function shot(event){
