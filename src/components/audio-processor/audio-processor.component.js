@@ -7,9 +7,12 @@ class AudioProcessor {
   }
 
   init() {
-    document.body.insertAdjacentHTML("beforeBegin", audioProcessorTemplate());
+    document.body.insertAdjacentHTML("afterBegin", audioProcessorTemplate());
 
     this.audioContext = new AudioContext();
+    if (this.audioContext.state === 'suspended') {
+      this.audioContext.resume();
+  };
     this.gainNode = this.audioContext.createGain();
     this.pannerOptions = { pan: 0 };
     this.panner = new StereoPannerNode(this.audioContext, this.pannerOptions);
