@@ -5,7 +5,7 @@ import perfectDog from "../../assets/img/dog_perfect.png"
 
 export const modalWindowTemplate = (name) => {
   const gameOverWindow = `
-  <div id="modal-window" class="modal-hidden">
+  <div id="modal-window" class="modal-game-over-hidden">
     <h2>Bad hunt Dude!</h2>
     <img src=${gameOverDog} alt="dog">
     <button type="button" id="to-main">Close</button>
@@ -13,7 +13,7 @@ export const modalWindowTemplate = (name) => {
   `;
 
   const perfectWindow = `
-  <div id="modal-window" class="modal-hidden">
+  <div id="modal-window" class="modal-perfect-hidden">
     <h2>Awesome hunter</h2>
     <img src=${perfectDog} alt="dog">
     <button type="button" id="to-main">Close</button>
