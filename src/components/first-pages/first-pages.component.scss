@@ -13,11 +13,11 @@ $elemColor: black;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-
+    user-select: none;
     font-family: Birch;
     color: $textColor1;
-    font-size: 18px;
-    line-height: 20px;
+    font-size: 24px;
+    line-height: 26px;
     letter-spacing: 2px;
     font-weight: 600;
 
@@ -54,8 +54,8 @@ $elemColor: black;
 
         }
         h1{
-            font-size: 24px;
-            line-height: 26px;
+            font-size: 32px;
+            line-height: 34px;
             width: 30%;
         }
         .pages{
@@ -81,8 +81,8 @@ $elemColor: black;
                 padding: 10px;
                 .user-img{
                     position: relative;
-                    height: 25px;
-                    width: 25px;
+                    height: 30px;
+                    width: 30px;
                     cursor: pointer;
                 }
             }
@@ -90,7 +90,7 @@ $elemColor: black;
                 transform: scale(1.1);
             }
             .user:hover .user-img{
-                animation: logo-rotate 1 linear 1s;
+                animation: logo-rotate 1 linear .8s;
             }
         }
 
@@ -161,6 +161,8 @@ $elemColor: black;
             justify-content: center;
             a{
                 display: flex;
+                justify-content: center;
+                align-items: center;
                 margin: 10px;
                 color: $textColor1;
             }
@@ -178,8 +180,17 @@ $elemColor: black;
 }
 
 @keyframes logo-rotate{
-    100%{
-        transform: rotate(360deg);
+    25%{
+        transform: rotate(20deg);
+    }
+    50%{
+        transform: rotate(-40deg);
+    }
+    75%{
+        transform: rotate(20deg);
+    }
+    90%{
+        transform: rotate(-10deg);
     }
 }
 
