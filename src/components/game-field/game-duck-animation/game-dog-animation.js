@@ -1,4 +1,7 @@
 /* eslint-disable no-param-reassign */
+import AudioProcessor from "../../audio-processor/audio-processor.component";
+import {incDuckCount} from "../../../core/user-statistic"
+
 const dogImg=document.createElement('img');
 dogImg.src='../../../assets/img/pes.png';
 let frameNum=0;
@@ -10,7 +13,6 @@ let dogIngrassX=290;
 let dogInGrassY=370;
 let frameCounter=0;
 let frameCounterLaught=0;
-
 
 export const dog={
     go:true,
@@ -40,9 +42,9 @@ export function newDogParameters(){
 }
 
 export function dogMove(ctx,time,gameProcess){
+    
     clearInterval(time.moveIntervalId);
     time.frameTime=100;
-    // time.frameTime=1000;
     time.moveIntervalId=setInterval(()=>gameProcess(/* level */),time.frameTime);
     if(dog.go){
         dogGoY=410
@@ -75,19 +77,22 @@ export function dogMove(ctx,time,gameProcess){
                 ctx.drawImage(dogImg, 560*frameNum, 410*frameString, 560, 600, dogGoX,  dogGoY-20, 264, 270);
             }
             frameCounter+=1;
+            // soundFlag=true;
             if(frameCounter>2){// замерла с поднятыми ушами
                 if(frameNum<2)frameNum+=1;
                 dogGoX+=10;
                 dogGoY-=10;
                 if(frameCounter>30){// прыгнула
-                dog.jump=false;
-                dog.scaredDucks=true;
-                console.log('ducks scared');
-                frameNum=0;
-                frameString=0;
-                dogGoX=0;
-                dogGoY=400;
-                frameCounter=0;
+                    AudioProcessor.play('bark');
+                    dog.jump=false;
+                    dog.scaredDucks=true;
+                    console.log('ducks scared');
+                    incDuckCount();// ! статистика
+                    frameNum=0;
+                    frameString=0;
+                    dogGoX=0;
+                    dogGoY=400;
+                    frameCounter=0;
                 }
             }
         }
