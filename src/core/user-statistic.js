@@ -26,7 +26,7 @@ const lvlStat = {
 };
 
 // начало игры
-export function startGame() {
+export function startGameStat() {
     gameStat.time = 0;
     gameStat.ducks = 0;
     gameStat.hits = 0;
@@ -46,7 +46,7 @@ export function statStart() {
     lvlStat.score = 0;
 }
 
-// на каждое попадание
+// утка выбыла любым способом
 export function isRoundEnd() {
     lvlStat.ducksKillPerRound += 1;
     lvlStat.score += levelSettings.scorePerDuck;

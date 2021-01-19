@@ -1,5 +1,6 @@
 /* eslint-disable no-param-reassign */
 import {showCurrentStatistic} from './game-show-current-statistic-function';
+import {isRoundEnd, incDuckFlyAway} from "../../../core/user-statistic"
 
 const duckImgR=document.createElement('img');
 duckImgR.src='../../../assets/img/duckR.png';
@@ -79,13 +80,14 @@ export function duckGoAway(duck,ctx, progress){
         duck.num+=1;
         if(duck.num>3)duck.num=0;
         duck.goAwY-=10;
-    }else{
-        progress.currentTwoDucksCruck+=1;
-        console.log(progress.currentTwoDucksCruck);
-        progress.goAwayducks+=1;
-        console.log(`goAwayducks ${progress.goAwayducks}`);
-        showCurrentStatistic(progress); 
-        progress.cruckDuck+=1;
+    }else if(progress.currentTwoDucksCruck<2){
+            progress.currentTwoDucksCruck+=1;
+            incDuckFlyAway();// ! статистика
+            isRoundEnd();// ! статистика
+            progress.goAwayducks+=1;
+            console.log(`goAwayducks ${progress.goAwayducks}`);
+            showCurrentStatistic(progress); 
+            progress.cruckDuck+=1;
         }
 
 }
@@ -97,6 +99,7 @@ export function duckFall(duck, ctx, progress){
     } else if(!duck.duckFall){
         duck.duckFall=true;;
         progress.currentTwoDucksCruck+=1;
+        isRoundEnd();// ! статистика
         progress.currentTwoShotDucks+=1;
         progress.shotDucks+=1;
         progress.score+=8+2*progress.level;

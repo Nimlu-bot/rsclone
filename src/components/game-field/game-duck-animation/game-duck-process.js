@@ -5,6 +5,7 @@ import {ducksForGame, progressForGame, newProgressParameters, startGameProgressP
 import {dog, dogMove, newDogParameters} from './game-dog-animation';
 import {showCurrentStatistic} from './game-show-current-statistic-function';
 import { ModalWindow } from "../../modal-window/modal-window.component";
+import {startGameStat, statStart, newRound, isBuletsEnd, isLevelEnd, isWin} from "../../../core/user-statistic"
 
 
 const treeGrass=document.createElement('img');
@@ -13,6 +14,7 @@ let ctx;
 let canvas;
 let pauseFlag=false;
 let gameFlag=false;
+let lvlbeginStatisticFlag=true;
 const time={
     frameTime:80,
     moveIntervalId:null
@@ -53,6 +55,8 @@ function showModalWindow(){
 }
 
 function gameProcess(){
+    if(lvlbeginStatisticFlag)statStart();// ! статистика
+    lvlbeginStatisticFlag=false;// ! статистика
     gameFlag=true;
     pauseFlag=false;
     ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGTH);
@@ -66,10 +70,7 @@ function gameProcess(){
         clearInterval(time.moveIntervalId);
         time.frameTime=85-progress.level*7;
         time.moveIntervalId=setInterval(()=>gameProcess(/* level */),time.frameTime);
-
         ctx.globalCompositeOperation = 'destination-over';
-
-
         if((ducks.duck1.timeAfterStartFly<Math.ceil(200*(80/time.frameTime))) && (progress.bullet!==0)) {
             if(ducks.duck1.isLive){
                     duckMove(ctx, ducks.duck1, ducks);
@@ -91,26 +92,29 @@ function gameProcess(){
             duckGoAway(ducks.duck2, ctx, progress);
         }
         if(progress.currentTwoDucksCruck===2){// выбыла пара уток
+            newRound();// ! статистика
             if(progress.currentTwoShotDucks===1)dogObj.findOneDuck=true;// если поймали одну утку
             if(progress.currentTwoShotDucks===2)dogObj.findTwoDucks=true;// если поймали две утки
             if(progress.currentTwoShotDucks===0)dogObj.laught=true;// если не поймали ни одной утки
             progress.currentTwoDucksCruck=0;
             progress.currentTwoShotDucks=0;
             progress.bullet=4;
-            console.log(`new bullet ${progress.bullet}`);
             newDucksParameters(ducks);
             dogObj.scaredDucks=false;
             showCurrentStatistic(progress);
         }
         if(progress.cruckDuck===10){// конец уровня
+            isLevelEnd(); // ! статистика
+            if(isLevelEnd()){isWin()}; // ! статистика
             if (progress.level<10){
+                showCurrentStatistic(progress); 
                 showModalWindow();
                 newDogParameters(); // для выхода собаки между уровнями
-                showCurrentStatistic(progress); 
             }else{// конец игры
+                 showCurrentStatistic(progress);
                 showModalWindow();
-                showCurrentStatistic(progress); 
                 newDogParameters(); // для выхода собаки между уровнями
+                dogObj.go=false;
                 console.log('ALL LEVELS COMPLETE');
                 clearInterval(time.moveIntervalId);
             }
@@ -141,7 +145,7 @@ function shot(event){
             break;
     }
     if(gameFlag && !pauseFlag && progress.bullet>0) progress.bullet-=1;
-    console.log(`bullet ${progress.bullet}`);
+    isBuletsEnd(); // ! статистика
     if(progress.bullet>0){
             if(!pauseFlag){
                 const clickX = event.clientX - canvas.getBoundingClientRect().left+25;
@@ -168,6 +172,7 @@ export function startGame (context, lvl){ // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!ex
     showCurrentStatistic(progress);
 
     if(context){// запуск начала игры(при продолжении взамен контекста ставлю null)
+        startGameStat(); // ! статистика
         startGameProgressParameters();
         if(lvl) progress.level=lvl;
         newDogParameters();
@@ -184,7 +189,7 @@ export function startGame (context, lvl){ // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!ex
     const pauseBtn =document.querySelector('.pause-btn-header');
     if(pauseBtn)pauseBtn.addEventListener('click', ()=>pauseGame());
 
-    time.moveIntervalId= setInterval(()=>gameProcess(/* level */),time.frameTime);
+    time.moveIntervalId= setInterval(()=>gameProcess(),time.frameTime);
 
     const main = document.querySelector('.main');
     if(!shotListenerFlag)main.addEventListener('click', (event) =>shot(event));
