@@ -1,4 +1,6 @@
+/* eslint-disable no-param-reassign */
 import {showCurrentStatistic} from './game-show-current-statistic-function';
+import {isRoundEnd, incDuckFlyAway} from "../../../core/user-statistic"
 
 const duckImgR=document.createElement('img');
 duckImgR.src='../../../assets/img/duckR.png';
@@ -28,8 +30,8 @@ export function newDucksParameters(ducks){
     ducks.duck1.isLive=true;
     ducks.duck2.isLive=true;
 
-    ducks.duck1.goAvay=false;
-    ducks.duck2.goAvay=false;
+    // ducks.duck1.goAvay=false;
+    // ducks.duck2.goAvay=false;
 
     ducks.duck1.moveX=500 + randomWithoutZero();
     ducks.duck1.moveY=480;
@@ -69,7 +71,6 @@ export function duckMove(ctx,duck,ducks){
 }
 
 export function duckGoAway(duck,ctx, progress){
-    duck.goAway=true;
     if(duck.moveX!==null)duck.goAwX=duck.moveX;
     if(duck.moveY!==null)duck.goAwY=duck.moveY;
     duck.moveX=null;
@@ -79,13 +80,15 @@ export function duckGoAway(duck,ctx, progress){
         duck.num+=1;
         if(duck.num>3)duck.num=0;
         duck.goAwY-=10;
-    }else{
-        if(duck.goAway) progress.currentTwoDucksCruck+=1;
-        progress.goAwayducks+=1;
-        console.log(`goAwayducks ${progress.goAwayducks}`);
-        showCurrentStatistic(progress); 
-        progress.cruckDuck+=1;
-    }
+    }else if(progress.currentTwoDucksCruck<2){
+            progress.currentTwoDucksCruck+=1;
+            incDuckFlyAway();// ! статистика
+            isRoundEnd();// ! статистика
+            progress.goAwayducks+=1;
+            console.log(`goAwayducks ${progress.goAwayducks}`);
+            showCurrentStatistic(progress); 
+            progress.cruckDuck+=1;
+        }
 
 }
 
@@ -96,6 +99,7 @@ export function duckFall(duck, ctx, progress){
     } else if(!duck.duckFall){
         duck.duckFall=true;;
         progress.currentTwoDucksCruck+=1;
+        isRoundEnd();// ! статистика
         progress.currentTwoShotDucks+=1;
         progress.shotDucks+=1;
         progress.score+=8+2*progress.level;

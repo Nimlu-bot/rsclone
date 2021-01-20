@@ -13,13 +13,13 @@
   height: auto;
   text-align: center;
   background: url('../../assets/img/paper-cell.jpg');
-  border-radius: 5%;
+  border-radius: 5px;
   box-shadow: 0 0 10px rgba(0,0,0,0.75);
   vertical-align: middle;
   font-family: Birch;
   font-size: 25px;
   font-weight: 900;
-  color: #550ec9;
+  color: rgba(83, 53, 92, 1);
   text-transform: uppercase;
 }
 
@@ -31,6 +31,7 @@
 }
 
 #cover-div {
+  display: none;
   position: fixed;
   top: 0;
   left: 0;
@@ -49,10 +50,10 @@
   padding: 12px 40px;
   cursor: pointer;
   font-size: 21px;
-  color: #550ec9;
+  color: rgba(83, 53, 92, 1);
   font-weight: 900;
   line-height: 24px;
-  border: 2px solid #550ec9;
+  border: 2px solid rgba(83, 53, 92, 1);
   border-radius: 5px;
   user-select: none;
   box-sizing: border-box;
@@ -63,4 +64,9 @@
 
 #to-main:hover {
   transform: scale(1.05);
+}
+
+.modal-perfect-hidden,
+.modal-game-over-hidden {
+  display: none;
 }
