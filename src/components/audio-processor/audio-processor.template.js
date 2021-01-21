@@ -20,7 +20,8 @@ import fail from "../../assets/audio/you_failed.mp3";
 export const audioProcessorTemplate = () => {
   return `
 
-    <audio controls src=${bark} id="bark"></audio>
+  <div class="all-sounds">
+  <audio controls src=${bark} id="bark"></audio>
     <audio controls src=${bonusRound} id="bonus-round"></audio>
     <audio controls src=${breakTime} id="break-time"></audio>
     <audio controls src=${clay} id="clay"></audio>
@@ -37,6 +38,7 @@ export const audioProcessorTemplate = () => {
     <audio controls src=${shot} id="shot"></audio>
     <audio controls src=${tittle} id="tittle"></audio>
     <audio controls src=${fail} id="you-failed"></audio>
-
+  </div>
+  
   `;
 };

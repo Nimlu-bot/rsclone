@@ -82,7 +82,6 @@ class AudioProcessor {
 };
 export default new AudioProcessor();
 
-
 /* for other
 import AudioProcessor from "./components/audio-processor/audio-processor.component";
 for example:
