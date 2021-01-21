@@ -41,11 +41,11 @@ export function newDogParameters() {
 }
 
 export function dogMove(ctx, time, gameProcess, progress, showCurrentStatistic) {
-    if (frameCounter === 0) showCurrentStatistic(progress);
     clearInterval(time.moveIntervalId);
     time.frameTime = 100;
     time.moveIntervalId = setInterval(() => gameProcess(/* level */), time.frameTime);
     if (dog.go) {
+        if (frameCounter === 0) showCurrentStatistic(progress);
         dogGoY = 410;
         ctx.globalCompositeOperation = "source-over";
         ctx.drawImage(dogImg, 560 * frameNum, 390 * frameString, 555, 410, dogGoX, dogGoY, 250, 180);
@@ -101,7 +101,7 @@ export function dogMove(ctx, time, gameProcess, progress, showCurrentStatistic) 
     if (dog.findOneDuck) {
         clearInterval(time.moveIntervalId);
         progress.bullet = 0;
-        showCurrentStatistic(progress);
+        if (frameCounter === 0) showCurrentStatistic(progress);
         time.frameTime = 40;
         time.moveIntervalId = setInterval(() => gameProcess(/* level */), time.frameTime);
         frameString = 0;
@@ -131,7 +131,7 @@ export function dogMove(ctx, time, gameProcess, progress, showCurrentStatistic) 
     if (dog.findTwoDucks) {
         clearInterval(time.moveIntervalId);
         progress.bullet = 0;
-        showCurrentStatistic(progress);
+        if (frameCounter === 0) showCurrentStatistic(progress);
         time.frameTime = 30;
         time.moveIntervalId = setInterval(() => gameProcess(/* level */), time.frameTime);
         frameString = 1;
@@ -160,7 +160,7 @@ export function dogMove(ctx, time, gameProcess, progress, showCurrentStatistic) 
     if (dog.laught) {
         clearInterval(time.moveIntervalId);
         progress.bullet = 0;
-        showCurrentStatistic(progress);
+        if (frameCounterLaught === 0) showCurrentStatistic(progress);
         time.frameTime = 100;
         time.moveIntervalId = setInterval(() => gameProcess(/* level */), time.frameTime);
         frameString = 1;
