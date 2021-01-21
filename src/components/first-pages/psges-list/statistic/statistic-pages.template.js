@@ -38,12 +38,19 @@ export const statisticTableHeader = `
 export const statisticsTemplate = (userStat, number) => {
     const persent = Math.ceil((userStat.ducks / userStat.hits) * 100);
     const date = new Date(userStat.time);
+    const options = {
+        year: "2-digit",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit"
+    };
 
     return `
 		
-	 <tr class = "stat-table-item" ><td>${number}</td><td>${date.toLocaleString()}</td><td>${userStat.ducks}</td><td>${
-        userStat.hits
-    }</td><td>${persent}</td><td>${userStat.score}</td></tr>
+	 <tr class = "stat-table-item" ><td>${number}</td><td>${date.toLocaleString("ru-RU", options)}</td><td>${
+        userStat.ducks
+    }</td><td>${userStat.hits}</td><td>${persent}</td><td>${userStat.score}</td></tr>
 	 
 		
 `;

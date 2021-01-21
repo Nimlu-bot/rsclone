@@ -1,9 +1,11 @@
+import {statEventHandler} from "./utils/serverAPI"
+
+
 const levelSettings = {
     ducksTogether: 2,
     ducksPerRound: 10,
     ducksNeed: 5,
-    shots: 3,
-    scorePerDuck: 100
+    shots: 4
 };
 
 const gameStat = {
@@ -22,8 +24,15 @@ const lvlStat = {
     ducksFlyAwayPerRound: 0,
     bulets: 0,
     hits: 0,
-    score: 0
+    score: 0,
+    currentLvl: 1
 };
+function saveStat() {
+    const statArray = JSON.parse(localStorage.getItem("currentUserStat")) || [];
+    statArray.push(gameStat);
+
+    localStorage.setItem("currentUserStat", JSON.stringify(statArray));
+}
 
 // начало игры
 export function startGameStat() {
@@ -32,6 +41,7 @@ export function startGameStat() {
     gameStat.hits = 0;
     gameStat.kills = 0;
     gameStat.score = 0;
+    lvlStat.currentLvl = 1;
 }
 
 // начало уровня
@@ -44,13 +54,11 @@ export function statStart() {
     lvlStat.bulets = 0;
     lvlStat.hits = 0;
     lvlStat.score = 0;
+    lvlStat.currentLvl += 1;
 }
 
 // утка выбыла любым способом
 export function isRoundEnd() {
-    lvlStat.ducksKillPerRound += 1;
-    lvlStat.score += levelSettings.scorePerDuck;
-    lvlStat.duckKillPerLevel += 1;
     if (lvlStat.ducksKillPerRound + lvlStat.ducksFlyAwayPerRound === levelSettings.ducksTogether) {
         return true;
     }
@@ -62,10 +70,6 @@ export function newRound() {
     lvlStat.ducksKillPerRound = 0;
     lvlStat.ducksFlyAwayPerRound = 0;
     lvlStat.bulets = 0;
-}
-
-// при начале нового раунда (вылета 2 новых уток)
-export function incDuckCount() {
     lvlStat.duckCount += levelSettings.ducksTogether;
 }
 
@@ -77,15 +81,15 @@ export function incDuckFlyAway() {
 
 // при выстреле
 export function isBuletsEnd() {
-    lvlStat.hits += 1;
-    lvlStat.bulets += 1;
-    if (lvlStat.bulets === levelSettings.shots) {
+    if (lvlStat.bulets < levelSettings.shots) {
+        lvlStat.hits += 1;
+        lvlStat.bulets += 1;
         return true;
     }
     return false;
 }
 
-// после окончания каждого раунда
+// после окончания каждого уровня
 export function isLevelEnd() {
     if (
         lvlStat.duckCount === levelSettings.ducksPerRound &&
@@ -96,6 +100,11 @@ export function isLevelEnd() {
     return false;
 }
 
+export function LooseOrEnd() {
+		saveStat();
+		statEventHandler(gameStat);
+		
+}
 // при окончании уровня  т.е isLevelEnd вернул true
 export function isWin() {
     gameStat.time = new Date();
@@ -103,10 +112,10 @@ export function isWin() {
     gameStat.hits += lvlStat.hits;
     gameStat.kills += lvlStat.duckKillPerLevel;
     gameStat.score += lvlStat.score;
-    console.log(gameStat);
     if (lvlStat.duckKillPerLevel >= levelSettings.ducksNeed) {
         return true;
     }
+    LooseOrEnd();
     return false;
 }
 
@@ -118,9 +127,8 @@ export function getLvlStat() {
     return lvlStat;
 }
 
-export function saveStat() {
-    const statArray = JSON.parse(localStorage.getItem('userStat')) || [];
-		statArray.push(gameStat);
-		
-    localStorage.setItem('userStat', JSON.stringify(statArray));
+export function killed() {
+    lvlStat.ducksKillPerRound += 1;
+    lvlStat.score += 8 + 2 * lvlStat.currentLvl;
+    lvlStat.duckKillPerLevel += 1;
 }
