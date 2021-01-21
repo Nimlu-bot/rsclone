@@ -2,17 +2,10 @@ import { audioProcessorTemplate } from './audio-processor.template'
 
 
 class AudioProcessor {
-  constructor() {
-    this.init();
-  }
 
   init() {
     document.body.insertAdjacentHTML("afterBegin", audioProcessorTemplate());
-
     this.audioContext = new AudioContext();
-    if (this.audioContext.state === 'suspended') {
-      this.audioContext.resume();
-  };
     this.gainNode = this.audioContext.createGain();
     this.pannerOptions = { pan: 0 };
     this.panner = new StereoPannerNode(this.audioContext, this.pannerOptions);
@@ -50,6 +43,9 @@ class AudioProcessor {
   }
 
   play(name) {
+    if (this.audioContext.state === 'suspended') {
+      this.audioContext.resume();
+  };
     if (this[name] && this[name].mediaElement) {
       this[name].mediaElement.play();
     }

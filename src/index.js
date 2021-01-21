@@ -13,6 +13,5 @@ svgAnimation.makeGood();
 svgAnimation.getButton().addEventListener('click', () => {
   svgAnimation.removeAll();
   AudioProcessor.init();
-  AudioProcessor.play('quack');
   firstPages.init();
 });
