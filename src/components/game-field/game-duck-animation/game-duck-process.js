@@ -31,7 +31,9 @@ function continueGame(event) {
         if (event.target.id === "to-main" && reloadGameFlag) {
             document.body.dispatchEvent(reloadEvent);
             reloadGameFlag = false;
-        } else if (gameFlag) startGame(null, null); // возвращаемся в игру, не меняя параметры
+        } else if (gameFlag) {
+            startGame(null, null); // возвращаемся в игру, не меняя параметры
+        }
     }
 }
 
@@ -190,6 +192,10 @@ function shot(event) {
 
 export function startGame(context, lvl) {
     // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!export
+    console.log("startGame");
+    console.log(context);
+    console.log(lvl);
+
     canvas = document.querySelector(".game-canvas");
     clearInterval(time.moveIntervalId);
     showCurrentStatistic(progress);
@@ -203,6 +209,7 @@ export function startGame(context, lvl) {
         newDucksParameters(ducks);
         progress.ducksInCurrentLvl += 2;
         ctx = context;
+        showCurrentStatistic(progress);
     }
 
     if (!pauseFlag) {
