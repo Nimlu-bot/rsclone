@@ -11,7 +11,7 @@ $elemColor: black;
 // general style
 .wrapper{
     display: flex;
-    background-image: url(../../assets/img/pngwing.com.png);
+    background-image: url(../../assets/img/unnamed.jpg);
     mix-blend-mode:hard-light ;
     flex-direction: column;
     min-height: 100vh;
@@ -169,7 +169,7 @@ $elemColor: black;
                 color: $textColor1;
             }
             a:hover{    
-                transform: scale(1.1);
+                transform: scale(0.95);
                 transition: all .3s ;
             }
         }

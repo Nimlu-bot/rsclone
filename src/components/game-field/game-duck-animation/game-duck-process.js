@@ -14,7 +14,8 @@ let ctx;
 let canvas;
 let pauseFlag = false;
 let gameFlag = false;
-let lvlbeginStatisticFlag = true;
+let reloadGameFlag = false;
+let lvlbeginStatisticFlag = true; // ! статистика
 const time = {
     frameTime: 80,
     moveIntervalId: null
@@ -24,24 +25,26 @@ const ducks = ducksForGame;
 const progress = progressForGame;
 const dogObj = dog;
 const reloadEvent = new Event("reloadGameEvent");
-let reloadGameFlag = false;
 
 function continueGame(event) {
     if (event.target.classList.contains("continue-btn") || event.target.id === "to-main") {
         if (event.target.id === "to-main" && reloadGameFlag) {
+            shotListenerFlag = false;
             document.body.dispatchEvent(reloadEvent);
             reloadGameFlag = false;
-        } else if (gameFlag) {
+        } else if (gameFlag && pauseFlag) {
             startGame(null, null); // возвращаемся в игру, не меняя параметры
         }
+        pauseFlag = false;
     }
 }
 
+document.body.addEventListener("click", (event) => continueGame(event));
+
 function pauseGame() {
-    if (gameFlag) {
+    if (gameFlag && !pauseFlag) {
         pauseFlag = true;
         clearInterval(time.moveIntervalId);
-        document.body.addEventListener("click", (event) => continueGame(event));
     }
 }
 
@@ -54,10 +57,10 @@ function showModalWindow() {
         modalWindowPerfect.showWindow();
         newProgressParameters();
         progress.level += 1;
-    } else {
+    } else {// при проигрыше
         reloadGameFlag = true;
         modalWindowGameOver.showWindow();
-        startGameProgressParameters(); // Обнуляем очки
+        startGameProgressParameters(); 
     }
     pauseGame();
 }
@@ -70,13 +73,14 @@ function gameProcess() {
     ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGTH);
     // отрисовываем фон
     ctx.drawImage(treeGrass, 0, 0, 1008, 724, 0, 80, CANVAS_WIDTH, CANVAS_HEIGTH);
-    dogMove(ctx, time, gameProcess, progress, showCurrentStatistic); // !!!!!!!!!!!!!!!!!!!!!!!собачка
+
+    dogMove(ctx, time, gameProcess, progress, showCurrentStatistic);
 
     if (dogObj.scaredDucks) {
         // ускоряем движение
         clearInterval(time.moveIntervalId);
         time.frameTime = 85 - progress.level * 7;
-        time.moveIntervalId = setInterval(() => gameProcess(/* level */), time.frameTime);
+        time.moveIntervalId = setInterval(() => gameProcess(), time.frameTime);
         ctx.globalCompositeOperation = "destination-over";
         if (ducks.duck1.timeAfterStartFly < Math.ceil(200 * (80 / time.frameTime)) && progress.bullet !== 0) {
             if (ducks.duck1.isLive) {
@@ -107,7 +111,6 @@ function gameProcess() {
             if (progress.currentTwoShotDucks === 0) dogObj.laught = true; // если не поймали ни одной утки
             progress.currentTwoDucksCruck = 0;
             progress.currentTwoShotDucks = 0;
-            // progress.bullet=4;
             newDucksParameters(ducks);
             dogObj.scaredDucks = false;
             showCurrentStatistic(progress);
@@ -118,10 +121,9 @@ function gameProcess() {
                 isWin();
                 statStart();
             } // ! статистика
-            if (progress.level < 3) {
+            if (progress.level < 10) {
                 showCurrentStatistic(progress);
                 showModalWindow();
-                // progress.level+=1;
                 newDogParameters(); // для выхода собаки между уровнями
             } else {
                 // конец игры
@@ -136,7 +138,6 @@ function gameProcess() {
         }
     }
     cloudsAdd(ctx, progress.level);
-    // cloudsAdd(ctx, 9);
 }
 
 function shot(event) {
@@ -192,16 +193,12 @@ function shot(event) {
 
 export function startGame(context, lvl) {
     // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!export
-    console.log("startGame");
-    console.log(context);
-    console.log(lvl);
-
+    showCurrentStatistic(progress);
     canvas = document.querySelector(".game-canvas");
     clearInterval(time.moveIntervalId);
-    showCurrentStatistic(progress);
-
     if (context) {
         // запуск начала игры(при продолжении взамен контекста ставлю null)
+        shotListenerFlag = false;
         startGameStat(); // ! статистика
         startGameProgressParameters();
         if (lvl) progress.level = lvl;
@@ -211,18 +208,15 @@ export function startGame(context, lvl) {
         ctx = context;
         showCurrentStatistic(progress);
     }
-
     if (!pauseFlag) {
         newDucksParameters(ducks);
         progress.ducksInCurrentLvl += 2;
     }
-
     const pauseBtn = document.querySelector(".pause-btn-header");
     if (pauseBtn) pauseBtn.addEventListener("click", () => pauseGame());
 
     time.moveIntervalId = setInterval(() => gameProcess(), time.frameTime);
 
-    const main = document.querySelector(".main");
-    if (!shotListenerFlag) main.addEventListener("click", (event) => shot(event));
+    if (!shotListenerFlag) canvas.addEventListener("click", (event) => shot(event));
     shotListenerFlag = true;
 }

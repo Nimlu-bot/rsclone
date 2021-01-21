@@ -1,4 +1,3 @@
-  
 import { gameFieldTemplate } from "./game-field.template";
 import { Game } from "./game/index";
 
@@ -9,7 +8,8 @@ export class GameField {
 
     init(lvl) {
         const list = document.querySelector(".game-place");
-        console.log(`level ${  lvl}`) 
+        list.style.zIndex = "15";
+        console.log(`level ${lvl}`);
         list.insertAdjacentHTML("beforeend", gameFieldTemplate);
         this.game.init(lvl);
     }
