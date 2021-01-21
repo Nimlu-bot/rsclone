@@ -97,7 +97,6 @@ export function duckGoAway(duck, ctx, progress) {
         console.log(`goAwayducks ${progress.goAwayducks}`);
         showCurrentStatistic(progress);
         progress.cruckDuck += 1;
-        killed(); // ! статистика
     }
 }
 
@@ -108,6 +107,7 @@ export function duckFall(duck, ctx, progress) {
     } else if (!duck.duckFall) {
         duck.duckFall = true;
         progress.currentTwoDucksCruck += 1;
+        killed(); // ! статистика
         isRoundEnd(); // ! статистика
         progress.currentTwoShotDucks += 1;
         progress.shotDucks += 1;

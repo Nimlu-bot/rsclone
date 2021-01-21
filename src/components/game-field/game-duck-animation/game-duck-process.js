@@ -23,10 +23,15 @@ let shotListenerFlag = false;
 const ducks = ducksForGame;
 const progress = progressForGame;
 const dogObj = dog;
+const reloadEvent = new Event("reloadGameEvent");
+let reloadGameFlag = false;
 
 function continueGame(event) {
     if (event.target.classList.contains("continue-btn") || event.target.id === "to-main") {
-        if (gameFlag) startGame(null, null); // возвращаемся в игру, не меняя параметры
+        if (event.target.id === "to-main" && reloadGameFlag) {
+            document.body.dispatchEvent(reloadEvent);
+            reloadGameFlag = false;
+        } else if (gameFlag) startGame(null, null); // возвращаемся в игру, не меняя параметры
     }
 }
 
@@ -111,6 +116,7 @@ function gameProcess() {
                 statStart();
             } // ! статистика
             if (progress.level < 10) {
+                reloadGameFlag = true;
                 showCurrentStatistic(progress);
                 showModalWindow();
                 // progress.level+=1;

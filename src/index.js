@@ -13,3 +13,5 @@ svgAnimation.getButton().addEventListener('click', () => {
   svgAnimation.removeAll();
   firstPages.init();
 });
+
+document.body.addEventListener("reloadGameEvent", () => firstPages.init());
