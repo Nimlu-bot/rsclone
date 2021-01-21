@@ -15,3 +15,5 @@ svgAnimation.getButton().addEventListener('click', () => {
   AudioProcessor.init();
   firstPages.init();
 });
+
+document.body.addEventListener("reloadGameEvent", () => firstPages.init());
