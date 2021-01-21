@@ -31,25 +31,21 @@ export class FirstPages {
 
     loginForm() {
         document.querySelector(".user").addEventListener("click", () => {
-
-            if(!document.querySelector(".game-field-main")){
-
-                if(!document.querySelector(".login-div")){
+            if (!document.querySelector(".game-field-main")) {
+                if (!document.querySelector(".login-div")) {
                     const divElem = document.createElement("div");
                     divElem.classList.add("login-div");
-                    setTimeout(()=>{
-                        divElem.style.right = "5px"
-                    },100)
+                    setTimeout(() => {
+                        divElem.style.right = "5px";
+                    }, 100);
                     document.querySelector(".wrapper").append(divElem);
                     this.login.init();
-                   
-                }else{
-                    setTimeout(()=>{
-                        document.querySelector(".login-div").remove()
-                    },100);
-                    document.querySelector(".login-div").style.right = "-100%"
+                } else {
+                    setTimeout(() => {
+                        document.querySelector(".login-div").remove();
+                    }, 100);
+                    document.querySelector(".login-div").style.right = "-100%";
                 }
-                      
             } else {
                 return false;
             }
@@ -78,15 +74,14 @@ export class FirstPages {
 
             // eslint-disable-next-line prefer-const
             switch (e.target.id) {
-
                 case "start":
-                    document.querySelector(".nav").remove()
+                    document.querySelector(".nav").remove();
                     // default start level 1
-                    return this.start(1)
+                    return this.start(1);
 
                 case "level":
-                    document.querySelector(".nav").remove()
-                    return this.level()
+                    document.querySelector(".nav").remove();
+                    return this.level();
 
                 case "settings":
                     document.querySelector(".nav").remove();
@@ -119,11 +114,11 @@ export class FirstPages {
         document.querySelector(".game-place").innerHTML = "";
         document.querySelector(".game-menu").style.zIndex = "10";
         document.querySelector(".game-menu").style.backgroundColor = "transparent";
-        this.title = "play";
+        this.title = "game";
         document.querySelector(".pages").innerHTML = this.title;
-        this.pauseBtn()
-        this.gameField.init(lvl)
-        this.score()
+        this.pauseBtn();
+        this.gameField.init(lvl);
+        this.score();
     }
 
     level() {
@@ -131,14 +126,14 @@ export class FirstPages {
         document.querySelector(".pages").innerHTML = this.title;
         document.querySelector(".game-menu").insertAdjacentHTML("afterbegin", levelPagesTemplate);
         // eslint-disable-next-line consistent-return
-        document.querySelector(".level-wrap").addEventListener('click', (e) => {
-            if (e.target.id === 'level-back') {
+        document.querySelector(".level-wrap").addEventListener("click", (e) => {
+            if (e.target.id === "level-back") {
                 document.querySelector(".level-wrap").remove();
-                return this.nav()
+                return this.nav();
                 // eslint-disable-next-line no-else-return
             } else {
-                document.querySelector(".level-wrap").remove()
-                this.start(e.target.value)
+                document.querySelector(".level-wrap").remove();
+                this.start(e.target.value);
             }
         });
     }
@@ -148,10 +143,10 @@ export class FirstPages {
         document.querySelector(".pages").innerHTML = this.title;
         document.querySelector(".game-menu").insertAdjacentHTML("afterbegin", settingsPagesTemplate);
         // eslint-disable-next-line consistent-return
-        document.querySelector(".settings-wrap").addEventListener('click', (e) => {
-            if (e.target.id === 'settings-back') {
+        document.querySelector(".settings-wrap").addEventListener("click", (e) => {
+            if (e.target.id === "settings-back") {
                 document.querySelector(".settings-wrap").remove();
-                return this.nav()
+                return this.nav();
             }
         });
 
@@ -166,10 +161,10 @@ export class FirstPages {
         const stat = new Statistics();
         stat.init();
         // eslint-disable-next-line consistent-return
-        document.querySelector(".statistic-wrap").addEventListener('click', (e) => {
-            if (e.target.id === 'statistic-back') {
+        document.querySelector(".statistic-wrap").addEventListener("click", (e) => {
+            if (e.target.id === "statistic-back") {
                 document.querySelector(".statistic-wrap").remove();
-                return this.nav()
+                return this.nav();
             }
         });
     }
@@ -202,9 +197,8 @@ export class FirstPages {
 
     init() {
         document.body.insertAdjacentHTML("afterbegin", firstPagesTemplate);
-        document.querySelector(".wrapper").style.backgroundImage = "url(../../assets/img/paper-cell.jpg)";
+        // document.querySelector(".wrapper").style.backgroundImage = "url(../../assets/img/paper-cell.jpg)";
         this.nav();
         this.loginForm();
-    
     }
 }
