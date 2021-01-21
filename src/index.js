@@ -14,4 +14,8 @@ svgAnimation.getButton().addEventListener('click', () => {
   firstPages.init();
 });
 
-document.body.addEventListener("reloadGameEvent", () => firstPages.init());
+document.body.addEventListener("reloadGameEvent", () => {
+    document.querySelector(".game-place").innerHTML = "";
+    document.querySelector(".pause-btn-header").remove();
+    firstPages.nav();
+});
