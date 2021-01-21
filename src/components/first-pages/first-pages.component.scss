@@ -11,6 +11,8 @@ $elemColor: black;
 // general style
 .wrapper{
     display: flex;
+    background-image: url(../../assets/img/pngwing.com.png);
+    mix-blend-mode:hard-light ;
     flex-direction: column;
     min-height: 100vh;
     user-select: none;
@@ -22,6 +24,10 @@ $elemColor: black;
     font-weight: 600;
 
     .content{
+        border-right: 2px solid #00000048;
+        border-left: 2px solid #00000048;
+        background-image: url(../../assets/img/paper-cell.jpg);
+        background-position: center;
         display: flex;
         flex-wrap: wrap;
         width: 100%;
@@ -40,9 +46,7 @@ $elemColor: black;
     .header,
     .footer{
         display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 5vh;
+        min-height: 6vh;
         background-color: $bgHeaderFooter;
         user-select: none;
     }
@@ -57,6 +61,7 @@ $elemColor: black;
             font-size: 32px;
             line-height: 34px;
             width: 30%;
+            padding-left: 15px;
         }
         .pages{
             display: flex;
@@ -74,20 +79,16 @@ $elemColor: black;
             width: 30%;
 
             .user{
-                background-image: url(../../assets/img/profile.png);
-                background-position: center;
-                background-size: 90%;
-                background-repeat: no-repeat;
-                padding: 10px;
+                padding-right: 10px;
                 .user-img{
                     position: relative;
-                    height: 30px;
-                    width: 30px;
+                    height: 50px;
+                    width: 50px;
                     cursor: pointer;
                 }
             }
             .user:hover{
-                transform: scale(1.1);
+                // transform: scale(1.1);
             }
             .user:hover .user-img{
                 animation: logo-rotate 1 linear .8s;
@@ -98,7 +99,7 @@ $elemColor: black;
 
     .main{
         display: flex;
-        min-height: 80vh;
+        min-height: 88vh;
         align-items: center;
         background-color: $bgMain;
 
@@ -106,7 +107,6 @@ $elemColor: black;
             position: relative;
             justify-content: center;
             flex-wrap: nowrap;
-            min-height: 80vh;
 
             .game-menu{
                 position: absolute;
@@ -121,15 +121,13 @@ $elemColor: black;
             .game-menu {
                 display: flex;
                 width: 100%;
-                min-height: 80vh;
+                min-height: 88vh;
                 height: 100%;
                 justify-content: center;
                 align-items: center;
                 transition: .2s;
                 flex-wrap: wrap;
             }
-            
-            
         }   
     }
 
@@ -159,6 +157,10 @@ $elemColor: black;
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
+            li{
+                display: flex;
+                align-items: center;
+            }
             a{
                 display: flex;
                 justify-content: center;
