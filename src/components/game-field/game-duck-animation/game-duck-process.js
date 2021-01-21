@@ -53,6 +53,7 @@ function showModalWindow() {
         newProgressParameters();
         progress.level += 1;
     } else {
+        reloadGameFlag = true;
         modalWindowGameOver.showWindow();
         startGameProgressParameters(); // Обнуляем очки
     }
@@ -115,8 +116,7 @@ function gameProcess() {
                 isWin();
                 statStart();
             } // ! статистика
-            if (progress.level < 10) {
-                reloadGameFlag = true;
+            if (progress.level < 3) {
                 showCurrentStatistic(progress);
                 showModalWindow();
                 // progress.level+=1;
@@ -124,6 +124,7 @@ function gameProcess() {
             } else {
                 // конец игры
                 showCurrentStatistic(progress);
+                reloadGameFlag = true;
                 showModalWindow();
                 newDogParameters(); // для выхода собаки между уровнями
                 dogObj.go = false;
