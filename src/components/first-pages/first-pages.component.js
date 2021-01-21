@@ -63,6 +63,7 @@ export class FirstPages {
 
     nav() {
         this.title = "Game menu";
+        document.querySelector(".game-menu").style.zIndex = "25";
         document.querySelector(".pages").innerHTML = this.title;
         document.querySelector(".game-menu").insertAdjacentHTML("afterbegin", navPagesTemplate);
 
@@ -76,6 +77,7 @@ export class FirstPages {
             switch (e.target.id) {
                 case "start":
                     document.querySelector(".nav").remove();
+                    document.querySelector(".game-menu").style.zIndex = "10";
                     // default start level 1
                     return this.start(1);
 
