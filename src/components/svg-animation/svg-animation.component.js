@@ -45,6 +45,7 @@ export class SvgAnimation {
   removeAll() {
     const duck = document.querySelector('#svg-duck');
     if (duck) {
+      duck.style.visibility= "hidden";
       duck.remove();
     }
 
