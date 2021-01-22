@@ -26,7 +26,7 @@ c-371 0 -674 -3 -673 -7 1 -5 -3 -17 -9 -28 -11 -20 -8 -20 673 -17 l684 2 0
 172 -10 202 l0 56 505 0 c278 0 505 3 506 8 0 4 2 15 4 25 3 16 -26 17 -506
 17 l-509 0 0 56 c0 30 5 121 10 202 68 979 422 1860 1059 2632 121 147 452
 478 601 602 329 271 599 447 990 642 659 328 1420 514 2153 525 l97 1 0 -741z">
-    <animate id="pl-aim" attributeName="stroke-dashoffset" begin="0s" values="70685; 0" dur="4.5s" repeatCount="1"
+    <animate id="pl-aim" attributeName="stroke-dashoffset" begin="0s" values="70685; 0" dur="2s" repeatCount="1"
       fill="freeze" calcMode="linear">
     </animate>
   </path>

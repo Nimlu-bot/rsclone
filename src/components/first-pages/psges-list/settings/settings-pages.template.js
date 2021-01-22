@@ -8,12 +8,12 @@ export const settingsPagesTemplate = `
             <div class="audio-container">
                 <div class="volume-container">
                     <img class="audio-img" src="../../../../assets/img/sound.png">
-                    <input type="range" id="volume" min="0" max="2" value="1" step="0.01">
+                    <input type="range" id="volume" min="0" max="2" value="1" step="0.01" class="input-slider">
                 </div>
 
                 <div class="panner-container">
                     <span>L</span>
-                    <input type="range" id="panner" min="-1" max="1" value="0" step="0.01">
+                    <input type="range" id="panner" min="-1" max="1" value="0" step="0.01" class="input-slider">
                     <span>R</span>
                 </div>
             </div>
