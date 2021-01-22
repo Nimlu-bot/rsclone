@@ -53,7 +53,7 @@ export function duckMove(ctx, duck, ducks) {
         AudioProcessor.reset("quack");
         AudioProcessor.play("quack");
     }
-    if (soundCounter === 10) soundCounter = 0;
+    if (soundCounter === 20) soundCounter = 0;
     // отрисовка кадров
     duck.moveY += duck.randomPathChangeY;
     const duckImg = duck.moveX < duck.moveX + duck.randomPathChangeX ? duckImgR : duckImgL;
