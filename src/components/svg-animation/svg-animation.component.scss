@@ -8,54 +8,48 @@
 // }
 
 .duck-aim {
-  position: absolute;
-  top: 100px;
-  left: 50%;
-  transform: translate(-50%);
-  width: 179px;
-  height: 179px;
+  margin-top: 0;
+  margin-bottom: auto;
 }
 
-.duck {
-  position: relative;
-  top: -2px;
-  left: 22.5px;
-}
 
 .aim {
   position: fixed;
-  margin-bottom: -132px;
-  margin-left: 24px;
 }
 
 .animation-bullet{
-  position: absolute;
-  top: 259px;
-  right: 50%;
-  transform: translate(50%);
+  position: fixed;
+  top : 50%;
+  transform: translate(0, -15%);
 }
 
-.animation-button {
+.svg-animation-container {
   position: absolute;
-  top: 375px;
+  top: 50%;
   left: 50%;
-  transform: translate(-50%);
+  transform: translate(-50%, -50%);
+  height: 500px;
+  width: 559px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 #svg-button {
   font-size: 45px;
   font-weight: 900;
-  color: rgba(101, 81, 132, 1);
+  color: rgba(46, 13, 103, 1);
   font-family: 'Birch';
   pointer-events: none;
-  background-color: rgba(0, 0, 0 , 0.05);
+  background-color: rgba(0, 0, 0 , 0);
   letter-spacing: -0.1em;
 }
 
 #bullet-container {
-width: 300px;
-height: 113px;
-position: relative;
+  width: 300px;
+  height: 113px;
+  position: relative;
 }
 
 .bullet-empty {
@@ -95,7 +89,7 @@ position: relative;
   background-size: contain;
   background-repeat: no-repeat;
   left: -34%;
-  animation: ink 5s;
+  animation: ink 2.5s;
 }
 
 .end-loading {
