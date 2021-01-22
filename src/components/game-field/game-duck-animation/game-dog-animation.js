@@ -12,6 +12,7 @@ let dogIngrassX = 290;
 let dogInGrassY = 370;
 let frameCounter = 0;
 let frameCounterLaught = 0;
+const soundFlag = true;
 
 export const dog = {
     go: true,
@@ -77,15 +78,15 @@ export function dogMove(ctx, time, gameProcess, progress, showCurrentStatistic) 
                 ctx.drawImage(dogImg, 560 * frameNum, 410 * frameString, 560, 600, dogGoX, dogGoY - 20, 264, 270);
             }
             frameCounter += 1;
-            // soundFlag=true;
+            if (frameCounter === 2) AudioProcessor.play("bark"); // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             if (frameCounter > 2) {
                 // замерла с поднятыми ушами
                 if (frameNum < 2) frameNum += 1;
                 dogGoX += 10;
                 dogGoY -= 10;
+                // if (frameCounter === 20) AudioProcessor.play("bark"); // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                 if (frameCounter > 30) {
                     // прыгнула
-                    AudioProcessor.play("bark");
                     dog.jump = false;
                     dog.scaredDucks = true;
                     console.log("ducks scared");
