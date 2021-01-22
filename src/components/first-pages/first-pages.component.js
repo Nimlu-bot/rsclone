@@ -67,6 +67,10 @@ export class FirstPages {
         document.querySelector(".pages").innerHTML = this.title;
         document.querySelector(".game-menu").insertAdjacentHTML("afterbegin", navPagesTemplate);
 
+        setTimeout(()=>{
+            document.querySelector(".nav").style.top = "0%";
+        },0)
+
         // eslint-disable-next-line consistent-return
         document.querySelector(".nav").addEventListener("click", (e) => {
             if (document.querySelector(".login-wrapper")) {
@@ -125,8 +129,13 @@ export class FirstPages {
 
     level() {
         this.title = "level";
+        
         document.querySelector(".pages").innerHTML = this.title;
         document.querySelector(".game-menu").insertAdjacentHTML("afterbegin", levelPagesTemplate);
+        setTimeout(()=>{
+            document.querySelector(".level-wrap").style.bottom = "0%";
+        },0)
+        
         // eslint-disable-next-line consistent-return
         document.querySelector(".level-wrap").addEventListener("click", (e) => {
             if (e.target.id === "level-back") {
@@ -144,6 +153,9 @@ export class FirstPages {
         this.title = "settings";
         document.querySelector(".pages").innerHTML = this.title;
         document.querySelector(".game-menu").insertAdjacentHTML("afterbegin", settingsPagesTemplate);
+        setTimeout(()=>{
+            document.querySelector(".settings-wrap").style.left = "0%";
+        },0)
         // eslint-disable-next-line consistent-return
         document.querySelector(".settings-wrap").addEventListener("click", (e) => {
             if (e.target.id === "settings-back") {
@@ -170,6 +182,9 @@ export class FirstPages {
         // document.querySelector(".game-menu").insertAdjacentHTML("afterbegin", statisticPagesTemplate);
         const stat = new Statistics();
         stat.init();
+        setTimeout(()=>{
+            document.querySelector(".statistic-wrap").style.right = "0%";
+        },0)
         // eslint-disable-next-line consistent-return
         document.querySelector(".statistic-wrap").addEventListener("click", (e) => {
             if (e.target.id === "statistic-back") {

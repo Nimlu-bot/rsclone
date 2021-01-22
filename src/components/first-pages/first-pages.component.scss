@@ -1,44 +1,50 @@
-$bgHeaderFooter: rgba(67, 199, 188, 0);
-$bgMain:  rgba(50, 150, 142, 0);
-$textColor1: #2e0d67;
-$elemColor: black;
+
+$Color1: #2e0d67; //text color
+$Color: black; //footer, year color, bg git logo
 
 @font-face {
     font-family: Birch;
     src: url(../../assets/font/birchctt.ttf);
 }
 
-// general style
+body{
+    // заменить??
+    background-image: url(../../assets/img/tmb_209300_5513.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    user-select: none;
+}
+
 .wrapper{
     display: flex;
-    background-image: url(../../assets/img/pngwing.com1.png);
-    // background-size: cover;
-    mix-blend-mode:hard-light ;
     flex-direction: column;
     min-height: 100vh;
-    user-select: none;
+    max-width: 1200px;
+    margin: 0 auto;
+
     font-family: Birch;
-    color: $textColor1;
+    color: $Color1;
     font-size: 24px;
     line-height: 26px;
     letter-spacing: 2px;
     font-weight: 600;
 
+    background-image: url(../../assets/img/paper-cell.jpg);
+    background-position: center;
+    border-right: 2px solid #00000048;
+    border-left: 2px solid #00000048;
+        
     .content{
-        border-right: 2px solid #00000048;
-        border-left: 2px solid #00000048;
-        background-image: url(../../assets/img/paper-cell.jpg);
-        background-position: center;
         display: flex;
         flex-wrap: wrap;
         width: 100%;
-        max-width: 1200px;
-        margin: 0 auto;
     }
 
     .login-div{
         position: fixed;
-        top: 50px;
+        top: 70px;
         right: -100%;
         z-index: 10;
         transition:all .5s;
@@ -47,16 +53,13 @@ $elemColor: black;
     .header,
     .footer{
         display: flex;
-        min-height: 6vh;
-        background-color: $bgHeaderFooter;
-        user-select: none;
+        min-height: 10vh;
     }
     .header{
         .content{
             align-items: center;
             padding: 0 10px;
             justify-content: space-between;
-
         }
         h1{
             font-size: 32px;
@@ -77,10 +80,16 @@ $elemColor: black;
             flex-direction: row-reverse;
             align-items: center;
             justify-content: space-between;
+            height: 100%;
             width: 30%;
 
             .user{
-                padding-right: 10px;
+                height: 100%;
+                width:55px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-right: 10px;
                 .user-img{
                     position: relative;
                     height: 50px;
@@ -88,21 +97,17 @@ $elemColor: black;
                     cursor: pointer;
                 }
             }
-            .user:hover{
-                // transform: scale(1.1);
-            }
             .user:hover .user-img{
                 animation: logo-rotate 1 linear .8s;
             }
         }
-
     }
+
 
     .main{
         display: flex;
-        min-height: 88vh;
+        min-height: 80vh;
         align-items: center;
-        background-color: $bgMain;
 
         .content{
             position: relative;
@@ -110,24 +115,24 @@ $elemColor: black;
             flex-wrap: nowrap;
 
             .game-menu{
+                position: relative;
+            }
+            .game-place{
                 position: absolute;
-                justify-content: space-around;
-                align-items: center;
-                top: 0;
-                left: 0;
-                z-index: 10;
             }
 
             .game-place,
             .game-menu {
                 display: flex;
-                width: 100%;
-                min-height: 88vh;
-                height: 100%;
                 justify-content: center;
                 align-items: center;
-                transition: .2s;
                 flex-wrap: wrap;
+                overflow: hidden;
+
+                width: 100%;
+                min-height: 80vh;
+                top: 0;
+                left: 0;
             }
         }   
     }
@@ -151,7 +156,7 @@ $elemColor: black;
             height: 15px;
             width: 15px;
             margin-right: 5px;
-            background-color: $elemColor;
+            background-color: $Color;
             border-radius: 50%;
         }
         .autor{
@@ -167,7 +172,7 @@ $elemColor: black;
                 justify-content: center;
                 align-items: center;
                 margin: 10px;
-                color: $textColor1;
+                color: $Color1;
             }
             a:hover{    
                 transform: scale(0.95);
@@ -177,11 +182,12 @@ $elemColor: black;
         .year{
             display: flex;
             align-items: center;
-            color:$elemColor;
+            color: $Color;
         }
     }
 }
 
+// animation
 @keyframes logo-rotate{
     25%{
         transform: rotate(20deg);
@@ -197,3 +203,63 @@ $elemColor: black;
     }
 }
 
+@media all and (max-height: 697px) {
+    .wrapper{
+        font-size: 16px;
+        line-height: 18px;
+        h1{
+            font-size: 25px !important;
+            line-height: 28px !important;
+        }
+        .header{
+            .pause-btn-header{
+                padding: 5px 20px;
+                background-position: center;
+            }
+            .user-img{
+                height: 30px !important;
+                width: 30px !important;
+            }
+        }
+        .header,
+        .footer{
+            min-height: 5vh;
+        }
+        .main{
+            min-height: 90vh;
+            .content{
+                min-height: 90vh;
+                .game-place,
+                .game-menu{
+                    min-height: 90vh; 
+                }
+            }
+        }
+        .footer{
+            .autor{
+                a{
+                    font-size: 15px;
+                    line-height: 13px;
+                }
+            }
+        }
+    }
+}
+
+@media all and (max-width: 1150px) {
+    .wrapper{
+        .footer{
+            font-size: 18px;
+            line-height: 20px;
+        }
+    }
+}
+
+@media all and (max-width: 1150px) {
+    .wrapper{
+        .footer{
+            font-size: 16px;
+            line-height: 18px;
+        }
+    }
+}
