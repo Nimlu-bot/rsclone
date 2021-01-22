@@ -17,7 +17,8 @@ export const settingsPagesTemplate = `
                     <span>R</span>
                 </div>
             </div>
-        </li>
+				</li>
+				<li class="lang-container"><p class="settings-lang selected">EN</p><p class="settings-lang">RU</p><p class="settings-lang">BY</p></li>
         <li class="settings-btn game-btn" id="settings-back">back</li>
     </ul>
 </div>
