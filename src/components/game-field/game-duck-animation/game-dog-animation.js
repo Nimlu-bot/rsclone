@@ -77,14 +77,24 @@ export function dogMove(ctx, time, gameProcess, progress, showCurrentStatistic) 
             if (frameCounter < 7) {
                 ctx.drawImage(dogImg, 560 * frameNum, 410 * frameString, 560, 600, dogGoX, dogGoY - 20, 264, 270);
             }
+            if (frameCounter === 1) {
+                AudioProcessor.reset("bark");
+                AudioProcessor.play("bark");
+            }
+            if (frameCounter === 15) {
+                AudioProcessor.reset("bark");
+                AudioProcessor.play("bark");
+            }
+            if (frameCounter === 20) {
+                AudioProcessor.reset("bark");
+                AudioProcessor.play("bark");
+            }
             frameCounter += 1;
-            if (frameCounter === 2) AudioProcessor.play("bark"); // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             if (frameCounter > 2) {
                 // замерла с поднятыми ушами
                 if (frameNum < 2) frameNum += 1;
                 dogGoX += 10;
                 dogGoY -= 10;
-                // if (frameCounter === 20) AudioProcessor.play("bark"); // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                 if (frameCounter > 30) {
                     // прыгнула
                     dog.jump = false;
