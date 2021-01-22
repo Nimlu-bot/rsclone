@@ -45,6 +45,11 @@ export function dogMove(ctx, time, gameProcess, progress, showCurrentStatistic) 
     time.frameTime = 100;
     time.moveIntervalId = setInterval(() => gameProcess(/* level */), time.frameTime);
     if (dog.go) {
+        if (frameCounter === 0) showCurrentStatistic(progress);
+        if (frameCounter === 1) {
+            AudioProcessor.reset("intro");
+            AudioProcessor.play("intro");
+        }
         dogGoY = 410;
         ctx.globalCompositeOperation = "source-over";
         ctx.drawImage(dogImg, 560 * frameNum, 390 * frameString, 555, 410, dogGoX, dogGoY, 250, 180);
@@ -57,6 +62,9 @@ export function dogMove(ctx, time, gameProcess, progress, showCurrentStatistic) 
             frameNum === 3 ? (frameNum = 4) : (frameNum = 3);
         }
         frameCounter += 1;
+        if (frameCounter === 43) {
+            AudioProcessor.pause("intro");
+        }
         if (frameCounter === 45) {
             dog.go = false;
             dog.jump = true;
@@ -73,10 +81,25 @@ export function dogMove(ctx, time, gameProcess, progress, showCurrentStatistic) 
             ctx.globalCompositeOperation = "source-over";
             frameString = 1;
             if (frameCounter < 7) {
+                if (frameCounterLaught === 30) {
+                    AudioProcessor.reset("bark");
+                    AudioProcessor.play("bark");
+                }
                 ctx.drawImage(dogImg, 560 * frameNum, 410 * frameString, 560, 600, dogGoX, dogGoY - 20, 264, 270);
             }
+            if (frameCounter === 2) {
+                AudioProcessor.reset("bark");
+                AudioProcessor.play("bark");
+            }
+            if (frameCounter === 15) {
+                AudioProcessor.reset("bark");
+                AudioProcessor.play("bark");
+            }
+            if (frameCounter === 20) {
+                AudioProcessor.reset("bark");
+                AudioProcessor.play("bark");
+            }
             frameCounter += 1;
-            // soundFlag=true;
             if (frameCounter > 2) {
                 // замерла с поднятыми ушами
                 if (frameNum < 2) frameNum += 1;
@@ -84,7 +107,6 @@ export function dogMove(ctx, time, gameProcess, progress, showCurrentStatistic) 
                 dogGoY -= 10;
                 if (frameCounter > 30) {
                     // прыгнула
-                    AudioProcessor.play("bark");
                     dog.jump = false;
                     dog.scaredDucks = true;
                     console.log("ducks scared");
@@ -100,12 +122,19 @@ export function dogMove(ctx, time, gameProcess, progress, showCurrentStatistic) 
     if (dog.findOneDuck) {
         clearInterval(time.moveIntervalId);
         progress.bullet = 0;
-        showCurrentStatistic(progress);
+        if (frameCounter === 0) showCurrentStatistic(progress);
         time.frameTime = 40;
         time.moveIntervalId = setInterval(() => gameProcess(/* level */), time.frameTime);
         frameString = 0;
         frameNum = 5;
         if (frameCounter < 40) {
+            if (frameCounter === 2) {
+                AudioProcessor.reset("dogShowsDucks");
+                AudioProcessor.play("dogShowsDucks");
+            }
+            if (frameCounter === 38) {
+                AudioProcessor.pause("dogShowsDucks");
+            }
             ctx.drawImage(dogImg, 559 * frameNum, 402 * frameString, 520, 402, dogIngrassX, dogInGrassY, 220, 190);
         }
         if (frameCounter < 12) {
@@ -113,8 +142,15 @@ export function dogMove(ctx, time, gameProcess, progress, showCurrentStatistic) 
         } else {
             dogInGrassY += 2;
         }
-        // dogInGrassY-=1;
         frameCounter += 1;
+        if (frameCounter === 80) {
+            AudioProcessor.reset("bark");
+            AudioProcessor.play("bark");
+        }
+        if (frameCounter === 90) {
+            AudioProcessor.reset("bark");
+            AudioProcessor.play("bark");
+        }
         if (frameCounter === 120) {
             dog.findOneDuck = false;
             dogIngrassX = 290;
@@ -130,21 +166,36 @@ export function dogMove(ctx, time, gameProcess, progress, showCurrentStatistic) 
     if (dog.findTwoDucks) {
         clearInterval(time.moveIntervalId);
         progress.bullet = 0;
-        showCurrentStatistic(progress);
+        if (frameCounter === 0) showCurrentStatistic(progress);
         time.frameTime = 30;
         time.moveIntervalId = setInterval(() => gameProcess(/* level */), time.frameTime);
         frameString = 1;
         frameNum = 5;
-        if (frameCounter < 50) {
-            ctx.drawImage(dogImg, 540 * frameNum, 430 * frameString, 600, 590, dogIngrassX, dogInGrassY, 250, 230);
+        if (frameCounter < 48) {
+            if (frameCounter === 7) {
+                AudioProcessor.reset("dogShowsDucks");
+                AudioProcessor.play("dogShowsDucks");
+            }
+            if (frameCounter === 48) {
+                AudioProcessor.pause("dogShowsDucks");
+            }
+            ctx.drawImage(dogImg, 540 * frameNum, 430 * frameString, 600, 590, dogIngrassX, dogInGrassY - 10, 250, 240);
         }
-        if (frameCounter < 20) {
+        if (frameCounter < 19) {
             dogInGrassY -= 3;
         } else {
             dogInGrassY += 2;
         }
         frameCounter += 1;
-        if (frameCounter === 120) {
+        if (frameCounter === 90) {
+            AudioProcessor.reset("bark");
+            AudioProcessor.play("bark");
+        }
+        if (frameCounter === 105) {
+            AudioProcessor.reset("bark");
+            AudioProcessor.play("bark");
+        }
+        if (frameCounter === 118) {
             dog.findTwoDucks = false;
             dogIngrassX = 290;
             dogInGrassY = 370;
@@ -159,11 +210,15 @@ export function dogMove(ctx, time, gameProcess, progress, showCurrentStatistic) 
     if (dog.laught) {
         clearInterval(time.moveIntervalId);
         progress.bullet = 0;
-        showCurrentStatistic(progress);
+        if (frameCounterLaught === 0) showCurrentStatistic(progress);
         time.frameTime = 100;
         time.moveIntervalId = setInterval(() => gameProcess(/* level */), time.frameTime);
         frameString = 1;
         if (frameCounterLaught < 20) {
+            if (frameCounterLaught === 1) {
+                AudioProcessor.reset("dogLaughs");
+                AudioProcessor.play("dogLaughs");
+            }
             ctx.drawImage(
                 dogImg,
                 540 * frameNumLaught,
@@ -183,6 +238,17 @@ export function dogMove(ctx, time, gameProcess, progress, showCurrentStatistic) 
         }
         frameNumLaught === 3 ? (frameNumLaught = 4) : (frameNumLaught = 3);
         frameCounterLaught += 1;
+        if (frameCounterLaught === 21) {
+            AudioProcessor.pause("dogLaughs");
+        }
+        if (frameCounterLaught === 30) {
+            AudioProcessor.reset("bark");
+            AudioProcessor.play("bark");
+        }
+        if (frameCounterLaught === 38) {
+            AudioProcessor.reset("bark");
+            AudioProcessor.play("bark");
+        }
         if (frameCounterLaught === 50) {
             dog.laught = false;
             dogInGrassY = 370;

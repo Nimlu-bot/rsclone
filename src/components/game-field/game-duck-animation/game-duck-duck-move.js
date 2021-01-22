@@ -1,6 +1,7 @@
 /* eslint-disable no-param-reassign */
 import { showCurrentStatistic } from "./game-show-current-statistic-function";
 import { isRoundEnd, incDuckFlyAway, killed } from "../../../core/user-statistic";
+import AudioProcessor from "../../audio-processor/audio-processor.component";
 
 const duckImgR = document.createElement("img");
 duckImgR.src = "../../../assets/img/duckR.png";
@@ -10,6 +11,7 @@ const duckGoAw = document.createElement("img");
 duckGoAw.src = "../../../assets/img/duckGo.png";
 const duckShotImg = document.createElement("img");
 duckShotImg.src = "../../../assets/img/duckD.png"; // застреленная в 1м кадре, падающая во втором
+let soundCounter = 0;
 
 // функция для рандомного изменения направления
 export function randomWithoutZero() {
@@ -45,6 +47,13 @@ export function newDucksParameters(ducks) {
 
 // здесь только логика смены направления движения и отрисовка картинки с учетом направления
 export function duckMove(ctx, duck, ducks) {
+    // звук
+    soundCounter += 1;
+    if (soundCounter === 2) {
+        AudioProcessor.reset("quack");
+        AudioProcessor.play("quack");
+    }
+    if (soundCounter === 10) soundCounter = 0;
     // отрисовка кадров
     duck.moveY += duck.randomPathChangeY;
     const duckImg = duck.moveX < duck.moveX + duck.randomPathChangeX ? duckImgR : duckImgL;
@@ -115,6 +124,9 @@ export function duckFall(duck, ctx, progress) {
         console.log(`shotDucks ${progress.shotDucks}`);
         showCurrentStatistic(progress);
         progress.cruckDuck += 1;
+        AudioProcessor.pause("duckDeath");
+        AudioProcessor.reset("countingHits");
+        AudioProcessor.play("countingHits");
     }
 }
 
@@ -124,6 +136,10 @@ export function duckShot(duck, ctx, progress) {
         duck.fallX = duck.moveX;
     }
     if (duck.moveY !== null) duck.fallY = duck.moveY;
+    if (duck.timeAfterDeath === 2) {
+        AudioProcessor.reset("duckDeath");
+        AudioProcessor.play("duckDeath");
+    }
     duck.moveX = null;
     duck.moveY = null;
     if (duck.timeAfterDeath < 4) {

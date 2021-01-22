@@ -7,6 +7,7 @@ import { showCurrentStatistic } from "./game-show-current-statistic-function";
 import { ModalWindow } from "../../modal-window/modal-window.component";
 import { startGameStat, statStart, newRound, isBuletsEnd, isLevelEnd, isWin } from "../../../core/user-statistic";
 import { cloudsAdd } from "./game-clouds";
+import AudioProcessor from "../../audio-processor/audio-processor.component";
 
 const treeGrass = document.createElement("img");
 treeGrass.src = "../../../assets/img/background_full.png";
@@ -45,6 +46,7 @@ function pauseGame() {
     if (gameFlag && !pauseFlag) {
         pauseFlag = true;
         clearInterval(time.moveIntervalId);
+        AudioProcessor.pause("intro");
     }
 }
 
@@ -57,10 +59,11 @@ function showModalWindow() {
         modalWindowPerfect.showWindow();
         newProgressParameters();
         progress.level += 1;
-    } else {// при проигрыше
+    } else {
+        // при проигрыше
         reloadGameFlag = true;
         modalWindowGameOver.showWindow();
-        startGameProgressParameters(); 
+        startGameProgressParameters();
     }
     pauseGame();
 }
@@ -162,7 +165,11 @@ function shot(event) {
         default:
             break;
     }
-    if (gameFlag && !pauseFlag && progress.bullet > 0) progress.bullet -= 1;
+    if (gameFlag && !pauseFlag && progress.bullet > 0) {
+        progress.bullet -= 1;
+        AudioProcessor.reset("shot");
+        AudioProcessor.play("shot");
+    }
     isBuletsEnd(); // ! статистика
     if (progress.bullet > 0) {
         if (!pauseFlag) {
@@ -193,6 +200,7 @@ function shot(event) {
 
 export function startGame(context, lvl) {
     // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!export
+    AudioProcessor.pause("breakTime");
     showCurrentStatistic(progress);
     canvas = document.querySelector(".game-canvas");
     clearInterval(time.moveIntervalId);
@@ -213,7 +221,12 @@ export function startGame(context, lvl) {
         progress.ducksInCurrentLvl += 2;
     }
     const pauseBtn = document.querySelector(".pause-btn-header");
-    if (pauseBtn) pauseBtn.addEventListener("click", () => pauseGame());
+    if (pauseBtn)
+        pauseBtn.addEventListener("click", () => {
+            pauseGame();
+            AudioProcessor.reset("breakTime");
+            AudioProcessor.play("breakTime");
+        });
 
     time.moveIntervalId = setInterval(() => gameProcess(), time.frameTime);
 
