@@ -1,45 +1,45 @@
-$bgHeaderFooter: rgba(67, 199, 188, 0);
-$bgMain:  rgba(50, 150, 142, 0);
-$textColor1: #2e0d67;
-$elemColor: black;
+
+$Color1: #2e0d67; //text color
+$Color: black; //footer, year color, bg git logo
 
 @font-face {
     font-family: Birch;
     src: url(../../assets/font/birchctt.ttf);
 }
 
-// general style
 body{
-    // заменить
-    background-image: url(../../assets/img/pngwing.com.png);
+    // заменить??
+    background-image: url(../../assets/img/tmb_209300_5513.jpg);
     background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    user-select: none;
 }
 
 .wrapper{
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    user-select: none;
+    max-width: 1200px;
+    margin: 0 auto;
+
     font-family: Birch;
-    color: $textColor1;
+    color: $Color1;
     font-size: 24px;
     line-height: 26px;
     letter-spacing: 2px;
     font-weight: 600;
 
     background-image: url(../../assets/img/paper-cell.jpg);
-    max-width: 1200px;
-    margin: 0 auto;
     background-position: center;
     border-right: 2px solid #00000048;
     border-left: 2px solid #00000048;
         
-
     .content{
         display: flex;
         flex-wrap: wrap;
         width: 100%;
-        margin: 0 auto;
     }
 
     .login-div{
@@ -54,14 +54,12 @@ body{
     .footer{
         display: flex;
         min-height: 10vh;
-        background-color: $bgHeaderFooter;
     }
     .header{
         .content{
             align-items: center;
             padding: 0 10px;
             justify-content: space-between;
-
         }
         h1{
             font-size: 32px;
@@ -103,14 +101,13 @@ body{
                 animation: logo-rotate 1 linear .8s;
             }
         }
-
     }
+
 
     .main{
         display: flex;
         min-height: 80vh;
         align-items: center;
-        background-color: $bgMain;
 
         .content{
             position: relative;
@@ -118,23 +115,24 @@ body{
             flex-wrap: nowrap;
 
             .game-menu{
+                position: relative;
+            }
+            .game-place{
                 position: absolute;
-                justify-content: space-around;
-                align-items: center;
-                top: 0;
-                left: 0;
-                z-index: 10;
             }
 
             .game-place,
             .game-menu {
                 display: flex;
-                width: 100%;
-                min-height: 80vh;
                 justify-content: center;
                 align-items: center;
-                transition: .2s;
                 flex-wrap: wrap;
+                overflow: hidden;
+
+                width: 100%;
+                min-height: 80vh;
+                top: 0;
+                left: 0;
             }
         }   
     }
@@ -158,7 +156,7 @@ body{
             height: 15px;
             width: 15px;
             margin-right: 5px;
-            background-color: $elemColor;
+            background-color: $Color;
             border-radius: 50%;
         }
         .autor{
@@ -174,21 +172,20 @@ body{
                 justify-content: center;
                 align-items: center;
                 margin: 10px;
-                color: $textColor1;
+                color: $Color1;
             }
             a:hover{    
-                transform: scale(1.1);
+                transform: scale(0.95);
                 transition: all .3s ;
             }
         }
         .year{
             display: flex;
             align-items: center;
-            color:$elemColor;
+            color: $Color;
         }
     }
 }
-
 
 // animation
 @keyframes logo-rotate{

@@ -336,7 +336,7 @@ export const duckTemplate = () => {
 16 -5 18 -7 3 -13 19 -14 37 -1 19 -12 42 -25 54 -15 14 -18 22 -10 25 11 4
 10 6 0 13 -12 7 -11 9 1 9 13 0 13 1 0 10 -8 5 -10 10 -3 10 6 0 9 9 5 22 -3
 14 -2 19 6 14 8 -4 16 3 22 18 9 25 13 26 90 26 57 0 80 -4 81 -12z">
-      <animate id="pl-duck" attributeName="stroke-dashoffset" begin="0s" values="51127; 0" dur="2s" repeatCount="1"
+      <animate id="pl-duck" attributeName="stroke-dashoffset" begin="0s" values="51127; 0" dur="1.5s" repeatCount="1"
         fill="freeze" calcMode="linear">
       </animate>
     </path>

@@ -8,13 +8,13 @@ export class SvgAnimation {
 
   makeGood() {
     this.loadingBtn(document.body);
-    setTimeout(() => this.bullet(document.querySelector('.animation-bullet')), 1000);
-    setTimeout(() => this.duck(document.querySelector('.duck-aim')), 2000);
-    setTimeout(() => this.aim(document.querySelector('.duck-aim')), 2000);
+    this.bullet(document.querySelector('.animation-bullet'));
+    setTimeout(() => this.duck(document.querySelector('.duck-aim')), 1900);
+    setTimeout(() => this.aim(document.querySelector('.duck-aim')), 1900);
     setTimeout(() => {
       this.getButton().classList.add('end-loading');
       this.getButton().innerText='Ducks are detected! Click here...'
-    }, 5500);
+    }, 3500);
 
   }
 
@@ -43,32 +43,9 @@ export class SvgAnimation {
   }
 
   removeAll() {
-    const duck = document.querySelector('#svg-duck');
-    if (duck) {
-      duck.style.visibility= "hidden";
-      duck.remove();
-    }
-
-    const aim = document.querySelector('#svg-aim');
-    if (aim) {
-      aim.remove();
-    }
-
-    const text = document.querySelector('#svg-text');
-    if (text) {
-      text.remove();
-    }
-
-    const bullet = document.querySelector('#bullet-container');
-    if (bullet) {
-      bullet.remove();
-    }
-
-    const btn = this.getButton();
-    if (btn) {
-      btn.remove();
+    const svgContainer = document.querySelector('.svg-animation-container');
+    if (svgContainer) {
+      svgContainer.remove();
     }
   }
-
-
 }
