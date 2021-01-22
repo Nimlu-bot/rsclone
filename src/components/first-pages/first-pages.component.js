@@ -148,6 +148,14 @@ export class FirstPages {
                 document.querySelector(".settings-wrap").remove();
                 return this.nav();
             }
+            if (e.target.closest(".lang-container")) {
+                const langs = document.querySelector(".lang-container");
+                const selected = langs.querySelectorAll(".selected");
+
+                [...selected].forEach((el) => el.classList.remove("selected"));
+                e.target.classList.add("selected");
+                localStorage.setItem("currentLang", JSON.stringify(e.target.innerText));
+            }
         });
 
         this.volumeChanger();
