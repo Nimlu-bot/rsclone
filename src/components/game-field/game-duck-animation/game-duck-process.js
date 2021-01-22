@@ -87,7 +87,7 @@ function gameProcess() {
         ctx.globalCompositeOperation = "destination-over";
         if (ducks.duck1.timeAfterStartFly < Math.ceil(200 * (80 / time.frameTime)) && progress.bullet !== 0) {
             if (ducks.duck1.isLive) {
-                duckMove(ctx, ducks.duck1, ducks);
+                duckMove(ctx, ducks.duck1, ducks, progress);
                 ducks.duck1.timeAfterStartFly += 1;
             } else {
                 duckShot(ducks.duck1, ctx, progress);
@@ -98,7 +98,7 @@ function gameProcess() {
         if (ducks.duck2.timeAfterStartFly < Math.ceil(200 * (80 / time.frameTime)) && progress.bullet !== 0) {
             // если еще не закончилось время и пули
             if (ducks.duck2.isLive) {
-                duckMove(ctx, ducks.duck2, ducks);
+                duckMove(ctx, ducks.duck2, ducks, progress);
                 ducks.duck2.timeAfterStartFly += 1;
             } else {
                 duckShot(ducks.duck2, ctx, progress);

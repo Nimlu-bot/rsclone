@@ -46,14 +46,20 @@ export function newDucksParameters(ducks) {
 }
 
 // здесь только логика смены направления движения и отрисовка картинки с учетом направления
-export function duckMove(ctx, duck, ducks) {
+export function duckMove(ctx, duck, ducks, progress) {
     // звук
     soundCounter += 1;
     if (soundCounter === 2) {
         AudioProcessor.reset("quack");
         AudioProcessor.play("quack");
     }
-    if (soundCounter === 10) soundCounter = 0;
+    if (progress.level < 6 && soundCounter === 10) {
+        soundCounter = 0;
+    } else if (progress.level < 8 && soundCounter === 15) {
+        soundCounter = 0;
+    } else if (soundCounter === 40) {
+        soundCounter = 0;
+    }
     // отрисовка кадров
     duck.moveY += duck.randomPathChangeY;
     const duckImg = duck.moveX < duck.moveX + duck.randomPathChangeX ? duckImgR : duckImgL;
