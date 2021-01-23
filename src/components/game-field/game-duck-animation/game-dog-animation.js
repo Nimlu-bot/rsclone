@@ -1,8 +1,11 @@
 /* eslint-disable no-param-reassign */
 import AudioProcessor from "../../audio-processor/audio-processor.component";
 
-const dogImg = document.createElement("img");
-dogImg.src = "../../../assets/img/pes.png";
+const dogImgWhite = document.createElement("img");
+dogImgWhite.src = "../../../assets/img/pes.png";
+const dogImgNiger = document.createElement("img");
+dogImgNiger.src = "../../../assets/img/pes_niger.png";
+let dogImg;
 let frameNum = 0;
 let frameString = 0;
 let frameNumLaught = 3;
@@ -40,7 +43,8 @@ export function newDogParameters() {
     dog.scaredDucks = false;
 }
 
-export function dogMove(ctx, time, gameProcess, progress, showCurrentStatistic) {
+export function dogMove(ctx, time, gameProcess, progress, showCurrentStatistic, theme) {
+    theme === 2 ? (dogImg = dogImgNiger) : (dogImg = dogImgWhite);
     clearInterval(time.moveIntervalId);
     time.frameTime = 100;
     time.moveIntervalId = setInterval(() => gameProcess(/* level */), time.frameTime);
