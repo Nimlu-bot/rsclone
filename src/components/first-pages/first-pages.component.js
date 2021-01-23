@@ -5,6 +5,9 @@ import { navPagesTemplate } from "./psges-list/nav/nav-pages.template";
 import { levelPagesTemplate } from "./psges-list/level/level-pages.template";
 import { firstPagesTemplate } from "./first-pages.template";
 import { scoreTemplate } from "./psges-list/score/score.template";
+
+import {CondratsBro} from "./psges-list/congratsBro/congrats.component";// поздравление ----------Tonya тебе
+
 // Tonya
 import { GameField } from "../game-field/game-field.component";
 // Sergey
@@ -18,6 +21,7 @@ export class FirstPages {
         this.title = "Game menu";
         this.gameField = new GameField();
         this.login = new Login();
+        this.congrats = new CondratsBro();//-----------------------------------------------Tonya тебе
     }
 
     score() {
@@ -222,8 +226,10 @@ export class FirstPages {
 
     init() {
         document.body.insertAdjacentHTML("afterbegin", firstPagesTemplate);
-        // document.querySelector(".wrapper").style.backgroundImage = "url(../../assets/img/paper-cell.jpg)";
+        
         this.nav();
         this.loginForm();
+
+        this.congrats.init("Поздравляем ",1200);// congration--------------------------------Tonya тебе
     }
 }
