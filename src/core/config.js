@@ -63,7 +63,7 @@ const BY = {
     password: "Пароль",
     passwordLength: "*павінен быць не менш за 6 сімвалаў",
     signUp: "Рэгістрацыя",
-    erverError: "Памылка доступу да сервера",
+    serverError: "Памылка доступу да сервера",
     unknowError: "Невядомая памылка",
     invalidEmail: "Няправільны e-mail",
     IncorrectEmail: "Некарэктны email",

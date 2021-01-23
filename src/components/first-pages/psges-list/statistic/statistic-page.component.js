@@ -18,6 +18,8 @@ export class Statistics {
 
         const statTableBody = document.querySelector(".stat-table-body");
 
+        getStatEventHandler().then(this.getStat());
+
         document.querySelector(".stat-get").addEventListener("click", () => {
             const statArray = JSON.parse(localStorage.getItem("userStat")) || [];
             const sortedStatArr = statArray.sort((a, b) => b.score - a.score);
@@ -58,6 +60,21 @@ export class Statistics {
         document.querySelector(".stat-server-get").addEventListener("click", () => {
             getStatEventHandler();
         });
+    }
+
+    async getStat() {
+        const statArray = JSON.parse(localStorage.getItem("userStat")) || [];
+        const statTableBody = document.querySelector(".stat-table-body");
+        const sortedStatArr = statArray.sort((a, b) => b.score - a.score);
+
+        document.querySelectorAll(".stat-table-item").forEach((e) => e.remove());
+        let numberOfResult = null;
+        if (sortedStatArr.length < 10) {
+            numberOfResult = sortedStatArr.length;
+        } else numberOfResult = 10;
+        for (let i = 0; i < numberOfResult; i += 1) {
+            statTableBody.insertAdjacentHTML("beforeend", statisticsTemplate(sortedStatArr[i], i + 1));
+        }
     }
 }
 
