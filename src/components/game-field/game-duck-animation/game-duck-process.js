@@ -8,7 +8,9 @@ import { ModalWindow } from "../../modal-window/modal-window.component";
 import { startGameStat, statStart, newRound, isBuletsEnd, isLevelEnd, isWin } from "../../../core/user-statistic";
 import { cloudsAdd } from "./game-clouds";
 import AudioProcessor from "../../audio-processor/audio-processor.component";
+import { changeBkgrnd, changeAnimationColors } from "./game-theme";
 
+const themeNumb = 0;
 const treeGrass = document.createElement("img");
 treeGrass.src = "../../../assets/img/background_full.png";
 let ctx;
@@ -141,6 +143,7 @@ function gameProcess() {
         }
     }
     cloudsAdd(ctx, progress.level);
+    changeAnimationColors(ctx, themeNumb); // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 }
 
 function shot(event) {
@@ -201,6 +204,7 @@ function shot(event) {
 export function startGame(context, lvl) {
     // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!export
     AudioProcessor.pause("breakTime");
+    changeBkgrnd(themeNumb); // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     showCurrentStatistic(progress);
     canvas = document.querySelector(".game-canvas");
     clearInterval(time.moveIntervalId);
