@@ -25,7 +25,24 @@ const EN = {
     hits: "Shots",
     persent: "Persent",
     score: "Score",
-    statisticsTable: "Statistics table"
+		statisticsTable: "Statistics table",
+		gameMenu:"Game menu",
+		pause:"pause",
+		continue:"continue",
+		level:"level",
+		start:"Start",
+		levels:"Levels",
+		settings:"Settings",
+		statistic:"Statistic",
+		lvl:"lvl",
+		back:"back",
+		badHuntDude:"Bad hunt Dude!",
+		awesomeHunter:"Awesome hunter",
+		detecting:"Detecting...",
+		ducksAreDetected:"Ducks are detected! Click here..."
+
+
+
 };
 const RU = {
     Login: "Вход",
@@ -54,7 +71,21 @@ const RU = {
     hits: "Попаданий",
     persent: "Процент",
     score: "Очки",
-    statisticsTable: "Таблица статистики"
+		statisticsTable: "Таблица статистики",
+		gameMenu:"Игровое меню",
+		pause:"пауза",
+		continue:"продолжить",
+		level:"уровень",
+		start:"Старт",
+		levels:"Уровни",
+		settings:"Настройки",
+		statistic:"Статистика",
+		lvl:"Ур.",
+		back:"назад",
+		badHuntDude:"Плохая охота, чувак!",
+		awesomeHunter:"Замечательный охотник",
+		detecting:"Обнаружение ...",
+		ducksAreDetected:"Утки обнаружены! Нажмите здесь ..."
 };
 
 const BY = {
@@ -84,7 +115,21 @@ const BY = {
     hits: "Трапленняў",
     persent: "Адсоткаў",
     score: "Ачкі",
-    statisticsTable: "Табліца статыстыкі"
+		statisticsTable: "Табліца статыстыкі",
+		gameMenu:"Гульнёвае меню",
+		pause:"паўза",
+		continue:"працягваць",
+		level:"узровень",
+		start:"Старт",
+		levels:"Узроўні",
+		settings:"Настройкі",
+		statistic:"Статыстыка",
+		lvl:"узр.",
+		back:"назад",
+		badHuntDude:"Кепскае паляванне, чувак!",
+		awesomeHunter:"Выдатны паляўнічы",
+		detecting:"Выяўленне ...",
+		ducksAreDetected:"Качкі выяўленыя! Націсніце тут ..."
 };
 
 export const lang = {

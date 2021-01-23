@@ -1,28 +1,29 @@
 import "../../../../assets/css/general-style.scss";
 import "./statistic-pages.component.scss";
 
-import { lang, getLang } from "../../../../core/config";
+import { lang } from "../../../../core/config";
 
 export const statisticPagesTemplate = `
 <div class="statistic-wrap">
-
+<div class ="stat-message"></div>
     <div class="statistic-btn game-btn" id="statistic-back">back</div>
   
 </div>
 `;
 
-export const statisticTableHeader = `
+export const statisticTableHeader = (language) => {
+    return `
 <table border class="stat-table">
-	<caption>${lang[getLang()].statisticsTable} </caption>
+	<caption>${lang[language].statisticsTable} </caption>
 
 	<tbody class= "stat-table-body">
 		<tr class = "stat-table-header" >
 			<th>№</th>
-			<th>${lang[getLang()].time}</th>
-			<th>${lang[getLang()].ducks}</th>
-			<th>${lang[getLang()].hits}</th>
-			<th>${lang[getLang()].persent}</th>
-			<th>${lang[getLang()].score}</th>
+			<th>${lang[language].time}</th>
+			<th>${lang[language].ducks}</th>
+			<th>${lang[language].hits}</th>
+			<th>${lang[language].persent}</th>
+			<th>${lang[language].score}</th>
 		</tr>
 	</tbody>
 </table>
@@ -35,6 +36,7 @@ export const statisticTableHeader = `
 	 <div class = "game-btn stat-server-get hided">Получить с <br> сервера</div>
 </div>
 `;
+};
 
 export const statisticsTemplate = (userStat, number) => {
     const persent = Math.ceil((userStat.kills / userStat.ducks) * 100);
