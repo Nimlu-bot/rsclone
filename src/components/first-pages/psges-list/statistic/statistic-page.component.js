@@ -1,6 +1,12 @@
 // потом удалить
-import { statisticPagesTemplate, statisticsTemplate, statisticTableHeader } from "./statistic-pages.template";
-import { getLang, statEventHandler, getStatEventHandler, lang } from "../../../../core/index";
+import {
+    statisticPagesTemplate,
+    statisticsTemplate,
+    statisticTableHeader,
+    scoreTableHeader,
+    statisticSwicher
+} from "./statistic-pages.template";
+import { getLang, statEventHandler, getStatEventHandler, lang, getScoreEventHandler } from "../../../../core/index";
 
 export class Statistics {
     constructor() {
@@ -11,8 +17,9 @@ export class Statistics {
         const main = document.querySelector(".game-menu");
 
         main.insertAdjacentHTML("afterbegin", statisticPagesTemplate);
+        document.querySelector(".statistic-wrap").insertAdjacentHTML("afterbegin", statisticSwicher(this.lang));
 
-        const statWrapper = document.querySelector(".statistic-wrap");
+        const statWrapper = document.querySelector(".statistic-table-wrapper");
 
         statWrapper.insertAdjacentHTML("afterbegin", statisticTableHeader(this.lang));
 
@@ -62,7 +69,16 @@ export class Statistics {
         });
 
         document.querySelector(".stat-server-get").addEventListener("click", () => {
-            getStatEventHandler();
+            getScoreEventHandler();
+        });
+
+        document.querySelector(".stat-user").addEventListener("click", () => {
+            console.log("1");
+        });
+        document.querySelector(".stat-total").addEventListener("click", () => {
+            statWrapper.innerHTML = "";
+
+            console.log("2");
         });
     }
 

@@ -1,4 +1,5 @@
 $color-error-message: brown;
+$color-lines:#2e0d67;
 
 .statistic-wrap{
     display: flex;
@@ -10,23 +11,37 @@ $color-error-message: brown;
     padding: 80px 50px;
     border-radius: 5px;
     box-shadow: 0 0 10px black;
-
     position: relative;
     right: -90%;
-    transition: all .3s;
+		transition: all .3s;
 
-    .stat-table{
-        border: 1px solid black	;
-        width: 100%;
-        margin-bottom: auto;
+		.stat-switcher{
+			display: flex;
+			//border: 1px solid black;
+			flex-direction: row;
+			.stat-tab {
+				border: 1px solid $color-lines;
+				padding: 0 10px;
+				border-radius: 10px 10px 0 0 ;
+
+			}
 		}
-		.stat-message{
-			// width: 100%;
-			min-height: 20px;
-			margin: 0 auto ;
-			color: $color-error-message;
-			// border: 1px solid black ;
-		}
+
+.statistic-table-wrapper{
+	.stat-table{
+		border: 1px solid $color-lines	;
+		width: 100%;
+		margin-bottom: auto;
+}
+.stat-message{
+	// width: 100%;
+	min-height: 20px;
+	margin: 0 auto ;
+	color: $color-error-message;
+	// border: 1px solid black ;
+}
+}
+    
 
 
     .info-btn{
