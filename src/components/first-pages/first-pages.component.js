@@ -13,6 +13,7 @@ import { GameField } from "../game-field/game-field.component";
 // Sergey
 import { Login } from "../login/login.component";
 import { Statistics } from "./psges-list/statistic/statistic-page.component";
+import { setLang } from "../../core/config";
 // Andrey
 import AudioProcessor from "../audio-processor/audio-processor.component";
 
@@ -71,9 +72,9 @@ export class FirstPages {
         document.querySelector(".pages").innerHTML = this.title;
         document.querySelector(".game-menu").insertAdjacentHTML("afterbegin", navPagesTemplate);
 
-        setTimeout(()=>{
+        setTimeout(() => {
             document.querySelector(".nav").style.top = "0%";
-        },0)
+        }, 0);
 
         // eslint-disable-next-line consistent-return
         document.querySelector(".nav").addEventListener("click", (e) => {
@@ -133,13 +134,13 @@ export class FirstPages {
 
     level() {
         this.title = "level";
-        
+
         document.querySelector(".pages").innerHTML = this.title;
         document.querySelector(".game-menu").insertAdjacentHTML("afterbegin", levelPagesTemplate);
-        setTimeout(()=>{
+        setTimeout(() => {
             document.querySelector(".level-wrap").style.bottom = "0%";
-        },0)
-        
+        }, 0);
+
         // eslint-disable-next-line consistent-return
         document.querySelector(".level-wrap").addEventListener("click", (e) => {
             if (e.target.id === "level-back") {
@@ -157,9 +158,19 @@ export class FirstPages {
         this.title = "settings";
         document.querySelector(".pages").innerHTML = this.title;
         document.querySelector(".game-menu").insertAdjacentHTML("afterbegin", settingsPagesTemplate);
-        setTimeout(()=>{
+        setTimeout(() => {
             document.querySelector(".settings-wrap").style.left = "0%";
-        },0)
+        }, 0);
+        const currentLang = JSON.parse(localStorage.getItem("currentLang")) || "EN";
+        const langs = document.querySelectorAll(".settings-lang");
+        // const selected = langs.querySelectorAll(".selected");
+        [...langs].forEach((el) => {
+            if (el.innerText === currentLang) {
+                el.classList.add("selected");
+                setLang(currentLang);
+            }
+        });
+
         // eslint-disable-next-line consistent-return
         document.querySelector(".settings-wrap").addEventListener("click", (e) => {
             if (e.target.id === "settings-back") {
@@ -167,12 +178,13 @@ export class FirstPages {
                 return this.nav();
             }
             if (e.target.closest(".lang-container")) {
-                const langs = document.querySelector(".lang-container");
-                const selected = langs.querySelectorAll(".selected");
+                const langContainer = document.querySelector(".lang-container");
+                const selected = langContainer.querySelectorAll(".selected");
 
                 [...selected].forEach((el) => el.classList.remove("selected"));
                 e.target.classList.add("selected");
                 localStorage.setItem("currentLang", JSON.stringify(e.target.innerText));
+                setLang(e.target.innerText);
             }
         });
 
@@ -186,9 +198,9 @@ export class FirstPages {
         // document.querySelector(".game-menu").insertAdjacentHTML("afterbegin", statisticPagesTemplate);
         const stat = new Statistics();
         stat.init();
-        setTimeout(()=>{
+        setTimeout(() => {
             document.querySelector(".statistic-wrap").style.right = "0%";
-        },0)
+        }, 0);
         // eslint-disable-next-line consistent-return
         document.querySelector(".statistic-wrap").addEventListener("click", (e) => {
             if (e.target.id === "statistic-back") {

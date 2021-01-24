@@ -144,58 +144,60 @@ function gameProcess() {
 }
 
 function shot(event) {
-    // увеличиваем радиус попадания при увеличении скорости
-    let hittingError = 0;
-    switch (progress.level) {
-        case 6:
-            hittingError = 5;
-            break;
-        case 7:
-            hittingError = 10;
-            break;
-        case 8:
-            hittingError = 15;
-            break;
-        case 9:
-            hittingError = 18;
-            break;
-        case 10:
-            hittingError = 20;
-            break;
-        default:
-            break;
-    }
-    if (gameFlag && !pauseFlag && progress.bullet > 0) {
-        progress.bullet -= 1;
-        AudioProcessor.reset("shot");
-        AudioProcessor.play("shot");
-    }
-    isBuletsEnd(); // ! статистика
-    if (progress.bullet > 0) {
-        if (!pauseFlag) {
-            const clickX = event.clientX - canvas.getBoundingClientRect().left + 25;
-            const clickY = event.clientY - canvas.getBoundingClientRect().top + 25;
-            if (clickY < 480) {
-                if (
-                    clickX > ducks.duck1.moveX + 5 &&
-                    clickX < ducks.duck1.moveX + 101 - 5 + hittingError &&
-                    clickY > ducks.duck1.moveY + 5 &&
-                    clickY < ducks.duck1.moveY + 90 - 5 + hittingError
-                ) {
-                    ducks.duck1.isLive = false;
-                }
-                if (
-                    clickX > ducks.duck2.moveX + 5 &&
-                    clickX < ducks.duck2.moveX + 101 - 5 + hittingError &&
-                    clickY > ducks.duck2.moveY + 5 &&
-                    clickY < ducks.duck2.moveY + 90 - 5 + hittingError
-                ) {
-                    ducks.duck2.isLive = false;
+    if (ducks.duck1.isLive || ducks.duck2.isLive) {
+        // увеличиваем радиус попадания при увеличении скорости
+        let hittingError = 0;
+        switch (progress.level) {
+            case 6:
+                hittingError = 5;
+                break;
+            case 7:
+                hittingError = 10;
+                break;
+            case 8:
+                hittingError = 15;
+                break;
+            case 9:
+                hittingError = 18;
+                break;
+            case 10:
+                hittingError = 20;
+                break;
+            default:
+                break;
+        }
+        if (gameFlag && !pauseFlag && progress.bullet > 0) {
+            progress.bullet -= 1;
+            AudioProcessor.reset("shot");
+            AudioProcessor.play("shot");
+        }
+        isBuletsEnd(); // ! статистика
+        if (progress.bullet > 0) {
+            if (!pauseFlag) {
+                const clickX = event.clientX - canvas.getBoundingClientRect().left + 25;
+                const clickY = event.clientY - canvas.getBoundingClientRect().top + 25;
+                if (clickY < 480) {
+                    if (
+                        clickX > ducks.duck1.moveX + 5 &&
+                        clickX < ducks.duck1.moveX + 101 - 5 + hittingError &&
+                        clickY > ducks.duck1.moveY + 5 &&
+                        clickY < ducks.duck1.moveY + 90 - 5 + hittingError
+                    ) {
+                        ducks.duck1.isLive = false;
+                    }
+                    if (
+                        clickX > ducks.duck2.moveX + 5 &&
+                        clickX < ducks.duck2.moveX + 101 - 5 + hittingError &&
+                        clickY > ducks.duck2.moveY + 5 &&
+                        clickY < ducks.duck2.moveY + 90 - 5 + hittingError
+                    ) {
+                        ducks.duck2.isLive = false;
+                    }
                 }
             }
         }
+        showCurrentStatistic(progress);
     }
-    showCurrentStatistic(progress);
 }
 
 export function startGame(context, lvl) {
