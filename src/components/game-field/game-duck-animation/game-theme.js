@@ -8,6 +8,7 @@ export function changeBkgrnd(theme) {
             break;
         case 2:
         case 3:
+            document.body.style.backgroundImage = "url(../../../assets/img/mramor.png)";
             bkgrnd.style.background = "#000000";
             break;
         default:
