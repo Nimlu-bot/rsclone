@@ -1,3 +1,5 @@
+import { lang, getLang } from "../../../core/index";
+
 export function showCurrentStatistic(currentProgress) {
     const bulletBox = document.getElementById("bullet");
     const ducsBox = document.getElementById("point");
@@ -25,6 +27,6 @@ export function showCurrentStatistic(currentProgress) {
     }
     if (score) {
         score.innerHTML = currentProgress.score;
-        score.insertAdjacentHTML("beforeend", `<p>lvl ${currentProgress.level}</p>`);
+        score.insertAdjacentHTML("beforeend", `<p>${lang[getLang()].lvl} ${currentProgress.level}</p>`);
     }
 }

@@ -1,6 +1,6 @@
 // потом удалить
 import { statisticPagesTemplate, statisticsTemplate, statisticTableHeader } from "./statistic-pages.template";
-import { getLang, statEventHandler, getStatEventHandler } from "../../../../core/index";
+import { getLang, statEventHandler, getStatEventHandler, lang } from "../../../../core/index";
 
 export class Statistics {
     constructor() {
@@ -14,9 +14,15 @@ export class Statistics {
 
         const statWrapper = document.querySelector(".statistic-wrap");
 
-        statWrapper.insertAdjacentHTML("afterbegin", statisticTableHeader);
+        statWrapper.insertAdjacentHTML("afterbegin", statisticTableHeader(this.lang));
 
         const statTableBody = document.querySelector(".stat-table-body");
+        if (localStorage.getItem("userStat")) {
+            getStatEventHandler().then(this.getStat("userStat"));
+        } else {
+            document.querySelector(".stat-message").innerText = `${lang[getLang()].NoAuthorization}`;
+            this.getStat("currentUserStat");
+        }
 
         document.querySelector(".stat-get").addEventListener("click", () => {
             const statArray = JSON.parse(localStorage.getItem("userStat")) || [];
@@ -58,6 +64,21 @@ export class Statistics {
         document.querySelector(".stat-server-get").addEventListener("click", () => {
             getStatEventHandler();
         });
+    }
+
+    getStat(key) {
+        const statArray = JSON.parse(localStorage.getItem(key)) || [];
+        const statTableBody = document.querySelector(".stat-table-body");
+        const sortedStatArr = statArray.sort((a, b) => b.score - a.score);
+
+        document.querySelectorAll(".stat-table-item").forEach((e) => e.remove());
+        let numberOfResult = null;
+        if (sortedStatArr.length < 10) {
+            numberOfResult = sortedStatArr.length;
+        } else numberOfResult = 10;
+        for (let i = 0; i < numberOfResult; i += 1) {
+            statTableBody.insertAdjacentHTML("beforeend", statisticsTemplate(sortedStatArr[i], i + 1));
+        }
     }
 }
 
