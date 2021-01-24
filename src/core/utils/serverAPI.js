@@ -1,13 +1,6 @@
 const axios = require("axios");
 
-export function statEventHandler(stat) {
-    // const gameStat = {
-    //     time: new Date(),
-    //     ducks: Math.trunc(Math.random() * 100),
-    //     hits: Math.trunc(Math.random() * 100),
-    //     kills: Math.trunc(Math.random() * 100),
-    //     score: Math.trunc(Math.random() * 1000)
-    // };
+export function statEventHandler(stat) {  
     if (stat) {
         const token = localStorage.getItem("token");
         axios
@@ -25,7 +18,7 @@ export function statEventHandler(stat) {
     }
 }
 
-export function getStatEventHandler() {
+export async function getStatEventHandler() {
     const token = localStorage.getItem("token");
     axios
         .get("http://localhost:4000/api/stat", {

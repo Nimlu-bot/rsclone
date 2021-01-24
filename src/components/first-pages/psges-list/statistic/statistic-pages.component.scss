@@ -1,3 +1,5 @@
+$color-error-message: brown;
+
 .statistic-wrap{
     display: flex;
     flex-direction: column;
@@ -17,7 +19,14 @@
         border: 1px solid black	;
         width: 100%;
         margin-bottom: auto;
-    }
+		}
+		.stat-message{
+			// width: 100%;
+			min-height: 20px;
+			margin: 0 auto ;
+			color: $color-error-message;
+			// border: 1px solid black ;
+		}
 
 
     .info-btn{
@@ -32,4 +41,8 @@
             line-height: 10px;
         }
     }
+}
+.hided{
+	display: none;
+	visibility: hidden;
 }

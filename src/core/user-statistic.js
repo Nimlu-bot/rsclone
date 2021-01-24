@@ -1,5 +1,4 @@
-import {statEventHandler} from "./utils/serverAPI"
-
+import { statEventHandler, getStatEventHandler } from "./utils/serverAPI";
 
 const levelSettings = {
     ducksTogether: 2,
@@ -101,9 +100,9 @@ export function isLevelEnd() {
 }
 
 export function LooseOrEnd() {
-		saveStat();
-		statEventHandler(gameStat);
-		
+    saveStat();
+    statEventHandler(gameStat);
+    getStatEventHandler();
 }
 // при окончании уровня  т.е isLevelEnd вернул true
 export function isWin() {
