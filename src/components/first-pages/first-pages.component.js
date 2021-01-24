@@ -234,7 +234,6 @@ export class FirstPages {
 
     init() {
         document.body.insertAdjacentHTML("afterbegin", firstPagesTemplate);
-        // document.querySelector(".wrapper").style.backgroundImage = "url(../../assets/img/paper-cell.jpg)";
         this.nav();
         this.loginForm();
     }
