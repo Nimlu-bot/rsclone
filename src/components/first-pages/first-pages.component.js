@@ -10,8 +10,9 @@ import { GameField } from "../game-field/game-field.component";
 // Sergey
 import { Login } from "../login/login.component";
 import { Statistics } from "./psges-list/statistic/statistic-page.component";
-import { setLang } from "../../core/config";
+import { lang, getLang, setLang } from "../../core/config";
 // Andrey
+// import { ModalWindow } from "../modal-window/index";
 import AudioProcessor from "../audio-processor/audio-processor.component";
 
 export class FirstPages {
@@ -181,6 +182,11 @@ export class FirstPages {
                 e.target.classList.add("selected");
                 localStorage.setItem("currentLang", JSON.stringify(e.target.innerText));
                 setLang(e.target.innerText);
+                document.querySelector(".modal-game-over-h2").innerText = `${lang[getLang()].badHuntDude}`;
+                document.querySelector(".modal-perfect-h2").innerText = `${lang[getLang()].awesomeHunter}`;
+                document.querySelectorAll("#to-main").forEach((element) => {
+                    element.innerText = `${lang[getLang()].close}`;
+                });
             }
         });
 

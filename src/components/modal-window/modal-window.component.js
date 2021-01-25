@@ -1,4 +1,5 @@
 import { modalWindowTemplate } from "./modal-window.template";
+import { getLang } from "../../core/index";
 import AudioProcessor from "../audio-processor/audio-processor.component";
 
 export class ModalWindow {
@@ -7,7 +8,7 @@ export class ModalWindow {
   }
 
   createWindow() {
-    document.body.insertAdjacentHTML("afterBegin", modalWindowTemplate(this.windowName));
+    document.body.insertAdjacentHTML("afterBegin", modalWindowTemplate(this.windowName, getLang()));
 
     const coverDiv = document.createElement('div');
     coverDiv.id = 'cover-div';
@@ -27,7 +28,7 @@ export class ModalWindow {
     });
   }
 
-  showWindow() {
+  showWindow(dogTheme) {
     document.body.style.overflowY = 'hidden';
     if (this.windowName === 'game-over') {
       document.querySelector('.modal-game-over-hidden').style.display = 'block';
@@ -40,6 +41,38 @@ export class ModalWindow {
       document.querySelector('#cover-div').style.display = 'block';
       AudioProcessor.play('perfect');
     }
+
+    const dogsImagesOrigin = document.querySelectorAll('.dog-origin');
+    const dogsImagesInvert = document.querySelectorAll('.dog-invert');
+    const dogsImagesPencil = document.querySelectorAll('.dog-pencil');
+    const modalBackground = document.querySelectorAll('#modal-window');
+    const toMain = document.querySelectorAll('#to-main');
+    if (dogTheme === 0) {
+      dogsImagesOrigin.forEach((el) => {el.style.display = 'inline';});
+      dogsImagesInvert.forEach((el) => {el.style.display = 'none';});
+      dogsImagesPencil.forEach((el) => {el.style.display = 'none';});
+      modalBackground.forEach((el) => {`url('../../assets/img/paper-cell.jpg')`;})
+      modalBackground.forEach((el) => {el.style.background = ``})
+      toMain.forEach((el) => {el.style.background = `url('../../assets/img/paper-cell.jpg')`;})
+    } else if (dogTheme === 1) {
+      dogsImagesOrigin.forEach((el) => {el.style.display = 'none';});
+      dogsImagesInvert.forEach((el) => {el.style.display = 'none';});
+      dogsImagesPencil.forEach((el) => {el.style.display = 'inline';});
+      modalBackground.forEach((el) => {el.style.background = 'white'});
+      toMain.forEach((el) => {el.style.background = 'white'});
+    } else if (dogTheme === 2) {
+      dogsImagesOrigin.forEach((el) => {el.style.display = 'none';});
+      dogsImagesInvert.forEach((el) => {el.style.display = 'inline';});
+      dogsImagesPencil.forEach((el) => {el.style.display = 'none';});
+      modalBackground.forEach((el) => {el.style.background = 'black';});
+      toMain.forEach((el) => {el.style.background = 'black';});
+    } else if (dogTheme === 3) {
+      dogsImagesOrigin.forEach((el) => {el.style.display = 'none';});
+      dogsImagesInvert.forEach((el) => {el.style.display = 'none';});
+      dogsImagesPencil.forEach((el) => {el.style.display = 'inline';});
+      modalBackground.forEach((el) => {el.style.background = 'black';});
+      toMain.forEach((el) => {el.style.background = 'black';});
+    };
   }
 }
 

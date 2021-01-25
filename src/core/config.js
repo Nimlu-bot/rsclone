@@ -37,7 +37,8 @@ const EN = {
 		lvl:"lvl",
 		back:"back",
 		badHuntDude:"Bad hunt Dude!",
-		awesomeHunter:"Awesome hunter",
+        awesomeHunter:"Awesome hunter",
+        close: "Close",
 		detecting:"Detecting...",
 		ducksAreDetected:"Ducks are detected! Click here..."
 
@@ -83,7 +84,8 @@ const RU = {
 		lvl:"Ур.",
 		back:"назад",
 		badHuntDude:"Плохая охота, чувак!",
-		awesomeHunter:"Замечательный охотник",
+        awesomeHunter:"Замечательный охотник",
+        close: "Закрыть",
 		detecting:"Обнаружение ...",
 		ducksAreDetected:"Утки обнаружены! Нажмите здесь ..."
 };
@@ -127,7 +129,8 @@ const BY = {
 		lvl:"узр.",
 		back:"назад",
 		badHuntDude:"Кепскае паляванне, чувак!",
-		awesomeHunter:"Выдатны паляўнічы",
+        awesomeHunter:"Выдатны паляўнічы",
+        close: "Зачынiць",
 		detecting:"Выяўленне ...",
 		ducksAreDetected:"Качкі выяўленыя! Націсніце тут ..."
 };
