@@ -14,7 +14,7 @@ export const statisticPagesTemplate = `
 export const statisticSwicher = (language) => {
     return `
 	<div class = "stat-switcher">
-	<div class= "stat-user stat-tab">${lang[language].statisticsTable}</div>
+	<div class= "stat-user stat-tab selected">${lang[language].statisticsTable}</div>
 	<div class = "stat-total stat-tab">${lang[language].totalScoreTable}</div>
 	</div>
 	`;

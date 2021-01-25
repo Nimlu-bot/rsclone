@@ -5,7 +5,7 @@ $color-lines:#2e0d67;
 .statistic-wrap{
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
+    justify-content: space-between;
     background-image: url(../../../../assets/img/paper-cell.jpg);
     height: 80%; 
     background-position: center;
@@ -25,7 +25,7 @@ $color-lines:#2e0d67;
 				border-bottom: none;
 				padding: 0 10px;
 				border-radius: 10px 10px 0 0 ;
-
+				
 			}
 		}
 
@@ -63,4 +63,7 @@ $color-lines:#2e0d67;
 .hided{
 	display: none;
 	visibility: hidden;
+}
+.selected{
+	color: brown;
 }

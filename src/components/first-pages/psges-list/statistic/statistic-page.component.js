@@ -24,7 +24,9 @@ export class Statistics {
         const main = document.querySelector(".game-menu");
 
         main.insertAdjacentHTML("afterbegin", statisticPagesTemplate);
-        document.querySelector(".statistic-wrap").insertAdjacentHTML("afterbegin", statisticSwicher(this.lang));
+        document
+            .querySelector(".statistic-table-wrapper")
+            .insertAdjacentHTML("afterbegin", statisticSwicher(this.lang));
 
         const statWrapper = document.querySelector(".statistic-table-wrapper");
 
@@ -71,13 +73,19 @@ export class Statistics {
         //         getScoreEventHandler();
         //     });
 
-        document.querySelector(".stat-user").addEventListener("click", () => {
-            statWrapper.innerHTML = "";
+        document.querySelector(".stat-user").addEventListener("click", (e) => {
+            document.querySelector(".stat-table").remove();
             this.setUserTable(statWrapper);
+            const tabs = document.querySelectorAll(".stat-tab");
+            [...tabs].forEach((el) => el.classList.remove("selected"));
+            e.target.classList.add("selected");
         });
-        document.querySelector(".stat-total").addEventListener("click", () => {
-            statWrapper.innerHTML = "";
+        document.querySelector(".stat-total").addEventListener("click", (e) => {
+            document.querySelector(".stat-table").remove();
             this.setScoreTable(statWrapper);
+            const tabs = document.querySelectorAll(".stat-tab");
+            [...tabs].forEach((el) => el.classList.remove("selected"));
+            e.target.classList.add("selected");
         });
     }
 
@@ -97,7 +105,7 @@ export class Statistics {
     }
 
     setUserTable(item) {
-        item.insertAdjacentHTML("afterbegin", statisticTableHeader(this.lang));
+        item.insertAdjacentHTML("beforeend", statisticTableHeader(this.lang));
 
         if (localStorage.getItem("userStat")) {
             getStatEventHandler().then(this.getStat("userStat", statisticsTemplate));
@@ -108,7 +116,7 @@ export class Statistics {
     }
 
     setScoreTable(item) {
-        item.insertAdjacentHTML("afterbegin", scoreTableHeader(this.lang));
+        item.insertAdjacentHTML("beforeend", scoreTableHeader(this.lang));
 
         if (localStorage.getItem("totalScores")) {
             getScoreEventHandler().then(this.getStat("totalScores", scoreTemplate));
@@ -116,6 +124,13 @@ export class Statistics {
             document.querySelector(".stat-message").innerText = `${lang[getLang()].NoAuthorization}`;
         }
     }
+
+    // select(tab) {
+    //     const tabs = document.querySelectorAll(".stat-tab");
+    //     // const selected = langs.querySelectorAll(".selected");
+    //     [...tabs].forEach((el) => el.classList.remove("selected"));
+    //     e.target.classList.add("selected");
+    // }
 }
 
 // -----------
