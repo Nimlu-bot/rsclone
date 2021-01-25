@@ -8,7 +8,6 @@ export const statisticPagesTemplate = `
 <div class = "statistic-table-wrapper"></div>
 <div class ="stat-message"></div>
     <div class="statistic-btn game-btn" id="statistic-back">back</div>
-  
 </div>
 `;
 
@@ -35,16 +34,16 @@ export const statisticTableHeader = (language) => {
 		</tr>
 	</tbody>
 </table>
-
-<div class="info-btn">
-	 <div class = "game-btn stat-get hided">Получить</div>
-	 <div class = "game-btn stat-set hided">Записать</div>
-	 <div class = "game-btn stat-reset">Удалить</div>
-	 <div class = "game-btn stat-server-set hided ">Записать на <br> сервер</div>
-	 <div class = "game-btn stat-server-get">Получить с <br> сервера</div>
-</div>
 `;
 };
+
+// {<div class="info-btn">
+// 	 <div class = "game-btn stat-get hided">Получить</div>
+// 	 <div class = "game-btn stat-set hided">Записать</div>
+// 	 <div class = "game-btn stat-reset">Удалить</div>
+// 	 <div class = "game-btn stat-server-set hided ">Записать на <br> сервер</div>
+// 	 <div class = "game-btn stat-server-get">Получить с <br> сервера</div>
+// </div>}
 
 export const statisticsTemplate = (userStat, number) => {
     const persent = Math.ceil((userStat.kills / userStat.ducks) * 100);
@@ -56,14 +55,10 @@ export const statisticsTemplate = (userStat, number) => {
         hour: "2-digit",
         minute: "2-digit"
     };
-
     return `
-		
-	 <tr class = "stat-table-item" ><td>${number}</td><td>${date.toLocaleString("ru-RU", options)}</td><td>${
+		<tr class = "stat-table-item" ><td>${number}</td><td>${date.toLocaleString("ru-RU", options)}</td><td>${
         userStat.ducks
     }</td><td>${userStat.kills}</td><td>${persent}</td><td>${userStat.score}</td></tr>
-	 
-		
 `;
 };
 
@@ -78,5 +73,10 @@ export const scoreTableHeader = (language) => {
 	</tr>
 </tbody>
 </table>
+`;
+};
+export const scoreTemplate = (serverStat, number) => {
+    return `
+ <tr class = "stat-table-item" ><td>${number}</td><td>${serverStat.email}</td><td>${serverStat.score}</td></tr>
 `;
 };

@@ -33,32 +33,24 @@ export async function getStatEventHandler() {
             }
         );
 }
-async function sortUsers(array) {
-    const el = {};
-    const rez = [];
-    for (let i = 0; i < array.length; i += 1) {
-        el[i].email = array[i].email;
-        console.log(el);
-        // rez.push(el);
-    }
-}
 
 export async function getScoreEventHandler() {
     axios.get("http://localhost:4000/api/stat/all").then(
         (response) => {
             const scores = response.data;
             for (let i = 0; i < scores.length; i += 1) {
+                // eslint-disable-next-line no-underscore-dangle
                 delete scores[i]._id;
                 if (scores[i].stats.length !== 0) {
                     const maxScoreItem = scores[i].stats.reduce((acc, el) => (acc.score > el.score ? acc : el));
-                    console.log(maxScoreItem.score);
-                    scores[i].total = maxScoreItem.score;
-                    console.log(scores[i]);
+                    // console.log(maxScoreItem.score);
+                    scores[i].score = maxScoreItem.score;
+                    // console.log(scores[i]);
                 } else {
-                    scores[i].total = 0;
+                    scores[i].score = 0;
                 }
             }
-            console.log(scores);
+            // console.log(scores);
             localStorage.setItem("totalScores", JSON.stringify(scores));
         },
 

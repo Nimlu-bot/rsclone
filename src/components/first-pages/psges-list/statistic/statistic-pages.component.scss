@@ -1,6 +1,7 @@
 $color-error-message: brown;
 $color-lines:#2e0d67;
 
+
 .statistic-wrap{
     display: flex;
     flex-direction: column;
@@ -20,7 +21,8 @@ $color-lines:#2e0d67;
 			//border: 1px solid black;
 			flex-direction: row;
 			.stat-tab {
-				border: 1px solid $color-lines;
+				border: 2px solid $color-lines;
+				border-bottom: none;
 				padding: 0 10px;
 				border-radius: 10px 10px 0 0 ;
 
@@ -28,8 +30,9 @@ $color-lines:#2e0d67;
 		}
 
 .statistic-table-wrapper{
+	min-width: 546px;
 	.stat-table{
-		border: 1px solid $color-lines	;
+		border: 2px solid $color-lines	;
 		width: 100%;
 		margin-bottom: auto;
 }
