@@ -1,10 +1,12 @@
 /* eslint-disable no-param-reassign */
 import AudioProcessor from "../../audio-processor/audio-processor.component";
 
-const dogImgWhite = document.createElement("img");
-dogImgWhite.src = "../../../assets/img/pes.png";
-const dogImgNiger = document.createElement("img");
-dogImgNiger.src = "../../../assets/img/pes_niger.png";
+const dogImgBlue = document.createElement("img");
+dogImgBlue.src = "../../../assets/img/pes.png";
+const dogImgChB = document.createElement("img");
+dogImgChB.src = "../../../assets/img/pesChB.png";
+const dogImgInv = document.createElement("img");
+dogImgInv.src = "../../../assets/img/pesInv.png";
 let dogImg;
 let frameNum = 0;
 let frameString = 0;
@@ -44,12 +46,18 @@ export function newDogParameters() {
 }
 
 export function dogMove(ctx, time, gameProcess, progress, showCurrentStatistic, theme) {
-    theme === 2 ? (dogImg = dogImgNiger) : (dogImg = dogImgWhite);
+    if (theme === 0) {
+        dogImg = dogImgBlue;
+    } else if (theme === 1 || theme === 3) {
+        dogImg = dogImgChB;
+    } else if (theme === 2) {
+        dogImg = dogImgInv;
+    }
     clearInterval(time.moveIntervalId);
     time.frameTime = 100;
     time.moveIntervalId = setInterval(() => gameProcess(/* level */), time.frameTime);
     if (dog.go) {
-        if (frameCounter === 0) showCurrentStatistic(progress);
+        if (frameCounter === 0) showCurrentStatistic(progress, theme);
         if (frameCounter === 1) {
             AudioProcessor.reset("intro");
             AudioProcessor.play("intro");
@@ -126,7 +134,7 @@ export function dogMove(ctx, time, gameProcess, progress, showCurrentStatistic, 
     if (dog.findOneDuck) {
         clearInterval(time.moveIntervalId);
         progress.bullet = 0;
-        if (frameCounter === 0) showCurrentStatistic(progress);
+        if (frameCounter === 0) showCurrentStatistic(progress, theme);
         time.frameTime = 40;
         time.moveIntervalId = setInterval(() => gameProcess(/* level */), time.frameTime);
         frameString = 0;
@@ -163,14 +171,14 @@ export function dogMove(ctx, time, gameProcess, progress, showCurrentStatistic, 
             frameString = 0;
             frameNum = 0;
             progress.bullet = 4;
-            showCurrentStatistic(progress);
+            showCurrentStatistic(progress, theme);
             dog.scaredDucks = true;
         }
     }
     if (dog.findTwoDucks) {
         clearInterval(time.moveIntervalId);
         progress.bullet = 0;
-        if (frameCounter === 0) showCurrentStatistic(progress);
+        if (frameCounter === 0) showCurrentStatistic(progress, theme);
         time.frameTime = 30;
         time.moveIntervalId = setInterval(() => gameProcess(/* level */), time.frameTime);
         frameString = 1;
@@ -207,14 +215,14 @@ export function dogMove(ctx, time, gameProcess, progress, showCurrentStatistic, 
             frameString = 0;
             frameNum = 0;
             progress.bullet = 4;
-            showCurrentStatistic(progress);
+            showCurrentStatistic(progress, theme);
             dog.scaredDucks = true;
         }
     }
     if (dog.laught) {
         clearInterval(time.moveIntervalId);
         progress.bullet = 0;
-        if (frameCounterLaught === 0) showCurrentStatistic(progress);
+        if (frameCounterLaught === 0) showCurrentStatistic(progress, theme);
         time.frameTime = 100;
         time.moveIntervalId = setInterval(() => gameProcess(/* level */), time.frameTime);
         frameString = 1;
@@ -259,7 +267,7 @@ export function dogMove(ctx, time, gameProcess, progress, showCurrentStatistic, 
             frameString = 0;
             frameCounterLaught = 0;
             progress.bullet = 4;
-            showCurrentStatistic(progress);
+            showCurrentStatistic(progress, theme);
             dog.scaredDucks = true;
         }
     }
