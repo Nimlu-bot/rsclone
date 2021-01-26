@@ -1,6 +1,9 @@
 export function changeBkgrnd(theme) {
     const bkgrnd = document.querySelector(".game-field-main");
     switch (theme) {
+        case 0:
+            bkgrnd.style.background = "none";
+            break;
         case 1:
             bkgrnd.style.background = "#FFFFFF";
             break;
