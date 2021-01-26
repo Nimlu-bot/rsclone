@@ -1,7 +1,10 @@
 import { loginTemplate } from "./login.template";
 import { validateEmail, lang, getLang, getStatEventHandler } from "../../core/index";
+import { API_BASE_URL_PROD, API_BASE_URL_DEV, CURRENT_API } from "../../core/constants";
 
 const axios = require("axios");
+
+const apiUrl = CURRENT_API === "dev" ? API_BASE_URL_DEV : API_BASE_URL_PROD;
 
 export class Login {
     constructor() {
@@ -30,7 +33,7 @@ export class Login {
                 password: password.value
             };
 
-            axios.post("http://localhost:4000/api/auth/login", user).then(
+            axios.post(`${apiUrl}/api/auth/login`, user).then(
                 (response) => {
                     console.log(response);
 
@@ -40,20 +43,20 @@ export class Login {
                 },
                 (error) => {
                     const message = document.querySelector(".login-message");
-                    message.innerText = "";
-                    message.style.color = "red";
+                    // message.innerText = "";
+                    // message.style.color = "red";
                     if (error.response) {
-                        message.innerText = lang[getLang()][error.response.data.message];
+                        // message.innerText = lang[getLang()][error.response.data.message];
                     } else if (error.request) {
-                        message.innerText = lang[getLang()].serverError; // 'Server access error'
+                        // message.innerText = lang[getLang()].serverError; // 'Server access error'
                     } else {
-                        message.innerText = lang[getLang()].unknowError; // 'Unknow Error'
+                        // message.innerText = lang[getLang()].unknowError; // 'Unknow Error'
                     }
                 }
             );
         } else {
             const message = document.querySelector(".login-message");
-            message.innerText = lang[getLang()].invalidEmail;
+            // message.innerText = lang[getLang()].invalidEmail;
         }
     }
 
@@ -68,29 +71,29 @@ export class Login {
                 password: password.value
             };
 
-            axios.post("http://localhost:4000/api/auth/register", user).then(
+            axios.post(`${apiUrl}/api/auth/register`, user).then(
                 (response) => {
                     const message = document.querySelector(".login-message");
-                    message.style.color = "green";
-                    message.innerText = lang[getLang()][response.data.message];
+                    // message.style.color = "green";
+                    // message.innerText = lang[getLang()][response.data.message];
                     console.log(response);
                 },
                 (error) => {
                     const message = document.querySelector(".login-message");
-                    message.innerText = "";
-                    message.style.color = "red";
+                    // message.innerText = "";
+                    //  message.style.color = "red";
                     if (error.response) {
-                        message.innerText = lang[getLang()][error.response.data.message];
+                        // message.innerText = lang[getLang()][error.response.data.message];
                     } else if (error.request) {
-                        message.innerText = lang[getLang()].serverError; // 'Server access error'
+                        //  message.innerText = lang[getLang()].serverError; // 'Server access error'
                     } else {
-                        message.innerText = lang[getLang()].unknowError; // 'Unknow Error'
+                        // message.innerText = lang[getLang()].unknowError; // 'Unknow Error'
                     }
                 }
             );
         } else {
             const message = document.querySelector(".login-message");
-            message.innerText = lang[getLang()].invalidEmail;
+            // message.innerText = lang[getLang()].invalidEmail;
         }
     }
 }

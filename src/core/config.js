@@ -175,3 +175,5 @@ export function getLang() {
 export function setLang(l) {
     currentLang = l;
 }
+
+

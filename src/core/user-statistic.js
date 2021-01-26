@@ -33,13 +33,13 @@ function saveStat() {
 }
 
 // начало игры
-export function startGameStat() {
+export function startGameStat(lvl) {
     gameStat.time = 0;
     gameStat.ducks = 0;
     gameStat.hits = 0;
     gameStat.kills = 0;
     gameStat.score = 0;
-    lvlStat.currentLvl = 1;
+    lvlStat.currentLvl = lvl;
 }
 
 // начало уровня
@@ -130,3 +130,4 @@ export function killed() {
     lvlStat.score += 8 + 2 * lvlStat.currentLvl;
     lvlStat.duckKillPerLevel += 1;
 }
+
