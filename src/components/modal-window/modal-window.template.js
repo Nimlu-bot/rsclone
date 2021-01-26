@@ -11,7 +11,7 @@ import { lang } from '../../core/index';
 export const modalWindowTemplate = (name, language) => {
   const gameOverWindow = `
   <div id="modal-window" class="modal-game-over-hidden">
-    <h2 class="modal-game-over-h2">${lang[language].badHuntDude}</h2>
+    <h2 class="modal-game-over-h2 modal-for-theme">${lang[language].badHuntDude}</h2>
     <img src=${gameOverDog} alt="dog" class="dog-origin">
     <img src=${gameOverDogInvert} alt="dog" class="dog-invert">
     <img src=${gameOverDogPencil} alt="dog" class="dog-pencil">
@@ -21,7 +21,7 @@ export const modalWindowTemplate = (name, language) => {
 
   const perfectWindow = `
   <div id="modal-window" class="modal-perfect-hidden">
-    <h2 class="modal-perfect-h2">${lang[language].awesomeHunter}</h2>
+    <h2 class="modal-perfect-h2 modal-for-theme">${lang[language].awesomeHunter}</h2>
     <img src=${perfectDog} alt="dog" class="dog-origin">
     <img src=${perfectDogInvert} alt="dog" class="dog-invert">
     <img src=${perfectDogPencil} alt="dog" class="dog-pencil">

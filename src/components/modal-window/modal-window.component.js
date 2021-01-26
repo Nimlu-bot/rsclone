@@ -47,6 +47,7 @@ export class ModalWindow {
     const dogsImagesPencil = document.querySelectorAll('.dog-pencil');
     const modalBackground = document.querySelectorAll('#modal-window');
     const toMain = document.querySelectorAll('#to-main');
+    const modalTittle = document.querySelectorAll('.modal-for-theme');
     if (dogTheme === 0) {
       dogsImagesOrigin.forEach((el) => {el.style.display = 'inline';});
       dogsImagesInvert.forEach((el) => {el.style.display = 'none';});
@@ -56,7 +57,8 @@ export class ModalWindow {
         el.style.background = `url('../../assets/img/paper-cell.jpg')`;
         el.style.border = `2px solid rgba(101, 81, 132, 1)`;
         el.style.color = `rgba(46, 13, 103, 1)`;
-      })
+      });
+      modalTittle.forEach((el) => {el.style.color = `rgba(46, 13, 103, 1)`});
     } else if (dogTheme === 1) {
       dogsImagesOrigin.forEach((el) => {el.style.display = 'none';});
       dogsImagesInvert.forEach((el) => {el.style.display = 'none';});
@@ -65,8 +67,9 @@ export class ModalWindow {
       toMain.forEach((el) => {
         el.style.background = 'white';
         el.style.border = `2px solid #555555`;
-        el.style. color = '#555555';
+        el.style.color = '#555555';
       });
+      modalTittle.forEach((el) => {el.style.color = '#555555'});
     } else if (dogTheme === 2) {
       dogsImagesOrigin.forEach((el) => {el.style.display = 'none';});
       dogsImagesInvert.forEach((el) => {el.style.display = 'inline';});
@@ -77,6 +80,7 @@ export class ModalWindow {
         el.style.border = `2px solid #b0b0b0`;
         el.style. color = '#b0b0b0';
       });
+      modalTittle.forEach((el) => {el.style.color = '#b0b0b0';})
     } else if (dogTheme === 3) {
       dogsImagesOrigin.forEach((el) => {el.style.display = 'none';});
       dogsImagesInvert.forEach((el) => {el.style.display = 'none';});
@@ -87,6 +91,7 @@ export class ModalWindow {
         el.style.border = `2px solid #555555`;
         el.style. color = '#555555';
       });
+      modalTittle.forEach((el) => {el.style.color = '#555555'});
     };
   }
 }
