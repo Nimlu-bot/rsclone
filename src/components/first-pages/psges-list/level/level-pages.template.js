@@ -1,20 +1,21 @@
 import "../../../../assets/css/general-style.scss";
 import "./level-pages.component.scss";
+import { getLang } from "../../../../core/index";
 
-export const levelPagesTemplate = `
+export const levelPagesTemplate = (lang)=>`
 <div class="level-wrap">
     <ul>
-        <li class="game-btn level-btn" value="1">level 1</li>
-        <li class="game-btn level-btn" value="2">level 2</li>
-        <li class="game-btn level-btn" value="3">level 3</li>
-        <li class="game-btn level-btn" value="4">level 4</li>
-        <li class="game-btn level-btn" value="5">level 5</li>
-        <li class="game-btn level-btn" value="6">level 6</li>
-        <li class="game-btn level-btn" value="7">level 7</li>
-        <li class="game-btn level-btn" value="8">level 8</li>
-        <li class="game-btn level-btn" value="9">level 9</li>
-        <li class="game-btn level-btn" value="10">level 10</li>
-        <li class="game-btn level-btn" id="level-back">back</li>
+        <li class="game-btn level-btn" value="1">${lang[getLang()].level} 1</li>
+        <li class="game-btn level-btn" value="2">${lang[getLang()].level} 2</li>
+        <li class="game-btn level-btn" value="3">${lang[getLang()].level} 3</li>
+        <li class="game-btn level-btn" value="4">${lang[getLang()].level} 4</li>
+        <li class="game-btn level-btn" value="5">${lang[getLang()].level} 5</li>
+        <li class="game-btn level-btn" value="6">${lang[getLang()].level} 6</li>
+        <li class="game-btn level-btn" value="7">${lang[getLang()].level} 7</li>
+        <li class="game-btn level-btn" value="8">${lang[getLang()].level} 8</li>
+        <li class="game-btn level-btn" value="9">${lang[getLang()].level} 9</li>
+        <li class="game-btn level-btn" value="10">${lang[getLang()].level} 10</li>
+        <li class="game-btn level-btn" id="level-back">${lang[getLang()].back}</li>
     </ul>
 </div>
 `;

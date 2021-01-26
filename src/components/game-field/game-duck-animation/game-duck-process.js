@@ -1,5 +1,5 @@
 /* eslint-disable no-use-before-define */
-import { CANVAS_HEIGTH, CANVAS_WIDTH } from "../../../core/index";
+import { CANVAS_HEIGTH, CANVAS_WIDTH, lang, getLang } from "../../../core/index";
 import { duckMove, duckGoAway, duckShot, newDucksParameters } from "./game-duck-duck-move";
 import { ducksForGame, progressForGame, newProgressParameters, startGameProgressParameters } from "./game-constants";
 import { dog, dogMove, newDogParameters } from "./game-dog-animation";
@@ -11,7 +11,7 @@ import AudioProcessor from "../../audio-processor/audio-processor.component";
 import { changeBkgrnd } from "./game-theme";
 import { CondratsBro } from "../../first-pages/psges-list/congratsBro/congrats.component";
 
-let themeNumb = 0;
+const themeNumb = 0;
 const treeGrass = document.createElement("img");
 treeGrass.src = "../../../assets/img/background_full.png";
 const treeGrassChB = document.createElement("img");
@@ -159,7 +159,7 @@ function gameProcess() {
                     showModalWindow();
                 } else {
                     // победа
-                    congradituate.init("Поздравляем", progress.score);
+                    congradituate.init(`${lang[getLang()].win}`, progress.score); // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                     document.body.dispatchEvent(reloadEvent);
                 }
                 startGameProgressParameters();
@@ -231,7 +231,6 @@ function shot(event) {
 }
 
 export function startGame(context, lvl) {
-    themeNumb = localStorage.getItem("theme") ? +localStorage.getItem("theme") : 0;
     AudioProcessor.pause("breakTime");
     changeBkgrnd(themeNumb); // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     showCurrentStatistic(progress, themeNumb);

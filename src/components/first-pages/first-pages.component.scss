@@ -13,7 +13,6 @@ body{
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-
     user-select: none;
 }
 
@@ -31,6 +30,9 @@ body{
     letter-spacing: 2px;
     font-weight: 600;
 
+    position: relative;
+    overflow: hidden;
+
     background-image: url(../../assets/img/paper-cell.jpg);
     background-position: center;
     border-right: 2px solid #00000048;
@@ -43,7 +45,7 @@ body{
     }
 
     .login-div{
-        position: fixed;
+        position: absolute;
         top: 70px;
         right: -100%;
         z-index: 30;
@@ -146,12 +148,14 @@ body{
         .logo-box{
             display: flex;
             align-items: center;
+            border-radius: 9px;
+
              .rs-logo{
                 height: 30px;
                 width: 50px;
             }
         }
-       
+
         .git-logo{
             height: 15px;
             width: 15px;
@@ -167,20 +171,21 @@ body{
                 display: flex;
                 align-items: center;
             }
-            a{
+            .autor-Name{
                 display: flex;
                 justify-content: center;
                 align-items: center;
                 margin: 10px;
                 color: $Color1;
             }
-            a:hover{    
+            .autor-Name:hover{    
                 transform: scale(0.95);
                 transition: all .3s ;
             }
         }
         .year{
             display: flex;
+            padding: 0px 2px;
             align-items: center;
             color: $Color;
         }

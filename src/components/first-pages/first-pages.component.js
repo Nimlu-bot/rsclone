@@ -1,3 +1,6 @@
+/* eslint-disable no-return-assign */
+/* eslint-disable no-param-reassign */
+/* eslint-disable consistent-return */
 import { backBtnHeader, continueBtn } from "./psges-list/backBtnHeader/backBtnHeader.template";
 
 import { settingsPagesTemplate } from "./psges-list/settings/settings-pages.template";
@@ -11,6 +14,7 @@ import { GameField } from "../game-field/game-field.component";
 import { Login } from "../login/login.component";
 import { Statistics } from "./psges-list/statistic/statistic-page.component";
 import { setLang } from "../../core/config";
+import { lang, getLang } from "../../core/index";
 // Andrey
 import AudioProcessor from "../audio-processor/audio-processor.component";
 
@@ -22,7 +26,7 @@ export class FirstPages {
     }
 
     score() {
-        document.querySelector(".game-field-main").insertAdjacentHTML("afterbegin", scoreTemplate);
+        document.querySelector(".game-field-main").insertAdjacentHTML("afterbegin", scoreTemplate(lang));
         setTimeout(() => {
             document.querySelector(".bullet-box").style.left = "0%";
             document.querySelector(".point-box").style.left = "0%";
@@ -32,7 +36,6 @@ export class FirstPages {
 
     loginForm() {
         document.querySelector(".user").addEventListener("click", () => {
-          
             if (!document.querySelector(".game-field-main")) {
                 if (!document.querySelector(".login-div")) {
                     const divElem = document.createElement("div");
@@ -40,16 +43,16 @@ export class FirstPages {
                     setTimeout(() => {
                         divElem.style.right = "5px";
                     }, 100);
-                    document.querySelector(".wrapper").append(divElem);
+                    document.querySelector(".game-menu").append(divElem);
                     this.login.init();
-                    document.querySelectorAll(".login-button").forEach(elem => {
+                    document.querySelectorAll(".login-button").forEach((elem) => {
                         elem.addEventListener("click", () => {
                             setTimeout(() => {
                                 document.querySelector(".login-div").remove();
                             }, 100);
                             document.querySelector(".login-div").style.right = "-100%";
-                        })
-                    })
+                        });
+                    });
                 } else {
                     setTimeout(() => {
                         document.querySelector(".login-div").remove();
@@ -60,7 +63,6 @@ export class FirstPages {
                 return false;
             }
         });
-
     }
 
     continue() {
@@ -76,10 +78,29 @@ export class FirstPages {
         this.title = "Game menu";
         document.querySelector(".game-menu").style.zIndex = "25";
         document.querySelector(".pages").innerHTML = this.title;
-        document.querySelector(".game-menu").insertAdjacentHTML("afterbegin", navPagesTemplate);
+        document.querySelector(".game-menu").insertAdjacentHTML("afterbegin",
+                navPagesTemplate(lang
+                    // ,
+                    // ,
+                    // ,
+                    // 
+                )
+            );
+    
 
         setTimeout(() => {
             document.querySelector(".nav").style.top = "0%";
+            if(localStorage.getItem('theme') === '1'){
+                document.querySelector(".nav").style.backgroundImage = "none";
+                document.querySelector(".nav").style.backgroundColor = "#fff";
+            } else if (localStorage.getItem('theme') === '3'){
+                document.querySelector(".nav").style.backgroundImage = "none";
+                document.querySelector(".nav").style.backgroundColor = "rgb(28, 28, 28)";
+                document.querySelector(".nav").style.color = "#fff"
+
+            } else {
+                document.querySelector(".nav").style.backgroundImage = "../../assets/img/paper-cell.jpg";
+            }
         }, 0);
 
         // eslint-disable-next-line consistent-return
@@ -113,13 +134,13 @@ export class FirstPages {
             }
         });
         if (document.querySelector(".game-field-main")) {
-            document.querySelector(".nav").insertAdjacentHTML("afterbegin", continueBtn);
+            document.querySelector(".nav").insertAdjacentHTML("afterbegin", continueBtn(lang[getLang()].continue));
             this.continue();
         }
     }
 
     pauseBtn() {
-        document.querySelector(".user").insertAdjacentHTML("afterend", backBtnHeader);
+        document.querySelector(".user").insertAdjacentHTML("afterend", backBtnHeader(lang[getLang()].pause));
         document.querySelector(".pause-btn-header").addEventListener("click", () => {
             document.querySelector(".game-menu").style.zIndex = "25";
             document.querySelector(".pause-btn-header").remove();
@@ -142,9 +163,20 @@ export class FirstPages {
         this.title = "level";
 
         document.querySelector(".pages").innerHTML = this.title;
-        document.querySelector(".game-menu").insertAdjacentHTML("afterbegin", levelPagesTemplate);
+        document.querySelector(".game-menu").insertAdjacentHTML("afterbegin", levelPagesTemplate(lang));
         setTimeout(() => {
             document.querySelector(".level-wrap").style.bottom = "0%";
+            if(localStorage.getItem('theme') === '1'){
+                document.querySelector(".level-wrap").style.backgroundImage = "none";
+                document.querySelector(".level-wrap").style.backgroundColor = "#fff";
+            } else if (localStorage.getItem('theme') === '3'){
+                document.querySelector(".level-wrap").style.backgroundImage = "none";
+                document.querySelector(".level-wrap").style.backgroundColor = "rgb(28, 28, 28)";
+                document.querySelector(".level-wrap").style.color = "#fff";
+
+            } else {
+                document.querySelector(".level-wrap").style.backgroundImage = "../../assets/img/paper-cell.jpg";
+            }
         }, 0);
 
         // eslint-disable-next-line consistent-return
@@ -160,38 +192,77 @@ export class FirstPages {
         });
     }
 
-    style_0(){
+    style0(){
         document.querySelector(".wrapper").setAttribute("style","none");
-    };
-    style_1(){
+        document.querySelector(".game-place").style.filter = "none";
+        document.querySelector(".game-menu").style.filter = "none"  
+        document.querySelector(".logo-box").style.backgroundColor = "transparent";
+        document.querySelector(".year").style.color = "#2e0d67";
+        document.querySelector(".user-img").src="../../assets/img/troll.png"
+        document.querySelector(".header").style.color = "#2e0d67";
+        document.querySelectorAll(".autor-Name").forEach((elem) => {
+            elem.style.color = "#2e0d67";
+        })
+    }
+
+    style1(){
+        document.querySelector(".wrapper").setAttribute("style","none");
         document.querySelector(".wrapper").style.backgroundColor = "#FAF0E6";
         document.querySelector(".wrapper").style.backgroundImage = "none";
         document.querySelector(".wrapper").style.filter = "grayscale(100%)";
+
+        document.querySelector(".game-place").style.filter = "none";
+        document.querySelector(".game-menu").style.filter = "none"
+
+        document.querySelector(".logo-box").style.backgroundColor = "transparent";
+        document.querySelector(".year").style.color = "#2e0d67";
+        document.querySelector(".user-img").src="../../assets/img/troll.png"
+        document.querySelector(".header").style.color = "#2e0d67";
+        document.querySelectorAll(".autor-Name").forEach((elem) => elem.style.color = "#2e0d67")
     }
-    style_2(){
-        console.log("first 2")
-        document.querySelector(".wrapper").style.backgroundImage = "../../assets/img/paper-cell.jpg";
+
+    style2(){
         document.querySelector(".wrapper").setAttribute("style","none");
+        document.querySelector(".wrapper").style.backgroundImage = "../../assets/img/paper-cell.jpg";
         document.querySelector(".wrapper").style.filter = "invert(100%)";
+
+        document.querySelector(".game-place").style.filter = "none";
+        document.querySelector(".game-menu").style.filter = "none"
+
+        document.querySelector(".logo-box").style.backgroundColor = "transparent";
+        document.querySelector(".year").style.color = "#2e0d67";
+        document.querySelector(".user-img").src="../../assets/img/troll.png"
+        document.querySelector(".header").style.color = "#2e0d67";
+        document.querySelectorAll(".autor-Name").forEach((elem) => elem.style.color = "#2e0d67")
     }
-    style_3(){
-        document.querySelector(".wrapper").style.backgroundColor = "#000";
+
+    style3(){
+        document.querySelector(".wrapper").setAttribute("style","none");
+        document.querySelector(".wrapper").style.backgroundColor = "#1C1C1C";
         document.querySelector(".wrapper").style.backgroundImage = "none";
-        document.querySelector(".wrapper").style.color = "#fff";
-        document.querySelector(".wrapper").style.filter = "saturate(30%)";
+        document.querySelector(".wrapper").style.filter = "saturate(10%)";        
+
+// rs logo
+        document.querySelector(".logo-box").style.backgroundColor = "#fff";
+// header & footer text 
+        document.querySelector(".year").style.color = "#fff";
+        document.querySelector(".header").style.color = "#fff";
+        document.querySelectorAll(".autor-Name").forEach((elem) => elem.style.color = "#fff")
+// troll face 
+        document.querySelector(".user-img").src="../../assets/img/trollinv.png"
     }
 
     styleForTheme(){
         if(localStorage.getItem('theme') === null){
-            this.style_0();
+            this.style0();
         } else if (`${localStorage.getItem('theme')}` === "0"){
-            this.style_0();
+            this.style0();
         } else if (`${localStorage.getItem('theme')}` === "1"){
-            this.style_1();
+            this.style1();
         } else if(`${localStorage.getItem('theme')}` === "2"){
-            this.style_2();
+            this.style2();
         } else if(`${localStorage.getItem('theme')}` === "3"){
-            this.style_3();
+            this.style3();
         }
     }
 
@@ -211,10 +282,10 @@ export class FirstPages {
                     elem.setAttribute("checked", "true");
                     this.styleForTheme();
                 }
-            })
+            });
         }
 
-        document.getElementsByName('input_theme').forEach(elem => {
+        document.getElementsByName("input_theme").forEach((elem) => {
             elem.addEventListener("click", () => {
                 localStorage.setItem('theme',elem.value)
                 this.styleForTheme();
@@ -224,12 +295,23 @@ export class FirstPages {
     }
 
     settings() {
-        
         this.title = "settings";
         document.querySelector(".pages").innerHTML = this.title;
-        document.querySelector(".game-menu").insertAdjacentHTML("afterbegin", settingsPagesTemplate);
+        document.querySelector(".game-menu").insertAdjacentHTML("afterbegin", settingsPagesTemplate(lang));
         setTimeout(() => {
             document.querySelector(".settings-wrap").style.left = "0%";
+            if(localStorage.getItem('theme') === '1'){
+                document.querySelector(".settings-wrap").style.backgroundImage = "none";
+                document.querySelector(".settings-wrap").style.backgroundColor = "#fff";
+            } else if (localStorage.getItem('theme') === '3'){
+                document.querySelector(".settings-wrap").style.backgroundImage = "none";
+                document.querySelector(".settings-wrap").style.backgroundColor = "rgb(28, 28, 28)";
+                document.querySelector(".settings-wrap").style.color = "#fff";
+
+            } else {
+                document.querySelector(".settings-wrap").style.backgroundImage = "../../assets/img/paper-cell.jpg";
+            }
+            
         }, 0);
         const currentLang = JSON.parse(localStorage.getItem("currentLang")) || "EN";
         const langs = document.querySelectorAll(".settings-lang");
@@ -271,6 +353,18 @@ export class FirstPages {
         stat.init();
         setTimeout(() => {
             document.querySelector(".statistic-wrap").style.right = "0%";
+
+            if(localStorage.getItem('theme') === '1'){
+                document.querySelector(".statistic-wrap").style.backgroundImage = "none";
+                document.querySelector(".statistic-wrap").style.backgroundColor = "#fff";
+            } else if (localStorage.getItem('theme') === '3'){
+                document.querySelector(".statistic-wrap").style.backgroundImage = "none";
+                document.querySelector(".statistic-wrap").style.backgroundColor = "rgb(28, 28, 28)";
+                document.querySelector(".statistic-wrap").style.color = "#fff";
+
+            }else {
+                document.querySelector(".statistic-wrap").style.backgroundImage = "../../assets/img/paper-cell.jpg";
+            }
         }, 0);
         // eslint-disable-next-line consistent-return
         document.querySelector(".statistic-wrap").addEventListener("click", (e) => {
@@ -308,7 +402,7 @@ export class FirstPages {
     }
 
     init() {
-        document.body.insertAdjacentHTML("afterbegin", firstPagesTemplate);
+        document.body.insertAdjacentHTML("afterbegin", firstPagesTemplate(lang));
         this.nav();
         this.loginForm();
         this.styleForTheme();
