@@ -7,14 +7,8 @@ cloud2.src = "../../../assets/img/cloud2.png";
 const cloud3 = document.createElement("img");
 cloud3.src = "../../../assets/img/cloud3.png";
 
-const cloud4 = document.createElement("img");
-cloud4.src = "../../../assets/img/cloud4.png";
-
 const cloud5 = document.createElement("img");
 cloud5.src = "../../../assets/img/cloud5.png";
-
-const cloud6 = document.createElement("img");
-cloud6.src = "../../../assets/img/cloud6.png";
 
 const cloud7 = document.createElement("img");
 cloud7.src = "../../../assets/img/cloud7.png";

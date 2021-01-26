@@ -11,6 +11,7 @@ const duckGoAw = document.createElement("img");
 duckGoAw.src = "../../../assets/img/duckGo.png";
 const duckShotImg = document.createElement("img");
 duckShotImg.src = "../../../assets/img/duckD.png"; // застреленная в 1м кадре, падающая во втором
+
 let soundCounter = 0;
 
 // функция для рандомного изменения направления
@@ -109,7 +110,6 @@ export function duckGoAway(duck, ctx, progress) {
         incDuckFlyAway(); // ! статистика
         isRoundEnd(); // ! статистика
         progress.goAwayducks += 1;
-        console.log(`goAwayducks ${progress.goAwayducks}`);
         showCurrentStatistic(progress);
         progress.cruckDuck += 1;
     }
@@ -127,7 +127,6 @@ export function duckFall(duck, ctx, progress) {
         progress.currentTwoShotDucks += 1;
         progress.shotDucks += 1;
         progress.score += 8 + 2 * progress.level;
-        console.log(`shotDucks ${progress.shotDucks}`);
         showCurrentStatistic(progress);
         progress.cruckDuck += 1;
         AudioProcessor.pause("duckDeath");

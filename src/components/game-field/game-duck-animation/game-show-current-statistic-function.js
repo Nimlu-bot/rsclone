@@ -27,6 +27,6 @@ export function showCurrentStatistic(currentProgress) {
     }
     if (score) {
         score.innerHTML = currentProgress.score;
-        score.insertAdjacentHTML("beforeend", `<p>${lang[getLang()].lvl} ${currentProgress.level}</p>`);
+        score.insertAdjacentHTML("beforeend", `<p>${lang[getLang()].lvl}${currentProgress.level}</p>`);
     }
 }

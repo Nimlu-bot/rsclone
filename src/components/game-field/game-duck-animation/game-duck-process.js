@@ -1,5 +1,5 @@
 /* eslint-disable no-use-before-define */
-import { CANVAS_HEIGTH, CANVAS_WIDTH } from "../../../core/index";
+import { CANVAS_HEIGTH, CANVAS_WIDTH, lang, getLang } from "../../../core/index";
 import { duckMove, duckGoAway, duckShot, newDucksParameters } from "./game-duck-duck-move";
 import { ducksForGame, progressForGame, newProgressParameters, startGameProgressParameters } from "./game-constants";
 import { dog, dogMove, newDogParameters } from "./game-dog-animation";
@@ -8,6 +8,7 @@ import { ModalWindow } from "../../modal-window/modal-window.component";
 import { startGameStat, statStart, newRound, isBuletsEnd, isLevelEnd, isWin } from "../../../core/user-statistic";
 import { cloudsAdd } from "./game-clouds";
 import AudioProcessor from "../../audio-processor/audio-processor.component";
+import { CondratsBro } from "../../first-pages/psges-list/congratsBro/congrats.component";
 
 const treeGrass = document.createElement("img");
 treeGrass.src = "../../../assets/img/background_full.png";
@@ -53,6 +54,7 @@ function pauseGame() {
 // для модальных окон
 const modalWindowPerfect = new ModalWindow("perfect");
 const modalWindowGameOver = new ModalWindow("game-over");
+const congradituate = new CondratsBro();
 
 function showModalWindow() {
     if (progress.shotDucks >= 5) {
@@ -85,6 +87,7 @@ function gameProcess() {
         time.frameTime = 85 - progress.level * 7;
         time.moveIntervalId = setInterval(() => gameProcess(), time.frameTime);
         ctx.globalCompositeOperation = "destination-over";
+        // если еще не закончилось время и пули
         if (ducks.duck1.timeAfterStartFly < Math.ceil(200 * (80 / time.frameTime)) && progress.bullet !== 0) {
             if (ducks.duck1.isLive) {
                 duckMove(ctx, ducks.duck1, ducks, progress);
@@ -96,7 +99,6 @@ function gameProcess() {
             duckGoAway(ducks.duck1, ctx, progress);
         }
         if (ducks.duck2.timeAfterStartFly < Math.ceil(200 * (80 / time.frameTime)) && progress.bullet !== 0) {
-            // если еще не закончилось время и пули
             if (ducks.duck2.isLive) {
                 duckMove(ctx, ducks.duck2, ducks, progress);
                 ducks.duck2.timeAfterStartFly += 1;
@@ -106,8 +108,8 @@ function gameProcess() {
         } else if (ducks.duck2.isLive) {
             duckGoAway(ducks.duck2, ctx, progress);
         }
+        // выбыла пара уток
         if (progress.currentTwoDucksCruck === 2) {
-            // выбыла пара уток
             newRound(); // ! статистика
             if (progress.currentTwoShotDucks === 1) dogObj.findOneDuck = true; // если поймали одну утку
             if (progress.currentTwoShotDucks === 2) dogObj.findTwoDucks = true; // если поймали две утки
@@ -118,12 +120,13 @@ function gameProcess() {
             dogObj.scaredDucks = false;
             showCurrentStatistic(progress);
         }
+        // конец уровня
         if (progress.cruckDuck === 10) {
-            // конец уровня
             if (isLevelEnd()) {
+                // ! статистика
                 isWin();
                 statStart();
-            } // ! статистика
+            }
             if (progress.level < 10) {
                 showCurrentStatistic(progress);
                 showModalWindow();
@@ -131,11 +134,19 @@ function gameProcess() {
             } else {
                 // конец игры
                 showCurrentStatistic(progress);
-                reloadGameFlag = true;
-                showModalWindow();
-                newDogParameters(); // для выхода собаки между уровнями
+                if (progress.shotDucks < 5) {
+                    // проигрыш
+                    reloadGameFlag = true;
+                    showModalWindow();
+                } else {
+                    // победа
+                    congradituate.init(`${lang[getLang()].win}`, progress.score);
+                    document.body.dispatchEvent(reloadEvent);
+                }
+                startGameProgressParameters();
+                pauseGame();
+                newDogParameters();
                 dogObj.go = false;
-                console.log("ALL LEVELS COMPLETE");
                 clearInterval(time.moveIntervalId);
             }
         }
@@ -178,17 +189,17 @@ function shot(event) {
                 const clickY = event.clientY - canvas.getBoundingClientRect().top + 25;
                 if (clickY < 480) {
                     if (
-                        clickX > ducks.duck1.moveX + 5 &&
+                        clickX > ducks.duck1.moveX + 5 - hittingError &&
                         clickX < ducks.duck1.moveX + 101 - 5 + hittingError &&
-                        clickY > ducks.duck1.moveY + 5 &&
+                        clickY > ducks.duck1.moveY + 5 - hittingError &&
                         clickY < ducks.duck1.moveY + 90 - 5 + hittingError
                     ) {
                         ducks.duck1.isLive = false;
                     }
                     if (
-                        clickX > ducks.duck2.moveX + 5 &&
+                        clickX > ducks.duck2.moveX + 5 - hittingError &&
                         clickX < ducks.duck2.moveX + 101 - 5 + hittingError &&
-                        clickY > ducks.duck2.moveY + 5 &&
+                        clickY > ducks.duck2.moveY + 5 - hittingError &&
                         clickY < ducks.duck2.moveY + 90 - 5 + hittingError
                     ) {
                         ducks.duck2.isLive = false;
@@ -201,7 +212,6 @@ function shot(event) {
 }
 
 export function startGame(context, lvl) {
-    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!export
     AudioProcessor.pause("breakTime");
     showCurrentStatistic(progress);
     canvas = document.querySelector(".game-canvas");

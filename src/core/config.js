@@ -34,13 +34,23 @@ const EN = {
     levels: "Levels",
     settings: "Settings",
     statistic: "Statistic",
-    lvl: "lvl",
+    lvl: "lvl.",
     back: "back",
     badHuntDude: "Bad hunt Dude!",
     awesomeHunter: "Awesome hunter",
     detecting: "Detecting...",
     ducksAreDetected: "Ducks are detected! Click here...",
-    totalScoreTable: "Total score table"
+    totalScoreTable: "Total score table",
+    win: "You win",
+    tonia: "Antonina Zinkevich",
+    sergey: "Sergey Nesterov",
+    fedos: "Fedor Mikulich",
+    andrey: "Andrey Komov",
+    theme: "Theme",
+    standart: "Standart",
+    pencil: "Pencil draw",
+    vision: "Night vision",
+    night: "Night"
 };
 const RU = {
     Login: "Вход",
@@ -84,7 +94,17 @@ const RU = {
     awesomeHunter: "Замечательный охотник",
     detecting: "Обнаружение ...",
     ducksAreDetected: "Утки обнаружены! Нажмите здесь ...",
-    totalScoreTable: "Сводная таблица"
+    totalScoreTable: "Сводная таблица",
+    win: "Победа",
+    tonia: "Антонина Зинкевич",
+    sergey: "Сергей Нестеров",
+    fedos: "Федор Микулич",
+    andrey: "Андрей Комов",
+    theme: "Тема",
+    standart: "Стандартная",
+    pencil: "Простой карандащ",
+    vision: "Ночное видение",
+    night: "Ночь"
 };
 
 const BY = {
@@ -129,7 +149,17 @@ const BY = {
     awesomeHunter: "Выдатны паляўнічы",
     detecting: "Выяўленне ...",
     ducksAreDetected: "Качкі выяўленыя! Націсніце тут ...",
-    totalScoreTable: "Зводная табліца"
+    totalScoreTable: "Зводная табліца",
+    win: "Перамога",
+    tonia: "Антанiна Зiнкевiч",
+    sergey: "Сяргей Несцераў",
+    fedos: "Федар Мiкулiч",
+    andrey: "Андрэй Комаў",
+    theme: "Тэма",
+    standart: "стандартная",
+    pencil: "просты аловак",
+    vision: "начное бачанне",
+    night: "ноч"
 };
 
 export const lang = {
