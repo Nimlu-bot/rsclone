@@ -57,7 +57,10 @@ export function dogMove(ctx, time, gameProcess, progress, showCurrentStatistic, 
     time.frameTime = 100;
     time.moveIntervalId = setInterval(() => gameProcess(), time.frameTime);
     if (dog.go) {
-        if (frameCounter === 0) showCurrentStatistic(progress, theme);
+        if (frameCounter === 0) {
+            progress.bullet = 0;
+            showCurrentStatistic(progress, theme);
+        }
         if (frameCounter === 1) {
             AudioProcessor.reset("intro");
             AudioProcessor.play("intro");
@@ -110,6 +113,8 @@ export function dogMove(ctx, time, gameProcess, progress, showCurrentStatistic, 
             if (frameCounter === 20) {
                 AudioProcessor.reset("bark");
                 AudioProcessor.play("bark");
+                progress.bullet = 4;
+                showCurrentStatistic(progress, theme);
             }
             frameCounter += 1;
             if (frameCounter > 2) {

@@ -64,13 +64,13 @@ const congradituate = new CondratsBro();
 
 function showModalWindow() {
     if (progress.shotDucks >= 5) {
-        modalWindowPerfect.showWindow();
+        modalWindowPerfect.showWindow(themeNumb);
         newProgressParameters();
         progress.level += 1;
     } else {
         // при проигрыше
         reloadGameFlag = true;
-        modalWindowGameOver.showWindow();
+        modalWindowGameOver.showWindow(themeNumb);
         startGameProgressParameters();
     }
     pauseGame();
@@ -171,7 +171,6 @@ function gameProcess() {
         }
     }
     cloudsAdd(ctx, progress.level, themeNumb);
-    // changeAnimationColors(ctx, themeNumb); // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 }
 
 function shot(event) {
