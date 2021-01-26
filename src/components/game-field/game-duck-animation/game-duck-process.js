@@ -1,5 +1,5 @@
 /* eslint-disable no-use-before-define */
-import { CANVAS_HEIGTH, CANVAS_WIDTH } from "../../../core/index";
+import { CANVAS_HEIGTH, CANVAS_WIDTH, lang, getLang } from "../../../core/index";
 import { duckMove, duckGoAway, duckShot, newDucksParameters } from "./game-duck-duck-move";
 import { ducksForGame, progressForGame, newProgressParameters, startGameProgressParameters } from "./game-constants";
 import { dog, dogMove, newDogParameters } from "./game-dog-animation";
@@ -159,7 +159,7 @@ function gameProcess() {
                     showModalWindow();
                 } else {
                     // победа
-                    congradituate.init("Поздравляем", progress.score);
+                    congradituate.init(`${lang[getLang()].win}`, progress.score); // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                     document.body.dispatchEvent(reloadEvent);
                 }
                 startGameProgressParameters();

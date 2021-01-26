@@ -1,7 +1,8 @@
 import "../../../../assets/css/general-style.scss";
 import "./settings-pages.component.scss";
+import { getLang } from "../../../../core/index";
 
-export const settingsPagesTemplate = `
+export const settingsPagesTemplate =(lang)=> `
 <div class="settings-wrap">
     <div class="audio-container">
         <div class="volume-container">
@@ -15,13 +16,13 @@ export const settingsPagesTemplate = `
             <span>R</span>
         </div>
     </div>
-
     <div class="lang-container"><p class="settings-lang">EN</p><p class="settings-lang">RU</p><p class="settings-lang">BY</p></div>
     <div class="theme-wrapp">
-        <input type="radio" name="input_theme" value="0">
-        <input type="radio" name="input_theme" value="1">
-        <input type="radio" name="input_theme" value="2">
-        <input type="radio" name="input_theme" value="3">
+        <span class="title">${lang[getLang()].theme}</span>
+        <span><input type="radio" name="input_theme" value="0">${lang[getLang()].standart}</span>
+        <span><input type="radio" name="input_theme" value="1">${lang[getLang()].pencil}</span>
+        <span><input type="radio" name="input_theme" value="2">${lang[getLang()].vision}</span>
+        <span><input type="radio" name="input_theme" value="3">${lang[getLang()].night}</span>
     </div>
     <div class="settings-btn game-btn" id="settings-back">back</div>
 </div>
