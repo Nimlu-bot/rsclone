@@ -1,6 +1,6 @@
 const axios = require("axios");
 
-export function statEventHandler(stat) {  
+export function statEventHandler(stat) {
     if (stat) {
         const token = localStorage.getItem("token");
         axios
@@ -32,4 +32,30 @@ export async function getStatEventHandler() {
                 console.log(error.response.data.message);
             }
         );
+}
+
+export async function getScoreEventHandler() {
+    axios.get("http://localhost:4000/api/stat/all").then(
+        (response) => {
+            const scores = response.data;
+            for (let i = 0; i < scores.length; i += 1) {
+                // eslint-disable-next-line no-underscore-dangle
+                delete scores[i]._id;
+                if (scores[i].stats.length !== 0) {
+                    const maxScoreItem = scores[i].stats.reduce((acc, el) => (acc.score > el.score ? acc : el));
+                    // console.log(maxScoreItem.score);
+                    scores[i].score = maxScoreItem.score;
+                    // console.log(scores[i]);
+                } else {
+                    scores[i].score = 0;
+                }
+            }
+            // console.log(scores);
+            localStorage.setItem("totalScores", JSON.stringify(scores));
+        },
+
+        (error) => {
+            console.log(error.response.data.message);
+        }
+    );
 }
