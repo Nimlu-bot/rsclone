@@ -20,19 +20,21 @@
     }
     .panner-container{
         display: flex;
-        .lang-container{
-			display: flex;
-			justify-content: space-around;
-			margin: 5px auto;
-			.selected{
-				color: brown;
-				//border-bottom: 3px solid black;
-			}
-			.settings-lang:hover{
-				transform: scale(1.1);
-			}
-		}
     }	
+
+    .lang-container{
+        display: flex;
+        justify-content: space-around;
+        margin: 5px auto;
+        .selected{
+            color: brown;
+            //border-bottom: 3px solid black;
+        }
+        .settings-lang:hover{
+            transform: scale(1.1);
+        }
+    }
+
     .theme-wrapp{
         display: flex;
         justify-content: center;

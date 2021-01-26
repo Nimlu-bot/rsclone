@@ -160,6 +160,41 @@ export class FirstPages {
         });
     }
 
+    style_0(){
+        document.querySelector(".wrapper").setAttribute("style","none");
+    };
+    style_1(){
+        document.querySelector(".wrapper").style.backgroundColor = "#FAF0E6";
+        document.querySelector(".wrapper").style.backgroundImage = "none";
+        document.querySelector(".wrapper").style.filter = "grayscale(100%)";
+    }
+    style_2(){
+        console.log("first 2")
+        document.querySelector(".wrapper").style.backgroundImage = "../../assets/img/paper-cell.jpg";
+        document.querySelector(".wrapper").setAttribute("style","none");
+        document.querySelector(".wrapper").style.filter = "invert(100%)";
+    }
+    style_3(){
+        document.querySelector(".wrapper").style.backgroundColor = "#000";
+        document.querySelector(".wrapper").style.backgroundImage = "none";
+        document.querySelector(".wrapper").style.color = "#fff";
+        document.querySelector(".wrapper").style.filter = "saturate(30%)";
+    }
+
+    styleForTheme(){
+        if(localStorage.getItem('theme') === null){
+            this.style_0();
+        } else if (`${localStorage.getItem('theme')}` === "0"){
+            this.style_0();
+        } else if (`${localStorage.getItem('theme')}` === "1"){
+            this.style_1();
+        } else if(`${localStorage.getItem('theme')}` === "2"){
+            this.style_2();
+        } else if(`${localStorage.getItem('theme')}` === "3"){
+            this.style_3();
+        }
+    }
+
     theme(){
 
         if(localStorage.getItem('theme') === null){
@@ -168,11 +203,13 @@ export class FirstPages {
                 if(elem.value === "0"){
                     elem.setAttribute("checked", "true")
                 }
+                this.styleForTheme();
             })
         } else {
             document.getElementsByName('input_theme').forEach(elem => {
                 if(elem.value === `${localStorage.getItem('theme')}`){
-                    elem.setAttribute("checked", "true")
+                    elem.setAttribute("checked", "true");
+                    this.styleForTheme();
                 }
             })
         }
@@ -180,6 +217,7 @@ export class FirstPages {
         document.getElementsByName('input_theme').forEach(elem => {
             elem.addEventListener("click", () => {
                 localStorage.setItem('theme',elem.value)
+                this.styleForTheme();
             })
         })
 
@@ -222,7 +260,7 @@ export class FirstPages {
 
         this.volumeChanger();
         this.panChanger();
-        this.theme()
+        this.theme();
     }
 
     statistic() {
@@ -273,5 +311,6 @@ export class FirstPages {
         document.body.insertAdjacentHTML("afterbegin", firstPagesTemplate);
         this.nav();
         this.loginForm();
+        this.styleForTheme();
     }
 }
