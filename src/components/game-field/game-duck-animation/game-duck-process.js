@@ -8,10 +8,10 @@ import { ModalWindow } from "../../modal-window/modal-window.component";
 import { startGameStat, statStart, newRound, isBuletsEnd, isLevelEnd, isWin } from "../../../core/user-statistic";
 import { cloudsAdd } from "./game-clouds";
 import AudioProcessor from "../../audio-processor/audio-processor.component";
-import { changeBkgrnd, changeAnimationColors } from "./game-theme";
+import { changeBkgrnd } from "./game-theme";
 import { CondratsBro } from "../../first-pages/psges-list/congratsBro/congrats.component";
 
-const themeNumb = 3;
+let themeNumb = 0;
 const treeGrass = document.createElement("img");
 treeGrass.src = "../../../assets/img/background_full.png";
 const treeGrassChB = document.createElement("img");
@@ -159,7 +159,7 @@ function gameProcess() {
                     showModalWindow();
                 } else {
                     // победа
-                    congradituate.init("Поздравляем!", progress.score);
+                    congradituate.init("Поздравляем", progress.score);
                     document.body.dispatchEvent(reloadEvent);
                 }
                 startGameProgressParameters();
@@ -232,6 +232,7 @@ function shot(event) {
 }
 
 export function startGame(context, lvl) {
+    themeNumb = localStorage.getItem("theme") ? +localStorage.getItem("theme") : 0;
     AudioProcessor.pause("breakTime");
     changeBkgrnd(themeNumb); // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     showCurrentStatistic(progress, themeNumb);

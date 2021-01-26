@@ -55,7 +55,7 @@ export function dogMove(ctx, time, gameProcess, progress, showCurrentStatistic, 
     }
     clearInterval(time.moveIntervalId);
     time.frameTime = 100;
-    time.moveIntervalId = setInterval(() => gameProcess(/* level */), time.frameTime);
+    time.moveIntervalId = setInterval(() => gameProcess(), time.frameTime);
     if (dog.go) {
         if (frameCounter === 0) showCurrentStatistic(progress, theme);
         if (frameCounter === 1) {
