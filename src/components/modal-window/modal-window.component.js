@@ -51,27 +51,42 @@ export class ModalWindow {
       dogsImagesOrigin.forEach((el) => {el.style.display = 'inline';});
       dogsImagesInvert.forEach((el) => {el.style.display = 'none';});
       dogsImagesPencil.forEach((el) => {el.style.display = 'none';});
-      modalBackground.forEach((el) => {`url('../../assets/img/paper-cell.jpg')`;})
-      modalBackground.forEach((el) => {el.style.background = ``})
-      toMain.forEach((el) => {el.style.background = `url('../../assets/img/paper-cell.jpg')`;})
+      modalBackground.forEach((el) => {el.style.background = `url('../../assets/img/paper-cell.jpg')`})
+      toMain.forEach((el) => {
+        el.style.background = `url('../../assets/img/paper-cell.jpg')`;
+        el.style.border = `2px solid rgba(101, 81, 132, 1)`;
+        el.style.color = `rgba(46, 13, 103, 1)`;
+      })
     } else if (dogTheme === 1) {
       dogsImagesOrigin.forEach((el) => {el.style.display = 'none';});
       dogsImagesInvert.forEach((el) => {el.style.display = 'none';});
       dogsImagesPencil.forEach((el) => {el.style.display = 'inline';});
       modalBackground.forEach((el) => {el.style.background = 'white'});
-      toMain.forEach((el) => {el.style.background = 'white'});
+      toMain.forEach((el) => {
+        el.style.background = 'white';
+        el.style.border = `2px solid #555555`;
+        el.style. color = '#555555';
+      });
     } else if (dogTheme === 2) {
       dogsImagesOrigin.forEach((el) => {el.style.display = 'none';});
       dogsImagesInvert.forEach((el) => {el.style.display = 'inline';});
       dogsImagesPencil.forEach((el) => {el.style.display = 'none';});
       modalBackground.forEach((el) => {el.style.background = 'black';});
-      toMain.forEach((el) => {el.style.background = 'black';});
+      toMain.forEach((el) => {
+        el.style.background = 'black';
+        el.style.border = `2px solid #b0b0b0`;
+        el.style. color = '#b0b0b0';
+      });
     } else if (dogTheme === 3) {
       dogsImagesOrigin.forEach((el) => {el.style.display = 'none';});
       dogsImagesInvert.forEach((el) => {el.style.display = 'none';});
       dogsImagesPencil.forEach((el) => {el.style.display = 'inline';});
       modalBackground.forEach((el) => {el.style.background = 'black';});
-      toMain.forEach((el) => {el.style.background = 'black';});
+      toMain.forEach((el) => {
+        el.style.background = 'black';
+        el.style.border = `2px solid #555555`;
+        el.style. color = '#555555';
+      });
     };
   }
 }
