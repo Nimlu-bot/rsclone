@@ -1,14 +1,14 @@
 import "../../../../assets/css/general-style.scss";
 import "./backBtnHeader.component.scss";
 
-export const backBtnHeader = `
+export const backBtnHeader = (pause) => `
 <div class="pause-btn-header game-btn">
-    pause
+    ${pause}
 </div>
 `;
 
-export const continueBtn = `
+export const continueBtn = (continuestr) => `
 <div class="continue-btn game-btn">
-    continue
+    ${continuestr}
 </div>
 `;

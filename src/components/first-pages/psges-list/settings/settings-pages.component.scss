@@ -12,6 +12,9 @@
     transition: all .3s;
 
     .volume-container{
+        margin-left: -30px !important;
+        display: flex;
+        justify-content: center;
         .audio-img{
             height: 20px;
             width: 20px;
@@ -20,22 +23,26 @@
     }
     .panner-container{
         display: flex;
-        .lang-container{
-			display: flex;
-			justify-content: space-around;
-			margin: 5px auto;
-			.selected{
-				color: brown;
-				//border-bottom: 3px solid black;
-			}
-			.settings-lang:hover{
-				transform: scale(1.1);
-			}
-		}
+        justify-content: center;
     }	
+    .lang-container{
+        display: flex;
+        justify-content: space-around;
+        margin: 5px auto;
+        .selected{
+            color: brown;
+            //border-bottom: 3px solid black;
+        }
+        .settings-lang:hover{
+            transform: scale(1.1);
+        }
+    }
     .theme-wrapp{
         display: flex;
-        justify-content: center;
+        flex-direction: column;
+        .title{
+            text-align: center;
+        }
 
         input{
             margin: 0 5px;
@@ -46,6 +53,6 @@
     	
     
     .settings-btn{
-    padding: 8px 25px !important;
+        padding: 25px 10px 25px!important;
     }
 }
