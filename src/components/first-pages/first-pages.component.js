@@ -32,6 +32,7 @@ export class FirstPages {
 
     loginForm() {
         document.querySelector(".user").addEventListener("click", () => {
+          
             if (!document.querySelector(".game-field-main")) {
                 if (!document.querySelector(".login-div")) {
                     const divElem = document.createElement("div");
@@ -41,6 +42,14 @@ export class FirstPages {
                     }, 100);
                     document.querySelector(".wrapper").append(divElem);
                     this.login.init();
+                    document.querySelectorAll(".login-button").forEach(elem => {
+                        elem.addEventListener("click", () => {
+                            setTimeout(() => {
+                                document.querySelector(".login-div").remove();
+                            }, 100);
+                            document.querySelector(".login-div").style.right = "-100%";
+                        })
+                    })
                 } else {
                     setTimeout(() => {
                         document.querySelector(".login-div").remove();
@@ -51,6 +60,7 @@ export class FirstPages {
                 return false;
             }
         });
+
     }
 
     continue() {
@@ -150,7 +160,33 @@ export class FirstPages {
         });
     }
 
+    theme(){
+
+        if(localStorage.getItem('theme') === null){
+            localStorage.setItem('theme',0)
+            document.getElementsByName('input_theme').forEach(elem => {
+                if(elem.value === "0"){
+                    elem.setAttribute("checked", "true")
+                }
+            })
+        } else {
+            document.getElementsByName('input_theme').forEach(elem => {
+                if(elem.value === `${localStorage.getItem('theme')}`){
+                    elem.setAttribute("checked", "true")
+                }
+            })
+        }
+
+        document.getElementsByName('input_theme').forEach(elem => {
+            elem.addEventListener("click", () => {
+                localStorage.setItem('theme',elem.value)
+            })
+        })
+
+    }
+
     settings() {
+        
         this.title = "settings";
         document.querySelector(".pages").innerHTML = this.title;
         document.querySelector(".game-menu").insertAdjacentHTML("afterbegin", settingsPagesTemplate);
@@ -186,6 +222,7 @@ export class FirstPages {
 
         this.volumeChanger();
         this.panChanger();
+        this.theme()
     }
 
     statistic() {
