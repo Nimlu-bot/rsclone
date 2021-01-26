@@ -14,6 +14,7 @@ import { GameField } from "../game-field/game-field.component";
 import { Login } from "../login/login.component";
 import { Statistics } from "./psges-list/statistic/statistic-page.component";
 import { setLang } from "../../core/config";
+import { getScoreEventHandler, getStatEventHandler } from "../../core/utils/serverAPI";
 import { lang, getLang } from "../../core/index";
 // Andrey
 import AudioProcessor from "../audio-processor/audio-processor.component";
@@ -35,6 +36,7 @@ export class FirstPages {
     }
 
     loginForm() {
+        // eslint-disable-next-line consistent-return
         document.querySelector(".user").addEventListener("click", () => {
             if (!document.querySelector(".game-field-main")) {
                 if (!document.querySelector(".login-div")) {
@@ -348,8 +350,11 @@ export class FirstPages {
     statistic() {
         this.title = "statistic";
         document.querySelector(".pages").innerHTML = this.title;
+
         // document.querySelector(".game-menu").insertAdjacentHTML("afterbegin", statisticPagesTemplate);
         const stat = new Statistics();
+        getScoreEventHandler();
+        getStatEventHandler();
         stat.init();
         setTimeout(() => {
             document.querySelector(".statistic-wrap").style.right = "0%";

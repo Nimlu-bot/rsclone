@@ -29,7 +29,6 @@ const lvlStat = {
 function saveStat() {
     const statArray = JSON.parse(localStorage.getItem("currentUserStat")) || [];
     statArray.push(gameStat);
-
     localStorage.setItem("currentUserStat", JSON.stringify(statArray));
 }
 
