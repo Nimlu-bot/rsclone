@@ -4,6 +4,17 @@ const axios = require("axios");
 
 const apiUrl = CURRENT_API === "dev" ? API_BASE_URL_DEV : API_BASE_URL_PROD;
 
+const getStatEvent = new CustomEvent("getStat", {
+    detail: { data: undefined },
+    bubbles: true,
+    cancelable: true
+});
+
+const getScoreEvent = new CustomEvent("getScore", {
+    detail: { data: undefined },
+    bubbles: true,
+    cancelable: true
+});
 export function statEventHandler(stat) {
     if (stat) {
         const token = localStorage.getItem("token");
@@ -24,6 +35,7 @@ export function statEventHandler(stat) {
 
 export async function getStatEventHandler() {
     const token = localStorage.getItem("token");
+
     axios
         .get(`${apiUrl}/api/stat`, {
             headers: { Authorization: `Bearer ${token}` }
@@ -31,9 +43,14 @@ export async function getStatEventHandler() {
         .then(
             (response) => {
                 localStorage.setItem("userStat", JSON.stringify(response.data));
+                getStatEvent.detail.data = true;
+                document.dispatchEvent(getStatEvent);
             },
             (error) => {
                 console.log(error.response.data.message);
+                localStorage.removeItem("userStat");
+                getStatEvent.detail.data = false;
+                document.dispatchEvent(getStatEvent);
             }
         );
 }
@@ -56,6 +73,8 @@ export async function getScoreEventHandler() {
             }
             // console.log(scores);
             localStorage.setItem("totalScores", JSON.stringify(scores));
+            getScoreEvent.detail.data = true;
+            document.dispatchEvent(getScoreEvent);
         },
 
         (error) => {

@@ -24,13 +24,10 @@ export class Statistics {
         const main = document.querySelector(".game-menu");
 
         main.insertAdjacentHTML("afterbegin", statisticPagesTemplate);
-        document
-            .querySelector(".statistic-table-wrapper")
-            .insertAdjacentHTML("afterbegin", statisticSwicher(this.lang));
-
         const statWrapper = document.querySelector(".statistic-table-wrapper");
-
-        this.setUserTable(statWrapper);
+        statWrapper.insertAdjacentHTML("afterbegin", statisticSwicher(this.lang));
+        // this.setUserTable(statWrapper);
+        getStatEventHandler();
 
         // document.querySelector(".stat-get").addEventListener("click", () => {
         //     const statArray = JSON.parse(localStorage.getItem("userStat")) || [];
@@ -81,26 +78,38 @@ export class Statistics {
             e.target.classList.add("selected");
         });
         document.querySelector(".stat-total").addEventListener("click", (e) => {
+            getScoreEventHandler();
             document.querySelector(".stat-table").remove();
             this.setScoreTable(statWrapper);
             const tabs = document.querySelectorAll(".stat-tab");
             [...tabs].forEach((el) => el.classList.remove("selected"));
             e.target.classList.add("selected");
         });
+
+        document.addEventListener("getStat", () => {
+            this.setUserTable(statWrapper);
+        });
+        document.addEventListener("getScore", () => {
+            const statTable = document.querySelector(".stat-table");
+            if (statTable) statTable.remove();
+            this.setScoreTable(statWrapper);
+        });
     }
 
     getStat(key, template) {
         const statArray = JSON.parse(localStorage.getItem(key)) || [];
         const statTableBody = document.querySelector(".stat-table-body");
-        const sortedStatArr = statArray.sort((a, b) => b.score - a.score);
-
-        document.querySelectorAll(".stat-table-item").forEach((e) => e.remove());
-        let numberOfResult = null;
-        if (sortedStatArr.length < 10) {
-            numberOfResult = sortedStatArr.length;
-        } else numberOfResult = 10;
-        for (let i = 0; i < numberOfResult; i += 1) {
-            statTableBody.insertAdjacentHTML("beforeend", template(sortedStatArr[i], i + 1));
+        if (statTableBody) {
+            const sortedStatArr = statArray.sort((a, b) => b.score - a.score);
+            const items = document.querySelectorAll(".stat-table-item");
+            if (items) items.forEach((e) => e.remove());
+            let numberOfResult = null;
+            if (sortedStatArr.length < 10) {
+                numberOfResult = sortedStatArr.length;
+            } else numberOfResult = 10;
+            for (let i = 0; i < numberOfResult; i += 1) {
+                statTableBody.insertAdjacentHTML("beforeend", template(sortedStatArr[i], i + 1));
+            }
         }
     }
 
@@ -108,7 +117,7 @@ export class Statistics {
         item.insertAdjacentHTML("beforeend", statisticTableHeader(this.lang));
 
         if (localStorage.getItem("userStat")) {
-            getStatEventHandler().then(this.getStat("userStat", statisticsTemplate));
+            this.getStat("userStat", statisticsTemplate);
         } else {
             document.querySelector(".stat-message").innerText = `${lang[getLang()].NoAuthorization}`;
             this.getStat("currentUserStat", statisticsTemplate);
@@ -119,18 +128,11 @@ export class Statistics {
         item.insertAdjacentHTML("beforeend", scoreTableHeader(this.lang));
 
         if (localStorage.getItem("totalScores")) {
-            getScoreEventHandler().then(this.getStat("totalScores", scoreTemplate));
+            this.getStat("totalScores", scoreTemplate);
         } else {
             document.querySelector(".stat-message").innerText = `${lang[getLang()].NoAuthorization}`;
         }
     }
-
-    // select(tab) {
-    //     const tabs = document.querySelectorAll(".stat-tab");
-    //     // const selected = langs.querySelectorAll(".selected");
-    //     [...tabs].forEach((el) => el.classList.remove("selected"));
-    //     e.target.classList.add("selected");
-    // }
 }
 
 // -----------

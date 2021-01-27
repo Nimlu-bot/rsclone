@@ -1,3 +1,4 @@
+// import { Body } from "node-fetch";
 import { loginTemplate } from "./login.template";
 import { validateEmail, lang, getLang, getStatEventHandler } from "../../core/index";
 import { API_BASE_URL_PROD, API_BASE_URL_DEV, CURRENT_API } from "../../core/constants";
@@ -32,6 +33,11 @@ export class Login {
                 email: email.value,
                 password: password.value
             };
+            const customEvent = new CustomEvent("login", {
+                detail: { data: undefined },
+                bubbles: true,
+                cancelable: true
+            });
 
             axios.post(`${apiUrl}/api/auth/login`, user).then(
                 (response) => {
@@ -39,9 +45,15 @@ export class Login {
 
                     localStorage.setItem("token", response.data.token);
                     localStorage.setItem("id", response.data.userId);
-                    getStatEventHandler();
+                    localStorage.setItem("email", user.email);
+
+                    customEvent.detail.data = true;
+                    document.dispatchEvent(customEvent);
+                    //  getStatEventHandler();
                 },
                 (error) => {
+                    customEvent.detail.data = false;
+                    document.dispatchEvent(customEvent);
                     const message = document.querySelector(".login-message");
                     // message.innerText = "";
                     // message.style.color = "red";

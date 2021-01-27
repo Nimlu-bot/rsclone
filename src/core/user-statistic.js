@@ -34,6 +34,7 @@ function saveStat() {
 
 // начало игры
 export function startGameStat(lvl) {
+    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!startGameStat");
     gameStat.time = 0;
     gameStat.ducks = 0;
     gameStat.hits = 0;
@@ -44,6 +45,7 @@ export function startGameStat(lvl) {
 
 // начало уровня
 export function statStart() {
+    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!statStart");
     lvlStat.ducksKillPerRound = 0;
     lvlStat.duckKillPerLevel = 0;
     lvlStat.duckCount = 0;
@@ -99,12 +101,14 @@ export function isLevelEnd() {
 }
 
 export function LooseOrEnd() {
+    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!LooseOrEnd");
     saveStat();
     statEventHandler(gameStat);
-    getStatEventHandler();
+    // getStatEventHandler();
 }
 // при окончании уровня  т.е isLevelEnd вернул true
 export function isWin() {
+    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!isWin");
     gameStat.time = new Date();
     gameStat.ducks += levelSettings.ducksPerRound;
     gameStat.hits += lvlStat.hits;
@@ -130,4 +134,3 @@ export function killed() {
     lvlStat.score += 8 + 2 * lvlStat.currentLvl;
     lvlStat.duckKillPerLevel += 1;
 }
-
