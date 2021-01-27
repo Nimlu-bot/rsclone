@@ -11,22 +11,7 @@ const duckGoAw = document.createElement("img");
 duckGoAw.src = "../../../assets/img/duckGo.png";
 const duckShotImg = document.createElement("img");
 duckShotImg.src = "../../../assets/img/duckD.png"; // застреленная в 1м кадре, падающая во втором
-const duckImgRchB = document.createElement("img");
-duckImgRchB.src = "../../../assets/img/duckRchB.png";
-const duckImgLchB = document.createElement("img");
-duckImgLchB.src = "../../../assets/img/duckLchB.png";
-const duckGoAwchB = document.createElement("img");
-duckGoAwchB.src = "../../../assets/img/duckGoChB.png";
-const duckShotImgChB = document.createElement("img");
-duckShotImgChB.src = "../../../assets/img/duckDchB.png"; // застреленная в 1м кадре, падающая во втором
-const duckImgRinv = document.createElement("img");
-duckImgRinv.src = "../../../assets/img/duckRinv.png";
-const duckImgLinv = document.createElement("img");
-duckImgLinv.src = "../../../assets/img/duckLInv.png";
-const duckGoAwInv = document.createElement("img");
-duckGoAwInv.src = "../../../assets/img/duckGoInv.png";
-const duckShotImgInv = document.createElement("img");
-duckShotImgInv.src = "../../../assets/img/duckDInv.png"; // застреленная в 1м кадре, падающая во втором
+
 let soundCounter = 0;
 
 // функция для рандомного изменения направления
@@ -62,28 +47,7 @@ export function newDucksParameters(ducks) {
 }
 
 // здесь только логика смены направления движения и отрисовка картинки с учетом направления
-export function duckMove(ctx, duck, ducks, progress, theme) {
-    let imgR;
-    let imgL;
-    switch (theme) {
-        case 0:
-            imgR = duckImgR;
-            imgL = duckImgL;
-            break;
-        case 1:
-        case 3:
-            imgR = duckImgRchB;
-            imgL = duckImgLchB;
-            break;
-        case 2:
-            imgR = duckImgRinv;
-            imgL = duckImgLinv;
-            break;
-        default:
-            imgR = duckImgR;
-            imgL = duckImgL;
-            break;
-    }
+export function duckMove(ctx, duck, ducks, progress) {
     // звук
     soundCounter += 1;
     if (soundCounter === 2) {
@@ -99,7 +63,7 @@ export function duckMove(ctx, duck, ducks, progress, theme) {
     }
     // отрисовка кадров
     duck.moveY += duck.randomPathChangeY;
-    const duckImg = duck.moveX < duck.moveX + duck.randomPathChangeX ? imgR : imgL;
+    const duckImg = duck.moveX < duck.moveX + duck.randomPathChangeX ? duckImgR : duckImgL;
     duck.moveX += duck.randomPathChangeX;
     ctx.drawImage(duckImg, 101 * duck.num, 0, 101, 90, duck.moveX, duck.moveY, 101, 90);
     duck.num += 1;
@@ -131,29 +95,13 @@ export function duckMove(ctx, duck, ducks, progress, theme) {
     }
 }
 
-export function duckGoAway(duck, ctx, progress, theme) {
-    let duckImg;
-    switch (theme) {
-        case 0:
-            duckImg = duckGoAw;
-            break;
-        case 1:
-        case 3:
-            duckImg = duckGoAwchB;
-            break;
-        case 2:
-            duckImg = duckGoAwInv;
-            break;
-        default:
-            duckImg = duckGoAw;
-            break;
-    }
+export function duckGoAway(duck, ctx, progress) {
     if (duck.moveX !== null) duck.goAwX = duck.moveX;
     if (duck.moveY !== null) duck.goAwY = duck.moveY;
     duck.moveX = null;
     duck.moveY = null;
     if (duck.goAwY > -80) {
-        ctx.drawImage(duckImg, 100 * duck.num, 0, 100, 90, duck.goAwX, duck.goAwY, 100, 90);
+        ctx.drawImage(duckGoAw, 100 * duck.num, 0, 100, 90, duck.goAwX, duck.goAwY, 100, 90);
         duck.num += 1;
         if (duck.num > 3) duck.num = 0;
         duck.goAwY -= 10;
@@ -162,31 +110,14 @@ export function duckGoAway(duck, ctx, progress, theme) {
         incDuckFlyAway(); // ! статистика
         isRoundEnd(); // ! статистика
         progress.goAwayducks += 1;
-        console.log(`goAwayducks ${progress.goAwayducks}`);
-        showCurrentStatistic(progress, theme);
+        showCurrentStatistic(progress);
         progress.cruckDuck += 1;
     }
 }
 
-export function duckFall(duck, ctx, progress, theme) {
-    let duckImg;
-    switch (theme) {
-        case 0:
-            duckImg = duckShotImg;
-            break;
-        case 1:
-        case 3:
-            duckImg = duckShotImgChB;
-            break;
-        case 2:
-            duckImg = duckShotImgInv;
-            break;
-        default:
-            duckImg = duckShotImg;
-            break;
-    }
+export function duckFall(duck, ctx, progress) {
     if (!duck.duckFall && duck.fallY < 450) {
-        ctx.drawImage(duckImg, 105, 0, 105, 90, duck.fallX, duck.fallY, 101, 90);
+        ctx.drawImage(duckShotImg, 105, 0, 105, 90, duck.fallX, duck.fallY, 101, 90);
         duck.fallY += 50;
     } else if (!duck.duckFall) {
         duck.duckFall = true;
@@ -196,8 +127,7 @@ export function duckFall(duck, ctx, progress, theme) {
         progress.currentTwoShotDucks += 1;
         progress.shotDucks += 1;
         progress.score += 8 + 2 * progress.level;
-        console.log(`shotDucks ${progress.shotDucks}`);
-        showCurrentStatistic(progress, theme);
+        showCurrentStatistic(progress);
         progress.cruckDuck += 1;
         AudioProcessor.pause("duckDeath");
         AudioProcessor.reset("countingHits");
@@ -205,23 +135,7 @@ export function duckFall(duck, ctx, progress, theme) {
     }
 }
 
-export function duckShot(duck, ctx, progress, theme) {
-    let duckImg;
-    switch (theme) {
-        case 0:
-            duckImg = duckShotImg;
-            break;
-        case 1:
-        case 3:
-            duckImg = duckShotImgChB;
-            break;
-        case 2:
-            duckImg = duckShotImgInv;
-            break;
-        default:
-            duckImg = duckShotImg;
-            break;
-    }
+export function duckShot(duck, ctx, progress) {
     duck.isLive = false;
     if (duck.moveX !== null) {
         duck.fallX = duck.moveX;
@@ -234,9 +148,9 @@ export function duckShot(duck, ctx, progress, theme) {
     duck.moveX = null;
     duck.moveY = null;
     if (duck.timeAfterDeath < 4) {
-        ctx.drawImage(duckImg, 0, 0, 105, 90, duck.fallX, duck.fallY, 101, 90);
+        ctx.drawImage(duckShotImg, 0, 0, 105, 90, duck.fallX, duck.fallY, 101, 90);
         duck.timeAfterDeath += 1;
     } else {
-        duckFall(duck, ctx, progress, theme);
+        duckFall(duck, ctx, progress);
     }
 }
