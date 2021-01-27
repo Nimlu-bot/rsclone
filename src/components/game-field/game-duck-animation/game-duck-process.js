@@ -5,7 +5,15 @@ import { ducksForGame, progressForGame, newProgressParameters, startGameProgress
 import { dog, dogMove, newDogParameters } from "./game-dog-animation";
 import { showCurrentStatistic } from "./game-show-current-statistic-function";
 import { ModalWindow } from "../../modal-window/modal-window.component";
-import { startGameStat, statStart, newRound, isBuletsEnd, isLevelEnd, isWin } from "../../../core/user-statistic";
+import {
+    startGameStat,
+    statStart,
+    newRound,
+    isBuletsEnd,
+    isLevelEnd,
+    isWin,
+    LooseOrEnd
+} from "../../../core/user-statistic";
 import { cloudsAdd } from "./game-clouds";
 import AudioProcessor from "../../audio-processor/audio-processor.component";
 import { CondratsBro } from "../../first-pages/psges-list/congratsBro/congrats.component";
@@ -71,7 +79,7 @@ function showModalWindow() {
 }
 
 function gameProcess() {
-    if (lvlbeginStatisticFlag) startGameStat(); // ! статистика
+    // if (lvlbeginStatisticFlag) startGameStat(); // ! статистика
     lvlbeginStatisticFlag = false; // ! статистика
     gameFlag = true;
     pauseFlag = false;
@@ -142,6 +150,7 @@ function gameProcess() {
                     // победа
                     congradituate.init(`${lang[getLang()].win}`, progress.score);
                     document.body.dispatchEvent(reloadEvent);
+                    LooseOrEnd();
                 }
                 startGameProgressParameters();
                 pauseGame();
@@ -240,7 +249,7 @@ export function startGame(context, lvl) {
     if (context) {
         // запуск начала игры(при продолжении взамен контекста ставлю null)
         shotListenerFlag = false;
-        startGameStat(); // ! статистика
+        startGameStat(lvl); // ! статистика
         startGameProgressParameters();
         if (lvl) progress.level = lvl;
         newDogParameters();

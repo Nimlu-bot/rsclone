@@ -9,10 +9,8 @@ $Color: black; //footer, year color, bg git logo
 
 body{
     // заменить??
-    background-image: url(../../assets/img/pngwing.com1.png);
+    background-image: url(../../assets/img/paper-cell.jpg);
     background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
     user-select: none;
 }
 
@@ -42,14 +40,6 @@ body{
         display: flex;
         flex-wrap: wrap;
         width: 100%;
-    }
-
-    .login-div{
-        position: absolute;
-        top: 70px;
-        right: -100%;
-        z-index: 30;
-        transition:all .5s;
     }
 
     .header,
@@ -86,18 +76,31 @@ body{
             width: 30%;
 
             .user{
-                height: 100%;
-                width:55px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
+
+                height: 100%;
+                width:55px;
+                
                 margin-right: 10px;
+                position: relative;
+                .help{
+                    display: none;
+                    flex-direction: column;
+                    position: absolute;
+                    top: 25px;
+                    left: 0;
+                }
                 .user-img{
                     position: relative;
                     height: 50px;
                     width: 50px;
                     cursor: pointer;
                 }
+            }
+            .user:hover .help{
+                display: flex;
             }
             .user:hover .user-img{
                 animation: logo-rotate 1 linear .8s;
@@ -192,6 +195,10 @@ body{
             color: $Color;
         }
     }
+}
+
+.logged{
+	filter: hue-rotate(180deg);
 }
 
 // animation

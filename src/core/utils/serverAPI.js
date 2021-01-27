@@ -1,10 +1,25 @@
+import { API_BASE_URL_PROD, API_BASE_URL_DEV, CURRENT_API } from "../constants";
+
 const axios = require("axios");
 
+const apiUrl = CURRENT_API === "dev" ? API_BASE_URL_DEV : API_BASE_URL_PROD;
+
+const getStatEvent = new CustomEvent("getStat", {
+    detail: { data: undefined },
+    bubbles: true,
+    cancelable: true
+});
+
+const getScoreEvent = new CustomEvent("getScore", {
+    detail: { data: undefined },
+    bubbles: true,
+    cancelable: true
+});
 export function statEventHandler(stat) {
     if (stat) {
         const token = localStorage.getItem("token");
         axios
-            .post("http://localhost:4000/api/stat/save", stat, {
+            .post(`${apiUrl}/api/stat/save`, stat, {
                 headers: { Authorization: `Bearer ${token}` }
             })
             .then(
@@ -20,22 +35,28 @@ export function statEventHandler(stat) {
 
 export async function getStatEventHandler() {
     const token = localStorage.getItem("token");
+
     axios
-        .get("http://localhost:4000/api/stat", {
+        .get(`${apiUrl}/api/stat`, {
             headers: { Authorization: `Bearer ${token}` }
         })
         .then(
             (response) => {
                 localStorage.setItem("userStat", JSON.stringify(response.data));
+                getStatEvent.detail.data = true;
+                document.dispatchEvent(getStatEvent);
             },
             (error) => {
                 console.log(error.response.data.message);
+                localStorage.removeItem("userStat");
+                getStatEvent.detail.data = false;
+                document.dispatchEvent(getStatEvent);
             }
         );
 }
 
 export async function getScoreEventHandler() {
-    axios.get("http://localhost:4000/api/stat/all").then(
+    axios.get(`${apiUrl}/api/stat/all`).then(
         (response) => {
             const scores = response.data;
             for (let i = 0; i < scores.length; i += 1) {
@@ -52,6 +73,8 @@ export async function getScoreEventHandler() {
             }
             // console.log(scores);
             localStorage.setItem("totalScores", JSON.stringify(scores));
+            getScoreEvent.detail.data = true;
+            document.dispatchEvent(getScoreEvent);
         },
 
         (error) => {

@@ -14,7 +14,7 @@ import { GameField } from "../game-field/game-field.component";
 import { Login } from "../login/login.component";
 import { Statistics } from "./psges-list/statistic/statistic-page.component";
 import { setLang } from "../../core/config";
-import { getScoreEventHandler, getStatEventHandler } from "../../core/utils/serverAPI";
+// import { getScoreEventHandler, getStatEventHandler } from "../../core/utils/serverAPI";
 import { lang, getLang } from "../../core/index";
 // Andrey
 import AudioProcessor from "../audio-processor/audio-processor.component";
@@ -36,45 +36,27 @@ export class FirstPages {
     }
 
     loginForm() {
-        // eslint-disable-next-line consistent-return
-        document.querySelector(".user").addEventListener("click", () => {
-            if (!document.querySelector(".game-field-main")) {
-                if (!document.querySelector(".login-div")) {
-                    const divElem = document.createElement("div");
-                    divElem.classList.add("login-div");
-                    setTimeout(() => {
-                        divElem.style.right = "5px";
-                    }, 100);
-                    document.querySelector(".game-menu").append(divElem);
-                    this.login.init();
-                    if(localStorage.getItem('theme') === '3'){
-                        document.querySelector(".login-wrapper").style.backgroundImage = "none";
-                        document.querySelector(".login-wrapper").style.backgroundColor = "rgb(28, 28, 28)";
-                        document.querySelectorAll(".login-button").forEach(elem => elem.style.color = "#fff");
-                    } else if (localStorage.getItem('theme') === '1'){
-                        document.querySelector(".login-wrapper").style.backgroundImage = "none";
-                        document.querySelector(".login-wrapper").style.backgroundColor = "#FAF0E6";
-                    } else {
-                        document.querySelector(".login-wrapper").setAttribute("style","none");
-                    }
 
-                    document.querySelectorAll(".login-button").forEach((elem) => {
-                        elem.addEventListener("click", () => {
-                            setTimeout(() => {
-                                document.querySelector(".login-div").remove();
-                            }, 100);
-                            document.querySelector(".login-div").style.right = "-100%";
-                        });
-                    });
-                } else {
-                    setTimeout(() => {
-                        document.querySelector(".login-div").remove();
-                    }, 100);
-                    document.querySelector(".login-div").style.right = "-100%";
-                }
-            } else {
-                return false;
-            }
+        this.login.init();
+
+        if(localStorage.getItem('theme') === '3'){
+            document.querySelector(".login-wrapper").style.backgroundImage = "none";
+            document.querySelector(".login-wrapper").style.backgroundColor = "rgb(28, 28, 28)";
+            document.querySelectorAll(".login-button").forEach(elem => elem.style.color = "#fff");
+        } else if (localStorage.getItem('theme') === '1'){
+            document.querySelector(".login-wrapper").style.backgroundImage = "none";
+            document.querySelector(".login-wrapper").style.backgroundColor = "#FAF0E6";
+        } else {
+            document.querySelector(".login-wrapper").setAttribute("style","none");
+        }
+// ---------------------- Удаление ----------------------------------
+        document.querySelectorAll(".login-button").forEach((elem) => {
+            elem.addEventListener("click", () => {
+
+                document.querySelector(".login-wrapper").remove();
+                this.nav();
+  
+            });
         });
     }
 
@@ -91,15 +73,16 @@ export class FirstPages {
         this.title = "Game menu";
         document.querySelector(".game-menu").style.zIndex = "25";
         document.querySelector(".pages").innerHTML = this.title;
-        document.querySelector(".game-menu").insertAdjacentHTML("afterbegin",
-                navPagesTemplate(lang
-                    // ,
-                    // ,
-                    // ,
-                    // 
-                )
-            );
-    
+        document.querySelector(".game-menu").insertAdjacentHTML(
+            "afterbegin",
+            navPagesTemplate(
+                lang
+                // ,
+                // ,
+                // ,
+                //
+            )
+        );
 
         setTimeout(() => {
             document.querySelector(".nav").style.top = "0%";
@@ -264,8 +247,8 @@ export class FirstPages {
 
         // document.querySelector(".game-menu").insertAdjacentHTML("afterbegin", statisticPagesTemplate);
         const stat = new Statistics();
-        getScoreEventHandler();
-        getStatEventHandler();
+        // getScoreEventHandler();
+        // getStatEventHandler();
         stat.init();
         setTimeout(() => {
             document.querySelector(".statistic-wrap").style.right = "0%";
@@ -462,8 +445,16 @@ export class FirstPages {
 
     init() {
         document.body.insertAdjacentHTML("afterbegin", firstPagesTemplate(lang));
-        this.nav();
-        this.loginForm();
+
+        this.loginForm()
         this.styleForTheme();
+        document.addEventListener("login", (e) => {
+            if (e.detail) {
+                document.querySelector(".user-img").classList.add("logged");
+                console.log("сделать троля зеленым и написать мыло");
+            } else {
+                console.log("что-нибудь написать о том что не залогинился");
+            }
+        });
     }
 }

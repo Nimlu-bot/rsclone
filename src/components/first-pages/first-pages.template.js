@@ -13,7 +13,10 @@ export const firstPagesTemplate = (lang) => `
         <div class="pages">${lang[getLang()].gameMenu}</div>
         
         <div class="pause-btn">
-        <div class="user"><img class="user-img" src="../../assets/img/troll.png"></div>
+        <div class="user">
+            <img class="user-img" src="../../assets/img/troll.png">
+            <div class="help">имя @mail</div>
+        </div>
         </div>
     </div>
     </div>
