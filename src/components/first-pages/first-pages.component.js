@@ -45,6 +45,17 @@ export class FirstPages {
                     }, 100);
                     document.querySelector(".game-menu").append(divElem);
                     this.login.init();
+                    if(localStorage.getItem('theme') === '3'){
+                        document.querySelector(".login-wrapper").style.backgroundImage = "none";
+                        document.querySelector(".login-wrapper").style.backgroundColor = "rgb(28, 28, 28)";
+                        document.querySelectorAll(".login-button").forEach(elem => elem.style.color = "#fff");
+                    } else if (localStorage.getItem('theme') === '1'){
+                        document.querySelector(".login-wrapper").style.backgroundImage = "none";
+                        document.querySelector(".login-wrapper").style.backgroundColor = "#FAF0E6";
+                    } else {
+                        document.querySelector(".login-wrapper").setAttribute("style","none");
+                    }
+
                     document.querySelectorAll(".login-button").forEach((elem) => {
                         elem.addEventListener("click", () => {
                             setTimeout(() => {
@@ -92,7 +103,7 @@ export class FirstPages {
             document.querySelector(".nav").style.top = "0%";
             if(localStorage.getItem('theme') === '1'){
                 document.querySelector(".nav").style.backgroundImage = "none";
-                document.querySelector(".nav").style.backgroundColor = "#fff";
+                document.querySelector(".nav").style.backgroundColor = "#FAF0E6";
             } else if (localStorage.getItem('theme') === '3'){
                 document.querySelector(".nav").style.backgroundImage = "none";
                 document.querySelector(".nav").style.backgroundColor = "rgb(28, 28, 28)";
@@ -168,7 +179,7 @@ export class FirstPages {
             document.querySelector(".level-wrap").style.bottom = "0%";
             if(localStorage.getItem('theme') === '1'){
                 document.querySelector(".level-wrap").style.backgroundImage = "none";
-                document.querySelector(".level-wrap").style.backgroundColor = "#fff";
+                document.querySelector(".level-wrap").style.backgroundColor = "#FAF0E6";
             } else if (localStorage.getItem('theme') === '3'){
                 document.querySelector(".level-wrap").style.backgroundImage = "none";
                 document.querySelector(".level-wrap").style.backgroundColor = "rgb(28, 28, 28)";
@@ -194,6 +205,7 @@ export class FirstPages {
 
     style0(){
         document.querySelector(".wrapper").setAttribute("style","none");
+        document.body.style.backgroundImage = "url(../../assets/img/pngwing.com1.png)"
         document.querySelector(".game-place").style.filter = "none";
         document.querySelector(".game-menu").style.filter = "none"  
         document.querySelector(".logo-box").style.backgroundColor = "transparent";
@@ -203,6 +215,17 @@ export class FirstPages {
         document.querySelectorAll(".autor-Name").forEach((elem) => {
             elem.style.color = "#2e0d67";
         })
+
+        if( !document.querySelector(".settings-wrap") ){
+            return false
+        } else {
+            document.querySelector(".settings-wrap").style.filter = "none";
+            document.querySelector(".settings-wrap").style.backgroundImage = "../../assets/img/paper-cell.jpg";
+            document.querySelector(".settings-wrap").style.color = "#2e0d67";
+            document.querySelector(".settings-wrap").style.backgroundColor = "transparent";
+            
+        }
+        
     }
 
     style1(){
@@ -210,7 +233,17 @@ export class FirstPages {
         document.querySelector(".wrapper").style.backgroundColor = "#FAF0E6";
         document.querySelector(".wrapper").style.backgroundImage = "none";
         document.querySelector(".wrapper").style.filter = "grayscale(100%)";
+        document.body.style.backgroundImage = "url(../../assets/img/pngwing.com.png)"
 
+        if(!document.querySelector(".settings-wrap")){
+            return false
+        } else {
+            document.querySelector(".settings-wrap").style.backgroundColor = "#FAF0E6";
+            document.querySelector(".settings-wrap").style.backgroundImage = "none";
+            document.querySelector(".settings-wrap").style.color = "#2e0d67";
+            document.querySelector(".settings-wrap").style.filter = "grayscale(100%)";  
+        }            
+    
         document.querySelector(".game-place").style.filter = "none";
         document.querySelector(".game-menu").style.filter = "none"
 
@@ -225,23 +258,35 @@ export class FirstPages {
         document.querySelector(".wrapper").setAttribute("style","none");
         document.querySelector(".wrapper").style.backgroundImage = "../../assets/img/paper-cell.jpg";
         document.querySelector(".wrapper").style.filter = "invert(100%)";
+        document.body.style.backgroundImage = "url(../../assets/img/pngwing.com1.png)" 
 
         document.querySelector(".game-place").style.filter = "none";
-        document.querySelector(".game-menu").style.filter = "none"
+        document.querySelector(".game-menu").style.filter = "none";
 
         document.querySelector(".logo-box").style.backgroundColor = "transparent";
         document.querySelector(".year").style.color = "#2e0d67";
-        document.querySelector(".user-img").src="../../assets/img/troll.png"
+        document.querySelector(".user-img").src="../../assets/img/troll.png";
         document.querySelector(".header").style.color = "#2e0d67";
-        document.querySelectorAll(".autor-Name").forEach((elem) => elem.style.color = "#2e0d67")
+        document.querySelectorAll(".autor-Name").forEach((elem) => elem.style.color = "#2e0d67");
+
+        if(!document.querySelector(".settings-wrap")){
+            return false;
+        } else {
+            document.querySelector(".settings-wrap").style.filter = "none";  
+            document.querySelector(".settings-wrap").style.backgroundImage = "../../assets/img/paper-cell.jpg";
+            document.querySelector(".settings-wrap").style.color = "rgb(46, 13, 103)";
+            document.querySelector(".settings-wrap").style.backgroundColor = "transparent";
+        }
+        
     }
 
     style3(){
         document.querySelector(".wrapper").setAttribute("style","none");
         document.querySelector(".wrapper").style.backgroundColor = "#1C1C1C";
         document.querySelector(".wrapper").style.backgroundImage = "none";
-        document.querySelector(".wrapper").style.filter = "saturate(10%)";        
-
+        document.querySelector(".wrapper").style.filter = "saturate(10%)";   
+        document.body.style.backgroundImage = "url(../../assets/img/mramor.png)"  
+        
 // rs logo
         document.querySelector(".logo-box").style.backgroundColor = "#fff";
 // header & footer text 
@@ -250,6 +295,15 @@ export class FirstPages {
         document.querySelectorAll(".autor-Name").forEach((elem) => elem.style.color = "#fff")
 // troll face 
         document.querySelector(".user-img").src="../../assets/img/trollinv.png"
+
+        if(!document.querySelector(".settings-wrap")){
+            return false;
+        } else {
+            document.querySelector(".settings-wrap").style.filter = "none";
+            document.querySelector(".settings-wrap").style.backgroundImage = "none";
+            document.querySelector(".settings-wrap").style.color = "#fff";
+            document.querySelector(".settings-wrap").style.backgroundColor = "#1C1C1C";
+        }
     }
 
     styleForTheme(){
@@ -298,16 +352,18 @@ export class FirstPages {
         this.title = "settings";
         document.querySelector(".pages").innerHTML = this.title;
         document.querySelector(".game-menu").insertAdjacentHTML("afterbegin", settingsPagesTemplate(lang));
+
         setTimeout(() => {
             document.querySelector(".settings-wrap").style.left = "0%";
             if(localStorage.getItem('theme') === '1'){
+                document.querySelector(".settings-wrap").style.backgroundColor = "#FAF0E6";
                 document.querySelector(".settings-wrap").style.backgroundImage = "none";
-                document.querySelector(".settings-wrap").style.backgroundColor = "#fff";
+                document.querySelector(".settings-wrap").style.color = "#2e0d67";
+                document.querySelector(".settings-wrap").style.filter = "grayscale(100%)";
             } else if (localStorage.getItem('theme') === '3'){
                 document.querySelector(".settings-wrap").style.backgroundImage = "none";
-                document.querySelector(".settings-wrap").style.backgroundColor = "rgb(28, 28, 28)";
                 document.querySelector(".settings-wrap").style.color = "#fff";
-
+                document.querySelector(".settings-wrap").style.backgroundColor = "#1C1C1C";
             } else {
                 document.querySelector(".settings-wrap").style.backgroundImage = "../../assets/img/paper-cell.jpg";
             }
@@ -356,7 +412,7 @@ export class FirstPages {
 
             if(localStorage.getItem('theme') === '1'){
                 document.querySelector(".statistic-wrap").style.backgroundImage = "none";
-                document.querySelector(".statistic-wrap").style.backgroundColor = "#fff";
+                document.querySelector(".statistic-wrap").style.backgroundColor = "#FAF0E6";
             } else if (localStorage.getItem('theme') === '3'){
                 document.querySelector(".statistic-wrap").style.backgroundImage = "none";
                 document.querySelector(".statistic-wrap").style.backgroundColor = "rgb(28, 28, 28)";

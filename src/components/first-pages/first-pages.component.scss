@@ -144,6 +144,7 @@ body{
         margin-top: auto;
         .content{
             justify-content: center;
+            align-items: center;
         }
         .logo-box{
             display: flex;
@@ -151,6 +152,7 @@ body{
             border-radius: 9px;
 
              .rs-logo{
+                 padding: 0 2px;
                 height: 30px;
                 width: 50px;
             }
