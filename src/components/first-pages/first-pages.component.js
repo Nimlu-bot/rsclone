@@ -10,7 +10,9 @@ import { GameField } from "../game-field/game-field.component";
 // Sergey
 import { Login } from "../login/login.component";
 import { Statistics } from "./psges-list/statistic/statistic-page.component";
-import { lang, getLang, setLang } from "../../core/config";
+import { setLang } from "../../core/config";
+// import { getScoreEventHandler, getStatEventHandler } from "../../core/utils/serverAPI";
+import { lang, getLang } from "../../core/index";
 // Andrey
 // import { ModalWindow } from "../modal-window/index";
 import AudioProcessor from "../audio-processor/audio-processor.component";
@@ -23,7 +25,7 @@ export class FirstPages {
     }
 
     score() {
-        document.querySelector(".game-field-main").insertAdjacentHTML("afterbegin", scoreTemplate);
+        document.querySelector(".game-field-main").insertAdjacentHTML("afterbegin", scoreTemplate(lang));
         setTimeout(() => {
             document.querySelector(".bullet-box").style.left = "0%";
             document.querySelector(".point-box").style.left = "0%";
@@ -32,8 +34,8 @@ export class FirstPages {
     }
 
     loginForm() {
+        // eslint-disable-next-line consistent-return
         document.querySelector(".user").addEventListener("click", () => {
-          
             if (!document.querySelector(".game-field-main")) {
                 if (!document.querySelector(".login-div")) {
                     const divElem = document.createElement("div");
@@ -43,14 +45,14 @@ export class FirstPages {
                     }, 100);
                     document.querySelector(".wrapper").append(divElem);
                     this.login.init();
-                    document.querySelectorAll(".login-button").forEach(elem => {
+                    document.querySelectorAll(".login-button").forEach((elem) => {
                         elem.addEventListener("click", () => {
                             setTimeout(() => {
                                 document.querySelector(".login-div").remove();
                             }, 100);
                             document.querySelector(".login-div").style.right = "-100%";
-                        })
-                    })
+                        });
+                    });
                 } else {
                     setTimeout(() => {
                         document.querySelector(".login-div").remove();
@@ -61,7 +63,6 @@ export class FirstPages {
                 return false;
             }
         });
-
     }
 
     continue() {
@@ -77,7 +78,16 @@ export class FirstPages {
         this.title = "Game menu";
         document.querySelector(".game-menu").style.zIndex = "25";
         document.querySelector(".pages").innerHTML = this.title;
-        document.querySelector(".game-menu").insertAdjacentHTML("afterbegin", navPagesTemplate);
+        document.querySelector(".game-menu").insertAdjacentHTML(
+            "afterbegin",
+            navPagesTemplate(
+                lang
+                // ,
+                // ,
+                // ,
+                //
+            )
+        );
 
         setTimeout(() => {
             document.querySelector(".nav").style.top = "0%";
@@ -114,13 +124,13 @@ export class FirstPages {
             }
         });
         if (document.querySelector(".game-field-main")) {
-            document.querySelector(".nav").insertAdjacentHTML("afterbegin", continueBtn);
+            document.querySelector(".nav").insertAdjacentHTML("afterbegin", continueBtn(lang[getLang()].continue));
             this.continue();
         }
     }
 
     pauseBtn() {
-        document.querySelector(".user").insertAdjacentHTML("afterend", backBtnHeader);
+        document.querySelector(".user").insertAdjacentHTML("afterend", backBtnHeader(lang[getLang()].pause));
         document.querySelector(".pause-btn-header").addEventListener("click", () => {
             document.querySelector(".game-menu").style.zIndex = "25";
             document.querySelector(".pause-btn-header").remove();
@@ -143,7 +153,7 @@ export class FirstPages {
         this.title = "level";
 
         document.querySelector(".pages").innerHTML = this.title;
-        document.querySelector(".game-menu").insertAdjacentHTML("afterbegin", levelPagesTemplate);
+        document.querySelector(".game-menu").insertAdjacentHTML("afterbegin", levelPagesTemplate(lang));
         setTimeout(() => {
             document.querySelector(".level-wrap").style.bottom = "0%";
         }, 0);
@@ -161,36 +171,33 @@ export class FirstPages {
         });
     }
 
-    theme(){
-
-        if(localStorage.getItem('theme') === null){
-            localStorage.setItem('theme',0)
-            document.getElementsByName('input_theme').forEach(elem => {
-                if(elem.value === "0"){
-                    elem.setAttribute("checked", "true")
+    theme() {
+        if (localStorage.getItem("theme") === null) {
+            localStorage.setItem("theme", 0);
+            document.getElementsByName("input_theme").forEach((elem) => {
+                if (elem.value === "0") {
+                    elem.setAttribute("checked", "true");
                 }
-            })
+            });
         } else {
-            document.getElementsByName('input_theme').forEach(elem => {
-                if(elem.value === `${localStorage.getItem('theme')}`){
-                    elem.setAttribute("checked", "true")
+            document.getElementsByName("input_theme").forEach((elem) => {
+                if (elem.value === `${localStorage.getItem("theme")}`) {
+                    elem.setAttribute("checked", "true");
                 }
-            })
+            });
         }
 
-        document.getElementsByName('input_theme').forEach(elem => {
+        document.getElementsByName("input_theme").forEach((elem) => {
             elem.addEventListener("click", () => {
-                localStorage.setItem('theme',elem.value)
-            })
-        })
-
+                localStorage.setItem("theme", elem.value);
+            });
+        });
     }
 
     settings() {
-        
         this.title = "settings";
         document.querySelector(".pages").innerHTML = this.title;
-        document.querySelector(".game-menu").insertAdjacentHTML("afterbegin", settingsPagesTemplate);
+        document.querySelector(".game-menu").insertAdjacentHTML("afterbegin", settingsPagesTemplate(lang));
         setTimeout(() => {
             document.querySelector(".settings-wrap").style.left = "0%";
         }, 0);
@@ -228,14 +235,17 @@ export class FirstPages {
 
         this.volumeChanger();
         this.panChanger();
-        this.theme()
+        this.theme();
     }
 
     statistic() {
         this.title = "statistic";
         document.querySelector(".pages").innerHTML = this.title;
+
         // document.querySelector(".game-menu").insertAdjacentHTML("afterbegin", statisticPagesTemplate);
         const stat = new Statistics();
+        // getScoreEventHandler();
+        // getStatEventHandler();
         stat.init();
         setTimeout(() => {
             document.querySelector(".statistic-wrap").style.right = "0%";
@@ -276,8 +286,16 @@ export class FirstPages {
     }
 
     init() {
-        document.body.insertAdjacentHTML("afterbegin", firstPagesTemplate);
+        document.body.insertAdjacentHTML("afterbegin", firstPagesTemplate(lang));
         this.nav();
         this.loginForm();
+        document.addEventListener("login", (e) => {
+            if (e.detail) {
+                document.querySelector(".user-img").classList.add("logged");
+                console.log("сделать троля зеленым и написать мыло");
+            } else {
+                console.log("что-нибудь написать о том что не залогинился");
+            }
+        });
     }
 }
