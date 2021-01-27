@@ -187,6 +187,10 @@ body{
     }
 }
 
+.logged{
+	filter: hue-rotate(180deg);
+}
+
 // animation
 @keyframes logo-rotate{
     25%{

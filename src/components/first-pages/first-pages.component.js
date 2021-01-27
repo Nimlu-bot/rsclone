@@ -11,7 +11,7 @@ import { GameField } from "../game-field/game-field.component";
 import { Login } from "../login/login.component";
 import { Statistics } from "./psges-list/statistic/statistic-page.component";
 import { setLang } from "../../core/config";
-import { getScoreEventHandler, getStatEventHandler } from "../../core/utils/serverAPI";
+// import { getScoreEventHandler, getStatEventHandler } from "../../core/utils/serverAPI";
 import { lang, getLang } from "../../core/index";
 // Andrey
 import AudioProcessor from "../audio-processor/audio-processor.component";
@@ -77,17 +77,16 @@ export class FirstPages {
         this.title = "Game menu";
         document.querySelector(".game-menu").style.zIndex = "25";
         document.querySelector(".pages").innerHTML = this.title;
-        document
-            .querySelector(".game-menu")
-            .insertAdjacentHTML(
-                "afterbegin",
-                navPagesTemplate(lang
-                    // ,
-                    // ,
-                    // ,
-                    // 
-                )
-            );
+        document.querySelector(".game-menu").insertAdjacentHTML(
+            "afterbegin",
+            navPagesTemplate(
+                lang
+                // ,
+                // ,
+                // ,
+                //
+            )
+        );
 
         setTimeout(() => {
             document.querySelector(".nav").style.top = "0%";
@@ -239,8 +238,8 @@ export class FirstPages {
 
         // document.querySelector(".game-menu").insertAdjacentHTML("afterbegin", statisticPagesTemplate);
         const stat = new Statistics();
-        getScoreEventHandler();
-        getStatEventHandler();
+        // getScoreEventHandler();
+        // getStatEventHandler();
         stat.init();
         setTimeout(() => {
             document.querySelector(".statistic-wrap").style.right = "0%";
@@ -284,5 +283,13 @@ export class FirstPages {
         document.body.insertAdjacentHTML("afterbegin", firstPagesTemplate(lang));
         this.nav();
         this.loginForm();
+        document.addEventListener("login", (e) => {
+            if (e.detail) {
+                document.querySelector(".user-img").classList.add("logged");
+                console.log("сделать троля зеленым и написать мыло");
+            } else {
+                console.log("что-нибудь написать о том что не залогинился");
+            }
+        });
     }
 }
