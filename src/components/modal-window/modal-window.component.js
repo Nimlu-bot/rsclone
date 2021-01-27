@@ -8,7 +8,7 @@ export class ModalWindow {
   }
 
   createWindow() {
-    document.body.insertAdjacentHTML("afterBegin", modalWindowTemplate(this.windowName, getLang()));
+    document.querySelector('.wrapper').insertAdjacentHTML("afterBegin", modalWindowTemplate(this.windowName, getLang()));
 
     const coverDiv = document.createElement('div');
     coverDiv.id = 'cover-div';
