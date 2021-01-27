@@ -205,151 +205,6 @@ export class FirstPages {
         });
     }
 
-    style0(){
-        document.querySelector(".wrapper").setAttribute("style","none");
-        document.body.style.backgroundImage = "url(../../assets/img/pngwing.com1.png)"
-        document.querySelector(".game-place").style.filter = "none";
-        document.querySelector(".game-menu").style.filter = "none"  
-        document.querySelector(".logo-box").style.backgroundColor = "transparent";
-        document.querySelector(".year").style.color = "#2e0d67";
-        document.querySelector(".user-img").src="../../assets/img/troll.png"
-        document.querySelector(".header").style.color = "#2e0d67";
-        document.querySelectorAll(".autor-Name").forEach((elem) => {
-            elem.style.color = "#2e0d67";
-        })
-
-        if( !document.querySelector(".settings-wrap") ){
-            return false
-        } else {
-            document.querySelector(".settings-wrap").style.filter = "none";
-            document.querySelector(".settings-wrap").style.backgroundImage = "../../assets/img/paper-cell.jpg";
-            document.querySelector(".settings-wrap").style.color = "#2e0d67";
-            document.querySelector(".settings-wrap").style.backgroundColor = "transparent";
-            
-        }
-        
-    }
-
-    style1(){
-        document.querySelector(".wrapper").setAttribute("style","none");
-        document.querySelector(".wrapper").style.backgroundColor = "#FAF0E6";
-        document.querySelector(".wrapper").style.backgroundImage = "none";
-        document.querySelector(".wrapper").style.filter = "grayscale(100%)";
-        document.body.style.backgroundImage = "url(../../assets/img/pngwing.com.png)"
-
-        if(!document.querySelector(".settings-wrap")){
-            return false
-        } else {
-            document.querySelector(".settings-wrap").style.backgroundColor = "#FAF0E6";
-            document.querySelector(".settings-wrap").style.backgroundImage = "none";
-            document.querySelector(".settings-wrap").style.color = "#2e0d67";
-            document.querySelector(".settings-wrap").style.filter = "grayscale(100%)";  
-        }            
-    
-        document.querySelector(".game-place").style.filter = "none";
-        document.querySelector(".game-menu").style.filter = "none"
-
-        document.querySelector(".logo-box").style.backgroundColor = "transparent";
-        document.querySelector(".year").style.color = "#2e0d67";
-        document.querySelector(".user-img").src="../../assets/img/troll.png"
-        document.querySelector(".header").style.color = "#2e0d67";
-        document.querySelectorAll(".autor-Name").forEach((elem) => elem.style.color = "#2e0d67")
-    }
-
-    style2(){
-        document.querySelector(".wrapper").setAttribute("style","none");
-        document.querySelector(".wrapper").style.backgroundImage = "../../assets/img/paper-cell.jpg";
-        document.querySelector(".wrapper").style.filter = "invert(100%)";
-        document.body.style.backgroundImage = "url(../../assets/img/pngwing.com1.png)" 
-
-        document.querySelector(".game-place").style.filter = "none";
-        document.querySelector(".game-menu").style.filter = "none";
-
-        document.querySelector(".logo-box").style.backgroundColor = "transparent";
-        document.querySelector(".year").style.color = "#2e0d67";
-        document.querySelector(".user-img").src="../../assets/img/troll.png";
-        document.querySelector(".header").style.color = "#2e0d67";
-        document.querySelectorAll(".autor-Name").forEach((elem) => elem.style.color = "#2e0d67");
-
-        if(!document.querySelector(".settings-wrap")){
-            return false;
-        } else {
-            document.querySelector(".settings-wrap").style.filter = "none";  
-            document.querySelector(".settings-wrap").style.backgroundImage = "../../assets/img/paper-cell.jpg";
-            document.querySelector(".settings-wrap").style.color = "rgb(46, 13, 103)";
-            document.querySelector(".settings-wrap").style.backgroundColor = "transparent";
-        }
-        
-    }
-
-    style3(){
-        document.querySelector(".wrapper").setAttribute("style","none");
-        document.querySelector(".wrapper").style.backgroundColor = "#1C1C1C";
-        document.querySelector(".wrapper").style.backgroundImage = "none";
-        document.querySelector(".wrapper").style.filter = "saturate(10%)";   
-        document.body.style.backgroundImage = "url(../../assets/img/mramor.png)"  
-        
-// rs logo
-        document.querySelector(".logo-box").style.backgroundColor = "#fff";
-// header & footer text 
-        document.querySelector(".year").style.color = "#fff";
-        document.querySelector(".header").style.color = "#fff";
-        document.querySelectorAll(".autor-Name").forEach((elem) => elem.style.color = "#fff")
-// troll face 
-        document.querySelector(".user-img").src="../../assets/img/trollinv.png"
-
-        if(!document.querySelector(".settings-wrap")){
-            return false;
-        } else {
-            document.querySelector(".settings-wrap").style.filter = "none";
-            document.querySelector(".settings-wrap").style.backgroundImage = "none";
-            document.querySelector(".settings-wrap").style.color = "#fff";
-            document.querySelector(".settings-wrap").style.backgroundColor = "#1C1C1C";
-        }
-    }
-
-    styleForTheme(){
-        if(localStorage.getItem('theme') === null){
-            this.style0();
-        } else if (`${localStorage.getItem('theme')}` === "0"){
-            this.style0();
-        } else if (`${localStorage.getItem('theme')}` === "1"){
-            this.style1();
-        } else if(`${localStorage.getItem('theme')}` === "2"){
-            this.style2();
-        } else if(`${localStorage.getItem('theme')}` === "3"){
-            this.style3();
-        }
-    }
-
-    theme(){
-
-        if(localStorage.getItem('theme') === null){
-            localStorage.setItem('theme',0)
-            document.getElementsByName('input_theme').forEach(elem => {
-                if(elem.value === "0"){
-                    elem.setAttribute("checked", "true")
-                }
-                this.styleForTheme();
-            })
-        } else {
-            document.getElementsByName('input_theme').forEach(elem => {
-                if(elem.value === `${localStorage.getItem('theme')}`){
-                    elem.setAttribute("checked", "true");
-                    this.styleForTheme();
-                }
-            });
-        }
-
-        document.getElementsByName("input_theme").forEach((elem) => {
-            elem.addEventListener("click", () => {
-                localStorage.setItem('theme',elem.value)
-                this.styleForTheme();
-            })
-        })
-
-    }
-
     settings() {
         this.title = "settings";
         document.querySelector(".pages").innerHTML = this.title;
@@ -423,8 +278,8 @@ export class FirstPages {
                 document.querySelector(".statistic-wrap").style.backgroundColor = "rgb(28, 28, 28)";
                 document.querySelector(".statistic-wrap").style.color = "#fff";
 
-            }else {
-                document.querySelector(".statistic-wrap").style.backgroundImage = "../../assets/img/paper-cell.jpg";
+            } else {
+                return document.querySelector(".statistic-wrap").style.backgroundImage = "../../assets/img/paper-cell.jpg";
             }
         }, 0);
         // eslint-disable-next-line consistent-return
@@ -434,6 +289,149 @@ export class FirstPages {
                 return this.nav();
             }
         });
+    }
+
+    style0(){
+        document.querySelector(".wrapper").setAttribute("style","none");
+        document.body.style.backgroundImage = "url(../../assets/img/pngwing.com1.png)"
+        document.querySelector(".game-place").style.filter = "none";
+        document.querySelector(".game-menu").style.filter = "none"  
+        document.querySelector(".logo-box").style.backgroundColor = "transparent";
+        document.querySelector(".year").style.color = "#2e0d67";
+        document.querySelector(".user-img").src="../../assets/img/troll.png"
+        document.querySelector(".header").style.color = "#2e0d67";
+        document.querySelectorAll(".autor-Name").forEach((elem) => {
+            elem.style.color = "#2e0d67";
+        })
+
+        if( !document.querySelector(".settings-wrap") ){
+            return false
+        } else {
+            document.querySelector(".settings-wrap").style.filter = "none";
+            document.querySelector(".settings-wrap").style.backgroundColor = "transparent";
+            document.querySelector(".settings-wrap").style.backgroundImage = "../../assets/img/paper-cell.jpg";
+            document.querySelector(".settings-wrap").style.color = "#2e0d67";
+        }
+        
+    }
+
+    style1(){
+        document.querySelector(".wrapper").setAttribute("style","none");
+        document.querySelector(".wrapper").style.backgroundColor = "#FAF0E6";
+        document.querySelector(".wrapper").style.backgroundImage = "none";
+        document.querySelector(".wrapper").style.filter = "grayscale(100%)";
+        document.body.style.backgroundImage = "url(../../assets/img/pngwing.com1.png)"
+
+        if(!document.querySelector(".settings-wrap")){
+            return false
+        } else {
+            document.querySelector(".settings-wrap").style.backgroundColor = "#FAF0E6";
+            document.querySelector(".settings-wrap").style.backgroundImage = "none";
+            document.querySelector(".settings-wrap").style.color = "#2e0d67";
+            document.querySelector(".settings-wrap").style.filter = "grayscale(100%)";  
+        }            
+    
+        document.querySelector(".game-place").style.filter = "none";
+        document.querySelector(".game-menu").style.filter = "none"
+
+        document.querySelector(".logo-box").style.backgroundColor = "transparent";
+        document.querySelector(".year").style.color = "#2e0d67";
+        document.querySelector(".user-img").src="../../assets/img/troll.png"
+        document.querySelector(".header").style.color = "#2e0d67";
+        document.querySelectorAll(".autor-Name").forEach((elem) => elem.style.color = "#2e0d67")
+    }
+
+    style2(){
+        document.querySelector(".wrapper").setAttribute("style","none");
+        document.querySelector(".wrapper").style.backgroundImage = "../../assets/img/paper-cell.jpg";
+        document.querySelector(".wrapper").style.filter = "invert(100%)";
+        document.body.style.backgroundImage = "url(../../assets/img/pngwing.com1.png)" 
+
+        document.querySelector(".game-place").style.filter = "none";
+        document.querySelector(".game-menu").style.filter = "none";
+
+        document.querySelector(".logo-box").style.backgroundColor = "transparent";
+        document.querySelector(".year").style.color = "#2e0d67";
+        document.querySelector(".user-img").src="../../assets/img/troll.png";
+        document.querySelector(".header").style.color = "#2e0d67";
+        document.querySelectorAll(".autor-Name").forEach((elem) => elem.style.color = "#2e0d67");
+
+        if(!document.querySelector(".settings-wrap")){
+            return false;
+        } else {
+            document.querySelector(".settings-wrap").style.filter = "none";  
+            document.querySelector(".settings-wrap").style.color = "rgb(46, 13, 103)";
+            document.querySelector(".settings-wrap").style.backgroundColor = "transparent";
+            document.querySelector(".settings-wrap").style.backgroundImage = "../../assets/img/paper-cell.jpg";
+        }
+    }
+
+    style3(){
+        document.querySelector(".wrapper").setAttribute("style","none");
+        document.querySelector(".wrapper").style.backgroundColor = "#1C1C1C";
+        document.querySelector(".wrapper").style.backgroundImage = "none";
+        document.querySelector(".wrapper").style.filter = "saturate(10%)";   
+        document.body.style.backgroundImage = "url(../../assets/img/mramor.png)"  
+        
+// rs logo
+        document.querySelector(".logo-box").style.backgroundColor = "#fff";
+// header & footer text 
+        document.querySelector(".year").style.color = "#fff";
+        document.querySelector(".header").style.color = "#fff";
+        document.querySelectorAll(".autor-Name").forEach((elem) => elem.style.color = "#fff")
+// troll face 
+        document.querySelector(".user-img").src="../../assets/img/trollinv.png"
+
+        if(!document.querySelector(".settings-wrap")){
+            return false;
+        } else {
+            document.querySelector(".settings-wrap").style.filter = "none";
+            document.querySelector(".settings-wrap").style.backgroundImage = "none";
+            document.querySelector(".settings-wrap").style.color = "#fff";
+            document.querySelector(".settings-wrap").style.backgroundColor = "#1C1C1C";
+        }
+    }
+
+    styleForTheme(){
+        if(localStorage.getItem('theme') === null){
+            this.style0();
+        } else if (`${localStorage.getItem('theme')}` === "0"){
+            this.style0();
+        } else if (`${localStorage.getItem('theme')}` === "1"){
+            this.style1();
+        } else if(`${localStorage.getItem('theme')}` === "2"){
+            this.style2();
+        } else if(`${localStorage.getItem('theme')}` === "3"){
+            this.style3();
+        }
+    }
+
+    theme(){
+
+        if(localStorage.getItem('theme') === null){
+            localStorage.setItem('theme',0)
+            document.getElementsByName('input_theme').forEach(elem => {
+                if(elem.value === "0"){
+                    elem.setAttribute("checked", "true")
+                }
+                this.styleForTheme();
+            })
+        } else {
+            document.getElementsByName('input_theme').forEach(elem => {
+                if(elem.value === `${localStorage.getItem('theme')}`){
+                    elem.setAttribute("checked", "true");
+                    this.styleForTheme();
+                }
+            });
+        }
+
+        document.getElementsByName("input_theme").forEach((elem) => {
+            elem.addEventListener("click", () => {
+                localStorage.setItem('theme',elem.value)
+                this.styleForTheme();
+            })
+        })
+
     }
 
     volumeChanger() {
