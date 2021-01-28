@@ -20,8 +20,7 @@ const cloud9 = document.createElement("img");
 cloud9.src = "../../../assets/img/cloud4_little.png";
 
 export function cloudsAdd(ctx, lvl) {
-    const lvlBackImgNumber = lvl;
-    switch (lvlBackImgNumber) {
+    switch (lvl) {
         case 1:
         case 7:
             ctx.drawImage(cloud2, 600, 150);
