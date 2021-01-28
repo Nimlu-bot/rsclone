@@ -1,22 +1,23 @@
 import "./modal-window.component.scss";
-import gameOverDog from "../../assets/img/game_over_dog.png"
-import perfectDog from "../../assets/img/dog_perfect.png"
+import perfectDog from "../../assets/img/dog_perfect.png";
+import gameOverDog from "../../assets/img/game_over_dog.png";
+import { lang } from '../../core/index';
 
 
-export const modalWindowTemplate = (name) => {
+export const modalWindowTemplate = (name, language) => {
   const gameOverWindow = `
   <div id="modal-window" class="modal-game-over-hidden">
-    <h2>Bad hunt Dude!</h2>
-    <img src=${gameOverDog} alt="dog">
-    <button type="button" id="to-main">Close</button>
+    <h2 class="modal-game-over-h2 modal-for-theme">${lang[language].badHuntDude}</h2>
+    <img src=${gameOverDog} alt="dog" class="dog-origin">
+    <button type="button" id="to-main">${lang[language].close}</button>
   </div>
   `;
 
   const perfectWindow = `
   <div id="modal-window" class="modal-perfect-hidden">
-    <h2>Awesome hunter</h2>
-    <img src=${perfectDog} alt="dog">
-    <button type="button" id="to-main">Close</button>
+    <h2 class="modal-perfect-h2 modal-for-theme">${lang[language].awesomeHunter}</h2>
+    <img src=${perfectDog} alt="dog" class="dog-origin">
+    <button type="button" id="to-main">${lang[language].close}</button>
   </div>
   `;
 

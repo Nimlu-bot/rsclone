@@ -1,4 +1,5 @@
 import { modalWindowTemplate } from "./modal-window.template";
+import { getLang } from "../../core/index";
 import AudioProcessor from "../audio-processor/audio-processor.component";
 
 export class ModalWindow {
@@ -7,7 +8,7 @@ export class ModalWindow {
   }
 
   createWindow() {
-    document.body.insertAdjacentHTML("afterBegin", modalWindowTemplate(this.windowName));
+    document.querySelector('.wrapper').insertAdjacentHTML("afterBegin", modalWindowTemplate(this.windowName, getLang()));
 
     const coverDiv = document.createElement('div');
     coverDiv.id = 'cover-div';
@@ -40,6 +41,7 @@ export class ModalWindow {
       document.querySelector('#cover-div').style.display = 'block';
       AudioProcessor.play('perfect');
     }
+
   }
 }
 

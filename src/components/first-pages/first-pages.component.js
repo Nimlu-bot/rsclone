@@ -14,6 +14,7 @@ import { setLang } from "../../core/config";
 // import { getScoreEventHandler, getStatEventHandler } from "../../core/utils/serverAPI";
 import { lang, getLang } from "../../core/index";
 // Andrey
+// import { ModalWindow } from "../modal-window/index";
 import AudioProcessor from "../audio-processor/audio-processor.component";
 
 export class FirstPages {
@@ -224,6 +225,11 @@ export class FirstPages {
                 e.target.classList.add("selected");
                 localStorage.setItem("currentLang", JSON.stringify(e.target.innerText));
                 setLang(e.target.innerText);
+                document.querySelector(".modal-game-over-h2").innerText = `${lang[getLang()].badHuntDude}`;
+                document.querySelector(".modal-perfect-h2").innerText = `${lang[getLang()].awesomeHunter}`;
+                document.querySelectorAll("#to-main").forEach((element) => {
+                    element.innerText = `${lang[getLang()].close}`;
+                });
             }
         });
 

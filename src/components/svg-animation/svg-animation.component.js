@@ -3,6 +3,7 @@ import { aimTemplate } from './aim.template';
 import { textTemplate } from './text.template';
 import { bulletTemplate } from './bullet.template';
 import { loadingBtnTemplate } from './loading.btn.template';
+import { lang, getLang } from "../../core/index";
 
 export class SvgAnimation {
 
@@ -13,7 +14,7 @@ export class SvgAnimation {
     setTimeout(() => this.aim(document.querySelector('.duck-aim')), 1900);
     setTimeout(() => {
       this.getButton().classList.add('end-loading');
-      this.getButton().innerText='Ducks are detected! Click here...'
+      this.getButton().innerText = `${lang[getLang()].ducksAreDetected}`
     }, 3500);
 
   }
@@ -23,7 +24,7 @@ export class SvgAnimation {
   }
 
   loadingBtn(tag) {
-    tag.insertAdjacentHTML("afterBegin", loadingBtnTemplate());
+    tag.insertAdjacentHTML("afterBegin", loadingBtnTemplate(getLang()));
   }
 
   duck(tag) {

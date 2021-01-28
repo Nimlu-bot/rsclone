@@ -28,8 +28,12 @@ class AudioProcessor {
     this.shot = this.createMediaElement(document.querySelector('#shot'));
     this.tittle = this.createMediaElement(document.querySelector('#tittle'));
     this.fail = this.createMediaElement(document.querySelector('#you-failed'));
-    /* window.qq = this.intro;
-    window.zz = this.registration; */ // it's for testing
+    if (localStorage.getItem('volumeLevel')) {
+      this.setVolume(+localStorage.getItem('volumeLevel'));
+    };
+    if (localStorage.getItem('panLevel')) {
+      this.setPan(+localStorage.getItem('panLevel'));
+    };
   }
 
   createMediaElement(tagAudio) {
@@ -65,10 +69,12 @@ class AudioProcessor {
 
   setVolume(volume) {
     this.gainNode.gain.value = volume;
+    localStorage.setItem('volumeLevel', volume);
   }
 
   setPan(pan) {
     this.panner.pan.value = pan;
+    localStorage.setItem('panLevel', pan);
   }
 
   get gain() {

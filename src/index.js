@@ -7,14 +7,15 @@ import { setLang } from "./core/config";
 setLang(JSON.parse(localStorage.getItem("currentLang")) || "RU");
 
 const firstPages = new FirstPages();
-new ModalWindow("perfect").createWindow();
-new ModalWindow("game-over").createWindow();
+
 const svgAnimation = new SvgAnimation();
 svgAnimation.makeGood();
 svgAnimation.getButton().addEventListener("click", () => {
     svgAnimation.removeAll();
     AudioProcessor.init();
     firstPages.init();
+    new ModalWindow("perfect").createWindow();
+    new ModalWindow("game-over").createWindow();
 });
 
 document.body.addEventListener("reloadGameEvent", () => {
