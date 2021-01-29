@@ -27,6 +27,10 @@ export class Statistics {
         const statWrapper = document.querySelector(".statistic-table-wrapper");
         statWrapper.insertAdjacentHTML("afterbegin", statisticSwicher(this.lang));
         // this.setUserTable(statWrapper);
+        const tabs = document.querySelectorAll(".stat-tab");
+        [...tabs].forEach((el) => {
+            el.classList.add("disabled");
+        });
         getStatEventHandler();
 
         // document.querySelector(".stat-get").addEventListener("click", () => {
@@ -73,25 +77,37 @@ export class Statistics {
         document.querySelector(".stat-user").addEventListener("click", (e) => {
             document.querySelector(".stat-table").remove();
             this.setUserTable(statWrapper);
-            const tabs = document.querySelectorAll(".stat-tab");
+            // const tabs = document.querySelectorAll(".stat-tab");
+
             [...tabs].forEach((el) => el.classList.remove("selected"));
             e.target.classList.add("selected");
         });
         document.querySelector(".stat-total").addEventListener("click", (e) => {
-            getScoreEventHandler();
             document.querySelector(".stat-table").remove();
+            getScoreEventHandler();
+
             this.setScoreTable(statWrapper);
-            const tabs = document.querySelectorAll(".stat-tab");
-            [...tabs].forEach((el) => el.classList.remove("selected"));
+            // const tabs = document.querySelectorAll(".stat-tab");
+            [...tabs].forEach((el) => {
+                el.classList.remove("selected");
+                el.classList.add("disabled");
+            });
             e.target.classList.add("selected");
         });
 
         document.addEventListener("getStat", () => {
+            [...tabs].forEach((el) => {
+                el.classList.remove("disabled");
+            });
             this.setUserTable(statWrapper);
         });
         document.addEventListener("getScore", () => {
             const statTable = document.querySelector(".stat-table");
             if (statTable) statTable.remove();
+            //  const tabs = document.querySelectorAll(".stat-tab");
+            [...tabs].forEach((el) => {
+                el.classList.remove("disabled");
+            });
             this.setScoreTable(statWrapper);
         });
     }
@@ -115,7 +131,6 @@ export class Statistics {
 
     setUserTable(item) {
         item.insertAdjacentHTML("beforeend", statisticTableHeader(this.lang));
-
         if (localStorage.getItem("userStat")) {
             this.getStat("userStat", statisticsTemplate);
         } else {

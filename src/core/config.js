@@ -51,7 +51,8 @@ const EN = {
     standart: "Standart",
     pencil: "Pencil draw",
     vision: "Night vision",
-    night: "Night"
+    night: "Night",
+    continueWithoutRegistration: "Continue without registration"
 };
 const RU = {
     Login: "Вход",
@@ -106,7 +107,8 @@ const RU = {
     standart: "Стандартная",
     pencil: "Простой карандащ",
     vision: "Ночное видение",
-    night: "Ночь"
+    night: "Ночь",
+    continueWithoutRegistration: "Продолжить без регистрации"
 };
 
 const BY = {
@@ -162,7 +164,8 @@ const BY = {
     standart: "стандартная",
     pencil: "просты аловак",
     vision: "начное бачанне",
-    night: "ноч"
+    night: "ноч",
+    continueWithoutRegistration: "Працягнуць без рэгістрацыі"
 };
 
 export const lang = {
@@ -178,5 +181,3 @@ export function getLang() {
 export function setLang(l) {
     currentLang = l;
 }
-
-

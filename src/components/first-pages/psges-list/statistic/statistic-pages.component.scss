@@ -67,3 +67,7 @@ $color-lines:#2e0d67;
 .selected{
 	color: brown;
 }
+.disabled{
+	pointer-events: none;
+	color: grey;
+}

@@ -48,9 +48,9 @@ export class FirstPages {
                     document.querySelectorAll(".login-button").forEach((elem) => {
                         elem.addEventListener("click", () => {
                             setTimeout(() => {
-                                document.querySelector(".login-div").remove();
+                                // document.querySelector(".login-div").remove();
                             }, 100);
-                            document.querySelector(".login-div").style.right = "-100%";
+                            // document.querySelector(".login-div").style.right = "0";
                         });
                     });
                 } else {
@@ -290,10 +290,11 @@ export class FirstPages {
         this.nav();
         this.loginForm();
         document.addEventListener("login", (e) => {
-            if (e.detail) {
+            if (e.detail.data) {
                 document.querySelector(".user-img").classList.add("logged");
                 console.log("сделать троля зеленым и написать мыло");
             } else {
+                document.querySelector(".user-img").classList.add("not-logged");
                 console.log("что-нибудь написать о том что не залогинился");
             }
         });

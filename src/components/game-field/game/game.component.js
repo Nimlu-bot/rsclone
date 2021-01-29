@@ -9,9 +9,7 @@ export class Game {
 
     init(lvl) {
         const field = document.querySelector(".game-field-main");
-        console.log(`тут${lvl}`);
         field.insertAdjacentHTML("beforeend", gameTemplate(CANVAS_WIDTH, CANVAS_HEIGTH));
-        console.log("canvas created");
 
         const canvas = document.querySelector(".game-canvas");
         const ctx = canvas.getContext("2d");

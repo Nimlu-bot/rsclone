@@ -1,5 +1,5 @@
-import './login.component.scss';
-import { lang } from '../../core/index';
+import "./login.component.scss";
+import { lang } from "../../core/index";
 import "../../assets/css/general-style.scss";
 
 export const loginTemplate = (language) => {
@@ -14,6 +14,7 @@ export const loginTemplate = (language) => {
 			<button class = "login-button signup game-btn">${lang[language].signUp}</button>
 		</div>
 		<div class="login-message"></div>
+		<div class= "login-without">${lang[language].continueWithoutRegistration}</div>
 	</div>
 `;
 };
