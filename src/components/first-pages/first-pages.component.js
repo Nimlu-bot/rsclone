@@ -2,7 +2,7 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable consistent-return */
 import { backBtnHeader, continueBtn } from "./psges-list/backBtnHeader/backBtnHeader.template";
-
+import {setFootHeadLang} from "./psges-list/lengFooterHeader/lengFH.component";
 import { settingsPagesTemplate } from "./psges-list/settings/settings-pages.template";
 import { navPagesTemplate } from "./psges-list/nav/nav-pages.template";
 import { levelPagesTemplate } from "./psges-list/level/level-pages.template";
@@ -19,6 +19,8 @@ import { lang, getLang } from "../../core/index";
 // Andrey
 // import { ModalWindow } from "../modal-window/index";
 import AudioProcessor from "../audio-processor/audio-processor.component";
+
+const changeLangEvent = new Event("changeLang");
 
 export class FirstPages {
     constructor() {
@@ -71,7 +73,7 @@ export class FirstPages {
     }
 
     nav() {
-        this.title = "Game menu";
+        this.title = `${lang[getLang()].gameMenu}`;
         document.querySelector(".game-menu").style.zIndex = "25";
         document.querySelector(".pages").innerHTML = this.title;
         document.querySelector(".game-menu").insertAdjacentHTML(
@@ -157,7 +159,7 @@ export class FirstPages {
     }
 
     level() {
-        this.title = "level";
+        this.title = `${lang[getLang()].level}`;
 
         document.querySelector(".pages").innerHTML = this.title;
         document.querySelector(".game-menu").insertAdjacentHTML("afterbegin", levelPagesTemplate(lang));
@@ -190,7 +192,7 @@ export class FirstPages {
     }
 
     settings() {
-        this.title = "settings";
+        this.title = `${lang[getLang()].settings}`;
         document.querySelector(".pages").innerHTML = this.title;
         document.querySelector(".game-menu").insertAdjacentHTML("afterbegin", settingsPagesTemplate(lang));
 
@@ -226,6 +228,7 @@ export class FirstPages {
                 document.querySelector(".settings-wrap").remove();
                 return this.nav();
             }
+
             if (e.target.closest(".lang-container")) {
                 const langContainer = document.querySelector(".lang-container");
                 const selected = langContainer.querySelectorAll(".selected");
@@ -234,21 +237,23 @@ export class FirstPages {
                 e.target.classList.add("selected");
                 localStorage.setItem("currentLang", JSON.stringify(e.target.innerText));
                 setLang(e.target.innerText);
+                
                 document.querySelector(".modal-game-over-h2").innerText = `${lang[getLang()].badHuntDude}`;
                 document.querySelector(".modal-perfect-h2").innerText = `${lang[getLang()].awesomeHunter}`;
                 document.querySelectorAll("#to-main").forEach((element) => {
                     element.innerText = `${lang[getLang()].close}`;
                 });
+                document.body.dispatchEvent(changeLangEvent);
+                
             }
         });
-
         this.volumeChanger();
         this.panChanger();
         this.theme();
     }
 
     statistic() {
-        this.title = "statistic";
+        this.title = `${lang[getLang()].statistic}`;
         document.querySelector(".pages").innerHTML = this.title;
 
         // document.querySelector(".game-menu").insertAdjacentHTML("afterbegin", statisticPagesTemplate);
@@ -451,7 +456,6 @@ export class FirstPages {
 
     init() {
         document.body.insertAdjacentHTML("afterbegin", firstPagesTemplate(lang));
-
         this.loginForm()
         this.styleForTheme();
         document.addEventListener("login", (e) => {
@@ -464,3 +468,5 @@ export class FirstPages {
         });
     }
 }
+
+document.body.addEventListener("changeLang", () => {setFootHeadLang()});
