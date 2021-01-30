@@ -242,7 +242,7 @@ export class FirstPages {
                     element.innerText = `${lang[getLang()].close}`;
                 });
                 document.body.dispatchEvent(changeLangEvent);
-                
+                this.theme();
             }
         });
         this.volumeChanger();
@@ -417,9 +417,11 @@ export class FirstPages {
             });
         }
 
-        document.getElementsByName("input_theme").forEach((elem) => {
+        document.querySelectorAll(".theme").forEach((elem) => {
             elem.addEventListener("click", () => {
-                localStorage.setItem('theme',elem.value)
+                elem.firstChild.checked = "true";
+                
+                localStorage.setItem('theme',elem.firstChild.value)
                 this.styleForTheme();
             })
         })

@@ -19,10 +19,10 @@ export const settingsPagesTemplate =(lang)=> `
     <div class="lang-container"><p class="settings-lang">EN</p><p class="settings-lang">RU</p><p class="settings-lang">BY</p></div>
     <div class="theme-wrapp">
         <span class="title">${lang[getLang()].theme}</span>
-        <span><input type="radio" name="input_theme" value="0">${lang[getLang()].standart}</span>
-        <span><input type="radio" name="input_theme" value="1">${lang[getLang()].pencil}</span>
-        <span><input type="radio" name="input_theme" value="2">${lang[getLang()].vision}</span>
-        <span><input type="radio" name="input_theme" value="3">${lang[getLang()].night}</span>
+        <span class="theme"><input type="radio" name="input_theme" value="0">${lang[getLang()].standart}</span>
+        <span class="theme"><input type="radio" name="input_theme" value="1">${lang[getLang()].pencil}</span>
+        <span class="theme"><input type="radio" name="input_theme" value="2">${lang[getLang()].vision}</span>
+        <span class="theme"><input type="radio" name="input_theme" value="3">${lang[getLang()].night}</span>
     </div>
     <div class="settings-btn game-btn" id="settings-back">${lang[getLang()].back}</div>
 </div>

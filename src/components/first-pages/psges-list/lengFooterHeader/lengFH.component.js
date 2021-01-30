@@ -6,10 +6,10 @@ export function setFootHeadLang(){
 
     document.querySelector(".theme-wrapp").innerHTML = `
         <span class="title">${lang[getLang()].theme}</span>
-        <span><input type="radio" name="input_theme" value="0">${lang[getLang()].standart}</span>
-        <span><input type="radio" name="input_theme" value="1">${lang[getLang()].pencil}</span>
-        <span><input type="radio" name="input_theme" value="2">${lang[getLang()].vision}</span>
-        <span><input type="radio" name="input_theme" value="3">${lang[getLang()].night}</span>
+        <span class="theme"><input type="radio" name="input_theme" value="0">${lang[getLang()].standart}</span>
+        <span class="theme"><input type="radio" name="input_theme" value="1">${lang[getLang()].pencil}</span>
+        <span class="theme"><input type="radio" name="input_theme" value="2">${lang[getLang()].vision}</span>
+        <span class="theme"><input type="radio" name="input_theme" value="3">${lang[getLang()].night}</span>
     `
     document.getElementById("settings-back").innerHTML = `${lang[getLang()].back}`;
 

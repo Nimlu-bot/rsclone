@@ -4,6 +4,7 @@
     padding: 80px 50px;
     border-radius: 5px;
     box-shadow: 0 0 10px black;
+    width: 300px;
 
     position: relative;
     left: -90%;
@@ -32,6 +33,7 @@
             //border-bottom: 3px solid black;
         }
         .settings-lang:hover{
+            cursor: pointer;
             transform: scale(1.1);
         }
     }
@@ -40,6 +42,12 @@
         flex-direction: column;
         .title{
             text-align: center;
+        }
+        .theme{
+            cursor: pointer;
+        }
+        .theme:hover{
+            color: brown;
         }
 
         input{

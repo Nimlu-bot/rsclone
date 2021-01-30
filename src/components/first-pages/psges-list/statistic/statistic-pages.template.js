@@ -4,7 +4,7 @@ import { getLang } from "../../../../core/index";
 
 import { lang } from "../../../../core/config";
 
-export const statisticPagesTemplate = `
+export const statisticPagesTemplate = ( lang ) =>`
 <div class="statistic-wrap">
 <div class = "statistic-table-wrapper"></div>
 <div class ="stat-message"></div>
