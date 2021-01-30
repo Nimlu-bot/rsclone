@@ -15,7 +15,9 @@ export const firstPagesTemplate = (lang) => `
         <div class="pause-btn">
         <div class="user">
             <img class="user-img" src="../../assets/img/troll.png">
-            <div class="help">имя @mail</div>
+            <div class="help">
+                Пройди регистрацию дружок ...
+            </div>
         </div>
         </div>
     </div>

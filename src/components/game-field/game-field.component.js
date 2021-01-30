@@ -9,7 +9,6 @@ export class GameField {
     init(lvl) {
         const list = document.querySelector(".game-place");
         list.style.zIndex = "15";
-        console.log(`level ${lvl}`);
         list.insertAdjacentHTML("beforeend", gameFieldTemplate);
         this.game.init(lvl);
     }

@@ -16,7 +16,6 @@ let soundCounter = 0;
 
 // функция для рандомного изменения направления
 export function randomWithoutZero() {
-    // const stepPathChangeArr = [-20, -10, 10, 20];
     const stepPathChangeArr = [-5, -10, 10, 5];
     return stepPathChangeArr[Math.round(Math.random() * 3)];
 }
@@ -31,10 +30,6 @@ export function newDucksParameters(ducks) {
     ducks.duck2.timeAfterDeath = 0;
     ducks.duck1.isLive = true;
     ducks.duck2.isLive = true;
-
-    // ducks.duck1.goAvay=false;
-    // ducks.duck2.goAvay=false;
-
     ducks.duck1.moveX = 500 + randomWithoutZero();
     ducks.duck1.moveY = 480;
     ducks.duck2.moveX = 250 + randomWithoutZero();
@@ -48,7 +43,7 @@ export function newDucksParameters(ducks) {
 
 // здесь только логика смены направления движения и отрисовка картинки с учетом направления
 export function duckMove(ctx, duck, ducks, progress) {
-    // звук
+    // звук с учетом скорости смены кадров
     soundCounter += 1;
     if (soundCounter === 2) {
         AudioProcessor.reset("quack");
@@ -69,7 +64,6 @@ export function duckMove(ctx, duck, ducks, progress) {
     duck.num += 1;
     // duck.frameCounter+=1;
     if (duck.num > 3) duck.num = 0;
-
     // проверяем столкновение со стеной
     if (duck.moveX < 10) duck.randomPathChangeX = Math.abs(randomWithoutZero());
     if (duck.moveY < 10) duck.randomPathChangeY = Math.abs(randomWithoutZero());

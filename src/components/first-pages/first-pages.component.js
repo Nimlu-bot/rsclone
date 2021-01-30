@@ -207,8 +207,6 @@ export class FirstPages {
                 document.querySelector(".settings-wrap").style.backgroundImage = "none";
                 document.querySelector(".settings-wrap").style.color = "#fff";
                 document.querySelector(".settings-wrap").style.backgroundColor = "#1C1C1C";
-            } else {
-                document.querySelector(".settings-wrap").style.backgroundImage = "../../assets/img/paper-cell.jpg";
             }
             
         }, 0);
@@ -322,7 +320,7 @@ export class FirstPages {
             document.querySelector(".settings-wrap").style.backgroundColor = "#FAF0E6";
             document.querySelector(".settings-wrap").style.backgroundImage = "none";
             document.querySelector(".settings-wrap").style.color = "#2e0d67";
-            document.querySelector(".settings-wrap").style.filter = "grayscale(100%)";  
+            document.querySelector(".settings-wrap").style.filter = "grayscale(100%)";
         }            
     
         document.querySelector(".game-place").style.filter = "none";

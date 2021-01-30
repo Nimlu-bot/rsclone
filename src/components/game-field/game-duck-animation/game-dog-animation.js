@@ -7,7 +7,7 @@ let frameNum = 0;
 let frameString = 0;
 let frameNumLaught = 3;
 let dogGoX = 0;
-let dogGoY = 400;
+let dogGoY = 410;
 let dogIngrassX = 290;
 let dogInGrassY = 370;
 let frameCounter = 0;
@@ -27,7 +27,7 @@ export function newDogParameters() {
     frameString = 0;
     frameNumLaught = 3;
     dogGoX = 0;
-    dogGoY = 400;
+    dogGoY = 410;
     dogIngrassX = 290;
     dogInGrassY = 370;
     frameCounter = 0;
@@ -53,14 +53,13 @@ export function dogMove(ctx, time, gameProcess, progress, showCurrentStatistic) 
             AudioProcessor.reset("intro");
             AudioProcessor.play("intro");
         }
-        dogGoY = 410;
         ctx.globalCompositeOperation = "source-over";
         ctx.drawImage(dogImg, 560 * frameNum, 390 * frameString, 555, 410, dogGoX, dogGoY, 250, 180);
         if (frameCounter < 35) {
-            // иначе замирает и принюхивается
             dogGoX += 5;
             frameNum += 1;
             if (frameNum > 4) frameNum = 0;
+            // иначе замирает и принюхивается
         } else {
             frameNum === 3 ? (frameNum = 4) : (frameNum = 3);
         }
@@ -84,10 +83,6 @@ export function dogMove(ctx, time, gameProcess, progress, showCurrentStatistic) 
             ctx.globalCompositeOperation = "source-over";
             frameString = 1;
             if (frameCounter < 7) {
-                if (frameCounterLaught === 30) {
-                    AudioProcessor.reset("bark");
-                    AudioProcessor.play("bark");
-                }
                 ctx.drawImage(dogImg, 560 * frameNum, 410 * frameString, 560, 600, dogGoX, dogGoY - 20, 264, 270);
             }
             if (frameCounter === 2) {
@@ -104,6 +99,10 @@ export function dogMove(ctx, time, gameProcess, progress, showCurrentStatistic) 
                 progress.bullet = 4;
                 showCurrentStatistic(progress);
             }
+            if (frameCounterLaught === 30) {
+                AudioProcessor.reset("bark");
+                AudioProcessor.play("bark");
+            }
             frameCounter += 1;
             if (frameCounter > 2) {
                 // замерла с поднятыми ушами
@@ -117,7 +116,7 @@ export function dogMove(ctx, time, gameProcess, progress, showCurrentStatistic) 
                     frameNum = 0;
                     frameString = 0;
                     dogGoX = 0;
-                    dogGoY = 400;
+                    dogGoY = 410;
                     frameCounter = 0;
                 }
             }
