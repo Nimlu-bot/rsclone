@@ -24,6 +24,6 @@ export const settingsPagesTemplate =(lang)=> `
         <span><input type="radio" name="input_theme" value="2">${lang[getLang()].vision}</span>
         <span><input type="radio" name="input_theme" value="3">${lang[getLang()].night}</span>
     </div>
-    <div class="settings-btn game-btn" id="settings-back">back</div>
+    <div class="settings-btn game-btn" id="settings-back">${lang[getLang()].back}</div>
 </div>
 `;

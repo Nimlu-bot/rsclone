@@ -213,6 +213,28 @@ function shot(event) {
 }
 
 export function startGame(context, lvl) {
+    console.log("!!!!!!");
+    canvas = document.querySelector(".game-canvas");
+    const theme = +localStorage.getItem("theme");
+    console.log("!!!!!!");
+    switch (theme) {
+        case 1:
+            canvas.style.cursor =
+                "url(../../../assets/img/aim50chB.png), url(../../../assets/img/aim50chB.png) 25 25, default";
+            break;
+        case 2:
+            canvas.style.cursor =
+                "url(../../../assets/img/aim50green.png), url(../../../assets/img/aim50green.png) 25 25, default";
+            break;
+        case 3:
+            canvas.style.cursor =
+                "url(../../../assets/img/aim50Inv.png), url(../../../assets/img/aim50Inv.png) 25 25, default";
+            break;
+        default:
+            canvas.style.cursor =
+                "url(../../../assets/img/aim50.png), url(../../../assets/img/aim50.png) 25 25, default";
+            break;
+    }
     AudioProcessor.pause("breakTime");
     showCurrentStatistic(progressForGame);
     canvas = document.querySelector(".game-canvas");

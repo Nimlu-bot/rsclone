@@ -1,40 +1,19 @@
-import "../../assets/css/nullstyle.scss";
-import "./first-pages.component.scss";
-import { getLang } from "../../core/index";
+import { lang, getLang } from "../../../../core/index";
 
-export const firstPagesTemplate = (lang) => `
-<div class="wrapper">
 
-<!-- header -->
-    <div class="header">
-    <div class="content">
-        
-        <h1>Duck Hunt</h1>
-        <div class="pages">${lang[getLang()].gameMenu}</div>
-        
-        <div class="pause-btn">
-        <div class="user">
-            <img class="user-img" src="../../assets/img/troll.png">
-            <div class="help">
-                Пройди регистрацию дружок ...
-            </div>
-        </div>
-        </div>
-    </div>
-    </div>
+export function setFootHeadLang(){
+    document.querySelector(".pages").innerHTML = `${lang[getLang()].statistic}`
 
-<!-- main -->
-    <div class="main">
-    <div class="content">
+    document.querySelector(".theme-wrapp").innerHTML = `
+        <span class="title">${lang[getLang()].theme}</span>
+        <span><input type="radio" name="input_theme" value="0">${lang[getLang()].standart}</span>
+        <span><input type="radio" name="input_theme" value="1">${lang[getLang()].pencil}</span>
+        <span><input type="radio" name="input_theme" value="2">${lang[getLang()].vision}</span>
+        <span><input type="radio" name="input_theme" value="3">${lang[getLang()].night}</span>
+    `
+    document.getElementById("settings-back").innerHTML = `${lang[getLang()].back}`;
 
-    <div class="game-place"></div>
-    <div class="game-menu"></div>
-
-    </div>       
-    </div> 
-
-<!-- footer-->
-    <div class="footer">
+    document.querySelector('.footer').innerHTML = `
     <div class="content">
 
     <a class="logo-box" href = "https://rs.school/js/"><img class="rs-logo" src="../../assets/img/rs-school-js.svg" alt="rs-logo" /></a>
@@ -48,7 +27,6 @@ export const firstPagesTemplate = (lang) => `
     <div class="year">2021</div>
 
     </div>
-    </div>
+    `
+}
 
-</div>
-`;
