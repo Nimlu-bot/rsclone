@@ -26,10 +26,28 @@
     .lang-container{
         display: flex;
         justify-content: space-around;
-        margin: 5px auto;
+				margin: 5px auto;
+				.settings-lang{
+					flex: 1;
+					text-align: center;
+					margin: 0 10px;
+				}
         .selected{
+					position: relative;
             color: brown;
-            //border-bottom: 3px solid black;
+						// border-bottom: 3px solid  brown;
+						&::after{
+							content: "";
+  						position: absolute;
+  						bottom: 0;
+  						left: 0;
+  						width: 30px;
+  						height: 3px;
+  						background-color: brown;
+  						right: 0;
+  						margin: 0 auto;
+  						display: block;
+						}
         }
         .settings-lang:hover{
             transform: scale(1.1);

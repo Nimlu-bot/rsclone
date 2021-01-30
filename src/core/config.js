@@ -174,7 +174,7 @@ export const lang = {
     BY
 };
 
-let currentLang = "BY";
+let currentLang = "RU";
 export function getLang() {
     return currentLang;
 }
