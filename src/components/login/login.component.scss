@@ -62,4 +62,12 @@ $colour-login: #2e0d67;
 			transform: scale(0.9);
 		}
 	}
+	.login-as{
+		margin: 10px auto;
+		cursor: pointer;
+		&:hover{
+			transform: scale(0.9);
+		}
+	}
+	
 }

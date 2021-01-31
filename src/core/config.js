@@ -52,7 +52,8 @@ const EN = {
     pencil: "Pencil draw",
     vision: "Night vision",
     night: "Night",
-    continueWithoutRegistration: "Continue without registration"
+    continueWithoutRegistration: "Continue without registration",
+    loginAs: "Login as"
 };
 const RU = {
     Login: "Вход",
@@ -108,7 +109,8 @@ const RU = {
     pencil: "Простой карандащ",
     vision: "Ночное видение",
     night: "Ночь",
-    continueWithoutRegistration: "Продолжить без регистрации"
+    continueWithoutRegistration: "Продолжить без регистрации",
+    loginAs: "Войти как"
 };
 
 const BY = {
@@ -165,7 +167,8 @@ const BY = {
     pencil: "просты аловак",
     vision: "начное бачанне",
     night: "ноч",
-    continueWithoutRegistration: "Працягнуць без рэгістрацыі"
+    continueWithoutRegistration: "Працягнуць без рэгістрацыі",
+    loginAs: "Увайсці як"
 };
 
 export const lang = {

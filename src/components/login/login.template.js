@@ -3,6 +3,10 @@ import { lang } from "../../core/index";
 import "../../assets/css/general-style.scss";
 
 export const loginTemplate = (language) => {
+    // let email = null;
+    // if (localStorage.getItem("email")) {
+    //     email = localStorage.getItem("email");
+    // }
     return `
 	<div class = "login-wrapper">
 		<input class = "login-email" autocomplete="off" placeholder="${lang[language].eMail}" type="email" name="email" required >
@@ -16,5 +20,11 @@ export const loginTemplate = (language) => {
 		<div class="login-message"></div>
 		<div class= "login-without">${lang[language].continueWithoutRegistration}</div>
 	</div>
+`;
+};
+
+export const autoLogin = (language, email) => {
+    return `
+	<div class= "login-as">${lang[language].loginAs} ${email}</div>
 `;
 };

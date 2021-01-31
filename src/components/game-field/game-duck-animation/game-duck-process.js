@@ -188,8 +188,8 @@ function shot(event) {
         if (progressForGame.bullet > 0) {
             progressForGame.bullet -= 1;
             AudioProcessor.reset("shot");
-						AudioProcessor.play("shot");
-						isBuletsEnd(); // ! статистика
+            AudioProcessor.play("shot");
+            isBuletsEnd(); // ! статистика
             const clickX = event.clientX - canvas.getBoundingClientRect().left + 25;
             const clickY = event.clientY - canvas.getBoundingClientRect().top + 25;
             if (clickY < 480) {
