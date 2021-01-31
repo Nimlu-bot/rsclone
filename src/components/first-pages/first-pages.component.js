@@ -78,13 +78,7 @@ export class FirstPages {
         document.querySelector(".pages").innerHTML = this.title;
         document.querySelector(".game-menu").insertAdjacentHTML(
             "afterbegin",
-            navPagesTemplate(
-                lang
-                // ,
-                // ,
-                // ,
-                //
-            )
+            navPagesTemplate(lang)
         );
 
         setTimeout(() => {
