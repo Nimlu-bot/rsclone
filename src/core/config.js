@@ -53,7 +53,11 @@ const EN = {
     standart: "Standart",
     pencil: "Pencil draw",
     vision: "Night vision",
-    night: "Night"
+    night: "Night",
+    continueWithoutRegistration: "Continue without registration",
+    loginAs: "Login as",
+    hello: "Hello",
+    foreverAlone: "Forever alone"
 };
 const RU = {
     Login: "Вход",
@@ -110,7 +114,11 @@ const RU = {
     standart: "Стандартная",
     pencil: "Простой карандащ",
     vision: "Ночное видение",
-    night: "Ночь"
+    night: "Ночь",
+    continueWithoutRegistration: "Продолжить без регистрации",
+    loginAs: "Войти как",
+    hello: "Привет",
+    foreverAlone: "Вечно одинок"
 };
 
 const BY = {
@@ -168,7 +176,11 @@ const BY = {
     standart: "стандартная",
     pencil: "просты аловак",
     vision: "начное бачанне",
-    night: "ноч"
+    night: "ноч",
+    continueWithoutRegistration: "Працягнуць без рэгістрацыі",
+    loginAs: "Увайсці як",
+    hello: "Прывитанне",
+    foreverAlone: "Вечна адзінокі"
 };
 
 export const lang = {
@@ -177,12 +189,10 @@ export const lang = {
     BY
 };
 
-let currentLang = "BY";
+let currentLang = "RU";
 export function getLang() {
     return currentLang;
 }
 export function setLang(l) {
     currentLang = l;
 }
-
-

@@ -19,7 +19,7 @@ $colour-login: #2e0d67;
 		font-size: inherit;
 		min-width: 80%;
 
-		color: $colour-login;
+		color: inherit;
 		background-color: transparent;
 		background-image: url(../../assets/img/button_slim.png);
 		background-size: 98% 90%;
@@ -33,7 +33,7 @@ $colour-login: #2e0d67;
 		font-size: 18px;
 		line-height: 20px;
 		margin: 0 0 0 10px;
-		color:$colour-login;
+		color:inherit;
 	}
 	.login-buttons-wrapper{
 		font-size: inherit;
@@ -52,6 +52,22 @@ $colour-login: #2e0d67;
 	}
 	.login-message{
 		text-align: center;
-		color: $colour-login;
+		color: inherit;
+		margin: 10px auto;
 	}
+	.login-without{
+		margin: 0 auto;
+		cursor: pointer;
+		&:hover{
+			transform: scale(0.9);
+		}
+	}
+	.login-as{
+		margin: 10px auto;
+		cursor: pointer;
+		&:hover{
+			transform: scale(0.9);
+		}
+	}
+	
 }
