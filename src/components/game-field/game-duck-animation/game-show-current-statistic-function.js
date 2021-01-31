@@ -30,3 +30,4 @@ export function showCurrentStatistic(currentProgress) {
         score.insertAdjacentHTML("beforeend", `<p>${lang[getLang()].lvl}${currentProgress.level}</p>`);
     }
 }
+
