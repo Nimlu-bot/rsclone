@@ -12,7 +12,9 @@ export class ModalWindow {
 
     const coverDiv = document.createElement('div');
     coverDiv.id = 'cover-div';
-    document.body.append(coverDiv);
+    if (!document.querySelector('#cover-div')) {
+      document.body.querySelector('.wrapper').append(coverDiv);
+    }
 
     document.querySelector('#to-main').addEventListener('click', () => {
       document.body.style.overflowY = '';

@@ -11,9 +11,9 @@ export const settingsPagesTemplate =(lang)=> `
         </div>
 
         <div class="panner-container">
-            <span>L</span>
+            <span>${lang[getLang()].panLeft}</span>
             <input type="range" id="panner" min="-1" max="1" value="0" step="0.01" class="input-slider">
-            <span>R</span>
+            <span>${lang[getLang()].panRight}</span>
         </div>
     </div>
     <div class="lang-container"><p class="settings-lang">EN</p><p class="settings-lang">RU</p><p class="settings-lang">BY</p></div>
