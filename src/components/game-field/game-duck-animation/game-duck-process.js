@@ -185,11 +185,11 @@ function shot(event) {
             default:
                 break;
         }
-        isBuletsEnd(); // ! статистика
         if (progressForGame.bullet > 0) {
             progressForGame.bullet -= 1;
             AudioProcessor.reset("shot");
             AudioProcessor.play("shot");
+            isBuletsEnd(); // ! статистика
             const clickX = event.clientX - canvas.getBoundingClientRect().left + 25;
             const clickY = event.clientY - canvas.getBoundingClientRect().top + 25;
             if (clickY < 480) {
@@ -243,7 +243,8 @@ export function startGame(context, lvl) {
     if (context) {
         // запуск начала игры(при продолжении взамен контекста ставлю null)
         shotListenerFlag = false;
-        startGameStat(lvl); // ! статистика
+        startGameStat(lvl);
+        statStart(); // ! статистика
         startGameProgressParameters();
         if (lvl) progressForGame.level = lvl;
         newDogParameters();

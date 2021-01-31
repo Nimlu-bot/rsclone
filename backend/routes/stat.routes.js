@@ -6,6 +6,7 @@ const User = require("../models/User");
 const router = Router();
 
 router.post("/save", auth, async (req, res) => {
+    const now = new Date();
     try {
         const { time, ducks, hits, kills, score } = req.body;
         const stat = new Stat({
@@ -18,19 +19,27 @@ router.post("/save", auth, async (req, res) => {
         });
         await stat.save();
         res.status(201).json({ stat });
+
+        console.log(`${now} user with id ${req.user.userId} stat save`);
     } catch (e) {
         res.status(500).json({ message: "SomethingWentWrongTryAgain" }); // Что-то пошло не так, попробуйте снова
+        console.log(`${now} Error user with id ${req.user.userId} stat save`);
     }
 });
 router.get("/", auth, async (req, res) => {
+    const now = new Date();
     try {
         const stat = await Stat.find({ owner: req.user.userId });
         res.json(stat);
+
+        console.log(`${now} user with id ${req.user.userId} stat get`);
     } catch (e) {
         res.status(500).json({ message: "SomethingWentWrongTryAgain" }); // Что-то пошло не так, попробуйте снова
+        console.log(`${now} Error user with id ${req.user.userId} stat get`);
     }
 });
 router.get("/all", async (req, res) => {
+    const now = new Date();
     try {
         const users = await User.find({}, { email: 1 });
         const rez = new Array(users.length);
@@ -42,8 +51,10 @@ router.get("/all", async (req, res) => {
             users[i]._id = null;
         }
         res.json(users);
+        console.log(`${now} all stat get`);
     } catch (e) {
         res.status(500).json({ message: "SomethingWentWrongTryAgain" }); // Что-то пошло не так, попробуйте снова
+        console.log(`${now}  Error all stat get`);
     }
 });
 module.exports = router;
