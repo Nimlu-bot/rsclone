@@ -78,32 +78,37 @@ function gameProcess() {
     gameFlag = true;
     pauseFlag = false;
     ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGTH);
-    // отрисовываем фон
     ctx.drawImage(treeGrass, 0, 0, 1008, 724, 0, 80, CANVAS_WIDTH, CANVAS_HEIGTH);
-
     dogMove(ctx, time, gameProcess, progressForGame, showCurrentStatistic);
-
     if (dog.scaredDucks) {
         // ускоряем движение
         clearInterval(time.moveIntervalId);
         time.frameTime = 85 - progressForGame.level * 7;
         time.moveIntervalId = setInterval(() => gameProcess(), time.frameTime);
         ctx.globalCompositeOperation = "destination-over";
-        // если еще не закончилось время и пули
-        if (ducksForGame.duck1.timeAfterStartFly < Math.ceil(200 * (80 / time.frameTime)) && progressForGame.bullet !== 0) {
+        // если еще не закончилось время
+        if (ducksForGame.duck1.timeAfterStartFly < Math.ceil(200 * (80 / time.frameTime))) {
             if (ducksForGame.duck1.isLive) {
-                duckMove(ctx, ducksForGame.duck1, ducksForGame, progressForGame);
-                ducksForGame.duck1.timeAfterStartFly += 1;
+                if (progressForGame.bullet !== 0) {
+                    duckMove(ctx, ducksForGame.duck1, ducksForGame, progressForGame);
+                    ducksForGame.duck1.timeAfterStartFly += 1;
+                } else {
+                    duckGoAway(ducksForGame.duck1, ctx, progressForGame);
+                }
             } else {
                 duckShot(ducksForGame.duck1, ctx, progressForGame);
             }
         } else if (ducksForGame.duck1.isLive) {
             duckGoAway(ducksForGame.duck1, ctx, progressForGame);
         }
-        if (ducksForGame.duck2.timeAfterStartFly < Math.ceil(200 * (80 / time.frameTime)) && progressForGame.bullet !== 0) {
+        if (ducksForGame.duck2.timeAfterStartFly < Math.ceil(200 * (80 / time.frameTime))) {
             if (ducksForGame.duck2.isLive) {
-                duckMove(ctx, ducksForGame.duck2, ducksForGame, progressForGame);
-                ducksForGame.duck2.timeAfterStartFly += 1;
+                if (progressForGame.bullet !== 0) {
+                    duckMove(ctx, ducksForGame.duck2, ducksForGame, progressForGame);
+                    ducksForGame.duck2.timeAfterStartFly += 1;
+                } else {
+                    duckGoAway(ducksForGame.duck2, ctx, progressForGame);
+                }
             } else {
                 duckShot(ducksForGame.duck2, ctx, progressForGame);
             }
@@ -182,29 +187,27 @@ function shot(event) {
         }
         isBuletsEnd(); // ! статистика
         if (progressForGame.bullet > 0) {
-            if (!pauseFlag && gameFlag) {
-                progressForGame.bullet -= 1;
-                AudioProcessor.reset("shot");
-                AudioProcessor.play("shot");
-                const clickX = event.clientX - canvas.getBoundingClientRect().left + 25;
-                const clickY = event.clientY - canvas.getBoundingClientRect().top + 25;
-                if (clickY < 480) {
-                    if (
-                        clickX > ducksForGame.duck1.moveX + 5 - hittingError &&
-                        clickX < ducksForGame.duck1.moveX + 101 - 5 + hittingError &&
-                        clickY > ducksForGame.duck1.moveY + 5 - hittingError &&
-                        clickY < ducksForGame.duck1.moveY + 90 - 5 + hittingError
-                    ) {
-                        ducksForGame.duck1.isLive = false;
-                    }
-                    if (
-                        clickX > ducksForGame.duck2.moveX + 5 - hittingError &&
-                        clickX < ducksForGame.duck2.moveX + 101 - 5 + hittingError &&
-                        clickY > ducksForGame.duck2.moveY + 5 - hittingError &&
-                        clickY < ducksForGame.duck2.moveY + 90 - 5 + hittingError
-                    ) {
-                        ducksForGame.duck2.isLive = false;
-                    }
+            progressForGame.bullet -= 1;
+            AudioProcessor.reset("shot");
+            AudioProcessor.play("shot");
+            const clickX = event.clientX - canvas.getBoundingClientRect().left + 25;
+            const clickY = event.clientY - canvas.getBoundingClientRect().top + 25;
+            if (clickY < 480) {
+                if (
+                    clickX > ducksForGame.duck1.moveX + 5 - hittingError &&
+                    clickX < ducksForGame.duck1.moveX + 101 - 5 + hittingError &&
+                    clickY > ducksForGame.duck1.moveY + 5 - hittingError &&
+                    clickY < ducksForGame.duck1.moveY + 90 - 5 + hittingError
+                ) {
+                    ducksForGame.duck1.isLive = false;
+                }
+                if (
+                    clickX > ducksForGame.duck2.moveX + 5 - hittingError &&
+                    clickX < ducksForGame.duck2.moveX + 101 - 5 + hittingError &&
+                    clickY > ducksForGame.duck2.moveY + 5 - hittingError &&
+                    clickY < ducksForGame.duck2.moveY + 90 - 5 + hittingError
+                ) {
+                    ducksForGame.duck2.isLive = false;
                 }
             }
         }
@@ -213,10 +216,8 @@ function shot(event) {
 }
 
 export function startGame(context, lvl) {
-    console.log("!!!!!!");
     canvas = document.querySelector(".game-canvas");
     const theme = +localStorage.getItem("theme");
-    console.log("!!!!!!");
     switch (theme) {
         case 1:
             canvas.style.cursor =
@@ -260,6 +261,9 @@ export function startGame(context, lvl) {
 
     time.moveIntervalId = setInterval(() => gameProcess(), time.frameTime);
 
-    if (!shotListenerFlag) canvas.addEventListener("click", (event) => shot(event));
+    if (!shotListenerFlag) {
+        canvas.addEventListener("click", (event) => shot(event));
+        document.body.addEventListener("changeLang", () => showCurrentStatistic(progressForGame));
+    }
     shotListenerFlag = true;
 }
