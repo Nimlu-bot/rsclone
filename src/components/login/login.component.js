@@ -126,6 +126,10 @@ export class Login {
             bubbles: true,
             cancelable: true
         });
+
+        localStorage.removeItem("token");
+        localStorage.removeItem("id");
+        localStorage.removeItem("email");
         loginEvent.detail.data = false;
         document.dispatchEvent(loginEvent);
     }

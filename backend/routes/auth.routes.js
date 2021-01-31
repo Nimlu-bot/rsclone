@@ -1,18 +1,18 @@
-const { Router } = require('express');
-const bcrypt = require('bcryptjs');
-const config = require('config');
-const jwt = require('jsonwebtoken');
-const { check, validationResult } = require('express-validator');
-const User = require('../models/User');
+const { Router } = require("express");
+const bcrypt = require("bcryptjs");
+const config = require("config");
+const jwt = require("jsonwebtoken");
+const { check, validationResult } = require("express-validator");
+const User = require("../models/User");
 
 const router = Router();
 
 // /api/auth/register
 router.post(
-    '/register',
+    "/register",
     [
-        check('email', 'IncorrectEmail').isEmail(), // Некорректный email
-        check('password', 'MinimumPasswordLength6Characters').isLength({
+        check("email", "IncorrectEmail").isEmail(), // Некорректный email
+        check("password", "MinimumPasswordLength6Characters").isLength({
             // Минимальная длина пароля 6 символов
             min: 6
         })
@@ -20,14 +20,16 @@ router.post(
     // eslint-disable-next-line consistent-return
     async (req, res) => {
         // res.set("Access-Control-Allow-Origin", "*");
+        const now = new Date();
         try {
-            console.log(req.body);
+            // console.log(req.body);
             const errors = validationResult(req);
 
             if (!errors.isEmpty()) {
+                console.log(`${now} Error user ${req.body.email} Incorrect data`);
                 return res.status(401).json({
                     errors: errors.array(),
-                    message: 'IncorrectRegistrationData' // Некорректные данные при регистрации
+                    message: "IncorrectRegistrationData" // Некорректные данные при регистрации
                 });
             }
 
@@ -36,38 +38,42 @@ router.post(
             const candidate = await User.findOne({ email });
 
             if (candidate) {
-                return res.status(401).json({ message: 'ThisUserAlreadyExists' }); // Такой пользователь уже существует
+                console.log(`${now} Error user ${email} Already Exists`);
+                return res.status(401).json({ message: "ThisUserAlreadyExists" }); // Такой пользователь уже существует
             }
 
             const hashedPassword = await bcrypt.hash(password, 12);
             const user = new User({ email, password: hashedPassword });
 
             await user.save();
+            console.log(`${now} user ${user.email} creater`);
 
-            res.status(201).json({ message: 'UserCreated' }); // Пользователь создан
+            res.status(201).json({ message: "UserCreated" }); // Пользователь создан
         } catch (e) {
-            res.status(500).json({ message: 'SomethingWentWrongTryAgain' }); // Что-то пошло не так, попробуйте снова
+            res.status(500).json({ message: "SomethingWentWrongTryAgain" }); // Что-то пошло не так, попробуйте снова
+            console.log(`${now} Error user not creted`);
         }
     }
 );
 
 // /api/auth/login
 router.post(
-    '/login',
+    "/login",
     [
-        check('email', 'PleaseEnterAValidEmail').normalizeEmail().isEmail(), // Введите корректный email
-        check('password', 'enterPassword').exists() // Введите пароль
+        check("email", "PleaseEnterAValidEmail").normalizeEmail().isEmail(), // Введите корректный email
+        check("password", "enterPassword").exists() // Введите пароль
     ],
     // eslint-disable-next-line consistent-return
     async (req, res) => {
+        const now = new Date();
         try {
-            console.log(req.body);
+            // console.log(req.body);
             const errors = validationResult(req);
 
             if (!errors.isEmpty()) {
                 return res.status(401).json({
                     errors: errors.array(),
-                    message: 'InvalidLoginData' // Некорректный данные при входе в систему
+                    message: "InvalidLoginData" // Некорректный данные при входе в систему
                 });
             }
 
@@ -76,22 +82,24 @@ router.post(
             const user = await User.findOne({ email });
 
             if (!user) {
-                return res.status(401).json({ message: 'UserIsNotFound' }); // Пользователь не найден
+                return res.status(401).json({ message: "UserIsNotFound" }); // Пользователь не найден
             }
 
             const isMatch = await bcrypt.compare(password, user.password);
 
             if (!isMatch) {
-                return res.status(401).json({ message: 'InvalidPasswordTryAgain' }); // Неверный пароль, попробуйте снова
+                return res.status(401).json({ message: "InvalidPasswordTryAgain" }); // Неверный пароль, попробуйте снова
             }
 
-            const token = jwt.sign({ userId: user.id }, config.get('jwtSecret'), {
-                expiresIn: '1h'
+            const token = jwt.sign({ userId: user.id }, config.get("jwtSecret"), {
+                expiresIn: "10h"
             });
 
             res.json({ token, userId: user.id });
+            console.log(`${now} user ${email} logged in`);
         } catch (e) {
-            res.status(500).json({ message: 'SomethingWentWrongTryAgain' }); // Что-то пошло не так, попробуйте снова
+            res.status(500).json({ message: "SomethingWentWrongTryAgain" }); // Что-то пошло не так, попробуйте снова
+            console.log(`${now} Error user not logged in`);
         }
     }
 );
