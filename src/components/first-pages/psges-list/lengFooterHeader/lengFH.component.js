@@ -3,6 +3,11 @@ import { lang, getLang } from "../../../../core/index";
 
 export function setFootHeadLang(){
     document.querySelector(".pages").innerHTML = `${lang[getLang()].statistic}`
+    document.querySelector(".panner-container").innerHTML = `
+    <span>${lang[getLang()].panLeft}</span>
+    <input type="range" id="panner" min="-1" max="1" value="0" step="0.01" class="input-slider">
+    <span>${lang[getLang()].panRight}</span>
+    `;
 
     document.querySelector(".theme-wrapp").innerHTML = `
         <span class="title">${lang[getLang()].theme}</span>
