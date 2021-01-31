@@ -55,7 +55,9 @@ const EN = {
     vision: "Night vision",
     night: "Night",
     continueWithoutRegistration: "Continue without registration",
-    loginAs: "Login as"
+    loginAs: "Login as",
+    hello: "Hello",
+    foreverAlone: "Forever alone"
 };
 const RU = {
     Login: "Вход",
@@ -114,7 +116,9 @@ const RU = {
     vision: "Ночное видение",
     night: "Ночь",
     continueWithoutRegistration: "Продолжить без регистрации",
-    loginAs: "Войти как"
+    loginAs: "Войти как",
+    hello: "Привет",
+    foreverAlone: "Вечно одинок"
 };
 
 const BY = {
@@ -174,7 +178,9 @@ const BY = {
     vision: "начное бачанне",
     night: "ноч",
     continueWithoutRegistration: "Працягнуць без рэгістрацыі",
-    loginAs: "Увайсці як"
+    loginAs: "Увайсці як",
+    hello: "Прывитанне",
+    foreverAlone: "Вечна адзінокі"
 };
 
 export const lang = {

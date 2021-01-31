@@ -19,6 +19,7 @@ import { lang, getLang } from "../../core/index";
 // Andrey
 // import { ModalWindow } from "../modal-window/index";
 import AudioProcessor from "../audio-processor/audio-processor.component";
+import { User } from "./psges-list/user";
 
 const changeLangEvent = new Event("changeLang");
 
@@ -79,10 +80,7 @@ export class FirstPages {
         this.title = `${lang[getLang()].gameMenu}`;
         document.querySelector(".game-menu").style.zIndex = "25";
         document.querySelector(".pages").innerHTML = this.title;
-        document.querySelector(".game-menu").insertAdjacentHTML(
-            "afterbegin",
-            navPagesTemplate(lang)
-        );
+        document.querySelector(".game-menu").insertAdjacentHTML("afterbegin", navPagesTemplate(lang));
 
         setTimeout(() => {
             document.querySelector(".nav").style.top = "0%";
@@ -443,13 +441,16 @@ export class FirstPages {
         this.loginForm();
         this.styleForTheme();
         document.addEventListener("login", (e) => {
+            const user = new User();
             if (e.detail.data) {
-                document.querySelector(".user-img").classList.add("logged");
+                user.login(lang);
+                // document.querySelector(".user-img").classList.add("logged");
                 console.log("сделать троля зеленым и написать мыло");
                 document.querySelector(".login-wrapper").remove();
                 this.nav();
             } else {
-                document.querySelector(".user-img").classList.add("not-logged");
+                user.alone(lang);
+                // document.querySelector(".user-img").classList.add("not-logged");
                 console.log("что-нибудь написать о том что не залогинился");
                 document.querySelector(".login-wrapper").remove();
                 this.nav();
