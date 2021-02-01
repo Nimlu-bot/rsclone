@@ -12,26 +12,21 @@ export class ModalWindow {
     if (localStorage.getItem("theme") === null) {
       document.querySelectorAll(".modal-list").forEach(elem => {
         elem.setAttribute("style", "none");
-        elem.style.display= "block"; 
     })} else if (`${localStorage.getItem("theme")}` === "0") {
       document.querySelectorAll(".modal-list").forEach(elem => {
         elem.setAttribute("style", "none");
-        elem.style.display= "block"; 
     })} else if (`${localStorage.getItem("theme")}` === "1") {
       document.querySelectorAll(".modal-list").forEach(elem => {
         elem.setAttribute("style", "none");
-        elem.style.display= "block"; 
         elem.style.backgroundImage = "none";
         elem.style.backgroundColor = "#FAF0E6";
         elem.style.color = "#2e0d67";
     })} else if (`${localStorage.getItem("theme")}` === "2") {
       document.querySelectorAll(".modal-list").forEach(elem => {
       elem.setAttribute("style", "none");
-      elem.style.display= "block"; 
     })} else if (`${localStorage.getItem("theme")}` === "3") {
       document.querySelectorAll(".modal-list").forEach(elem => {
         elem.setAttribute("style", "none");
-        elem.style.display= "block"; 
         elem.style.backgroundImage = "none";
         elem.style.backgroundColor = "#1C1C1C";
         elem.style.color = "#fff";
@@ -65,17 +60,18 @@ export class ModalWindow {
   showWindow() {
     document.body.style.overflowY = 'hidden';
     if (this.windowName === 'game-over') {
+      this.theme();
       document.querySelector('.modal-game-over-hidden').style.display = 'block';
       document.querySelector('#cover-div').style.display = 'block';
       AudioProcessor.play('gameOver');
-      this.theme();
     }
 
     if (this.windowName === 'perfect') {
+      this.theme();
       document.querySelector('.modal-perfect-hidden').style.display = 'block';
       document.querySelector('#cover-div').style.display = 'block';
       AudioProcessor.play('perfect');
-      this.theme();
+      
     }
 
   }
