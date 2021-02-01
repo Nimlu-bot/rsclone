@@ -1,7 +1,8 @@
 import { lang, getLang } from "../../../../core/index";
 
 export function setFootHeadLang() {
-    document.querySelector(".pages").innerHTML = `${lang[getLang()].statistic}`;
+    document.querySelector(".pages").innerHTML = `${lang[getLang()].settings}`;
+    
     document.querySelector(".panner-container").innerHTML = `
     <span>${lang[getLang()].panLeft}</span>
     <input type="range" id="panner" min="-1" max="1" value="0" step="0.01" class="input-slider">
@@ -10,11 +11,11 @@ export function setFootHeadLang() {
 
     document.querySelector(".theme-wrapp").innerHTML = `
         <span class="title">${lang[getLang()].theme}</span>
-        <span><input type="radio" name="input_theme" value="0">${lang[getLang()].standart}</span>
-        <span><input type="radio" name="input_theme" value="1">${lang[getLang()].pencil}</span>
-        <span><input type="radio" name="input_theme" value="2">${lang[getLang()].vision}</span>
-        <span><input type="radio" name="input_theme" value="3">${lang[getLang()].night}</span>
-    `;
+        <span class="theme"><input type="radio" name="input_theme" value="0">${lang[getLang()].standart}</span>
+        <span class="theme"><input type="radio" name="input_theme" value="1">${lang[getLang()].pencil}</span>
+        <span class="theme"><input type="radio" name="input_theme" value="2">${lang[getLang()].vision}</span>
+        <span class="theme"><input type="radio" name="input_theme" value="3">${lang[getLang()].night}</span>
+    `
     document.getElementById("settings-back").innerHTML = `${lang[getLang()].back}`;
 
     document.querySelector(".footer").innerHTML = `

@@ -38,6 +38,11 @@ export class FirstPages {
             document.querySelector(".point-box").style.left = "0%";
             document.querySelector(".total-box").style.left = "0%";
         }, 0);
+        if (`${localStorage.getItem("theme")}` === "3") {
+            document.querySelector(".total-box").style.color = "#fff";
+        }else {
+            document.querySelector(".total-box").setAttribute("style", "none");
+        }
     }
 
     loginForm() {
@@ -74,6 +79,7 @@ export class FirstPages {
             document.querySelector(".game-menu").style.zIndex = "10";
             document.querySelector(".game-menu").style.backgroundColor = "transparent";
             this.pauseBtn();
+            document.querySelector(".pages").innerHTML = `${lang[getLang()].game}`;
         });
     }
 
@@ -143,10 +149,10 @@ export class FirstPages {
     }
 
     start(lvl) {
+        this.title = `${lang[getLang()].game}`;
         document.querySelector(".game-place").innerHTML = "";
         document.querySelector(".game-menu").style.zIndex = "10";
         document.querySelector(".game-menu").style.backgroundColor = "transparent";
-        this.title = "game";
         document.querySelector(".pages").innerHTML = this.title;
         this.pauseBtn();
         this.gameField.init(lvl);
@@ -235,6 +241,7 @@ export class FirstPages {
                     element.innerText = `${lang[getLang()].close}`;
                 });
                 document.body.dispatchEvent(changeLangEvent);
+                this.theme();
             }
         });
         this.volumeChanger();
@@ -292,13 +299,15 @@ export class FirstPages {
             elem.style.color = "#2e0d67";
         });
 
-        if (!document.querySelector(".settings-wrap")) {
-            return false;
+        if (document.querySelector(".total-box")) {
+            document.querySelector(".total-box").setAttribute("style","none");
+            document.querySelector(".total-box").style.left = "0%";
         }
-        document.querySelector(".settings-wrap").style.filter = "none";
-        document.querySelector(".settings-wrap").style.backgroundColor = "transparent";
-        document.querySelector(".settings-wrap").style.backgroundImage = "../../assets/img/paper-cell.jpg";
-        document.querySelector(".settings-wrap").style.color = "#2e0d67";
+
+        if( document.querySelector(".settings-wrap")) {
+            document.querySelector(".settings-wrap").setAttribute("style","none");
+            document.querySelector(".settings-wrap").style.left = "0%";
+        }
     }
 
     style1() {
@@ -306,35 +315,32 @@ export class FirstPages {
         document.querySelector(".wrapper").style.backgroundColor = "#FAF0E6";
         document.querySelector(".wrapper").style.backgroundImage = "none";
         document.querySelector(".wrapper").style.filter = "grayscale(100%)";
+        document.querySelector(".header").style.color = "#2e0d67";
+        document.querySelector(".user-img").src = "../../assets/img/troll.png";
         document.body.style.backgroundImage = "url(../../assets/img/pngwing.com1.png)";
 
-        if (!document.querySelector(".settings-wrap")) {
-            return false;
-        }
-        document.querySelector(".settings-wrap").style.backgroundColor = "#FAF0E6";
-        document.querySelector(".settings-wrap").style.backgroundImage = "none";
-        document.querySelector(".settings-wrap").style.color = "#2e0d67";
-        document.querySelector(".settings-wrap").style.filter = "grayscale(100%)";
-
-        document.querySelector(".game-place").style.filter = "none";
-        document.querySelector(".game-menu").style.filter = "none";
-
-        document.querySelector(".logo-box").style.backgroundColor = "transparent";
-        document.querySelector(".year").style.color = "#2e0d67";
-        if (this.isLogged) {
-            document.querySelector(".user-img").src = "../../assets/img/troll.png";
-        } else {
-            document.querySelector(".user-img").src = "../../assets/img/alone.png";
-        }
-        document.querySelector(".header").style.color = "#2e0d67";
         document.querySelectorAll(".autor-Name").forEach((elem) => (elem.style.color = "#2e0d67"));
+        document.querySelector(".logo-box").style.backgroundColor = "none";
+        document.querySelector(".year").style.color = "#2e0d67";
+
+        if (document.querySelector(".total-box")) {
+            document.querySelector(".total-box").setAttribute("style","none");
+            document.querySelector(".total-box").style.left = "0%";
+        }
+
+        if (document.querySelector(".settings-wrap")) {
+            document.querySelector(".settings-wrap").style.backgroundColor = "#FAF0E6";
+            document.querySelector(".settings-wrap").style.backgroundImage = "none";
+            document.querySelector(".settings-wrap").style.color = "#2e0d67";
+            document.querySelector(".settings-wrap").style.filter = "grayscale(100%)";
+        }
     }
 
     style2() {
         document.querySelector(".wrapper").setAttribute("style", "none");
         document.querySelector(".wrapper").style.backgroundImage = "../../assets/img/paper-cell.jpg";
         document.querySelector(".wrapper").style.filter = "invert(100%)";
-        document.body.style.backgroundImage = "url(../../assets/img/pngwing.com1.png)";
+        document.body.style.backgroundImage = "url(../../assets/img/mramor.png)" 
 
         document.querySelector(".game-place").style.filter = "none";
         document.querySelector(".game-menu").style.filter = "none";
@@ -349,13 +355,18 @@ export class FirstPages {
         document.querySelector(".header").style.color = "#2e0d67";
         document.querySelectorAll(".autor-Name").forEach((elem) => (elem.style.color = "#2e0d67"));
 
-        if (!document.querySelector(".settings-wrap")) {
-            return false;
+        if (document.querySelector(".total-box")) {
+            document.querySelector(".total-box").setAttribute("style","none");
+            document.querySelector(".total-box").style.left = "0%";
         }
-        document.querySelector(".settings-wrap").style.filter = "none";
-        document.querySelector(".settings-wrap").style.color = "rgb(46, 13, 103)";
-        document.querySelector(".settings-wrap").style.backgroundColor = "transparent";
-        document.querySelector(".settings-wrap").style.backgroundImage = "../../assets/img/paper-cell.jpg";
+        if (document.querySelector(".settings-wrap")) {
+            document.querySelector(".settings-wrap").setAttribute("style","none");
+            document.querySelector(".settings-wrap").style.left = "0%";
+            document.querySelector(".settings-wrap").style.filter = "none";  
+            document.querySelector(".settings-wrap").style.color = "rgb(46, 13, 103)";
+            document.querySelector(".settings-wrap").style.backgroundColor = "transparent";
+            document.querySelector(".settings-wrap").style.backgroundImage = "../../assets/img/paper-cell.jpg";
+        } 
     }
 
     style3() {
@@ -363,7 +374,7 @@ export class FirstPages {
         document.querySelector(".wrapper").style.backgroundColor = "#1C1C1C";
         document.querySelector(".wrapper").style.backgroundImage = "none";
         document.querySelector(".wrapper").style.filter = "saturate(10%)";
-        document.body.style.backgroundImage = "url(../../assets/img/mramor.png)";
+        document.body.style.backgroundImage = "url(../../assets/img/mramor.png)";     
 
         // rs logo
         document.querySelector(".logo-box").style.backgroundColor = "#fff";
@@ -378,13 +389,21 @@ export class FirstPages {
             document.querySelector(".user-img").src = "../../assets/img/alone_inv.png";
         }
 
-        if (!document.querySelector(".settings-wrap")) {
-            return false;
+        if (document.querySelector(".total-box")) {
+            document.querySelector(".total-box").setAttribute("style","none");
+            document.querySelector(".total-box").style.left = "0%";
+            document.querySelector(".total-box").style.color = "#fff";
         }
-        document.querySelector(".settings-wrap").style.filter = "none";
-        document.querySelector(".settings-wrap").style.backgroundImage = "none";
-        document.querySelector(".settings-wrap").style.color = "#fff";
-        document.querySelector(".settings-wrap").style.backgroundColor = "#1C1C1C";
+            
+        if (document.querySelector(".settings-wrap")) {
+            document.querySelector(".settings-wrap").setAttribute("style","none");
+            document.querySelector(".settings-wrap").style.left = "0%";
+            document.querySelector(".settings-wrap").style.filter = "none";
+            document.querySelector(".settings-wrap").style.backgroundImage = "none";
+            document.querySelector(".settings-wrap").style.color = "#fff";
+            document.querySelector(".settings-wrap").style.backgroundColor = "#1C1C1C";
+        }      
+
     }
 
     styleForTheme() {
@@ -419,9 +438,11 @@ export class FirstPages {
             });
         }
 
-        document.getElementsByName("input_theme").forEach((elem) => {
+        document.querySelectorAll(".theme").forEach((elem) => {
             elem.addEventListener("click", () => {
-                localStorage.setItem("theme", elem.value);
+                elem.firstChild.checked = "true";
+                
+                localStorage.setItem('theme',elem.firstChild.value)
                 this.styleForTheme();
             });
         });

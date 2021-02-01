@@ -1,14 +1,13 @@
 import "../../../../assets/css/general-style.scss";
 import "./statistic-pages.component.scss";
-import { getLang } from "../../../../core/index";
 
 import { lang } from "../../../../core/config";
 
-export const statisticPagesTemplate = `
+export const statisticPagesTemplate = ( language ) =>`
 <div class="statistic-wrap">
-<div class = "statistic-table-wrapper"></div>
-<div class ="stat-message"></div>
-    <div class="statistic-btn game-btn" id="statistic-back">${lang[getLang()].back}</div>
+	<div class = "statistic-table-wrapper"></div>
+	<div class ="stat-message"></div>
+    <div class="statistic-btn game-btn" id="statistic-back">${lang[language].back}</div>
 </div>
 `;
 
