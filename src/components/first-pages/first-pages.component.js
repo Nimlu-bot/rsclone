@@ -28,6 +28,7 @@ export class FirstPages {
         this.title = "Game menu";
         this.gameField = new GameField();
         this.login = new Login();
+        this.isLogged = false;
     }
 
     score() {
@@ -281,7 +282,11 @@ export class FirstPages {
         document.querySelector(".game-menu").style.filter = "none";
         document.querySelector(".logo-box").style.backgroundColor = "transparent";
         document.querySelector(".year").style.color = "#2e0d67";
-        document.querySelector(".user-img").src = "../../assets/img/troll.png";
+        if (this.isLogged) {
+            document.querySelector(".user-img").src = "../../assets/img/troll.png";
+        } else {
+            document.querySelector(".user-img").src = "../../assets/img/alone.png";
+        }
         document.querySelector(".header").style.color = "#2e0d67";
         document.querySelectorAll(".autor-Name").forEach((elem) => {
             elem.style.color = "#2e0d67";
@@ -316,7 +321,11 @@ export class FirstPages {
 
         document.querySelector(".logo-box").style.backgroundColor = "transparent";
         document.querySelector(".year").style.color = "#2e0d67";
-        document.querySelector(".user-img").src = "../../assets/img/troll.png";
+        if (this.isLogged) {
+            document.querySelector(".user-img").src = "../../assets/img/troll.png";
+        } else {
+            document.querySelector(".user-img").src = "../../assets/img/alone.png";
+        }
         document.querySelector(".header").style.color = "#2e0d67";
         document.querySelectorAll(".autor-Name").forEach((elem) => (elem.style.color = "#2e0d67"));
     }
@@ -332,7 +341,11 @@ export class FirstPages {
 
         document.querySelector(".logo-box").style.backgroundColor = "transparent";
         document.querySelector(".year").style.color = "#2e0d67";
-        document.querySelector(".user-img").src = "../../assets/img/troll.png";
+        if (this.isLogged) {
+            document.querySelector(".user-img").src = "../../assets/img/troll.png";
+        } else {
+            document.querySelector(".user-img").src = "../../assets/img/alone.png";
+        }
         document.querySelector(".header").style.color = "#2e0d67";
         document.querySelectorAll(".autor-Name").forEach((elem) => (elem.style.color = "#2e0d67"));
 
@@ -359,7 +372,11 @@ export class FirstPages {
         document.querySelector(".header").style.color = "#fff";
         document.querySelectorAll(".autor-Name").forEach((elem) => (elem.style.color = "#fff"));
         // troll face
-        document.querySelector(".user-img").src = "../../assets/img/trollinv.png";
+        if (this.isLogged) {
+            document.querySelector(".user-img").src = "../../assets/img/trollinv.png";
+        } else {
+            document.querySelector(".user-img").src = "../../assets/img/alone_inv.png";
+        }
 
         if (!document.querySelector(".settings-wrap")) {
             return false;
@@ -443,17 +460,21 @@ export class FirstPages {
         document.addEventListener("login", (e) => {
             const user = new User();
             if (e.detail.data) {
-                user.login(lang);
+                this.isLogged = true;
                 // document.querySelector(".user-img").classList.add("logged");
                 console.log("сделать троля зеленым и написать мыло");
                 document.querySelector(".login-wrapper").remove();
                 this.nav();
+                this.styleForTheme();
+                user.login(lang);
             } else {
-                user.alone(lang);
+                this.isLogged = false;
                 // document.querySelector(".user-img").classList.add("not-logged");
                 console.log("что-нибудь написать о том что не залогинился");
                 document.querySelector(".login-wrapper").remove();
                 this.nav();
+                this.styleForTheme();
+                user.alone(lang);
             }
         });
     }
