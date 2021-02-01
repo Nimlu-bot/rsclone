@@ -202,12 +202,12 @@ body{
     }
 }
 
-.logged{
-	filter: hue-rotate(180deg);
-}
-.not-logged{
-	filter: invert(100%);
-}
+// .logged{
+// 	filter: hue-rotate(180deg);
+// }
+// .not-logged{
+// 	filter: invert(100%);
+// }
 // animation
 @keyframes logo-rotate{
     25%{
