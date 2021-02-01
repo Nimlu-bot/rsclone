@@ -23,7 +23,7 @@ export class Statistics {
     init() {
         const main = document.querySelector(".game-menu");
 
-        main.insertAdjacentHTML("afterbegin", statisticPagesTemplate);
+        main.insertAdjacentHTML("afterbegin", statisticPagesTemplate(this.lang));
         const statWrapper = document.querySelector(".statistic-table-wrapper");
         statWrapper.insertAdjacentHTML("afterbegin", statisticSwicher(this.lang));
         // this.setUserTable(statWrapper);

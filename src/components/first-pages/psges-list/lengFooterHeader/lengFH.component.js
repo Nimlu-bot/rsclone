@@ -1,7 +1,8 @@
 import { lang, getLang } from "../../../../core/index";
 
 export function setFootHeadLang() {
-    document.querySelector(".pages").innerHTML = `${lang[getLang()].statistic}`;
+    document.querySelector(".pages").innerHTML = `${lang[getLang()].settings}`;
+    
     document.querySelector(".panner-container").innerHTML = `
     <span>${lang[getLang()].panLeft}</span>
     <input type="range" id="panner" min="-1" max="1" value="0" step="0.01" class="input-slider">
