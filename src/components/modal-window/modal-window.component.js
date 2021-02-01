@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import { modalWindowTemplate } from "./modal-window.template";
 import { getLang } from "../../core/index";
 import AudioProcessor from "../audio-processor/audio-processor.component";
@@ -5,6 +6,37 @@ import AudioProcessor from "../audio-processor/audio-processor.component";
 export class ModalWindow {
   constructor(name) {
     this.windowName = name;
+  }
+
+  theme(){
+    if (localStorage.getItem("theme") === null) {
+      document.querySelectorAll(".modal-list").forEach(elem => {
+        elem.setAttribute("style", "none");
+        elem.style.display= "block"; 
+    })} else if (`${localStorage.getItem("theme")}` === "0") {
+      document.querySelectorAll(".modal-list").forEach(elem => {
+        elem.setAttribute("style", "none");
+        elem.style.display= "block"; 
+    })} else if (`${localStorage.getItem("theme")}` === "1") {
+      document.querySelectorAll(".modal-list").forEach(elem => {
+        elem.setAttribute("style", "none");
+        elem.style.display= "block"; 
+        elem.style.backgroundImage = "none";
+        elem.style.backgroundColor = "#FAF0E6";
+        elem.style.color = "#2e0d67";
+    })} else if (`${localStorage.getItem("theme")}` === "2") {
+      document.querySelectorAll(".modal-list").forEach(elem => {
+      elem.setAttribute("style", "none");
+      elem.style.display= "block"; 
+    })} else if (`${localStorage.getItem("theme")}` === "3") {
+      document.querySelectorAll(".modal-list").forEach(elem => {
+        elem.setAttribute("style", "none");
+        elem.style.display= "block"; 
+        elem.style.backgroundImage = "none";
+        elem.style.backgroundColor = "#1C1C1C";
+        elem.style.color = "#fff";
+    })
+    }
   }
 
   createWindow() {
@@ -36,12 +68,14 @@ export class ModalWindow {
       document.querySelector('.modal-game-over-hidden').style.display = 'block';
       document.querySelector('#cover-div').style.display = 'block';
       AudioProcessor.play('gameOver');
+      this.theme();
     }
 
     if (this.windowName === 'perfect') {
       document.querySelector('.modal-perfect-hidden').style.display = 'block';
       document.querySelector('#cover-div').style.display = 'block';
       AudioProcessor.play('perfect');
+      this.theme();
     }
 
   }

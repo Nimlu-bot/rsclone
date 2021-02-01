@@ -7,6 +7,25 @@ export class CondratsBro {
     constructor() {
         this.title = "Condrats";
     }
+    // document.querySelector(".wrap-congrats").style.backgroundImage = "url(../../../../assets/img/paper-cell.jpg)"
+
+    theme(){
+        if (localStorage.getItem("theme") === null) {
+            document.querySelector(" .wrap-congrats ").setAttribute("style", "none");
+        } else if (`${localStorage.getItem("theme")}` === "0") {
+            document.querySelector(".wrap-congrats").setAttribute("style", "none");
+        } else if (`${localStorage.getItem("theme")}` === "1") {
+            document.querySelector(".wrap-congrats").setAttribute("style", "none");
+            document.querySelector(".wrap-congrats").style.backgroundImage = "none";
+            document.querySelector(".wrap-congrats").style.backgroundColor = " rgb(250, 240, 230)"
+        } else if (`${localStorage.getItem("theme")}` === "2") {
+            document.querySelector(".wrap-congrats").setAttribute("style", "none");
+        } else if (`${localStorage.getItem("theme")}` === "3") {
+            document.querySelector(".wrap-congrats").setAttribute("style", "none");
+            document.querySelector(".wrap-congrats").style.backgroundImage = "none";
+            document.querySelector(".wrap-congrats").style.backgroundColor = "rgb(28, 28, 28)";
+        }
+    }
 
     init( win ,rest){
         AudioProcessor.reset('gameOver');
@@ -14,7 +33,9 @@ export class CondratsBro {
             AudioProcessor.play('gameOver');
         },1000)
             
-        document.body.insertAdjacentHTML("afterbegin", congrats(win,rest));
+
+        document.querySelector(".game-menu").insertAdjacentHTML("afterbegin", congrats(win,rest));
+        this.theme();
         document.querySelector(".wrap-congrats").addEventListener("click", () => {
             AudioProcessor.pause('gameOver');
             document.querySelector(".wrap-congrats").remove();
