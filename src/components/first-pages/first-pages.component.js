@@ -59,18 +59,6 @@ export class FirstPages {
         } else {
             document.querySelector(".login-wrapper").setAttribute("style", "none");
         }
-        // ---------------------- Удаление ----------------------------------
-
-        // document.querySelectorAll(".login-button").forEach((elem) => {
-        //     elem.addEventListener("click", () => {
-        //         document.querySelector(".login-wrapper").remove();
-        //         this.nav();
-        //     });
-        // });
-        // document.querySelector(".login-without").addEventListener("click", () => {
-        //     document.querySelector(".login-wrapper").remove();
-        //     this.nav();
-        // });
     }
 
     continue() {
@@ -305,6 +293,7 @@ export class FirstPages {
         }
 
         if (document.querySelector(".settings-wrap")) {
+            document.querySelector(".audio-img").src = "../../assets/img/sound.png";
             document.querySelector(".settings-wrap").setAttribute("style", "none");
             document.querySelector(".settings-wrap").style.left = "0%";
         }
@@ -324,7 +313,7 @@ export class FirstPages {
         document.body.style.backgroundImage = "url(../../assets/img/pngwing.com1.png)";
 
         document.querySelectorAll(".autor-Name").forEach((elem) => (elem.style.color = "#2e0d67"));
-        document.querySelector(".logo-box").style.backgroundColor = "none";
+        document.querySelector(".logo-box").style.backgroundColor = "transparent";
         document.querySelector(".year").style.color = "#2e0d67";
 
         if (document.querySelector(".total-box")) {
@@ -333,6 +322,7 @@ export class FirstPages {
         }
 
         if (document.querySelector(".settings-wrap")) {
+            document.querySelector(".audio-img").src = "../../assets/img/sound.png";
             document.querySelector(".settings-wrap").style.backgroundColor = "#FAF0E6";
             document.querySelector(".settings-wrap").style.backgroundImage = "none";
             document.querySelector(".settings-wrap").style.color = "#2e0d67";
@@ -364,6 +354,7 @@ export class FirstPages {
             document.querySelector(".total-box").style.left = "0%";
         }
         if (document.querySelector(".settings-wrap")) {
+            document.querySelector(".audio-img").src = "../../assets/img/sound.png";
             document.querySelector(".settings-wrap").setAttribute("style", "none");
             document.querySelector(".settings-wrap").style.left = "0%";
             document.querySelector(".settings-wrap").style.filter = "none";
@@ -379,7 +370,7 @@ export class FirstPages {
         document.querySelector(".wrapper").style.backgroundImage = "none";
         document.querySelector(".wrapper").style.filter = "saturate(10%)";
         document.body.style.backgroundImage = "url(../../assets/img/mramor.png)";
-
+        
         // rs logo
         document.querySelector(".logo-box").style.backgroundColor = "#fff";
         // header & footer text
@@ -400,6 +391,7 @@ export class FirstPages {
         }
 
         if (document.querySelector(".settings-wrap")) {
+            document.querySelector(".audio-img").src = "../../assets/img/soundInv.png";
             document.querySelector(".settings-wrap").setAttribute("style", "none");
             document.querySelector(".settings-wrap").style.left = "0%";
             document.querySelector(".settings-wrap").style.filter = "none";
@@ -485,16 +477,12 @@ export class FirstPages {
             const user = new User();
             if (e.detail.data) {
                 this.isLogged = true;
-                // document.querySelector(".user-img").classList.add("logged");
-                console.log("сделать троля зеленым и написать мыло");
                 document.querySelector(".login-wrapper").remove();
                 this.nav();
                 this.styleForTheme();
                 user.login(lang);
             } else {
                 this.isLogged = false;
-                // document.querySelector(".user-img").classList.add("not-logged");
-                console.log("что-нибудь написать о том что не залогинился");
                 document.querySelector(".login-wrapper").remove();
                 this.nav();
                 this.styleForTheme();
