@@ -37,14 +37,6 @@ export const statisticTableHeader = (language) => {
 `;
 };
 
-// {<div class="info-btn">
-// 	 <div class = "game-btn stat-get hided">Получить</div>
-// 	 <div class = "game-btn stat-set hided">Записать</div>
-// 	 <div class = "game-btn stat-reset">Удалить</div>
-// 	 <div class = "game-btn stat-server-set hided ">Записать на <br> сервер</div>
-// 	 <div class = "game-btn stat-server-get">Получить с <br> сервера</div>
-// </div>}
-
 export const statisticsTemplate = (userStat, number) => {
     const persent = Math.ceil((userStat.kills / userStat.ducks) * 100);
     const date = new Date(userStat.time);

@@ -9,7 +9,6 @@ import {
 } from "./statistic-pages.template";
 import {
     getLang,
-    // statEventHandler,
     getStatEventHandler,
     lang,
     getScoreEventHandler
@@ -26,59 +25,16 @@ export class Statistics {
         main.insertAdjacentHTML("afterbegin", statisticPagesTemplate(this.lang));
         const statWrapper = document.querySelector(".statistic-table-wrapper");
         statWrapper.insertAdjacentHTML("afterbegin", statisticSwicher(this.lang));
-        // this.setUserTable(statWrapper);
         const tabs = document.querySelectorAll(".stat-tab");
         [...tabs].forEach((el) => {
             el.classList.add("disabled");
         });
         getStatEventHandler();
 
-        // document.querySelector(".stat-get").addEventListener("click", () => {
-        //     const statArray = JSON.parse(localStorage.getItem("userStat")) || [];
-        //     const sortedStatArr = statArray.sort((a, b) => b.score - a.score);
-        //     document.querySelectorAll(".stat-table-item").forEach((e) => e.remove());
-        //     let numberOfResult = null;
-        //     if (sortedStatArr.length < 10) {
-        //         numberOfResult = sortedStatArr.length;
-        //     } else numberOfResult = 10;
-        //     for (let i = 0; i < numberOfResult; i += 1) {
-        //         statTableBody.insertAdjacentHTML("beforeend", statisticsTemplate(sortedStatArr[i], i + 1));
-        //     }
-        //     // const maxScoreItem = statArray.reduce((acc, el) => (acc.score > el.score ? acc : el));
-        //     // console.log(maxScoreItem.score);
-        // });
-
-        // document.querySelector(".stat-set").addEventListener("click", () => {
-        //     const userStat = {
-        //         time: new Date(),
-        //         ducks: Math.trunc(Math.random() * 100),
-        //         hits: Math.trunc(Math.random() * 100),
-        //         kills: Math.trunc(Math.random() * 100),
-        //         score: Math.trunc(Math.random() * 1000)
-        //     };
-        //     const statArray = JSON.parse(localStorage.getItem("userStat")) || [];
-        //     statArray.push(userStat);
-        //     localStorage.setItem("userStat", JSON.stringify(statArray));
-        // });
-
-        //     document.querySelector(".stat-reset").addEventListener("click", () => {
-        //         document.querySelectorAll(".stat-table-item").forEach((e) => e.remove());
-        //         localStorage.removeItem("userStat");
-        //     });
-
-        //     document.querySelector(".stat-server-set").addEventListener("click", () => {
-        //         statEventHandler();
-        //     });
-
-        //     document.querySelector(".stat-server-get").addEventListener("click", () => {
-        //         getScoreEventHandler();
-        //     });
 
         document.querySelector(".stat-user").addEventListener("click", (e) => {
             document.querySelector(".stat-table").remove();
             this.setUserTable(statWrapper);
-            // const tabs = document.querySelectorAll(".stat-tab");
-
             [...tabs].forEach((el) => el.classList.remove("selected"));
             e.target.classList.add("selected");
         });
@@ -87,7 +43,6 @@ export class Statistics {
             getScoreEventHandler();
 
             this.setScoreTable(statWrapper);
-            // const tabs = document.querySelectorAll(".stat-tab");
             [...tabs].forEach((el) => {
                 el.classList.remove("selected");
                 el.classList.add("disabled");
@@ -104,7 +59,6 @@ export class Statistics {
         document.addEventListener("getScore", () => {
             const statTable = document.querySelector(".stat-table");
             if (statTable) statTable.remove();
-            //  const tabs = document.querySelectorAll(".stat-tab");
             [...tabs].forEach((el) => {
                 el.classList.remove("disabled");
             });
@@ -150,4 +104,3 @@ export class Statistics {
     }
 }
 
-// -----------

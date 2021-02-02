@@ -7,7 +7,6 @@ export class CondratsBro {
     constructor() {
         this.title = "Condrats";
     }
-    // document.querySelector(".wrap-congrats").style.backgroundImage = "url(../../../../assets/img/paper-cell.jpg)"
 
     theme(){
         if (localStorage.getItem("theme") === null) {
