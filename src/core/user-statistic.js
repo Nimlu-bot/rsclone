@@ -73,7 +73,6 @@ export function newRound() {
 
 // если утка улетела
 export function incDuckFlyAway() {
-    console.log(" от нас ушла утка");
     lvlStat.ducksFlyAway += 1;
     lvlStat.ducksFlyAwayPerRound += 1;
 }
@@ -100,7 +99,6 @@ export function isLevelEnd() {
 }
 
 export function LooseOrEnd() {
-    console.log(" LooseOrEnd");
     saveStat();
     statEventHandler(gameStat);
 }
