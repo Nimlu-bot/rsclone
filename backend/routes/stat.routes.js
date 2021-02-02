@@ -1,3 +1,5 @@
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable no-await-in-loop */
 const { Router } = require("express");
 const Stat = require("../models/Stat");
 const auth = require("../middleware/auth.middleware");
@@ -42,7 +44,6 @@ router.get("/all", async (req, res) => {
     const now = new Date();
     try {
         const users = await User.find({}, { email: 1 });
-        const rez = new Array(users.length);
         for (let i = 0; i < users.length; i += 1) {
             users[i].stats = await Stat.find({ owner: users[i]._id }, { owner: 0, _id: 0, __v: 0 });
         }

@@ -14,9 +14,6 @@ export class Login {
 
     init() {
         const main = document.querySelector(".game-menu");
-
-        // main.innerHTML = '';
-
         main.insertAdjacentHTML("afterbegin", loginTemplate(getLang()));
 
         let email = null;
@@ -31,13 +28,13 @@ export class Login {
             }
         }
 
-        document.querySelector(".login").addEventListener("click", this.loginEventHandler.bind(this)); // этот прослушиватель нельзя удалить
-        document.querySelector(".signup").addEventListener("click", this.signUpEventHandler.bind(this)); // этот тоже
+        document.querySelector(".login").addEventListener("click", this.loginEventHandler.bind(this)); 
+        document.querySelector(".signup").addEventListener("click", this.signUpEventHandler.bind(this)); 
         document.querySelector(".login-without").addEventListener("click", this.withoutEventHandler);
     }
 
     async loginEventHandler() {
-        console.log("login");
+
         const email = document.querySelector(".login-email");
         const password = document.querySelector(".login-password");
         const isEmail = validateEmail(email.value);
@@ -54,8 +51,7 @@ export class Login {
             };
             try {
                 const response = await axios.post(`${apiUrl}/api/auth/login`, user);
-                // const data = await response.json();
-                // console.log(response);
+                console.log(response);
                 if (response.statusText !== "OK") {
                     throw new Error(response) || lang[getLang()].SomethingWentWrongTryAgain;
                 } else {
@@ -72,7 +68,7 @@ export class Login {
                 const message = document.querySelector(".login-message");
                 message.innerText = "";
                 message.style.color = "brown";
-                // console.log(e.response.data.message);
+                console.log(e.response.data.message);
                 if (e.response) {
                     message.innerText = lang[getLang()][e.response.data.message];
                 } else if (e.request) {
@@ -102,18 +98,14 @@ export class Login {
             try {
                 const response = await axios.post(`${apiUrl}/api/auth/register`, user);
                 if (response.statusText !== "Created") {
-                    // console.log(response);
+                    console.log(response);
                     throw new Error(response) || lang[getLang()].SomethingWentWrongTryAgain;
                 } else {
                     const message = document.querySelector(".login-message");
                     message.style.color = "green";
                     message.innerText = lang[getLang()][response.data.message];
-                    // console.log(response);
-
+                    console.log(response);
                     await this.loginEventHandler();
-
-                    // loginEvent.detail.data = true;
-                    // document.dispatchEvent(loginEvent);
                 }
             } catch (e) {
                 const message = document.querySelector(".login-message");

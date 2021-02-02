@@ -3,10 +3,7 @@ import { lang } from "../../core/index";
 import "../../assets/css/general-style.scss";
 
 export const loginTemplate = (language) => {
-    // let email = null;
-    // if (localStorage.getItem("email")) {
-    //     email = localStorage.getItem("email");
-    // }
+    
     return `
 	<div class = "login-wrapper">
 		<input class = "login-email" autocomplete="off" placeholder="${lang[language].eMail}" type="email" name="email" required >

@@ -43,28 +43,16 @@ export async function getStatEventHandler() {
         const response = await axios.get(`${apiUrl}/api/stat`, {
             headers: { Authorization: `Bearer ${token}` }
         });
-        // console.log(response);
+        console.log(response);
         localStorage.setItem("userStat", JSON.stringify(response.data));
         getStatEvent.detail.data = true;
         document.dispatchEvent(getStatEvent);
-        // .then(
-        //     (response) => {
-        //         localStorage.setItem("userStat", JSON.stringify(response.data));
-        //         getStatEvent.detail.data = true;
-        //         document.dispatchEvent(getStatEvent);
-        //     },
-        //     (error) => {
-        //         console.log(error.response.data.message);
-        //         localStorage.removeItem("userStat");
-        //         getStatEvent.detail.data = false;
-        //         document.dispatchEvent(getStatEvent);
-        //     }
-        // );
+        
     } catch {
         localStorage.removeItem("userStat");
         getStatEvent.detail.data = false;
         document.dispatchEvent(getStatEvent);
-        // console.log("stat error");
+        console.log("stat error");
     }
 }
 
@@ -86,31 +74,6 @@ export async function getScoreEventHandler() {
         getScoreEvent.detail.data = true;
         document.dispatchEvent(getScoreEvent);
 
-        // .then(
-        //     (response) => {
-        //         const scores = response.data;
-        //         for (let i = 0; i < scores.length; i += 1) {
-        //             // eslint-disable-next-line no-underscore-dangle
-        //             delete scores[i]._id;
-        //             if (scores[i].stats.length !== 0) {
-        //                 const maxScoreItem = scores[i].stats.reduce((acc, el) => (acc.score > el.score ? acc : el));
-        //                 // console.log(maxScoreItem.score);
-        //                 scores[i].score = maxScoreItem.score;
-        //                 // console.log(scores[i]);
-        //             } else {
-        //                 scores[i].score = 0;
-        //             }
-        //         }
-        //         // console.log(scores);
-        //         localStorage.setItem("totalScores", JSON.stringify(scores));
-        //         getScoreEvent.detail.data = true;
-        //         document.dispatchEvent(getScoreEvent);
-        //     },
-
-        //     (error) => {
-        //         console.log(error.response.data.message);
-        //     }
-        // );
     } catch {
         console.log("score error");
         getScoreEvent.detail.data = false;

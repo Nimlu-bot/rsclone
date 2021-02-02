@@ -7,7 +7,7 @@ const User = require("../models/User");
 
 const router = Router();
 
-// /api/auth/register
+
 router.post(
     "/register",
     [
@@ -19,10 +19,8 @@ router.post(
     ],
     // eslint-disable-next-line consistent-return
     async (req, res) => {
-        // res.set("Access-Control-Allow-Origin", "*");
         const now = new Date();
         try {
-            // console.log(req.body);
             const errors = validationResult(req);
 
             if (!errors.isEmpty()) {
@@ -56,7 +54,6 @@ router.post(
     }
 );
 
-// /api/auth/login
 router.post(
     "/login",
     [
@@ -67,7 +64,6 @@ router.post(
     async (req, res) => {
         const now = new Date();
         try {
-            // console.log(req.body);
             const errors = validationResult(req);
 
             if (!errors.isEmpty()) {

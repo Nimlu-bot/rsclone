@@ -14,10 +14,8 @@ import { GameField } from "../game-field/game-field.component";
 import { Login } from "../login/login.component";
 import { Statistics } from "./psges-list/statistic/statistic-page.component";
 import { setLang } from "../../core/config";
-// import { getScoreEventHandler, getStatEventHandler } from "../../core/utils/serverAPI";
 import { lang, getLang } from "../../core/index";
 // Andrey
-// import { ModalWindow } from "../modal-window/index";
 import AudioProcessor from "../audio-processor/audio-processor.component";
 import { User } from "./psges-list/user";
 
@@ -199,7 +197,6 @@ export class FirstPages {
         }, 0);
         const currentLang = JSON.parse(localStorage.getItem("currentLang")) || "RU";
         const langs = document.querySelectorAll(".settings-lang");
-        // const selected = langs.querySelectorAll(".selected");
         [...langs].forEach((el) => {
             if (el.innerText === currentLang) {
                 el.classList.add("selected");
@@ -241,10 +238,8 @@ export class FirstPages {
         this.title = `${lang[getLang()].statistic}`;
         document.querySelector(".pages").innerHTML = this.title;
 
-        // document.querySelector(".game-menu").insertAdjacentHTML("afterbegin", statisticPagesTemplate);
+  
         const stat = new Statistics();
-        // getScoreEventHandler();
-        // getStatEventHandler();
         stat.init();
         setTimeout(() => {
             document.querySelector(".statistic-wrap").style.right = "0%";
@@ -479,14 +474,14 @@ export class FirstPages {
                 this.isLogged = true;
                 document.querySelector(".login-wrapper").remove();
                 this.nav();
-                this.styleForTheme();
-                user.login(lang);
+								user.login(lang);
+								this.styleForTheme();
             } else {
                 this.isLogged = false;
                 document.querySelector(".login-wrapper").remove();
                 this.nav();
-                this.styleForTheme();
-                user.alone(lang);
+								user.alone(lang);
+								this.styleForTheme();
             }
         });
     }

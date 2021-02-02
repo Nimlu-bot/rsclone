@@ -38,11 +38,9 @@ $color-lines:#2e0d67;
 		margin-bottom: auto;
 }
 .stat-message{
-	// width: 100%;
 	min-height: 20px;
 	margin: 0 auto ;
 	color: $color-error-message;
-	// border: 1px solid black ;
 }
 }
     
@@ -68,7 +66,6 @@ $color-lines:#2e0d67;
 .selected{
 	position: relative;
 		color: brown;
-		// border-bottom: 3px solid  brown;
 		&::after{
 			content: "";
 			position: absolute;

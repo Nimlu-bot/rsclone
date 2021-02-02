@@ -27,7 +27,6 @@ const lvlStat = {
     currentLvl: 0
 };
 function saveStat() {
-    console.log(" сохраняем статистику");
     const statArray = JSON.parse(localStorage.getItem("currentUserStat")) || [];
     statArray.push(gameStat);
     localStorage.setItem("currentUserStat", JSON.stringify(statArray));
@@ -35,7 +34,6 @@ function saveStat() {
 
 // начало игры
 export function startGameStat(lvl) {
-    console.log(" начало игры");
     gameStat.time = 0;
     gameStat.ducks = 0;
     gameStat.hits = 0;
@@ -46,7 +44,6 @@ export function startGameStat(lvl) {
 
 // начало уровня
 export function statStart() {
-    console.log(" начало уровня");
     lvlStat.ducksKillPerRound = 0;
     lvlStat.duckKillPerLevel = 0;
     lvlStat.duckCount = 0;
@@ -60,7 +57,6 @@ export function statStart() {
 
 // утка выбыла любым способом
 export function isRoundEnd() {
-    console.log(" мы потеряли утку");
     if (lvlStat.ducksKillPerRound + lvlStat.ducksFlyAwayPerRound === levelSettings.ducksTogether) {
         return true;
     }
@@ -69,7 +65,6 @@ export function isRoundEnd() {
 
 // если убили 2 утки из 2, т.е isRoundEnd вернул true
 export function newRound() {
-    console.log(" новый раунд");
     lvlStat.ducksKillPerRound = 0;
     lvlStat.ducksFlyAwayPerRound = 0;
     lvlStat.bulets = 0;
@@ -85,7 +80,6 @@ export function incDuckFlyAway() {
 
 // при выстреле
 export function isBuletsEnd() {
-    console.log(" Потроны зря не трать");
     if (lvlStat.bulets < levelSettings.shots) {
         lvlStat.hits += 1;
         lvlStat.bulets += 1;
@@ -109,7 +103,6 @@ export function LooseOrEnd() {
     console.log(" LooseOrEnd");
     saveStat();
     statEventHandler(gameStat);
-    // getStatEventHandler();
 }
 // при окончании уровня  т.е isLevelEnd вернул true
 export function isWin() {
@@ -118,8 +111,6 @@ export function isWin() {
     gameStat.hits += lvlStat.hits;
     gameStat.kills += lvlStat.duckKillPerLevel;
     gameStat.score += lvlStat.score;
-    console.log(`"isWin GAME" ${JSON.stringify(gameStat)}`);
-    console.log(`"isWin LVL" ${JSON.stringify(lvlStat)}`);
     if (lvlStat.duckKillPerLevel >= levelSettings.ducksNeed) {
         return true;
     }
@@ -136,7 +127,6 @@ export function getLvlStat() {
 }
 
 export function killed() {
-    console.log("ура, попал!!!");
     lvlStat.ducksKillPerRound += 1;
     lvlStat.score += 8 + 2 * lvlStat.currentLvl;
     lvlStat.duckKillPerLevel += 1;
