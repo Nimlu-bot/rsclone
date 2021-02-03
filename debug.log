@@ -1,0 +1,5 @@
+[1222/192323.624:ERROR:directory_reader_win.cc(43)] FindFirstFile: ������� �� ������� ����� ��������� ����. (0x3)
+[1223/190728.836:ERROR:directory_reader_win.cc(43)] FindFirstFile: ������� �� ������� ����� ��������� ����. (0x3)
+[0104/135833.797:ERROR:directory_reader_win.cc(43)] FindFirstFile: ������� �� ������� ����� ��������� ����. (0x3)
+[0116/150521.302:ERROR:directory_reader_win.cc(43)] FindFirstFile: ������� �� ������� ����� ��������� ����. (0x3)
+[0123/160630.353:ERROR:directory_reader_win.cc(43)] FindFirstFile: ������� �� ������� ����� ��������� ����. (0x3)
