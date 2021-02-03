@@ -47,7 +47,6 @@ export async function getStatEventHandler() {
         localStorage.setItem("userStat", JSON.stringify(response.data));
         getStatEvent.detail.data = true;
         document.dispatchEvent(getStatEvent);
-        
     } catch {
         localStorage.removeItem("userStat");
         getStatEvent.detail.data = false;
@@ -60,6 +59,7 @@ export async function getScoreEventHandler() {
     try {
         const response = await axios.get(`${apiUrl}/api/stat/all`);
         const scores = response.data;
+        console.log(response);
         for (let i = 0; i < scores.length; i += 1) {
             // eslint-disable-next-line no-underscore-dangle
             delete scores[i]._id;
@@ -73,7 +73,6 @@ export async function getScoreEventHandler() {
         localStorage.setItem("totalScores", JSON.stringify(scores));
         getScoreEvent.detail.data = true;
         document.dispatchEvent(getScoreEvent);
-
     } catch {
         console.log("score error");
         getScoreEvent.detail.data = false;

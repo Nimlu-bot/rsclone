@@ -7,12 +7,7 @@ import {
     statisticSwicher,
     scoreTemplate
 } from "./statistic-pages.template";
-import {
-    getLang,
-    getStatEventHandler,
-    lang,
-    getScoreEventHandler
-} from "../../../../core/index";
+import { getLang, getStatEventHandler, lang, getScoreEventHandler } from "../../../../core/index";
 
 export class Statistics {
     constructor() {
@@ -30,7 +25,6 @@ export class Statistics {
             el.classList.add("disabled");
         });
         getStatEventHandler();
-
 
         document.querySelector(".stat-user").addEventListener("click", (e) => {
             document.querySelector(".stat-table").remove();
@@ -85,6 +79,7 @@ export class Statistics {
 
     setUserTable(item) {
         item.insertAdjacentHTML("beforeend", statisticTableHeader(this.lang));
+        document.querySelector(".stat-message").innerText = "";
         if (localStorage.getItem("userStat")) {
             this.getStat("userStat", statisticsTemplate);
         } else {
@@ -95,7 +90,7 @@ export class Statistics {
 
     setScoreTable(item) {
         item.insertAdjacentHTML("beforeend", scoreTableHeader(this.lang));
-
+        document.querySelector(".stat-message").innerText = "";
         if (localStorage.getItem("totalScores")) {
             this.getStat("totalScores", scoreTemplate);
         } else {
@@ -103,4 +98,3 @@ export class Statistics {
         }
     }
 }
-
